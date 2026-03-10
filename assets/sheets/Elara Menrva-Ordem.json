@@ -1,0 +1,144 @@
+{
+    "character_name": "Elara Menrva",
+    "origin": "Acadêmica",
+    "class": "Ocultista",
+    "path": "Lâmina Paranormal",
+    "nex_percent": "65",
+    "rank": "Oficial de Operações",
+    "vital_resources": {
+        "hp": {
+            "current": "61",
+            "max": "61"
+        },
+        "sanity": {
+            "current": "39",
+            "max": "70"
+        },
+        "effort": {
+            "current": "78",
+            "max": "78"
+        },
+        "defense": "14",
+        "dodge": "13",
+        "block": "0",
+        "movement": "9m"
+    },
+    "attributes": {
+        "agility": "1",
+        "strength": "0",
+        "intellect": "4",
+        "presence": "3",
+        "vigor": "2"
+    },
+    "skills_trained": {
+        "schema": "proficiency + graduation",
+        "acrobatic": "1",
+        "animal_handling": "0",
+        "arts": "3",
+        "athletics": "0",
+        "current_events": "0",
+        "science": "Veterana (+10)",
+        "crime": "0",
+        "diplomacy": "Treinada (+4)",
+        "deception": "3",
+        "fortitude": "2",
+        "stealth": "1",
+        "initiative": "1",
+        "intimidation": "3",
+        "intuition": "3",
+        "investigation": "Veterana (+9)",
+        "fight": "0",
+        "medicine": "4",
+        "mysticism": "4",
+        "occultism": "Especialista (+13)",
+        "perception": "3",
+        "piloting": "1",
+        "marksmanship": "1",
+        "profession": "4",
+        "reflexes": "1",
+        "religion": "3",
+        "survival": "2",
+        "tactics": "4",
+        "technology": "4",
+        "will": "3"
+    },
+    "powers_and_features": {
+        "origin_powers": [
+            "Saber é Poder (bônus em testes de Intelecto contra criaturas Paranormais)"
+        ],
+        "class_path_powers": [
+            "Lâmina Paranormal: Maestria em rituais de alteração corporal",
+            "Resistência Arcana (reduz custo de Sanidade de rituais)"
+        ],
+        "paranormal_abilities": [
+            "Forma Felina — Ritual pessoal de Alterar Corpo (Versão Morte). Transformação física completa em gata cinza para infiltração. Alto custo de Sanidade.",
+            "Decadência — Acelera o envelhecimento e decomposição de alvos orgânicos.",
+            "Cicatrização — Altera o corpo para curar ferimentos graves."
+        ]
+    },
+    "attacks_and_rituals": {
+        "attacks": [
+            {
+                "name": "Pistola 9mm (padrão da Ordem)",
+                "attack_test": "AGI + Pontaria",
+                "damage": "2d6+2 balístico"
+            },
+            {
+                "name": "Lâmina Paranormal (energia)",
+                "attack_test": "PRE + Ocultismo",
+                "damage": "2d8+4 paranormal"
+            }
+        ],
+        "ritual_save_dc": "16"
+    },
+    "equipment": {
+        "load": {
+            "current": "4",
+            "max": "6"
+        },
+        "armors": [
+            "Sobretudo escuro de alta qualidade (proteção leve)"
+        ],
+        "weapons": [
+            "Pistola 9mm (padrão da Ordem)"
+        ],
+        "items_and_tools": [
+            "Notebook criptografado com acesso aos arquivos da Ordem",
+            "Amuleto de Prata Antigo (Catalisador Amaldiçoado de Morte — foco para rituais pessoais)"
+        ],
+        "money": "Crédito Institucional Médio (Oficial)"
+    },
+    "personality": {
+        "trait": "Disciplina e rigor são armaduras mais eficazes que qualquer colete. Minha expressão severa é meu escudo.",
+        "ideal": "Proteger novos agentes dos horrores que eu enfrentei sem preparo. Que ninguém mais se quebre como eu me quebrei.",
+        "bond": "A Ordem é minha segunda família, imperfeita e pragmática como eu. E meus alunos são minha penitência.",
+        "flaw": "Minha Sanidade é frágil. O custo dos rituais de Morte e as memórias do que fiz para vingar minha família me assombram incessantemente."
+    },
+    "backstory": "A tragédia de Elara foi recontextualizada: sua família e seu noivo não foram mortos por um exército, mas sim por uma Criatura Paranormal invocada por um culto. Elara foi a única sobrevivente. Movida pela vingança, ela mergulhou no estudo do oculto, sendo recrutada pela Ordem. Ela caçou e 'deu fim' ao líder do culto, mas a vitória teve um custo terrível para sua Sanidade. Hoje, ela leciona para novos agentes, tentando prepará-los para os horrores que ela enfrentou, sua disciplina e rigidez nascidas do medo de ver mais jovens se quebrarem diante do Paranormal.",
+    "appearance_and_style": {
+        "image_alt": "Elara Menrva — Agente da Ordem",
+        "image_file": "Elara Menrva-Ordem-1.png",
+        "image_prompt": "A full-body illustration of Agent Elara Menrva, in the 'Digital Comic/Visual Novel' art style of Ordem Paranormal. The art must feature clean, well-defined black line art with vibrant, high-contrast colors. She is a tall, elegant middle-aged woman with silver hair in a bun and a severe look behind her glasses. She wears a modern, dark coat over professional attire. Her pose is dynamic, as if gesturing for a ritual, with glowing particles of paranormal energy swirling around her. The background is a dark office within the Ordem headquarters.",
+        "appearance": "Mulher elegante de meia-idade. Cabelo prateado em coque. Óculos de meia-lua e expressão severa por trás das lentes. Porte de professora e pragmatismo de agente de campo.",
+        "clothing_style": "Sobretudo escuro moderno sobre traje formal. Funcional e intimidador ao mesmo tempo.",
+        "unique_accessories": "Amuleto de Prata Antigo (catalisador amaldiçoado de Morte), notebook criptografado, óculos de meia-lua.",
+        "signature_expression": "Forma Felina (ritual de Alterar Corpo — alto custo de Sanidade)"
+    },
+    "goals_and_motivations": {
+        "main_goal": "Preparar a próxima geração de agentes para os horrores do Paranormal, garantindo que ninguém mais pague o preço que ela pagou.",
+        "motivations": "Penitência pelo custo de sua vingança. Proteger os jovens agentes que lembram de como ela era antes.",
+        "fears": "Perder completamente o que resta de sua Sanidade. Que um aluno se quebre do mesmo jeito que ela se quebrou.",
+        "secrets": "A extensão dos rituais que realizou para caçar o líder do culto e o que eles fizeram com sua mente. Os limites que cruzou que nem a Ordem sabe."
+    },
+    "game_notes": {
+        "combat_behavior": "Tática e cirúrgica. Usa Forma Felina para infiltração e reconhecimento. Em combate aberto, Lâmina Paranormal e Decadência para neutralizar alvos prioritários.",
+        "social_interactions": "Autoritária com novos agentes. Respeitosa com veteranos. Desconfia de impulso e valoriza protocolo. Pode relaxar a guarda com quem demonstra comprometimento genuíno.",
+        "future_development": "Arco de recuperação de Sanidade. Possível confronto com sobreviventes do culto que destruiu sua família. Risco de ser 'lembrada' do que cruzou."
+    },
+    "metadata": {
+        "template_title": "Elara Menrva - Ficha de Agente | Ocultista | NEX 65%",
+        "system": "Ordem Paranormal",
+        "locale": "pt-BR",
+        "schema_version": "1.0.0"
+    }
+}

@@ -1,0 +1,108 @@
+{
+    "character_name": "Elara Menrva",
+    "people": "Elfo-do-Sol",
+    "class": "Mago",
+    "level": "13",
+    "origin": "Acadêmica — A Guardiã (Proteger o conhecimento da transmutação)",
+    "tragic_pillars": {
+        "nemesis": "A Assombrada (assombrada pelas memórias de sua família assassinada)",
+        "melancholy": "A dor onipresente da perda e o medo de se apegar novamente a alguém",
+        "burden": "A Vingadora Gélida, que ressurge fria, precisa e terrivelmente eficiente para proteger seu santuário"
+    },
+    "resources_and_defense": {
+        "breath": {
+            "current": "62",
+            "max": "62"
+        },
+        "soul_points": {
+            "current": "25",
+            "max": "25"
+        },
+        "defense": "13",
+        "movement": "9m"
+    },
+    "attributes": {
+        "vigor": "-1",
+        "instinct": "1",
+        "presence": "2",
+        "mind": "5"
+    },
+    "skills": [
+        "Arcanismo",
+        "Cultura",
+        "Intuição",
+        "Percepção",
+        "Furtividade"
+    ],
+    "features": {
+        "people_features": [
+            "Visão no Escuro",
+            "Toque Solar (resistência contra efeitos de escuridão)"
+        ],
+        "class_features": [
+            "Trilha: Metamorfo",
+            "Forma Felina — refúgio silencioso para observar o mundo sem interagir, protegendo o coração partido da dor de novas perdas",
+            "Magia Especializada: Transmutação",
+            "Nexo Arcano (permite conjurar sem voz em forma felina)"
+        ],
+        "origin_features": [
+            "Pesquisadora (acesso a arquivos e bibliotecas)",
+            "Mentora (influência em academia)"
+        ]
+    },
+    "arcane_and_powers": {
+        "known_techniques_and_powers": [
+            "Alterar Forma (transformação em gata cinza com listras pretas)",
+            "Transmutação Arcana",
+            "Barreira Translúcida",
+            "Velocidade das Sombras",
+            "Desintegração Precisa"
+        ]
+    },
+    "equipment": {
+        "weapons": [
+            "Cajado de Teixo que absorve a luz (foco arcano)"
+        ],
+        "armor": [
+            "Vestes de Professora em tons sombrios (verde, preto, cinza)"
+        ],
+        "important_items": [
+            "Grimório antigo e pesado",
+            "Amuleto de prata do noivo falecido (foco emocional)"
+        ],
+        "money_cobreis": "320"
+    },
+    "personality": {
+        "trait": "Sou severa porque o mundo é severo. A gentileza irresponsável mata mais que qualquer espada.",
+        "ideal": "O conhecimento deve ser a fortaleza que protege os fracos e os inocentes.",
+        "bond": "A Academia é minha fortaleza contra a dor. Seus alunos são a frágil esperança que defendo.",
+        "flaw": "Temo meu próprio poder, pois sei a dor que a magia pode causar, e não confio em mim mesma quando a Sombra desperta."
+    },
+    "backstory": "Elara Menrva é uma figura lendária e reclusa na Academia de Magia. Sobrevivente de uma tragédia que lhe tirou tudo, ela se devotou a proteger o conhecimento como sua única penitência e propósito. Sua maldição não é uma força externa, mas as memórias que a assombram, tornando cada conjuração um ato de vontade contra a maré de seu próprio luto. A academia é sua fortaleza contra a dor, e seus alunos, a frágil esperança que ela defende contra a escuridão do mundo. Ela teme o próprio poder, pois sabe a dor que a magia pode causar, e sua Sombra é um lembrete aterrorizante da maga de guerra que ela foi forçada a se tornar.",
+    "appearance_and_style": {
+        "image_alt": "Elara Menrva",
+        "image_file": "Elara Menrva-Skyfall-1.png",
+        "image_prompt": "A full-body digital painting of Elara Menrva, a wise and tragic half-elf archmage professor, in a dark and semi-realistic fantasy art style. The lighting is dramatic chiaroscuro, with strong contrasts between light and shadow, creating a melancholic atmosphere. The color palette is mostly desaturated and earthy, with vibrant points of magical light. Her expression is one of tired wisdom, marked by her tragic past. She wears dark robes in green, black, and grey, holding a yew wand. The background is a dusty, ancient hall in a magic academy, with pale moonlight streaming through tall windows, creating an evocative and somber scene.",
+        "appearance": "Figura alta e esguia com graça de Elfo-do-Sol. Cabelo prateado com mechas persistentes de ouro, preso em coque severo. Traços finos, orelhas pontiagudas, óculos de meia-lua. Expressão de sabedoria cansada.",
+        "clothing_style": "Vestes sombrias de professora em verde, preto e cinza. Paleta desaturada e austera.",
+        "unique_accessories": "Cajado de teixo (foco arcano), amuleto de prata do noivo (foco emocional), óculos de meia-lua.",
+        "signature_expression": "Forma Felina — refúgio silencioso de observação"
+    },
+    "goals_and_motivations": {
+        "main_goal": "Preservar a academia e seus alunos como penitência e novo propósito de vida.",
+        "motivations": "Redenção pelo passado. Garantir que o conhecimento survive às trevas do mundo.",
+        "fears": "Que a Vingadora tome conta permanentemente. Que perca outro lar como perdeu o primeiro.",
+        "secrets": "A profundidade da maga de guerra que ela foi. Os horrores que cometeu antes de encontrar a academia."
+    },
+    "game_notes": {
+        "combat_behavior": "Evita combate. Quando forçada, a Vingadora Gélida emerge com táticas frias e cirúrgicas — nenhum esforço desperdiçado, máxima eficácia.",
+        "social_interactions": "Reservada e observadora. Leal com quem demonstra comprometimento com o conhecimento. Desconfia de instinto, valoriza estudo.",
+        "future_development": "Aprendizar a confiar novamente. Possível arco de confronto com os que destruíram sua família, desta vez como escolha e não como obsessão."
+    },
+    "metadata": {
+        "template_title": "Elara Menrva - Ficha de Personagem Elfo-do-Sol | Mago (Metamorfo) | Nível 13",
+        "system": "Skyfall",
+        "locale": "pt-BR",
+        "schema_version": "1.0.0"
+    }
+}

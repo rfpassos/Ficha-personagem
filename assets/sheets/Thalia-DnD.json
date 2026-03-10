@@ -1,0 +1,328 @@
+{
+    "character_name": "Thalia Windrunner",
+    "race": "Meio-Elfa",
+    "class": "Patrulheira",
+    "level": "3",
+    "basic_info": {
+        "system": "Dungeons & Dragons",
+        "full_name": "Thalia Windrunner",
+        "archetype": "Andarilha do Horizonte",
+        "background": "Forasteira",
+        "alignment": "Leal e Neutro",
+        "inspiration": false
+    },
+    "health_and_defense": {
+        "current_hp": "28",
+        "max_hp": "28",
+        "hit_dice": "3d10",
+        "armor_class": "16",
+        "movement": "9m",
+        "initiative": "+3",
+        "death_saves": {
+            "successes": 0,
+            "failures": 0
+        },
+        "resistances_immunities": "Vantagem em salvaguardas contra ser encantado; imune a sono mágico."
+    },
+    "attributes": {
+        "strength": {
+            "value": "8",
+            "modifier": "-1",
+            "save": "+1"
+        },
+        "dexterity": {
+            "value": "17",
+            "modifier": "+3",
+            "save": "+5"
+        },
+        "constitution": {
+            "value": "14",
+            "modifier": "+2",
+            "save": "+2"
+        },
+        "intelligence": {
+            "value": "10",
+            "modifier": "+0",
+            "save": "+0"
+        },
+        "wisdom": {
+            "value": "15",
+            "modifier": "+2",
+            "save": "+2"
+        },
+        "charisma": {
+            "value": "12",
+            "modifier": "+1",
+            "save": "+1"
+        }
+    },
+    "proficiencies": {
+        "saving_throws": [
+            "Destreza",
+            "Força"
+        ],
+        "skill_proficiencies": [
+            {
+                "name": "Acrobacia",
+                "attribute": "Des",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+3"
+            },
+            {
+                "name": "Adestrar Animais",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Arcanismo",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Atletismo",
+                "attribute": "For",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+1"
+            },
+            {
+                "name": "Atuação",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+1"
+            },
+            {
+                "name": "Enganação",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+1"
+            },
+            {
+                "name": "Furtividade",
+                "attribute": "Des",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+5"
+            },
+            {
+                "name": "História",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Intimidação",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+1"
+            },
+            {
+                "name": "Intuição",
+                "attribute": "Sab",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+4"
+            },
+            {
+                "name": "Investigação",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Medicina",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Natureza",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Percepção",
+                "attribute": "Sab",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+4"
+            },
+            {
+                "name": "Persuasão",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+1"
+            },
+            {
+                "name": "Prestidigitação",
+                "attribute": "Des",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+3"
+            },
+            {
+                "name": "Religião",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Sobrevivência",
+                "attribute": "Sab",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+4"
+            }
+        ],
+        "tools_and_languages": [
+            "Comum",
+            "Élfico",
+            "Silvestre",
+            "Flauta (instrumento musical)"
+        ]
+    },
+    "abilities_and_features": {
+        "racial_traits": [
+            "Visão no Escuro 18m",
+            "Ancestral Feérico (vantagem contra ser encantado; imunidade a sono mágico)",
+            "Versatilidade em Perícia (Furtividade e Intuição)"
+        ],
+        "class_features": [
+            "Inimigo Favorito: Humanos e Orcs (vantagem em rastreio e informações)",
+            "Explorador Natural: Floresta (sem terreno difícil, sem se perder, etc.)",
+            "Estilo de Luta: Arquearia (+2 em ataques à distância)",
+            "Consciência Primitiva (detecta criaturas em 1,6 km com espaço de magia)",
+            "Detectar Portal (ação para localizar portal planar mais próximo a 1,6 km)",
+            "Golpe Planar (ação bônus + espaço de magia: dano de energia +1d8 por 1 min)",
+            "Vagante (memória de mapas; encontra comida e água para até 6 pessoas)"
+        ],
+        "background_features": [
+            "Andarilha (rota de passagem segura em certos territórios)"
+        ]
+    },
+    "attacks": [
+        {
+            "name": "Arco Longo",
+            "attack_bonus": "+7",
+            "damage_and_type": "1d8+3 Perfurante"
+        },
+        {
+            "name": "Espada Curta",
+            "attack_bonus": "+5",
+            "damage_and_type": "1d6+3 Perfurante"
+        },
+        {
+            "name": "Espada Curta 2",
+            "attack_bonus": "+5",
+            "damage_and_type": "1d6+3 Perfurante"
+        }
+    ],
+    "spellcasting": {
+        "spellcasting_ability": "Sabedoria",
+        "spell_save_dc": "12",
+        "spell_attack_bonus": "+4",
+        "cantrips": [],
+        "spell_slots": "2 (1º nível)",
+        "spells_prepared": [
+            "Curar Ferimentos (1º círculo de Evocação)",
+            "Passos Longos (1º círculo de Transmutação)",
+            "Absorver Elementos (1º círculo de Abjuração)",
+            "Proteção contra o Bem e o Mal (1º círculo de Abjuração — Magia de Arquétipo)"
+        ]
+    },
+    "equipment": {
+        "armor": [
+            "Armadura de Couro Batido"
+        ],
+        "magic_items": [],
+        "general_equipment": [
+            "Duas espadas curtas",
+            "Arco longo",
+            "Aljava com 20 flechas",
+            "Pacote de explorador (mochila, saco de dormir, kit de refeição, caixa de fogo, 10 tochas, 10 dias de rações, cantil)",
+            "Cajado",
+            "Laço de caça",
+            "Troféu de presa de lobo",
+            "Broche de prata em formato de folha de salgueiro"
+        ],
+        "money": {
+            "copper": "0",
+            "silver": "0",
+            "electrum": "0",
+            "gold": "10",
+            "platinum": "0"
+        }
+    },
+    "personality": {
+        "trait": "Sinto-me mais em casa na estrada aberta, com o vento no rosto, do que em qualquer cidade murada.",
+        "ideal": "Dever. As mensagens que carrego são a linha da vida que conecta reinos e salva inocentes. Elas são mais importantes que eu.",
+        "bond": "Minha lealdade pertence ao General que me recrutou, que viu em mim não apenas uma mensageira, mas uma arma para a vitória.",
+        "flaw": "Uma vez, uma mensagem minha chegou tarde demais, e uma vila inteira pagou o preço. O peso dessa falha me assombra a cada galope."
+    },
+    "backstory": "Thalia Windrunner não é apenas uma mensageira; é uma veterana forjada no fogo de uma guerra recente. Recrutada pelo rigoroso General Theron Vance, ela se tornou a mais veloz e confiável de suas batedoras, uma mestre das estradas e sombras. No entanto, sua carreira foi marcada por uma tragédia: a destruição da vila de Cinzavale — um evento que ela carrega como sua maior falha, sem saber que foi um sacrifício deliberado orquestrado por seu mentor. Essa falha despertou nela um poder latente e mágico, transformando-a de uma simples batedora em uma Andarilha do Horizonte. Agora cavalga em busca de redenção, carregando a promessa feita a uma moribunda e o broche de salgueiro que deve ser entregue.",
+    "appearance_and_style": {
+        "image_alt": "Thalia Windrunner",
+        "image_file": "Thalia-DnD.png",
+        "image_prompt": "Full body portrait of Thalia Windrunner, a half-elf ranger with an athletic and slender build. Long brown hair usually kept in a practical braid. Sharp green eyes carrying a quiet melancholy. Lightly tanned skin. Wears worn but well-maintained leather armor over earthy travel clothes. A small silver brooch in the shape of a willow leaf is pinned to her cloak near the shoulder. She carries a longbow in hand and two short swords at her sides. Background: open road, windswept forest at dusk. Semi-realistic western fantasy art style, polished digital painting.",
+        "physical_appearance": "Meio-elfa de constituição atlética e esguia. Cabelos castanhos longos, geralmente em trança prática. Olhos verdes aguçados com melancolia silenciosa. Pele levemente bronzeada pelo sol.",
+        "clothing_style": "Armadura de couro batido gasta pelo uso, mas bem cuidada, sobre roupas de viagem em tons terrosos.",
+        "unique_accessories": "Broche de prata em formato de folha de salgueiro (preso na capa, perto do ombro). Origem: promessa para uma moribunda de Cinzavale.",
+        "signature_expression": "Golpe Planar — dano de energia imbuído nas lâminas"
+    },
+    "goals_and_motivations": {
+        "main_goal": "Encontrar Elara (neta da herbalista de Cinzavale) e entregar o broche de salgueiro, cumprindo a promessa de redenção.",
+        "motivations": "Redenção pela destruição de Cinzavale. Honrar o dever de mensageira como proteção dos inocentes.",
+        "fears": "Chegar tarde demais novamente. Descobrir que o General — seu mentor — foi o verdadeiro culpado por Cinzavale.",
+        "secrets": "O poder mágico que despertou em Cinzavale. A sensação de que o General sabia o que aconteceria."
+    },
+    "game_notes": {
+        "combat_behavior": "Arqueira à distância com mobilidade. Usa Furtividade para posicionamento. Golpe Planar em alvos prioritários. Evita combate corpo a corpo mas capaz com duas espadas curtas.",
+        "social_interactions": "Direta e prática. Leal a quem demonstra comprometimento real. Desconfia de políticos e líderes militares desde Cinzavale. Gentil com civis vulneráveis.",
+        "future_development": "Confronto inevitable com a verdade sobre General Vance e Cinzavale. Desenvolvimento do poder de Andarilha do Horizonte. Cumprimento da promessa do broche de salgueiro."
+    },
+    "spell_description": [
+        {
+            "name": "Curar Ferimentos",
+            "level": "1",
+            "school": "Evocação",
+            "casting_time": "1 ação",
+            "range": "Toque",
+            "components": "V, S",
+            "duration": "Instantânea",
+            "description": "Uma criatura que você toca recupera 1d8 + seu modificador de habilidade de conjuração em pontos de vida.",
+            "narrative": "Para Thalia, curar ferimentos é um ato de responsabilidade — a mensageira que não pode se dar ao luxo de perder aliados no campo."
+        },
+        {
+            "name": "Golpe Planar",
+            "level": "1",
+            "school": "Transmutação",
+            "casting_time": "Ação Bônus",
+            "range": "Pessoal",
+            "components": "V",
+            "duration": "Concentração, até 1 minuto",
+            "description": "Gasta um espaço de magia para imbuir armas com energia planar. Por 1 minuto, uma vez por turno, ao acertar: converte todo o dano em energia e causa 1d8 de dano de energia adicional.",
+            "narrative": "O poder inesperado despertado em Cinzavale. Quando as lâminas de Thalia brilham com luz planar, até ela mesma sente que algo maior que ela mesma está em jogo."
+        }
+    ],
+    "metadata": {
+        "template_title": "Thalia Windrunner - Ficha de Personagem Meio-Elfa | Patrulheira (Andarilha do Horizonte) | Nível 3",
+        "system": "D&D 5e",
+        "locale": "pt-BR",
+        "version": "1.4.0"
+    }
+}

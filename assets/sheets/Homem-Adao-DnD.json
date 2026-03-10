@@ -1,0 +1,341 @@
+{
+  "character_name": "Homem-Adão",
+  "race": "Meio-Elfo",
+  "class": "Guerreiro",
+  "level": "3",
+  "basic_info": {
+    "system": "Dungeons & Dragons",
+    "full_name": "Homem-Adão",
+    "archetype": "Campeão",
+    "background": "Artista (Gladiador)",
+    "alignment": "Caótico Neutro",
+    "inspiration": false
+  },
+  "health_and_defense": {
+    "current_hp": "31",
+    "max_hp": "31",
+    "hit_dice": "3d10",
+    "armor_class": "16",
+    "movement": "9m",
+    "initiative": "+0",
+    "death_saves": {
+      "successes": 0,
+      "failures": 0
+    },
+    "resistances_immunities": "Nenhuma"
+  },
+  "attributes": {
+    "strength": {
+      "value": "16",
+      "modifier": "+3",
+      "save": "+5"
+    },
+    "dexterity": {
+      "value": "10",
+      "modifier": "+0",
+      "save": "+0"
+    },
+    "constitution": {
+      "value": "16",
+      "modifier": "+3",
+      "save": "+5"
+    },
+    "intelligence": {
+      "value": "8",
+      "modifier": "-1",
+      "save": "-1"
+    },
+    "wisdom": {
+      "value": "8",
+      "modifier": "-1",
+      "save": "-1"
+    },
+    "charisma": {
+      "value": "16",
+      "modifier": "+3",
+      "save": "+3"
+    }
+  },
+  "proficiencies": {
+    "saving_throws": [
+      "Força",
+      "Constituição"
+    ],
+    "skill_proficiencies": [
+      {
+        "name": "Acrobacia",
+        "attribute": "Des",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+2"
+      },
+      {
+        "name": "Adestrar Animais",
+        "attribute": "Sab",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Arcanismo",
+        "attribute": "Int",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Atletismo",
+        "attribute": "For",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+5"
+      },
+      {
+        "name": "Atuação",
+        "attribute": "Car",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+5"
+      },
+      {
+        "name": "Enganação",
+        "attribute": "Car",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+5"
+      },
+      {
+        "name": "Furtividade",
+        "attribute": "Des",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "+0"
+      },
+      {
+        "name": "História",
+        "attribute": "Int",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Intimidação",
+        "attribute": "Car",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+5"
+      },
+      {
+        "name": "Intuição",
+        "attribute": "Sab",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Investigação",
+        "attribute": "Int",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Medicina",
+        "attribute": "Sab",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Natureza",
+        "attribute": "Int",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Percepção",
+        "attribute": "Sab",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Persuasão",
+        "attribute": "Car",
+        "proficient": true,
+        "expertise": false,
+        "modifier": "+5"
+      },
+      {
+        "name": "Prestidigitação",
+        "attribute": "Des",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "+0"
+      },
+      {
+        "name": "Religião",
+        "attribute": "Int",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      },
+      {
+        "name": "Sobrevivência",
+        "attribute": "Sab",
+        "proficient": false,
+        "expertise": false,
+        "modifier": "-1"
+      }
+    ],
+    "tools_and_languages": [
+      "Kit de Disfarces",
+      "Instrumento Musical (Machado-Lira)",
+      "Comum",
+      "Élfico"
+    ]
+  },
+  "abilities_and_features": {
+    "racial_traits": [
+      "Visão no Escuro",
+      "Ancestral Feérico",
+      "Versatilidade em Perícia"
+    ],
+    "class_features": [
+      "Estilo de Luta (Luta com Arma Grande)",
+      "Retomar o Fôlego",
+      "Surto de Ação",
+      "Crítico Aprimorado"
+    ],
+    "background_features": [
+      "Pela Fama"
+    ]
+  },
+  "attacks": [
+    {
+      "name": "Espada Grande",
+      "attack_bonus": "+5",
+      "damage_and_type": "2d6 + 3 Cortante"
+    },
+    {
+      "name": "Machado de Arremesso",
+      "attack_bonus": "+5",
+      "damage_and_type": "1d6 + 3 Cortante"
+    },
+    {
+      "name": "Machado-Lira (Arremesso)",
+      "attack_bonus": "+5",
+      "damage_and_type": "1d6 + 3 Cortante"
+    }
+  ],
+  "spellcasting": {
+    "spellcasting_ability": "N/A",
+    "spell_save_dc": "N/A",
+    "spell_attack_bonus": "N/A",
+    "cantrips": [],
+    "spell_slots": "N/A",
+    "spells_prepared": []
+  },
+  "equipment": {
+    "armor": [
+      "Cota de Malha"
+    ],
+    "magic_items": [
+      "Espelho da Perdição (natureza ambígua)"
+    ],
+    "general_equipment": [
+      "Espada Grande",
+      "Machado de Arremesso",
+      "Machado-Lira",
+      "Pacote de Masmorra",
+      "Lembrança de um Admirador (fita de seda escarlate)",
+      "Fantasia de Gladiador"
+    ],
+    "money": {
+      "copper": "0",
+      "silver": "0",
+      "electrum": "0",
+      "gold": "15",
+      "platinum": "0"
+    }
+  },
+  "personality": {
+    "trait": "Minha aparência é minha armadura mais importante. Estou sempre impecável, não importa a situação.",
+    "ideal": "Riqueza. Sem dinheiro, não há perfeição.",
+    "bond": "Estou ligado ao 'Espelho da Perdição', um artefato que ganhei de uma admiradora e que reflete minha busca pela imagem ideal.",
+    "flaw": "Posso perder a compostura em batalha se meu cabelo for desarrumado, minha roupa rasgar ou, pior ainda, uma unha quebrar."
+  },
+  "backstory": "Nascido escravo, a beleza de Homem-Adão o levou a se tornar um gladiador-celebridade e guarda-costas de um lorde. Com a morte de seu mestre, ele aproveitou a chance para tomar sua liberdade, buscando agora a fortuna necessária para sustentar sua vida de luxo e perfeição.",
+  "appearance_and_style": {
+    "image_alt": "Homem-Adão, o guerreiro Meio-Elfo",
+    "image_file": "Homem-Adao.png",
+    "image_prompt": "Full body portrait of Homem-Adão, a stunningly handsome male half-elf warrior champion. He has an impossibly muscular and powerful physique. He has impeccable, shoulder-length blonde hair in a sharp bob cut and vibrant green eyes. He wears polished, gleaming silver chainmail armor with a bold red Maltese Cross emblem on the chest. Underneath, he wears a furry brown animal skin loincloth and high leather boots. He masterfully holds a massive greatsword in one hand and a unique battle-axe skillfully crafted to also be a lyre (an axe-lyre) in the other. His pose is arrogant and proud, perhaps adjusting his hair or glancing at his reflection in his sword's blade after a battle. The background is a ruined, opulent gladiatorial arena. Art style: semi-realistic western fantasy, polished digital painting, featuring realistic texture rendering and dramatic, naturalistic lighting.",
+    "physical_appearance": "Homem-Adão é um espécime físico impressionante com corpo musculoso e definido, cabelos loiros impecáveis em corte chanel e olhos verde-vibrantes. Possui uma cicatriz em forma de Cruz de Malta no peito, escondida pela armadura.",
+    "clothing_style": "Veste uma cota de malha prateada polida com uma Cruz de Malta vermelha no peito, sobre uma tanga de pele animal marrom e peluda e botas de couro altas.",
+    "unique_accessories": "O Espelho da Perdição, um machado que também é uma lira, uma fita de seda escarlate amarrada no machado.",
+    "signature_expression": "Um olhar arrogante e orgulhoso, frequentemente checando seu reflexo em qualquer superfície polida."
+  },
+  "goals_and_motivations": {
+    "main_goal": "Acumular riqueza suficiente para viver uma vida de luxo e perfeição, livre de qualquer mestre.",
+    "motivations": "Sua vaidade, o desejo de ser admirado, e a necessidade de provar que é o mestre de seu próprio destino.",
+    "fears": "Perder sua beleza, ser visto como imperfeito ou sujo, voltar a uma vida de servidão.",
+    "secrets": "A origem humilhante de sua cicatriz como uma marca de escravo."
+  },
+  "game_notes": {
+    "combat_behavior": "Luta com poder avassalador, mas de forma performática. Pode se distrair ou se irritar se sua aparência for comprometida.",
+    "social_interactions": "Carismático, arrogante e egocêntrico. Usa sua beleza e fama para conseguir o que quer, tratando os outros com desdém ou charme, dependendo do que lhe for mais útil.",
+    "future_development": "Explorar a natureza do Espelho da Perdição e lidar com as consequências do passado relacionado ao seu antigo mestre e à cicatriz."
+  },
+  "spell_description": [],
+  "masters_treasure_chest": {
+    "bauDeTesouros": {
+      "titulo": "Baú de Tesouros do Mestre: Homem-Adão",
+      "descricao": "Este documento contém ganchos de aventura, motivações e elementos de enredo para integrar o personagem Homem-Adão de forma profunda e significativa na campanha. Ele explora os NPCs, erros, segredos e obrigações do personagem, oferecendo oportunidades para drama, conflito e desenvolvimento.",
+      "secoes": [
+        {
+          "id": 1,
+          "titulo": "NPCs Vivos: Conexões e Conflitos",
+          "itens": [
+            {
+              "nome": "A Nobre Admiradora (Lady Seraphina)",
+              "ganchos": [
+                "\"Um Presente Envenenado\": O espelho pode ser um artefato rastreador ou um foco de vidência, permitindo que ela o observe. Ela pode contatá-lo exigindo \"favores\" em troca de seu silêncio sobre o passado dele.",
+                "\"Herdeira em Perigo\": Com a morte do Lorde, a posição de Lady Seraphina se tornou precária. Ela procura Homem-Adão para protegê-la de rivais, prometendo-lhe uma grande fortuna.",
+                "\"Rival Ciumento\": Um antigo rival da arena, que também era favorecido por Lady Seraphina, agora está livre e caça Homem-Adão por ciúmes."
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "titulo": "Segredos e Passado: O Peso das Marcas",
+          "itens": [
+            {
+              "nome": "A Cicatriz em Forma de Cruz de Malta",
+              "ganchos": [
+                "Segredo: A cicatriz é uma marca de propriedade de seu antigo mestre. Ele subverteu o símbolo de dor ao adotá-lo em sua armadura.",
+                "\"O Símbolo Reconhecido\": Alguém (um ex-soldado, um nobre rival) reconhece a Cruz de Malta como o brasão do falecido Lorde, o que pode levar a acusações de que Homem-Adão é um impostor ou um servo fugitivo.",
+                "\"A Chave de Carne e Osso\": A marca na pele de Homem-Adão pode ressoar com magia perto de um cofre ou artefato de seu antigo mestre, tornando-o a única pessoa que pode desvendar seus segredos."
+              ]
+            },
+            {
+              "nome": "O Espelho da Perfeição (\"Perdição\")",
+              "ganchos": [
+                "Segredo: A natureza do espelho é ambígua. Ele garante uma aparência impecável, mas parece intensificar sua obsessão. É uma maldição ou apenas um catalisador para sua vaidade? Ele não sabe.",
+                "\"O Vislumbre da Decadência\": O espelho começa a mostrar breves e perturbadores vislumbres de Homem-Adão decaindo. É um aviso, uma alucinação, ou o preço de sua vaidade se manifestando?",
+                "\"O Culto da Beleza Eterna\": Um grupo de nobres obcecados pela juventude reconhece o espelho e tenta roubá-lo a todo custo."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "template_title": "Homem-Adão - Ficha de Personagem Meio-Elfo | Guerreiro | Nível 3",
+    "system": "D&D 5e",
+    "locale": "pt-BR",
+    "version": "1.4.0"
+  }
+}

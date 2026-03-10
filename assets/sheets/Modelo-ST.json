@@ -1,0 +1,17 @@
+{
+    "basic_info": { "name": "{{NAME}}", "species": "{{SPECIES}}", "environment": "{{ENVIRONMENT}}", "education": "{{EDUCATION}}", "assignment": "{{ASSIGNMENT}}", "rank": "{{RANK}}", "pronouns": "{{PRONOUNS}}" },
+    "attributes": { "control": "{{CONTROL_VALUE}}", "daring": "{{DARING_VALUE}}", "fitness": "{{FITNESS_VALUE}}", "insight": "{{INSIGHT_VALUE}}", "presence": "{{PRESENCE_VALUE}}", "reason": "{{REASON_VALUE}}" }, 
+    "disciplines": { "command": "{{COMMAND_VALUE}}", "conn": "{{CONN_VALUE}}", "security": "{{SECURITY_VALUE}}", "engineering": "{{ENGINEERING_VALUE}}", "science": "{{SCIENCE_VALUE}}", "medicine": "{{MEDICINE_VALUE}}" },
+    "values": [ "{{VALUE_1}}", "{{VALUE_2}}", "{{VALUE_3}}", "{{VALUE_4}}" ],
+    "focuses": [ "{{FOCUS_1}}", "{{FOCUS_2}}", "{{FOCUS_3}}", "{{FOCUS_4}}", "{{FOCUS_5}}", "{{FOCUS_6}}" ],
+    "talents": [ { "name": "{{TALENT_1_NAME}}", "effect": "{{TALENT_1_EFFECT}}" }, { "name": "{{TALENT_2_NAME}}", "effect": "{{TALENT_2_EFFECT}}" }, { "name": "{{TALENT_3_NAME}}", "effect": "{{TALENT_3_EFFECT}}" }, { "name": "{{TALENT_4_NAME}}", "effect": "{{TALENT_4_EFFECT}}" } ],
+    "combat_and_health": { "stress": "{{STRESS}}", "armor": "{{ARMOR}}", "damage_pool": "{{DAMAGE}}", "injuries": { "boxes": 4, "checked": 0 }, "attacks": [ { "name": "{{ATTACK_1_NAME}}", "damage": "{{ATTACK_1_DAMAGE}}", "effects": "{{ATTACK_1_EFFECTS}}" }, { "name": "{{ATTACK_2_NAME}}", "damage": "{{ATTACK_2_DAMAGE}}", "effects": "{{ATTACK_2_EFFECTS}}" }, { "name": "{{ATTACK_3_NAME}}", "damage": "{{ATTACK_3_DAMAGE}}", "effects": "{{ATTACK_3_EFFECTS}}" } ] },
+    "equipment": [ "{{EQUIPMENT_1}}", "{{EQUIPMENT_2}}", "{{EQUIPMENT_3}}", "{{EQUIPMENT_4}}" ],
+    "resources": { "determination": "{{DETERMINATION}}", "momentum": "{{MOMENTUM}}", "threat": "{{THREAT}}" },
+    "personality": { "trait": "{{PERSONALITY_TRAIT}}", "ideal": "{{IDEAL}}", "bond": "{{BOND}}", "flaw": "{{FLAW}}" },
+    "backstory": "{{BACKSTORY}}",
+    "appearance_and_style": { "image_alt": "{{CHARACTER_NAME}}", "image_file": "{{IMAGE_FILE.png}}", "image_prompt": "{{IMAGE_PROMPT}}", "appearance": "{{APPEARANCE}}", "clothing_style": "{{CLOTHING_STYLE}}", "unique_accessories": "{{UNIQUE_ACCESSORIES}}", "signature_expression": "{{SIGNATURE_EXPRESSION}}" },
+    "goals_and_motivations": { "main_goal": "{{MAIN_GOAL}}", "motivations": "{{MOTIVATIONS}}", "fears": "{{FEARS}}", "secrets": "{{SECRETS}}" },
+    "game_notes": { "combat_behavior": "{{COMBAT_BEHAVIOR}}", "social_interactions": "{{SOCIAL_INTERACTIONS}}", "future_development": "{{FUTURE_DEVELOPMENT}}" },
+    "metadata": { "template_title": "{{CHARACTER_NAME}} - Ficha de Personagem - {{SPECIES}} - {{ASSIGNMENT}}", "system": "Star Trek Adventures", "locale": "pt-BR", "schema_version": "1.0.0" }
+}

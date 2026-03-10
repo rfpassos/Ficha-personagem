@@ -1,0 +1,121 @@
+{
+    "system_name": "Tormenta 20",
+    "character_name": "Elara Menrva",
+    "race": "Meio-Elfa",
+    "class": "Arcanista",
+    "level": "13",
+    "basic_info": {
+        "full_name": "Elara Menrva",
+        "origin": "Acadêmico",
+        "deity": "Tanna-Toh",
+        "deity_obligations": "Preservar e difundir o conhecimento. Punir a destruição deliberada de registros e bibliotecas."
+    },
+    "stats_and_defenses": {
+        "attributes": {
+            "strength": "-1",
+            "dexterity": "0",
+            "constitution": "2",
+            "intelligence": "5",
+            "wisdom": "4",
+            "charisma": "2"
+        },
+        "hp": "46",
+        "mana_points": "130",
+        "defense": "12",
+        "movement": "9m",
+        "saves": {
+            "fortitude": "+6",
+            "reflex": "+4",
+            "will": "+12"
+        }
+    },
+    "skills": {
+        "trained": [
+            "Conhecimento",
+            "Guerra",
+            "Investigação",
+            "Misticismo",
+            "Nobreza",
+            "Vontade"
+        ]
+    },
+    "powers_and_abilities": {
+        "racial_powers": [
+            "Herança Feérica (vantagem contra encantamento, imunidade a sono mágico)",
+            "Vontade de Ferro"
+        ],
+        "class_powers": [
+            "Caminho do Mago",
+            "Magias (Transmutação Especializada)",
+            "Forma Felina (Metamorfose pessoal — gata cinza com listras pretas, mantém Int e Sab)"
+        ],
+        "origin_powers": [
+            "Saber é Poder (bônus em testes de Conhecimento em combate)"
+        ],
+        "deity_powers": [
+            "Conhecimento Enciclopédico (reroll em testes de Conhecimento e Misticismo)"
+        ]
+    },
+    "spells": {
+        "spell_circles": "Círculos 1 a 7",
+        "spell_dc": "18",
+        "known_spells": [
+            "Alterar-se",
+            "Tranca Arcana",
+            "Levitação",
+            "Velocidade",
+            "Metamorfose",
+            "Fabricar",
+            "Teletransporte",
+            "Desintegrar",
+            "Prisão Arcana",
+            "Análise"
+        ]
+    },
+    "equipment": {
+        "weapons": [
+            "Cajado de Bétula Branca (foco arcano +2)"
+        ],
+        "armor": [
+            "Vestes de Sábia de Tanna-Toh"
+        ],
+        "general": [
+            "Grimório Primoroso",
+            "Kit de Misticismo"
+        ],
+        "money_ts": "320 T$"
+    },
+    "personality": {
+        "trait": "Sempre que um aluno faz algo indevido, eu dou um pigarro alto e seco para chamar sua atenção.",
+        "ideal": "Acredito que dentro de cada um existe a capacidade de fazer o bem através do conhecimento.",
+        "bond": "A Academia Arcana é um templo do saber. Protegeria seus muros e seus alunos com minha própria vida.",
+        "flaw": "Eu vejo com desconfiança magias 'instintivas'. A verdadeira maestria vem do estudo rigoroso."
+    },
+    "backstory": "Elara Menrva é uma das mais respeitadas tutoras da Academia Arcana em Wynlla. Como devota de Tanna-Toh, ela é vista como a personificação do estudo mágico disciplinado. Sua habilidade de se transformar em uma gata é famosa nos corredores da academia, um truque que ela usa para observar discretamente o progresso de seus alunos. Ela é uma defensora ferrenha da tradição e do conhecimento registrado, e acredita que a ascensão da Tormenta é um resultado direto da arrogância e do uso imprudente da magia.",
+    "appearance_and_style": {
+        "image_alt": "Elara Menrva",
+        "image_file": "Elara Menrva-Tormenta-1.png",
+        "image_prompt": "A full-body illustration of Elara Menrva, a wise and elderly half-elf Arcanist professor, in a vibrant and dynamic fantasy anime/manga art style. The artwork should feature clean line art with varied thickness and high-contrast colors. She is tall and slender with an elegant posture. Her wise face has subtly pointed ears and half-moon glasses. Her silver hair is tied in a bun. She wears stylized robes in dark green, black, and charcoal grey, embroidered with the symbol of the goddess of knowledge (a scroll and a quill).",
+        "appearance": "Figura alta e esguia com a graça de herança élfica. Vestes carregam broche de prata com símbolo de Tanna-Toh (pergaminho e pena). Cabelo prateado em coque.",
+        "clothing_style": "Vestes formais de Sábia de Tanna-Toh — verde-escuro, preto e cinza-chumbo, com detalhes bordados em prata.",
+        "unique_accessories": "Broche de prata com símbolo de Tanna-Toh, cajado de bétula, óculos de meia-lua.",
+        "signature_expression": "Forma Felina (gata cinza com listras pretas)"
+    },
+    "goals_and_motivations": {
+        "main_goal": "Preservar o conhecimento arcano e defender a academia dos horrores da Tormenta.",
+        "motivations": "Devoção a Tanna-Toh e crença de que o conhecimento disciplinado é o único baluarte contra o caos.",
+        "fears": "Que a Tormenta corrompa ou destrua o legado arcano que ela dedicou sua vida a preservar.",
+        "secrets": "Seu passado como maga de guerra antes de encontrar a academia e a deusa."
+    },
+    "game_notes": {
+        "combat_behavior": "Prefere controle arcano de distância. Usa Prisão Arcana e Metamorfose para incapacitar. Reserva Desintegrar para ameaças à academia.",
+        "social_interactions": "Autoridade acadêmica respeitada. Desconfia de uso imprudente da magia. Valoriza disciplina e estudo rigoroso acima de tudo.",
+        "future_development": "Arco de confronto com a Tormenta usando conhecimento acumulado como arma definitiva."
+    },
+    "metadata": {
+        "template_title": "Elara Menrva - Ficha de Personagem Meio-Elfa | Arcanista | Nível 13",
+        "system": "Tormenta 20",
+        "locale": "pt-BR",
+        "version": "1.0.0"
+    }
+}

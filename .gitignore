@@ -1,39 +1,43 @@
-# Dependencies
+# Dependências
 node_modules/
 .pnp
 .pnp.js
+.yarn/
+.tsbuildinfo
 
-# Testing
-coverage/
-
-# Production
-build/
-dist/
-
-# Next.js
+# Build & Cache
 .next/
 out/
-
-# Environment Variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+dist/
+build/
+.vercel
+.cache/
+.npm
+.eslintcache
 
 # Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# OS Files
+# Segredos e Configurações Sensíveis
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.keys.json
+
+# Sistema
 .DS_Store
 Thumbs.db
 
-# Project Specific
-assets/sheets/*.pdf
-assets/sheets/*.json
-!assets/sheets/Elara Menrva-DnD.json
-api/generate_elara_pdf.js
-assets/templates/elara-test.html
+# Arquivos de Teste e Geração Local (O usuário quer versionar estes exemplos)
+# Removi as restrições que ignoravam arquivos de assets e scripts de teste.
+# Apenas PDFs pesados de exemplo podem ser ignorados se desejado,
+# mas se o usuário quer "todos os arquivos", vamos manter o que não for segredo.
+
+# assets/sheets/*.pdf
+# assets/sheets/*.json # Agora permitido para modelos

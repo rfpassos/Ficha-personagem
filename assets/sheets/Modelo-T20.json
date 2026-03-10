@@ -1,0 +1,13 @@
+    { "system_name": "Tormenta 20", "character_name": "{{CHARACTER_NAME}}", "race": "{{RACE}}", "class": "{{CLASS}}", "level": "{{LEVEL}}",
+    "basic_info": { "full_name": "{{CHARACTER_NAME}}", "origin": "{{ORIGIN}}", "deity": "{{DEITY}}", "deity_obligations": "{{DEITY_OBLIGATIONS}}" },
+    "stats_and_defenses": { "attributes": { "strength": "{{STRENGTH_VALUE}}", "dexterity": "{{DEXTERITY_VALUE}}", "constitution": "{{CONSTITUTION_VALUE}}", "intelligence": "{{INTELLIGENCE_VALUE}}", "wisdom": "{{WISDOM_VALUE}}", "charisma": "{{CHARISMA_VALUE}}" }, "hp": "{{HP}}", "mana_points": "{{MANA_POINTS}}", "defense": "{{DEFENSE}}", "movement": "{{MOVEMENT}}", "saves": { "fortitude": "{{FORTITUDE_SAVE}}", "reflex": "{{REFLEX_SAVE}}", "will": "{{WILL_SAVE}}"}},
+    "skills": { "trained": [ "{{SKILL_LIST}}" ] },
+    "powers_and_abilities": { "racial_powers": [ "{{RACIAL_POWERS}}" ], "class_powers": [ "{{CLASS_POWERS}}" ], "origin_powers": [ "{{ORIGIN_POWERS}}" ], "deity_powers": [ "{{DEITY_POWERS}}" ] },
+    "spells": { "spell_circles": "{{SPELL_CIRCLES}}", "spell_dc": "{{SPELL_DC}}", "known_spells": [ "{{SPELL_LIST}}" ] },
+    "equipment": { "weapons": [ "{{WEAPONS_LIST}}" ], "armor": [ "{{ARMOR_LIST}}" ], "general": [ "{{GENERAL_EQUIPMENT}}" ], "money_ts": "{{MONEY}}" },
+    "personality": { "trait": "{{PERSONALITY_TRAIT}}", "ideal": "{{IDEAL}}", "bond": "{{BOND}}", "flaw": "{{FLAW}}" },
+    "backstory": "{{BACKSTORY}}",
+    "appearance_and_style": { "image_alt": "{{CHARACTER_NAME}}", "image_file": "{{IMAGE_FILE.png}}", "image_prompt": "{{IMAGE_PROMPT}}", "appearance": "{{APPEARANCE}}", "clothing_style": "{{CLOTHING_STYLE}}", "unique_accessories": "{{UNIQUE_ACCESSORIES}}", "signature_expression": "{{SIGNATURE_EXPRESSION}}" },
+    "goals_and_motivations": { "main_goal": "{{MAIN_GOAL}}", "motivations": "{{MOTIVATIONS}}", "fears": "{{FEARS}}", "secrets": "{{SECRETS}}" },
+    "game_notes": { "combat_behavior": "{{COMBAT_BEHAVIOR}}", "social_interactions": "{{SOCIAL_INTERACTIONS}}", "future_development": "{{FUTURE_DEVELOPMENT}}" },
+    "metadata": { "template_title": "{{CHARACTER_NAME}} - Ficha de Personagem {{RACE}} | {{CLASS}} | Nível {{LEVEL}}", "system": "Tormenta 20",  "locale": "pt-BR",  "version": "1.0.0" } }

@@ -1,0 +1,133 @@
+{
+    "character_name": "Lívia Correia",
+    "origin": "Investigador",
+    "class": "Ocultista",
+    "path": "A ser escolhida em NEX 10%",
+    "nex_percent": "5",
+    "rank": "Recruta",
+    "vital_resources": {
+        "hp": {
+            "current": "14",
+            "max": "14"
+        },
+        "sanity": {
+            "current": "20",
+            "max": "20"
+        },
+        "effort": {
+            "current": "6",
+            "max": "6"
+        },
+        "defense": "11",
+        "dodge": "11",
+        "block": "0",
+        "movement": "9m"
+    },
+    "attributes": {
+        "agility": "1",
+        "strength": "1",
+        "intellect": "3",
+        "presence": "2",
+        "vigor": "2"
+    },
+    "skills_trained": {
+        "schema": "proficiency + graduation",
+        "acrobatic": "1",
+        "animal_handling": "2",
+        "arts": "2",
+        "athletics": "1",
+        "current_events": "Treinada (+8)",
+        "science": "Treinada (+8)",
+        "crime": "1",
+        "diplomacy": "2",
+        "deception": "2",
+        "fortitude": "Treinada (+7)",
+        "stealth": "1",
+        "initiative": "1",
+        "intimidation": "2",
+        "intuition": "Treinada (+7)",
+        "investigation": "Treinada (+8)",
+        "fight": "1",
+        "medicine": "3",
+        "mysticism": "3",
+        "occultism": "Treinada (+8)",
+        "perception": "Treinada (+7)",
+        "piloting": "1",
+        "marksmanship": "1",
+        "profession": "3",
+        "reflexes": "1",
+        "religion": "Treinada (+7)",
+        "survival": "3",
+        "tactics": "Treinada (+8)",
+        "technology": "3",
+        "will": "Treinada (+7)"
+    },
+    "powers_and_features": {
+        "origin_powers": [
+            "Investigador: Treinada em Investigação e Percepção. Vantagem em testes para encontrar evidências ocultas."
+        ],
+        "class_path_powers": [
+            "Ocultista: Treinada em Ocultismo e Vontade. Pode aprender e lançar rituais."
+        ],
+        "paranormal_abilities": []
+    },
+    "attacks_and_rituals": {
+        "attacks": [
+            {
+                "name": "Soco / Defesa Pessoal",
+                "attack_test": "FOR + Luta",
+                "damage": "1d4+1 impacto"
+            }
+        ],
+        "ritual_save_dc": "13"
+    },
+    "equipment": {
+        "load": {
+            "current": "3",
+            "max": "5"
+        },
+        "armors": [],
+        "weapons": [],
+        "items_and_tools": [
+            "Kit de Investigação (lupa, pinça, sacos plásticos, pó de impressão digital)",
+            "Grimório de anotações (registro de casos e teorias)",
+            "Celular (acesso a redes e pesquisa rápida)",
+            "Sobretudo com bolsos internos",
+            "Lanterna tática vermelha"
+        ],
+        "money": "Crédito Baixo (Recruta)"
+    },
+    "personality": {
+        "trait": "Não acredito em coincidências. Se algo parece impossível, ainda não encontrei a explicação certa — mas vou encontrar.",
+        "ideal": "Para entender os monstros, é preciso aprender a linguagem deles. Sem empatia pelo inimigo, não há vitória real.",
+        "bond": "Cada caso arquivado como 'sem solução' é um chamado. Terei repouso quando o Outro Lado parar de sussurrar.",
+        "flaw": "Minha obsessão me isola. Prefiro a companhia de grimórios empoeirados à de pessoas que não querem ver o que eu vejo."
+    },
+    "backstory": "Ela nunca foi uma investigadora comum. Enquanto seus colegas perseguiam pistas em becos escuros, ela buscava padrões em lendas urbanas. Ela descobriu que a verdade, muitas vezes, não estava na lógica do crime, mas na ilógica do impossível. Cada caso arquivado como 'sem solução' era, para ela, um sussurro do Outro Lado. Em vez de recuar, ela mergulhou de cabeça, trocando manuais de direito por grimórios empoeirados. Ela se tornou uma Ocultista por necessidade, pois entendeu que para encontrar os monstros, era preciso aprender a linguagem deles.",
+    "appearance_and_style": {
+        "image_alt": "Lívia Correia — Investigadora Ocultista",
+        "image_file": "Lívia1.png",
+        "image_prompt": "arte de quadrinhos moderna e vibrante de Lívia Correia, uma investigadora ocultista, mulher negra, baixa e com quadris largos, em um cenário que reflita sua vida de investigações sombrias e encontros paranormais. Ela segura um livro antigo em uma mão e, na outra, uma robusta lanterna tática vermelha, que ilumina a cena. O personagem deve estar em uma pose dinâmica e aparecendo de corpo inteiro na imagem.",
+        "appearance": "Mulher negra, baixa e de quadris largos. Aparenta por volta de 30 anos, mas olhos carregam o peso de muitas vidas. Cabelo escuro quase sempre preso em coque funcional. Olheiras profundas como prova de noites em claro.",
+        "clothing_style": "Calças escuras, botas confortáveis e sobretudo gasto com interior forrado de bolsos para pequenos artefatos e diários de anotações. Discreta e funcional.",
+        "unique_accessories": "Lanterna tática vermelha (sua ferramenta de campo mais confiável), grimório de anotações sempre à mão.",
+        "signature_expression": "A lanterna vermelha iluminando o que o mundo prefere deixar no escuro."
+    },
+    "goals_and_motivations": {
+        "main_goal": "Desvendar os padrões ocultos nos casos paranormais, construindo um mapa do Outro Lado para proteger os que não veem o que ela vê.",
+        "motivations": "Compulsão intelectual. A certeza de que cada impossível tem uma explicação, e que ignorá-la custa vidas inocentes.",
+        "fears": "Ser consumida pela obsessão a ponto de perder a perspectiva humana que a torna eficaz. Ou pior: descobrir que alguns impossíveis não têm explicação — que são apenas caos.",
+        "secrets": "O primeiro caso que a quebrou: algo que viu que não deveria ter visto, que a convenceu de que existia um Outro Lado antes de sequer saber o nome da Ordem."
+    },
+    "game_notes": {
+        "combat_behavior": "Evita confronto direto. Usa Intuição e Ocultismo para identificar fraquezas. Prefere documentar e planejar antes de agir. Se acuada, usa o ambiente e improvisação.",
+        "social_interactions": "Direta e objetiva. Desconfortável com pequenas falas mas eficaz em interrogatórios. Cria laços fortes com quem respeita sua perspectiva. Desconfia de quem descarta o impossível.",
+        "future_development": "Escolha da Trilha em NEX 10% (provável Investigadores do Oculto ou Lâmina de Conhecimento). Desenvolvimento do primeiro ritual. Confronto com o caso que a quebrou originalmente."
+    },
+    "metadata": {
+        "template_title": "Lívia Correia - Ficha de Agente | Ocultista | NEX 5%",
+        "system": "Ordem Paranormal",
+        "locale": "pt-BR",
+        "schema_version": "1.0.0"
+    }
+}

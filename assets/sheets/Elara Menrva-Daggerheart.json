@@ -1,0 +1,159 @@
+{
+    "character_name": "Elara Menrva",
+    "ancestry": "Sylvari (Meio-Elfa)",
+    "class": "Seraph",
+    "subclass": "Path of the Shaper (Trilha do Moldador) — A Metamorfa",
+    "level": "13",
+    "community": "O Arquivo",
+    "basic_info": {
+        "full_name": "Elara Menrva",
+        "action_dice": {
+            "hope_d12_checked": false,
+            "fear_d12_checked": false
+        }
+    },
+    "stress_and_defense": {
+        "armor": "14",
+        "evasion": "12",
+        "resolve": "16",
+        "thresholds": "Menor: 8 / Grave: 19 / Severo: 28",
+        "movement": "6"
+    },
+    "domains": {
+        "agility": {
+            "die": "d6",
+            "experience_checked": false
+        },
+        "strength": {
+            "die": "d4",
+            "experience_checked": false
+        },
+        "finesse": {
+            "die": "d6",
+            "experience_checked": false
+        },
+        "instinct": {
+            "die": "d8",
+            "experience_checked": false
+        },
+        "knowledge": {
+            "die": "d10",
+            "experience_checked": true
+        },
+        "presence": {
+            "die": "d6",
+            "experience_checked": false
+        }
+    },
+    "skills_and_proficiencies": {
+        "skills": [
+            {
+                "name": "Analisar",
+                "domain": "Knowledge"
+            },
+            {
+                "name": "Lembrar",
+                "domain": "Knowledge"
+            },
+            {
+                "name": "Manipular",
+                "domain": "Presence"
+            },
+            {
+                "name": "Perceber",
+                "domain": "Instinct"
+            },
+            {
+                "name": "Esconder-se",
+                "domain": "Finesse"
+            }
+        ],
+        "tools_and_languages": [
+            "Élfico",
+            "Silvanês",
+            "Idioma dos Sábios Arcanos"
+        ]
+    },
+    "features": {
+        "ancestry_features": [
+            "Visão no Escuro",
+            "Resistência Feérica (vantagem contra encantamento)"
+        ],
+        "class_features": [
+            "Forma Felina (Transmutação Completa em gata cinza com listras pretas — observação discreta e reflexo de natureza resiliente)",
+            "Domínio do Conhecimento +2",
+            "Magia de Serafim — acesso a magias de proteção e transformação",
+            "Sombra da Vingadora — sob ameaça extrema, acesso a poderes de guerra fria e implacável"
+        ],
+        "community_features": [
+            "Conhecimento Arquivado (acesso a tomos raros e registros históricos)",
+            "Rede de Sábios"
+        ]
+    },
+    "actions_and_spells": {
+        "action_tokens": "3",
+        "spell_slots": "6",
+        "known_spells": [
+            "Transmutação Menor",
+            "Escudo Arcano",
+            "Alteração de Forma",
+            "Golpe do Saber",
+            "Metamorfose Completa",
+            "Laço Imobilizador"
+        ]
+    },
+    "equipment": {
+        "load": {
+            "current": "5",
+            "max": "8"
+        },
+        "glimmer": "45",
+        "weapons_and_armor": [
+            "Vestes de Arquivista (leves)",
+            "Pedra da Forma (foco mágico pessoal)"
+        ],
+        "important_items": [
+            "Tomo Arcano (grimório pessoal)",
+            "Varinha de Salgueiro",
+            "Kit de Escriba"
+        ]
+    },
+    "values_connections_memories": {
+        "value": "O conhecimento deve ser preservado, independentemente do custo pessoal.",
+        "connections": [
+            "Seus alunos atuais — o novo 'lar' que ela protege com ferocidade de quem perdeu tudo",
+            "A memória de seu noivo assassinado — a ferida que a fez quem ela é"
+        ],
+        "memories": [
+            "A noite em que viu sua família ser assassinada e se tornou uma caçadora implacável",
+            "O dia em que escolheu a sala de aula em vez da vingança perpétua"
+        ]
+    },
+    "backstory": "Elara Menrva foi uma das mais brilhantes magas a serviço da realeza, cuja vida foi destruída quando um inimigo, para se vingar, assassinou toda a sua família na sua frente. Consumida pela dor, ela se tornou uma caçadora implacável, usando sua maestria em transmutação para obter sua vingança. Buscando redenção e um novo propósito, ela se refugiou na vida acadêmica, tornando-se professora. A escola e seus alunos se tornaram seu novo mundo, um que ela protege com a ferocidade de quem já perdeu tudo, enquanto luta para manter a 'vingadora' dentro de si adormecida.",
+    "appearance_and_style": {
+        "image_alt": "Elara Menrva",
+        "image_file": "Elara Menrva-Dagger-1.png",
+        "image_prompt": "A full-body illustration of Elara Menrva, a wise and tragic half-elf archmage professor, in a vibrant western animation fantasy style similar to 'The Legend of Vox Machina'. Her expressive face is marked by a deep-seated sorrow.",
+        "appearance": "Figura alta e esguia com graça élfica. Cabelo prateado com mechas escuras preso em coque. Traços finos, orelhas levemente pontiagudas, óculos de meia-lua. Vestes formais de tons sombrios.",
+        "clothing_style": "Vestes de Arquivista em verde-escuro, preto e cinza, estilo acadêmico formal.",
+        "unique_accessories": "Pedra da Forma (foco), varinha de salgueiro, óculos de meia-lua.",
+        "signature_expression": "Forma Felina (gata cinza com listras pretas)"
+    },
+    "goals_and_motivations": {
+        "main_goal": "Proteger a escola e seus alunos com toda a ferocidade que a Vingadora interno carrega.",
+        "motivations": "Redenção pelo passado. Encontrar novo propósito no ensino. Garantir que nenhum aluno precise se tornar o que ela foi forçada a se tornar.",
+        "fears": "Perder outro ser querido. Ser forçada a despertar a Vingadora novamente.",
+        "secrets": "A profundidade de quão longe foi em sua caçada de vingança e as atrocidades cometidas."
+    },
+    "game_notes": {
+        "combat_behavior": "Prefere evitar combate direto. Se forçada, a Sombra da Vingadora emerge: fria, precisa e aterrorizante. Usa Metamorfose Completa e magias de controle.",
+        "social_interactions": "Autoritária em ambiente acadêmico, reservada fora dele. Leal uma vez que confia. Desconfia de quem exibe poder sem o peso da responsabilidade.",
+        "future_development": "Arco de aceitar a coexistência do Prof. Menrva e da Vingadora. Possível confronto com remanescentes do culto que destruiu sua família."
+    },
+    "metadata": {
+        "template_title": "Elara Menrva - Ficha de Personagem Sylvari | Seraph | Nível 13",
+        "system": "Daggerheart",
+        "locale": "pt-BR",
+        "schema_version": "1.0.0"
+    }
+}

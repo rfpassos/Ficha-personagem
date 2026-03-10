@@ -1,0 +1,119 @@
+{
+    "system_name": "Tormenta 20",
+    "character_name": "Eco",
+    "race": "Osteon",
+    "class": "Clérigo",
+    "level": "1",
+    "basic_info": {
+        "full_name": "Eco",
+        "origin": "Eremita",
+        "deity": "Tenebra",
+        "deity_obligations": "Fazer rituais sob a noite e proteger os segredos da escuridão. Não expor os mistérios de Tenebra a não-iniciados."
+    },
+    "stats_and_defenses": {
+        "attributes": {
+            "strength": "1",
+            "dexterity": "0",
+            "constitution": "-1",
+            "intelligence": "5",
+            "wisdom": "6",
+            "charisma": "2"
+        },
+        "hp": "15",
+        "mana_points": "11",
+        "defense": "14",
+        "movement": "9m",
+        "saves": {
+            "fortitude": "+2",
+            "reflex": "+3",
+            "will": "+9"
+        }
+    },
+    "skills": {
+        "trained": [
+            "Conhecimento",
+            "Cura",
+            "Misticismo",
+            "Percepção",
+            "Religião",
+            "Sobrevivência",
+            "Vontade"
+        ]
+    },
+    "powers_and_abilities": {
+        "racial_powers": [
+            "Natureza Esquelética (imune a efeitos de veneno, doença e encantamento)",
+            "Armadura Óssea (+2 na Defesa)",
+            "Memória Póstuma (pode acessar conhecimentos de vida anterior com teste de Sab)"
+        ],
+        "class_powers": [
+            "Devoto (Tenebra) — canaliza energia divina da deusa da noite",
+            "Magias de Clérigo (foco em magia de Trevas e Cura)"
+        ],
+        "origin_powers": [
+            "Abrigo Solitário (sobrevive em ambientes inóspitos sem necessidade de descanso convencional)",
+            "Itens de Eremita (kit especializado para vida no isolamento)"
+        ],
+        "deity_powers": [
+            "Manto da Escuridão (cria zona de escuridão mágica de 3m durante 1 minuto)",
+            "Sussurros da Noite (percebe criaturas ocultas nas sombras próximas)"
+        ]
+    },
+    "spells": {
+        "spell_circles": "1º Círculo",
+        "spell_dc": "14",
+        "known_spells": [
+            "Curar Ferimentos",
+            "Luz das Trevas",
+            "Escudo Sagrado",
+            "Sussurro Sombrio"
+        ]
+    },
+    "equipment": {
+        "weapons": [
+            "Maça"
+        ],
+        "armor": [
+            "Couro Batido",
+            "Escudo Leve"
+        ],
+        "general": [
+            "Símbolo Sagrado de Tenebra (sol negro obsidiana em cordão de couro)",
+            "Kit de Sobrevivência"
+        ],
+        "money_ts": "6 T$"
+    },
+    "personality": {
+        "trait": "Sou uma entidade de silêncio e observação. Meu propósito atual não necessita de nome — apenas de ação.",
+        "ideal": "A escuridão não é o fim, mas o começo de tudo que foi esquecido. Preservo o que os vivos não querem lembrar.",
+        "bond": "Tenebra me deu propósito quando o mundo me esqueceu. Sua lei é a única que reconheço.",
+        "flaw": "Não tenho memórias de quem fui. Esta falta de identidade me torna vulnerável a quem oferece respostas — verdadeiras ou falsas."
+    },
+    "backstory": "A morte não foi o fim, mas um novo e silencioso começo. Reanimado sob a luz pálida da lua, este ser não se lembrava de seu nome, de seu rosto, de sua vida. Foi no silêncio e na escuridão que ouviu os sussurros de Tenebra, a Deusa da Noite, que lhe ofereceu um propósito. Agora, este Osteon serve à escuridão, uma alma desprendida das vaidades do passado, cuja identidade é tão fluida quanto as sombras que o cercam. Seus ossos amarelados são cobertos por vestes escuras de eremita, e onde deveriam estar os olhos, ardem dois pontos de luz violeta.",
+    "appearance_and_style": {
+        "image_alt": "Eco — Osteon Clérigo de Tenebra",
+        "image_file": "Eco.png",
+        "image_prompt": "A gender-fluid skeleton cleric, named Eco, stands in a dimly lit, ancient stone chamber. Its ancient, yellowed bones, with visible cracks and worn areas, are draped in dark, tattered hermit robes made of coarse, rough-hewn fabric. Underneath the robes, remnants of worn leather armor are visible, including a chest plate and gauntlets, showing signs of heavy use and age. Two points of calm, inquisitive violet light burn steadily in its eye sockets, emanating a soft glow. An obsidian symbol of a black sun, representing the goddess Tenebra, hangs from its neck on a leather cord. The black sun symbol is intricately carved, reflecting the minimal ambient light. The skeleton holds a gnarled wooden staff in its right hand, topped with a small, unlit lantern. The chamber is quiet, with dust motes dancing in the faint light filtering from an unseen source. The overall mood is silent and mysterious, with long, soft shadows cast on the stone walls.",
+        "appearance": "Esqueleto com ossos amarelados e gênero-fluido. Vestes escuras esfarrapadas de eremita sobre fragmentos de armadura de couro usada. Dois pontos de luz violeta calma onde deveriam estar os olhos.",
+        "clothing_style": "Vestes escuras e rústicas de eremita. Funcional e assustador de forma passiva.",
+        "unique_accessories": "Símbolo de Tenebra (sol negro em obsidiana, cordão de couro). Maça simples de combate.",
+        "signature_expression": "Dois pontos de luz violeta nos olhos — serenos, inquisitivos, eternos."
+    },
+    "goals_and_motivations": {
+        "main_goal": "Descobrir quem foi em vida, enquanto serve fielmente a Tenebra e protege os segredos da escuridão.",
+        "motivations": "Busca de identidade. Devoção genuína a Tenebra como único princípio organizador de uma existência sem memória.",
+        "fears": "Descobrir que foi algo terrível em vida. Ser manipulado por quem oferece respostas falsas sobre seu passado.",
+        "secrets": "Os resquícios de memória traumática que emergem como pesadelos — flashes de algo acontecendo antes da morte que não consegue reconstruir completamente."
+    },
+    "game_notes": {
+        "combat_behavior": "Suporte e controle arcano. Manto da Escuridão para desorientar inimigos. Cura e proteção para aliados. Evita combate físico direto mas usa Maça se necessário.",
+        "social_interactions": "Sereno e contemplativo. Fala pouco, observa muito. Intriga quem o encontra. Respeita rituais e protocolos. Desconfia de quem oferece identidade como moeda de troca.",
+        "future_development": "Descoberta gradual do passado através de Memória Póstuma. Arco de decisão: o que fazer com quem foi antes, se esse ser merecia continuar existindo?"
+    },
+    "metadata": {
+        "template_title": "Eco - Ficha de Personagem Osteon | Clérigo (Tenebra) | Nível 1",
+        "system": "Tormenta 20",
+        "locale": "pt-BR",
+        "version": "1.0.0"
+    }
+}
