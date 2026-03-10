@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Rubik:wght@400;500;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --paper: #f0ede8;
+            --paper-dk: #e2ddd7;
+            --paper-xd: #c8c0b2;
+            --ink: #1c1612;
+            --ink-lt: #3d342a;
+            --moss: #3d5c42;
+            --rust: #7a3425;
+            --silver: #607060;
+            --gold: #8a702a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #c8c0b2;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Rubik', sans-serif;
+            color: var(--ink);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--paper);
+            box-shadow: 2px 4px 20px rgba(28, 22, 18, 0.3);
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        /* HEADER — horizontal full-width */
+        .header {
+            background: var(--ink);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-main {
+            flex: 1;
+        }
+
+        .sys-label {
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 4px;
+        }
+
+        .char-name {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .char-sub {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header-portrait {
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--moss);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .header-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .port-ph {
+            width: 100%;
+            height: 100%;
+            background: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #555;
+        }
+
+        /* BODY */
+        .body {
+            padding: 14px 18px;
+        }
+
+        /* TRAGEDY + VITALS: side-by-side */
+        .top-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* TRAGEDY */
+        .tragedy-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .tragedy-block {
+            border: 1px solid var(--paper-xd);
+            padding: 8px 10px;
+            background: var(--paper-dk);
+            position: relative;
+        }
+
+        .tragedy-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--rust);
+        }
+
+        .tragedy-label {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 3px;
+        }
+
+        .tragedy-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            font-style: italic;
+            color: var(--ink-lt);
+            line-height: 1.45;
+        }
+
+        /* VITALS CARD */
+        .vitals-card {
+            background: var(--paper-dk);
+            border: 1px solid var(--paper-xd);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .vital-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .vital-block {
+            text-align: center;
+            padding: 6px 4px;
+            background: var(--paper);
+            border: 1px solid var(--paper-xd);
+        }
+
+        .vital-label {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            font-family: 'Fira Code', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .vital-sub {
+            font-size: 7px;
+            color: var(--silver);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* SECTION */
+        .sec {
+            margin-bottom: 10px;
+        }
+
+        .sec-title {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--moss);
+            border-bottom: 1px solid var(--paper-xd);
+            padding-bottom: 4px;
+            margin-bottom: 7px;
+        }
+
+        /* ATTRIBUTES */
+        .attrs-band {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: var(--paper-dk);
+            border: 1px solid var(--paper-xd);
+            margin-bottom: 10px;
+        }
+
+        .attr-cell {
+            text-align: center;
+            padding: 6px 4px;
+            border-right: 1px solid var(--paper-xd);
+        }
+
+        .attr-cell:last-child {
+            border-right: none;
+        }
+
+        .attr-name {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--silver);
+        }
+
+        .attr-val {
+            font-family: 'Fira Code', monospace;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .attr-mod {
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            color: var(--moss);
+        }
+
+        /* SKILLS 3-COL */
+        .skills-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0 8px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2.5px 0;
+            border-bottom: 1px solid rgba(200, 192, 178, 0.6);
+        }
+
+        .sk-dot {
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--paper-xd);
+            flex-shrink: 0;
+        }
+
+        .sk-dot.tr {
+            background: var(--moss);
+            border-color: var(--moss);
+        }
+
+        .sk-dot.ex {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .sk-name {
+            font-size: 8px;
+            color: var(--ink-lt);
+            flex: 1;
+        }
+
+        .sk-mod {
+            font-family: 'Fira Code', monospace;
+            font-size: 8px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* POWER */
+        .power-row {
+            display: flex;
+            gap: 6px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(200, 192, 178, 0.6);
+            align-items: flex-start;
+        }
+
+        .power-tag {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--moss);
+            padding: 1px 5px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .power-tag.class {
+            background: var(--rust);
+        }
+
+        .power-tag.magic {
+            background: var(--silver);
+        }
+
+        .power-text {
+            font-size: 8.5px;
+            color: var(--ink-lt);
+            line-height: 1.4;
+        }
+
+        /* EQUIP */
+        .equip-row {
+            font-size: 9px;
+            color: var(--ink-lt);
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(200, 192, 178, 0.5);
+        }
+
+        .equip-row::before {
+            content: '· ';
+            color: var(--rust);
+        }
+
+        /* NARRATIVE */
+        .narrative {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--ink-lt);
+            line-height: 1.6;
+            padding: 10px;
+            background: var(--paper-dk);
+            border: 1px solid var(--paper-xd);
+        }
+
+        /* GRID 4 */
+        .pers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .pers-card {
+            background: var(--paper-dk);
+            border: 1px solid var(--paper-xd);
+            border-top: 2px solid var(--moss);
+            padding: 8px;
+        }
+
+        .pers-label {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--moss);
+            margin-bottom: 4px;
+        }
+
+        .pers-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 9px;
+            font-style: italic;
+            color: var(--ink-lt);
+            line-height: 1.4;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--ink);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 7px;
+            font-family: 'Fira Code', monospace;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 1px;
+        }
+
+        .footer-brand {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 12px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <header class="header">
+            <div class="header-main">
+                <div class="sys-label">Skyfall RPG — Ficha de Personagem</div>
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-sub">{{people}} · {{class}} · Nível {{level}} · {{origin}}</div>
+            </div>
+            <div class="header-portrait">
+                {{#if appearance_and_style.image_file}}
+                <img src="{{appearance_and_style.image_file}}" alt="">
+                {{else}}<div class="port-ph">RETRATO</div>{{/if}}
+            </div>
+        </header>
+
+        <div class="body">
+
+            <div class="top-row">
+                <!-- PILARES TRÁGICOS -->
+                <div class="tragedy-stack">
+                    <div
+                        style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rust);margin-bottom:2px">
+                        PILARES TRÁGICOS</div>
+                    {{#each tragic_pillars}}
+                    <div class="tragedy-block">
+                        <div class="tragedy-label">{{@key}}</div>
+                        <div class="tragedy-text">{{this}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <!-- VITAIS -->
+                <div class="vitals-card">
+                    <div
+                        style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--silver);margin-bottom:2px">
+                        ESTADO ATUAL</div>
+                    <div class="vital-row">
+                        <div class="vital-block">
+                            <div class="vital-label">PV</div>
+                            <div class="vital-value">{{health.hp_current}}</div>
+                            <div class="vital-sub">/ {{health.hp_max}}</div>
+                        </div>
+                        <div class="vital-block">
+                            <div class="vital-label">PM</div>
+                            <div class="vital-value">{{health.mp_current}}</div>
+                            <div class="vital-sub">/ {{health.mp_max}}</div>
+                        </div>
+                    </div>
+                    <div class="vital-row">
+                        <div class="vital-block">
+                            <div class="vital-label">Defesa</div>
+                            <div class="vital-value">{{health.defense}}</div>
+                        </div>
+                        <div class="vital-block">
+                            <div class="vital-label">Resistência</div>
+                            <div class="vital-value">{{health.resistance}}</div>
+                        </div>
+                    </div>
+                    <div class="vital-block">
+                        <div class="vital-label">Deslocamento</div>
+                        <div class="vital-value" style="font-size:16px">{{health.movement}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATRIBUTOS -->
+            <div class="attrs-band">
+                {{#each attributes}}
+                <div class="attr-cell">
+                    <div class="attr-name">{{@key}}</div>
+                    <div class="attr-val">{{value}}</div>
+                    <div class="attr-mod">{{modifier}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- PERÍCIAS -->
+            <div class="sec">
+                <div class="sec-title">Perícias</div>
+                <div class="skills-3col">
+                    {{#each skills}}
+                    <div class="skill-row">
+                        <div class="sk-dot {{trained}}"></div>
+                        <span class="sk-name">{{name}}</span>
+                        <span class="sk-mod">{{modifier}}</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- PODERES -->
+            <div class="sec">
+                <div class="sec-title">Poderes &amp; Magias</div>
+                {{#each powers_and_features.people_powers}}
+                <div class="power-row">
+                    <span class="power-tag">Povo</span>
+                    <span class="power-text">{{this}}</span>
+                </div>
+                {{/each}}
+                {{#each powers_and_features.class_powers}}
+                <div class="power-row">
+                    <span class="power-tag class">Classe</span>
+                    <span class="power-text">{{this}}</span>
+                </div>
+                {{/each}}
+                {{#each powers_and_features.spells}}
+                <div class="power-row">
+                    <span class="power-tag magic">Magia</span>
+                    <span class="power-text"><b>{{name}}</b>: {{description}}</span>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec">
+                <div class="sec-title">Equipamento</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div>
+                        {{#each equipment.weapons}}<div class="equip-row">{{this}}</div>{{/each}}
+                        {{#each equipment.armor}}<div class="equip-row">{{this}}</div>{{/each}}
+                    </div>
+                    <div>
+                        {{#each equipment.items}}<div class="equip-row">{{this}}</div>{{/each}}
+                        {{#if equipment.money}}<div
+                            style="font-family:'Fira Code',monospace;font-size:9px;color:var(--gold);margin-top:5px">Ç
+                            {{equipment.money}}</div>{{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="sec">
+                <div class="sec-title">Personalidade</div>
+                <div class="pers-grid">
+                    <div class="pers-card">
+                        <div class="pers-label">Traço</div>
+                        <div class="pers-text">{{personality.trait}}</div>
+                    </div>
+                    <div class="pers-card" style="border-top-color:var(--rust)">
+                        <div class="pers-label" style="color:var(--rust)">Ideal</div>
+                        <div class="pers-text">{{personality.ideal}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Vínculo</div>
+                        <div class="pers-text">{{personality.bond}}</div>
+                    </div>
+                    <div class="pers-card" style="border-top-color:var(--rust)">
+                        <div class="pers-label" style="color:var(--rust)">Defeito</div>
+                        <div class="pers-text">{{personality.flaw}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="sec">
+                <div class="sec-title">História</div>
+                <div class="narrative">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.version}}</span>
+            <span class="footer-brand">Skyfall RPG</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

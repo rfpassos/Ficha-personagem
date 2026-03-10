@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Serif+JP:wght@400;700&family=Barlow+Condensed:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #f8f0e4;
+            --parchment2: #ede0c8;
+            --parchment3: #d8c8a8;
+            --red: #8b1c1c;
+            --red-lt: #b02020;
+            --gold: #9a7820;
+            --gold-lt: #c8a030;
+            --ink: #1a120a;
+            --ink-lt: #3a2820;
+            --shadow: rgba(26, 18, 10, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #5c4830;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Barlow Condensed', sans-serif;
+            color: var(--ink);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--parchment);
+            background-image:
+                radial-gradient(ellipse at 15% 15%, rgba(200, 160, 80, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 85%, rgba(138, 100, 40, 0.1) 0%, transparent 50%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(200, 160, 80, 0.3);
+            overflow: hidden;
+        }
+
+        /* TOP ACCENT */
+        .top-accent {
+            height: 8px;
+            background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 40px, var(--gold) 40px, var(--gold) 80px, var(--red) 80px);
+            opacity: 0.85;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 14px 20px 12px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            border-bottom: 3px solid var(--red);
+            background: var(--parchment2);
+        }
+
+        .system-eye {
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        .char-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .char-info {
+            font-size: 10px;
+            color: var(--ink-lt);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .char-info span {
+            border-right: 1px solid var(--parchment3);
+            padding: 0 8px;
+        }
+
+        .char-info span:first-child {
+            padding-left: 0;
+        }
+
+        .char-info span:last-child {
+            border-right: none;
+        }
+
+        .portrait-frame {
+            width: 80px;
+            height: 80px;
+            border: 3px double var(--gold);
+            background: var(--parchment2);
+            overflow: hidden;
+        }
+
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .port-ph {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: var(--parchment3);
+        }
+
+        .content {
+            padding: 12px 18px;
+        }
+
+        /* SECTION */
+        .sec {
+            margin-bottom: 10px;
+        }
+
+        .sec-head {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--red);
+            border-bottom: 2px solid var(--red);
+            padding-bottom: 3px;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sec-head span {
+            font-family: 'Sawarabi Mincho', serif;
+            font-size: 14px;
+            color: var(--gold);
+        }
+
+        /* VITAIS STRIP */
+        .vitals-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+        }
+
+        .vital {
+            text-align: center;
+            padding: 7px 4px;
+            border-right: 1px solid var(--parchment3);
+        }
+
+        .vital:last-child {
+            border-right: none;
+        }
+
+        .vital-label {
+            font-size: 6px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .vital-sub {
+            font-size: 7px;
+            color: var(--parchment3);
+        }
+
+        /* GRID T20 MAIN */
+        .main-2col {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* ATRIBUTOS */
+        .attrs {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .attr-cell {
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+            padding: 4px 5px;
+            text-align: center;
+            border-top: 2px solid var(--red);
+        }
+
+        .attr-name {
+            font-size: 6px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .attr-val {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 10px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2.5px 0;
+            border-bottom: 1px dotted var(--parchment3);
+        }
+
+        .sk-circle {
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--parchment3);
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: transparent;
+        }
+
+        .sk-circle.tr {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .sk-name {
+            font-size: 8.5px;
+            color: var(--ink-lt);
+            flex: 1;
+        }
+
+        .sk-mod {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        /* SAVES ROW */
+        .saves-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .save-item {
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+            padding: 4px 8px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .save-label {
+            font-size: 6px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .save-val {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        /* DEITY */
+        .deity-card {
+            background: linear-gradient(135deg, var(--parchment2), var(--parchment3));
+            border: 1px solid var(--parchment3);
+            border-left: 4px solid var(--gold);
+            padding: 8px 10px;
+            margin-bottom: 6px;
+        }
+
+        .deity-name-head {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .deity-obl {
+            font-size: 8.5px;
+            color: var(--ink-lt);
+            font-style: italic;
+            margin-top: 3px;
+            line-height: 1.4;
+        }
+
+        /* POWER */
+        .power-block {
+            border: 1px solid var(--parchment3);
+            background: var(--parchment2);
+            padding: 5px 8px;
+            margin-bottom: 4px;
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+        }
+
+        .power-type {
+            font-size: 6px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 5px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .power-type.race {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .power-type.class {
+            background: var(--red);
+        }
+
+        .power-type.origin {
+            background: var(--gold-lt);
+            color: var(--ink);
+        }
+
+        .power-type.divine {
+            background: #4a2080;
+        }
+
+        .power-text {
+            font-size: 8.5px;
+            color: var(--ink-lt);
+            line-height: 1.4;
+        }
+
+        /* SPELLS */
+        .spell-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .spell-tag {
+            font-size: 8px;
+            font-weight: 600;
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+            border-top: 2px solid var(--gold);
+            padding: 3px 8px;
+            color: var(--ink-lt);
+        }
+
+        /* EQUIP */
+        .equip-item {
+            font-size: 9px;
+            color: var(--ink-lt);
+            padding: 3px 0;
+            border-bottom: 1px dotted var(--parchment3);
+        }
+
+        .equip-item::before {
+            content: '• ';
+            color: var(--red);
+        }
+
+        /* PERS */
+        .pers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .pers-card {
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+            border-left: 3px solid var(--red);
+            padding: 7px 9px;
+        }
+
+        .pers-label {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 3px;
+        }
+
+        .pers-text {
+            font-size: 9px;
+            color: var(--ink-lt);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* BACKSTORY */
+        .backstory {
+            font-family: 'Sawarabi Mincho', serif;
+            font-size: 9px;
+            color: var(--ink-lt);
+            line-height: 1.7;
+            background: var(--parchment2);
+            border: 1px solid var(--parchment3);
+            border-left: 4px solid var(--gold);
+            padding: 10px 12px;
+        }
+
+        /* FOOTER */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 18px;
+            border-top: 3px solid var(--red);
+            background: var(--parchment2);
+            margin-top: 10px;
+        }
+
+        .footer-text {
+            font-size: 7px;
+            color: var(--parchment3);
+            letter-spacing: 1px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <div class="top-accent"></div>
+
+        <header class="header">
+            <div>
+                <div class="system-eye">Tormenta 20 — Ficha de Personagem</div>
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-info">
+                    <span>{{race}}</span><span>{{class}}</span>
+                    <span>Nível {{level}}</span>
+                    {{#if basic_info.origin}}<span>{{basic_info.origin}}</span>{{/if}}
+                    {{#if basic_info.deity}}<span>{{basic_info.deity}}</span>{{/if}}
+                </div>
+            </div>
+            <div class="portrait-frame">
+                {{#if appearance_and_style.image_file}}
+                <img src="{{appearance_and_style.image_file}}" alt="">
+                {{else}}<div class="port-ph">⚔</div>{{/if}}
+            </div>
+        </header>
+
+        <div class="content">
+
+            <div class="vitals-strip">
+                <div class="vital">
+                    <div class="vital-label">PV</div>
+                    <div class="vital-value">{{stats_and_defenses.hp}}</div>
+                    <div class="vital-sub">/ {{stats_and_defenses.hp}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">PM</div>
+                    <div class="vital-value">{{stats_and_defenses.mana_points}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">Defesa</div>
+                    <div class="vital-value">{{stats_and_defenses.defense}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">Desl.</div>
+                    <div class="vital-value" style="font-size:15px">{{stats_and_defenses.movement}}</div>
+                </div>
+            </div>
+
+            <!-- SALVAGUARDAS -->
+            <div class="saves-row">
+                {{#each stats_and_defenses.saves}}
+                <div class="save-item">
+                    <div class="save-label">{{@key}}</div>
+                    <div class="save-val">{{this}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- ATRIBUTOS + PERIODS -->
+            <div class="main-2col">
+                <div class="attrs">
+                    <div class="sec-head" style="font-size:8px;margin-bottom:4px"><span>✦</span> Atrib.</div>
+                    {{#each stats_and_defenses.attributes}}
+                    <div class="attr-cell">
+                        <div class="attr-name">{{@key}}</div>
+                        <div class="attr-val">{{this}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div>
+                    <div class="sec-head"><span>✦</span> Perícias Treinadas</div>
+                    <div class="skills-grid">
+                        {{#each skills.trained}}
+                        <div class="skill-row">
+                            <div class="sk-circle tr"></div>
+                            <span class="sk-name">{{@key}}</span>
+                            <span class="sk-mod">{{this}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVINDADE -->
+            {{#if basic_info.deity}}
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> Divindade &amp; Obrigações</div>
+                <div class="deity-card">
+                    <div class="deity-name-head">{{basic_info.deity}}</div>
+                    <div class="deity-obl">{{basic_info.deity_obligations}}</div>
+                </div>
+            </div>
+            {{/if}}
+
+            <!-- PODERES -->
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> Poderes</div>
+                {{#each powers_and_abilities.racial_powers}}
+                <div class="power-block"><span class="power-type race">Raça</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+                {{#each powers_and_abilities.class_powers}}
+                <div class="power-block"><span class="power-type class">Classe</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+                {{#each powers_and_abilities.origin_powers}}
+                <div class="power-block"><span class="power-type origin">Origem</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+                {{#each powers_and_abilities.deity_powers}}
+                <div class="power-block"><span class="power-type divine">Divino</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+            </div>
+
+            <!-- MAGIAS -->
+            {{#if spells.known_spells.length}}
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> Magias — CD {{spells.spell_dc}}</div>
+                <div class="spell-tags">
+                    {{#each spells.known_spells}}<span class="spell-tag">{{this}}</span>{{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> Equipamento</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div>
+                        {{#each equipment.weapons}}<div class="equip-item">{{this}}</div>{{/each}}
+                        {{#each equipment.armor}}<div class="equip-item">{{this}}</div>{{/each}}
+                    </div>
+                    <div>
+                        {{#each equipment.general}}<div class="equip-item">{{this}}</div>{{/each}}
+                        {{#if equipment.money_ts}}<div
+                            style="font-size:9px;color:var(--gold);margin-top:4px;font-weight:700">Tesouros:
+                            {{equipment.money_ts}}</div>{{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> Personalidade</div>
+                <div class="pers-grid">
+                    <div class="pers-card">
+                        <div class="pers-label">Traço</div>
+                        <div class="pers-text">{{personality.trait}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Ideal</div>
+                        <div class="pers-text">{{personality.ideal}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Vínculo</div>
+                        <div class="pers-text">{{personality.bond}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Defeito</div>
+                        <div class="pers-text">{{personality.flaw}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="sec">
+                <div class="sec-head"><span>✦</span> História</div>
+                <div class="backstory">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.version}}</span>
+            <span class="footer-brand">Tormenta 20</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

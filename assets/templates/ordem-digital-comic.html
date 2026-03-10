@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #f5f0e8;
+            --red: #d01010;
+            --red-lt: #ec2020;
+            --yellow: #f0c820;
+            --gray: #2c2c2c;
+            --gray-lt: #4a4a4a;
+            --dot-gray: rgba(0, 0, 0, 0.06);
+            --text: #0a0a0a;
+            --text-dim: #3a3a3a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e8e0d0;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--white);
+            /* DOT GRID — comic paper feel */
+            background-image: radial-gradient(circle, var(--dot-gray) 1px, transparent 1px);
+            background-size: 12px 12px;
+            border: 3px solid var(--black);
+            box-shadow: 6px 6px 0 var(--black);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* HEADER COMIC SPLASH */
+        .header {
+            background: var(--black);
+            padding: 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            min-height: 88px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--black);
+        }
+
+        /* Speed lines decoration */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 60px;
+            right: 0;
+            bottom: -40px;
+            background: repeating-conic-gradient(from 0deg at 0% 50%, rgba(255, 255, 255, 0.04) 0deg, transparent 1deg, transparent 8deg, rgba(255, 255, 255, 0.04) 9deg);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nex-banner {
+            background: var(--red);
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-right: 3px solid var(--black);
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .nex-label {
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        .nex-pct {
+            font-family: 'Bangers', sans-serif;
+            font-size: 38px;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            line-height: 1;
+        }
+
+        .nex-sign {
+            font-family: 'Bangers', sans-serif;
+            font-size: 14px;
+            color: var(--yellow);
+        }
+
+        .header-right {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        .sys-label {
+            font-family: 'Bangers', sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--red-lt);
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        .char-name {
+            font-family: 'Bangers', sans-serif;
+            font-size: 34px;
+            letter-spacing: 2px;
+            color: #fff;
+            line-height: 1;
+            text-shadow: 3px 3px 0 var(--red);
+        }
+
+        .char-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .ctag {
+            font-family: 'Bangers', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            background: var(--gray-lt);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+        }
+
+        .ctag.main {
+            background: var(--red);
+        }
+
+        .ctag.nex {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        /* ── PORTRAIT SIDE ───────────────────────────────── */
+        .photo-strip {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            border-left: 3px solid var(--black);
+            overflow: hidden;
+        }
+
+        .photo-strip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) grayscale(0.2);
+        }
+
+        .photo-ph {
+            width: 100%;
+            height: 100%;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        .photo-strip::after {
+            content: 'FOTO';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .header-right {
+            padding-right: 90px !important;
+        }
+
+        /* ── CONTENT ─────────────────────────────────────── */
+        .content {
+            padding: 12px 16px;
+        }
+
+        /* SECTION HEAD */
+        .sec-head {
+            font-family: 'Bangers', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--white);
+            background: var(--black);
+            padding: 4px 10px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            border: 2px solid var(--black);
+            display: inline-block;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%);
+            padding-right: 18px;
+        }
+
+        .sec-alt {
+            font-family: 'Bangers', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--black);
+            background: var(--yellow);
+            padding: 4px 10px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+            display: inline-block;
+            border: 2px solid var(--black);
+            clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%);
+            padding-left: 18px;
+        }
+
+        /* SPEECH BUBBLE STAT */
+        .vitals-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .vital-bubble {
+            background: var(--white);
+            border: 2px solid var(--black);
+            padding: 8px;
+            text-align: center;
+            position: relative;
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        .vital-bubble.danger {
+            border-color: var(--red);
+            box-shadow: 3px 3px 0 var(--red);
+        }
+
+        .vital-label {
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            color: var(--gray-lt);
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            font-family: 'Bangers', sans-serif;
+            font-size: 28px;
+            color: var(--black);
+            line-height: 1;
+        }
+
+        .vital-bubble.danger .vital-value {
+            color: var(--red);
+        }
+
+        .vital-sub {
+            font-size: 8px;
+            color: var(--gray-lt);
+            font-weight: 600;
+        }
+
+        /* ATTR GRID */
+        .attrs-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .attr-box {
+            background: var(--white);
+            border: 2px solid var(--black);
+            padding: 5px;
+            text-align: center;
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        .attr-name {
+            font-family: 'Bangers', sans-serif;
+            font-size: 8px;
+            letter-spacing: 1.5px;
+            color: var(--gray-lt);
+        }
+
+        .attr-val {
+            font-family: 'Bangers', sans-serif;
+            font-size: 24px;
+            color: var(--black);
+            line-height: 1;
+        }
+
+        .attr-mod {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 10px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+        }
+
+        .sk-star {
+            font-size: 10px;
+            color: var(--gray-lt);
+            flex-shrink: 0;
+        }
+
+        .sk-star.tr {
+            color: var(--red);
+        }
+
+        .sk-name {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .sk-mod {
+            font-family: 'Bangers', sans-serif;
+            font-size: 12px;
+            color: var(--black);
+        }
+
+        /* ATTACKS */
+        .attack-comic {
+            border: 2px solid var(--black);
+            background: var(--white);
+            box-shadow: 3px 3px 0 var(--black);
+            padding: 6px 8px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .atk-sfx {
+            font-family: 'Bangers', sans-serif;
+            font-size: 22px;
+            color: var(--red);
+            text-shadow: 1px 1px 0 var(--black);
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .atk-info {
+            flex: 1;
+        }
+
+        .atk-name {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .atk-sub {
+            font-size: 8px;
+            color: var(--gray-lt);
+        }
+
+        .atk-bonus {
+            font-family: 'Bangers', sans-serif;
+            font-size: 26px;
+            color: var(--black);
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .atk-yellow {
+            color: var(--yellow);
+            text-shadow: 1px 1px 0 var(--black);
+        }
+
+        /* POWERS */
+        .power-para {
+            border: 2px solid var(--black);
+            background: var(--white);
+            padding: 7px 10px;
+            margin-bottom: 5px;
+            box-shadow: 3px 3px 0 var(--black);
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .power-tag-comic {
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            padding: 2px 8px;
+            flex-shrink: 0;
+            border: 1px solid var(--black);
+        }
+
+        .power-tag-comic.orig {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .power-tag-comic.class {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .power-tag-comic.psi {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .power-text-c {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* EQUIP */
+        .equip-item {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-dim);
+            padding: 4px 8px;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .equip-item::before {
+            content: '▸';
+            color: var(--red);
+            font-size: 10px;
+        }
+
+        /* PERSONALITY BUBBLES */
+        .pers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .pers-bubble {
+            background: var(--white);
+            border: 2px solid var(--black);
+            padding: 8px;
+            position: relative;
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        .pers-label {
+            font-family: 'Bangers', sans-serif;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        .pers-text {
+            font-family: 'Comic Neue', cursive;
+            font-size: 9px;
+            color: var(--text-dim);
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* BACKSTORY PANEL */
+        .backstory-panel {
+            border: 3px solid var(--black);
+            background: var(--white);
+            padding: 12px;
+            box-shadow: 4px 4px 0 var(--black);
+            position: relative;
+        }
+
+        .backstory-text {
+            font-family: 'Comic Neue', cursive;
+            font-size: 9.5px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .backstory-panel::before {
+            content: 'ORIGEM';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: 'Bangers', sans-serif;
+            font-size: 11px;
+            color: var(--white);
+            background: var(--black);
+            letter-spacing: 2px;
+            padding: 0 8px;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 3px solid var(--black);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--black);
+            margin-top: 10px;
+        }
+
+        .footer-label {
+            font-family: 'Bangers', sans-serif;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-brand {
+            font-family: 'Bangers', sans-serif;
+            font-size: 16px;
+            color: var(--red);
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 0 var(--yellow);
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <header class="header">
+            <div class="nex-banner">
+                <div class="nex-label">NEX</div>
+                <div class="nex-pct">{{nex_percent}}</div>
+                <div class="nex-sign">%</div>
+            </div>
+            <div class="header-right">
+                <div class="sys-label">⊙ ORDEM PARANORMAL</div>
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-tags">
+                    <span class="ctag main">{{origin}}</span>
+                    <span class="ctag">{{class}}</span>
+                    {{#if path}}<span class="ctag">{{path}}</span>{{/if}}
+                    <span class="ctag nex">{{rank}}</span>
+                </div>
+            </div>
+            <div class="photo-strip">
+                {{#if appearance_and_style.image_file}}
+                <img src="{{appearance_and_style.image_file}}" alt="">
+                {{else}}<div class="photo-ph">ID</div>{{/if}}
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- STATUS VITAL -->
+            <div class="vitals-row" style="margin-top:10px">
+                <div class="vital-bubble danger">
+                    <div class="vital-label">PV</div>
+                    <div class="vital-value">{{vital_resources.hp.current}}</div>
+                    <div class="vital-sub">· {{vital_resources.hp.max}} máx ·</div>
+                </div>
+                <div class="vital-bubble">
+                    <div class="vital-label">Sanidade</div>
+                    <div class="vital-value">{{vital_resources.sanity.current}}</div>
+                    <div class="vital-sub">· {{vital_resources.sanity.max}} máx ·</div>
+                </div>
+                <div class="vital-bubble">
+                    <div class="vital-label">Esforço</div>
+                    <div class="vital-value">{{vital_resources.effort.current}}</div>
+                    <div class="vital-sub">· {{vital_resources.effort.max}} máx ·</div>
+                </div>
+                <div class="vital-bubble">
+                    <div class="vital-label">Defesa</div>
+                    <div class="vital-value">{{vital_resources.defense}}</div>
+                </div>
+                <div class="vital-bubble">
+                    <div class="vital-label">Esquiva</div>
+                    <div class="vital-value">{{vital_resources.dodge}}</div>
+                </div>
+                <div class="vital-bubble">
+                    <div class="vital-label">Desl.</div>
+                    <div class="vital-value" style="font-size:20px">{{vital_resources.movement}}</div>
+                </div>
+            </div>
+
+            <!-- ATRIBUTOS -->
+            <div class="sec-head">Atributos</div>
+            <div class="attrs-grid">
+                <div class="attr-box">
+                    <div class="attr-name">AGI</div>
+                    <div class="attr-val">{{attributes.agility}}</div>
+                </div>
+                <div class="attr-box">
+                    <div class="attr-name">FOR</div>
+                    <div class="attr-val">{{attributes.strength}}</div>
+                </div>
+                <div class="attr-box">
+                    <div class="attr-name">INT</div>
+                    <div class="attr-val">{{attributes.intellect}}</div>
+                </div>
+                <div class="attr-box">
+                    <div class="attr-name">PRE</div>
+                    <div class="attr-val">{{attributes.presence}}</div>
+                </div>
+                <div class="attr-box">
+                    <div class="attr-name">VIG</div>
+                    <div class="attr-val">{{attributes.vigor}}</div>
+                </div>
+            </div>
+
+            <!-- PERÍCIAS -->
+            <div class="sec-alt">Perícias</div>
+            <div class="skills-grid">
+                {{#each skills_trained}}
+                <div class="skill-row">
+                    <div
+                        class="sk-star {{#if (eq (slice this 0 2) 'Tr')}}tr{{/if}} {{#if (eq (slice this 0 2) 'Ve')}}tr{{/if}} {{#if (eq (slice this 0 2) 'Es')}}tr{{/if}}">
+                        ★</div>
+                    <span class="sk-name">{{@key}}</span>
+                    <span class="sk-mod">{{this}}</span>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- ATAQUES -->
+            <div class="sec-head">Combate!</div>
+            {{#each attacks_and_rituals.attacks}}
+            <div class="attack-comic">
+                <div class="atk-sfx" style="font-size:16px;color:var(--red)">⚡</div>
+                <div class="atk-info">
+                    <div class="atk-name">{{name}}</div>
+                    <div class="atk-sub">{{attack_test}} → {{damage}}</div>
+                </div>
+                <div class="atk-bonus atk-yellow">{{attack_test}}</div>
+            </div>
+            {{/each}}
+            <div style="font-size:8px;font-weight:700;color:var(--gray-lt);margin-top:3px">CD de Ritual:
+                {{attacks_and_rituals.ritual_save_dc}}</div>
+
+            <!-- PODERES -->
+            <div class="sec-alt">Poderes Paranormais</div>
+            {{#each powers_and_features.origin_powers}}
+            <div class="power-para"><span class="power-tag-comic orig">Origem</span><span
+                    class="power-text-c">{{this}}</span></div>
+            {{/each}}
+            {{#each powers_and_features.class_path_powers}}
+            <div class="power-para"><span class="power-tag-comic class">{{../class}}</span><span
+                    class="power-text-c">{{this}}</span></div>
+            {{/each}}
+            {{#each powers_and_features.paranormal_abilities}}
+            <div class="power-para"><span class="power-tag-comic psi">☆ PSI</span><span
+                    class="power-text-c">{{this}}</span></div>
+            {{/each}}
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec-head">Equipamento de Campo</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+                <div>
+                    <div
+                        style="font-size:8px;font-weight:700;color:var(--gray-lt);letter-spacing:1px;margin-bottom:4px">
+                        ARMAMENTO</div>
+                    {{#each equipment.weapons}}<div class="equip-item">{{this}}</div>{{/each}}
+                    {{#each equipment.armors}}<div class="equip-item">{{this}}</div>{{/each}}
+                </div>
+                <div>
+                    <div
+                        style="font-size:8px;font-weight:700;color:var(--gray-lt);letter-spacing:1px;margin-bottom:4px">
+                        KITS</div>
+                    {{#each equipment.items_and_tools}}<div class="equip-item">{{this}}</div>{{/each}}
+                    <div style="font-size:9px;font-weight:700;color:var(--red);margin-top:5px">{{equipment.money}}</div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="sec-alt">Perfil</div>
+            <div class="pers-grid" style="margin-bottom:10px">
+                <div class="pers-bubble">
+                    <div class="pers-label">Traço</div>
+                    <div class="pers-text">"{{personality.trait}}"</div>
+                </div>
+                <div class="pers-bubble">
+                    <div class="pers-label">Ideal</div>
+                    <div class="pers-text">"{{personality.ideal}}"</div>
+                </div>
+                <div class="pers-bubble">
+                    <div class="pers-label">Vínculo</div>
+                    <div class="pers-text">"{{personality.bond}}"</div>
+                </div>
+                <div class="pers-bubble" style="border-top:3px solid var(--red)">
+                    <div class="pers-label">Fragilidade</div>
+                    <div class="pers-text">"{{personality.flaw}}"</div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="backstory-panel" style="margin-bottom:12px">
+                <div class="backstory-text">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-label">{{metadata.system}} · v{{metadata.schema_version}}</span>
+            <span class="footer-brand">ORDEM PARANORMAL</span>
+            <span class="footer-label">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

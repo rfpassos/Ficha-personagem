@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050509;
+            --surface: #0d0d14;
+            --surface2: #131320;
+            --border: #1e1e2e;
+            --border2: #2a2a3e;
+            --red: #cc0000;
+            --red-gt: #ff1a1a;
+            --off-white: #f0ebe2;
+            --off-dim: #a09888;
+            --data-red: #e03030;
+            --data-gray: #4a4a5a;
+            --text: #e8e0d8;
+            --text-dim: #7a7a8a;
+            --text-muted: #3a3a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #020204;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--bg);
+            border: 1px solid var(--border2);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 60px rgba(204, 0, 0, 0.05), 0 0 200px rgba(0, 0, 0, 0.95);
+        }
+
+        /* CRT SCAN LINES */
+        .sheet::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.08) 2px, rgba(0, 0, 0, 0.08) 4px);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* CLASSIFIED STAMP strip */
+        .classified-strip {
+            height: 28px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .class-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .class-bar {
+            flex: 1;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0px, rgba(255, 255, 255, 0.4) 10px, transparent 10px, transparent 16px);
+        }
+
+        .class-nex {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 14px 20px 12px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: stretch;
+            border-bottom: 1px solid var(--border2);
+            background: var(--surface);
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dossier-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 8px;
+            color: var(--data-red);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .agent-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--off-white);
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .meta-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            border: 1px solid var(--border2);
+            background: var(--surface2);
+            padding: 2px 8px;
+        }
+
+        .meta-tag.classified {
+            border-color: var(--red);
+            color: var(--data-red);
+        }
+
+        .portrait-dossier {
+            width: 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .port-img {
+            flex: 1;
+            border: 1px solid var(--border2);
+            border-top: 3px solid var(--data-red);
+            overflow: hidden;
+        }
+
+        .port-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .port-ph {
+            width: 100%;
+            height: 100%;
+            min-height: 70px;
+            background: var(--surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .port-id {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-align: center;
+            border: 1px solid var(--border2);
+            padding: 2px 4px;
+        }
+
+        .content {
+            padding: 12px 18px;
+        }
+
+        /* SECTION */
+        .sec {
+            margin-bottom: 10px;
+        }
+
+        .sec-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--data-red);
+            border-bottom: 1px solid var(--border2);
+            padding-bottom: 4px;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sec-label::before {
+            content: '▮';
+            font-size: 8px;
+        }
+
+        /* STATUS CELLS */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .stat-cell {
+            background: var(--surface);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .stat-cell.large {
+            background: var(--surface2);
+        }
+
+        .stat-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--off-white);
+            line-height: 1;
+        }
+
+        .stat-cell.red .stat-value {
+            color: var(--data-red);
+        }
+
+        .stat-sub {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 8px;
+            color: var(--text-muted);
+        }
+
+        /* ATRIBUTOS */
+        .attrs-bar {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .attr-cell {
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            padding: 6px 4px;
+            text-align: center;
+        }
+
+        .attr-name {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .attr-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--off-white);
+            line-height: 1.1;
+        }
+
+        .attr-mod {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: var(--data-red);
+            font-weight: 600;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 8px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2.5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sk-tag {
+            width: 20px;
+            height: 10px;
+            border: 1px solid var(--text-muted);
+            flex-shrink: 0;
+            background: transparent;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 6px;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sk-tag.tr {
+            background: var(--data-red);
+            border-color: var(--data-red);
+            color: #fff;
+        }
+
+        .sk-name {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            flex: 1;
+        }
+
+        .sk-mod {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--off-white);
+        }
+
+        /* POWERS */
+        .power-row {
+            border: 1px solid var(--border2);
+            background: var(--surface);
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .power-classification {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            flex-shrink: 0;
+        }
+
+        .power-classification.class {
+            background: var(--data-red);
+            color: #fff;
+        }
+
+        .power-classification.origin {
+            background: var(--data-gray);
+            color: var(--off-white);
+        }
+
+        .power-classification.paranormal {
+            background: #400080;
+            color: #d0a0ff;
+            border: 1px solid #8040c0;
+        }
+
+        .power-text {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .power-name {
+            color: var(--off-white);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* ATTACKS */
+        .attack-row {
+            display: grid;
+            grid-template-columns: 1fr 50px 1fr;
+            gap: 6px;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding: 5px 0;
+        }
+
+        .atk-name {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--off-white);
+        }
+
+        .atk-roll {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--data-red);
+            text-align: center;
+        }
+
+        .atk-dmg {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: var(--off-white);
+        }
+
+        /* SANITY */
+        .sanity-track {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .sanity-pip {
+            width: 10px;
+            height: 10px;
+            border: 1px solid var(--border2);
+            background: transparent;
+        }
+
+        .sanity-pip.filled {
+            background: var(--data-red);
+            border-color: var(--data-red);
+        }
+
+        /* EQUIPMENT */
+        .equip-item {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 6px;
+        }
+
+        .equip-item::before {
+            content: '◈';
+            color: var(--data-red);
+            font-size: 8px;
+            flex-shrink: 0;
+        }
+
+        /* PERSONALITY */
+        .pers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .pers-card {
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-top: 2px solid var(--data-red);
+            padding: 8px;
+        }
+
+        .pers-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--data-red);
+            margin-bottom: 4px;
+        }
+
+        .pers-text {
+            font-size: 9px;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* BACKSTORY */
+        .backstory {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-left: 3px solid var(--data-red);
+            padding: 10px 12px;
+            font-size: 9px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border2);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-code {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 7px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--data-red);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+
+        <div class="classified-strip">
+            <div class="class-text">◉ Ordem Paranormal — DOSSIÊ DE AGENTE ◉</div>
+            <div class="class-bar"></div>
+            <div class="class-nex">NEX {{nex_percent}}%</div>
+        </div>
+
+        <header class="header">
+            <div class="header-left">
+                <div>
+                    <div class="dossier-tag">// ARQUIVO_AGENTE · {{origin}} · {{class}} · {{path}}</div>
+                    <div class="agent-name">{{character_name}}</div>
+                </div>
+                <div class="agent-meta">
+                    <span class="meta-tag classified">{{rank}}</span>
+                    <span class="meta-tag">{{origin}}</span>
+                    <span class="meta-tag">{{class}}</span>
+                    {{#if path}}<span class="meta-tag">{{path}}</span>{{/if}}
+                </div>
+            </div>
+            <div class="portrait-dossier">
+                <div class="port-img">
+                    {{#if appearance_and_style.image_file}}
+                    <img src="{{appearance_and_style.image_file}}" alt="">
+                    {{else}}<div class="port-ph">[FOTO<br>SIGILOSA]</div>{{/if}}
+                </div>
+                <div class="port-id">ID: {{character_name}}</div>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- STATUS -->
+            <div class="status-grid">
+                <div class="stat-cell red">
+                    <div class="stat-label">PV</div>
+                    <div class="stat-value">{{vital_resources.hp.current}}</div>
+                    <div class="stat-sub">/ {{vital_resources.hp.max}}</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-label">Sanidade</div>
+                    <div class="stat-value">{{vital_resources.sanity.current}}</div>
+                    <div class="stat-sub">/ {{vital_resources.sanity.max}}</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-label">Esforço</div>
+                    <div class="stat-value">{{vital_resources.effort.current}}</div>
+                    <div class="stat-sub">/ {{vital_resources.effort.max}}</div>
+                </div>
+                <div class="stat-cell large">
+                    <div class="stat-label">Defesa</div>
+                    <div class="stat-value">{{vital_resources.defense}}</div>
+                </div>
+                <div class="stat-cell large">
+                    <div class="stat-label">Esquiva</div>
+                    <div class="stat-value">{{vital_resources.dodge}}</div>
+                </div>
+                <div class="stat-cell large">
+                    <div class="stat-label">Deslocamento</div>
+                    <div class="stat-value" style="font-size:16px">{{vital_resources.movement}}</div>
+                </div>
+            </div>
+
+            <!-- ATRIBUTOS -->
+            <div class="sec">
+                <div class="sec-label">Atributos</div>
+                <div class="attrs-bar">
+                    <div class="attr-cell">
+                        <div class="attr-name">AGI</div>
+                        <div class="attr-val">{{attributes.agility}}</div>
+                        <div class="attr-mod">+{{attributes.agility}}</div>
+                    </div>
+                    <div class="attr-cell">
+                        <div class="attr-name">FOR</div>
+                        <div class="attr-val">{{attributes.strength}}</div>
+                        <div class="attr-mod">+{{attributes.strength}}</div>
+                    </div>
+                    <div class="attr-cell">
+                        <div class="attr-name">INT</div>
+                        <div class="attr-val">{{attributes.intellect}}</div>
+                        <div class="attr-mod">+{{attributes.intellect}}</div>
+                    </div>
+                    <div class="attr-cell">
+                        <div class="attr-name">PRE</div>
+                        <div class="attr-val">{{attributes.presence}}</div>
+                        <div class="attr-mod">+{{attributes.presence}}</div>
+                    </div>
+                    <div class="attr-cell">
+                        <div class="attr-name">VIG</div>
+                        <div class="attr-val">{{attributes.vigor}}</div>
+                        <div class="attr-mod">+{{attributes.vigor}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERÍCIAS -->
+            <div class="sec">
+                <div class="sec-label">Perícias</div>
+                <div class="skills-grid">
+                    {{#each skills_trained}}
+                    <div class="skill-row">
+                        <div
+                            class="sk-tag {{#if (startsWith this 'Tr')}}tr{{/if}} {{#if (startsWith this 'Ve')}}tr{{/if}} {{#if (startsWith this 'Es')}}tr{{/if}}">
+                            TR</div>
+                        <span class="sk-name">{{@key}}</span>
+                        <span class="sk-mod">{{this}}</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- ATAQUES -->
+            <div class="sec">
+                <div class="sec-label">Ataques &amp; Rituais — CD {{attacks_and_rituals.ritual_save_dc}}</div>
+                {{#each attacks_and_rituals.attacks}}
+                <div class="attack-row">
+                    <div class="atk-name">{{name}}</div>
+                    <div class="atk-roll">{{attack_test}}</div>
+                    <div class="atk-dmg">{{damage}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- PODERES -->
+            <div class="sec">
+                <div class="sec-label">Poderes Paranormais &amp; Habilidades</div>
+                {{#each powers_and_features.origin_powers}}
+                <div class="power-row"><span class="power-classification origin">Origem</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+                {{#each powers_and_features.class_path_powers}}
+                <div class="power-row"><span class="power-classification class">Trilha</span><span
+                        class="power-text">{{this}}</span></div>
+                {{/each}}
+                {{#each powers_and_features.paranormal_abilities}}
+                <div class="power-row">
+                    <span class="power-classification paranormal">PSI</span>
+                    <span class="power-text">{{this}}</span>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec">
+                <div class="sec-label">Carga {{equipment.load.current}}/{{equipment.load.max}} — Equipamento de Campo
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div>
+                        {{#each equipment.armors}}<div class="equip-item">{{this}}</div>{{/each}}
+                        {{#each equipment.weapons}}<div class="equip-item">{{this}}</div>{{/each}}
+                    </div>
+                    <div>
+                        {{#each equipment.items_and_tools}}<div class="equip-item">{{this}}</div>{{/each}}
+                        <div
+                            style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--data-red);margin-top:5px">
+                            // {{equipment.money}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="sec">
+                <div class="sec-label">Perfil Psicológico</div>
+                <div class="pers-grid">
+                    <div class="pers-card">
+                        <div class="pers-label">Traço</div>
+                        <div class="pers-text">{{personality.trait}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Ideal</div>
+                        <div class="pers-text">{{personality.ideal}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Vínculo</div>
+                        <div class="pers-text">{{personality.bond}}</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Fragilidade</div>
+                        <div class="pers-text">{{personality.flaw}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BACKSTORY -->
+            <div class="sec">
+                <div class="sec-label">Relatório de Origem — CONFIDENCIAL</div>
+                <div class="backstory">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-code">SYS: {{metadata.system}} · v{{metadata.schema_version}} ·
+                {{metadata.locale}}</span>
+            <span class="footer-brand">ORDEM PARANORMAL</span>
+            <span class="footer-code">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

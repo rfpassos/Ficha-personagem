@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1f2e;
+            --surface: #222738;
+            --surface2: #2c3347;
+            --border: #3a4160;
+            --terra: #d4623a;
+            --terra-lt: #e8845e;
+            --gold: #f0b340;
+            --green: #5a9e7a;
+            --text: #e8e0d4;
+            --text-dim: #a098b0;
+            --text-muted: #5e6080;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #111520;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 80px rgba(212, 98, 58, 0.08), 0 0 200px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+        }
+
+        /* TOP BAND */
+        .top-band {
+            height: 6px;
+            background: linear-gradient(to right, var(--terra) 0%, var(--gold) 40%, var(--green) 100%);
+        }
+
+        /* HEADER */
+        .header {
+            padding: 18px 24px 16px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .char-name {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .char-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        .tag.hl {
+            background: var(--terra);
+            border-color: var(--terra);
+            color: #fff;
+        }
+
+        .portrait-sm {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--terra);
+            overflow: hidden;
+        }
+
+        .portrait-sm img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portrait-ph {
+            width: 100%;
+            height: 100%;
+            background: var(--surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: var(--text-muted);
+        }
+
+        .content {
+            padding: 16px 24px;
+        }
+
+        /* SECTION */
+        .sec {
+            margin-top: 14px;
+            margin-bottom: 10px;
+        }
+
+        .sec-head {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--terra);
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sec-head::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* EMOTIONS */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .emotion-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-image: linear-gradient(135deg, var(--terra), transparent) 1;
+            padding: 10px;
+        }
+
+        .emotion-label {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .emotion-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--terra);
+        }
+
+        .emotion-text {
+            font-family: 'Spectral', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* VITALS ROW */
+        .vitals {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 8px;
+        }
+
+        .vit {
+            text-align: center;
+            border-right: 1px solid var(--border);
+            padding: 0 6px;
+        }
+
+        .vit:last-child {
+            border-right: none;
+        }
+
+        .vit-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .vit-val {
+            font-family: 'Space Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        /* DOMAINS MATRIX */
+        .domain-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .domain-cell {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 8px 6px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .domain-cell.exp {
+            border-color: var(--gold);
+        }
+
+        .d-name {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .d-die {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--terra-lt);
+        }
+
+        .d-exp-badge {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* FEATURES */
+        .feat-group {
+            margin-bottom: 8px;
+        }
+
+        .feat-group-title {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+            padding-left: 8px;
+            border-left: 2px solid var(--terra);
+        }
+
+        .feat-item {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 4px 0 4px 10px;
+            border-bottom: 1px solid rgba(58, 65, 96, 0.5);
+            line-height: 1.4;
+        }
+
+        /* SPELLS / ACTIONS */
+        .spell-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .spell-chip {
+            font-size: 8px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 3px 10px;
+        }
+
+        /* EQUIP */
+        .equip-row {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(58, 65, 96, 0.4);
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .equip-row::before {
+            content: '▸';
+            color: var(--terra);
+            font-size: 9px;
+        }
+
+        .magic {
+            color: var(--gold) !important;
+        }
+
+        /* CONNECTIONS */
+        .conn-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--green);
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            font-family: 'Spectral', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .conn-item.memory {
+            border-left-color: var(--terra);
+        }
+
+        /* BACKSTORY */
+        .backstory {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 12px;
+            font-family: 'Spectral', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* TWO COL */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 8px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+        }
+
+        .footer-text {
+            font-size: 7px;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .footer-brand {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--terra);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <div class="top-band"></div>
+
+        <header class="header">
+            <div>
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-tags">
+                    <span class="tag hl">{{ancestry}}</span>
+                    <span class="tag">{{class}}</span>
+                    <span class="tag">{{subclass}}</span>
+                    <span class="tag">Nível {{level}}</span>
+                    <span class="tag">{{community}}</span>
+                </div>
+            </div>
+            <div class="portrait-sm">
+                {{#if appearance_and_style.image_file}}
+                <img src="{{appearance_and_style.image_file}}" alt="">
+                {{else}}
+                <div class="portrait-ph">RETRATO</div>
+                {{/if}}
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- EMOÇÕES CENTRAIS -->
+            <div class="sec">
+                <div class="sec-head">Emoções Centrais</div>
+                <div class="emotion-grid">
+                    <div class="emotion-card">
+                        <div class="emotion-label">Melancolia</div>
+                        <div class="emotion-text">{{tragic_pillars.melancholy}}</div>
+                    </div>
+                    <div class="emotion-card">
+                        <div class="emotion-label">Sombra</div>
+                        <div class="emotion-text">{{tragic_pillars.burden}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VITAIS -->
+            <div class="vitals">
+                <div class="vit">
+                    <div class="vit-label">Armadura</div>
+                    <div class="vit-val">{{stress_and_defense.armor}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-label">Evasão</div>
+                    <div class="vit-val">{{stress_and_defense.evasion}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-label">Resiliência</div>
+                    <div class="vit-val">{{stress_and_defense.resolve}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-label">Movimento</div>
+                    <div class="vit-val">{{stress_and_defense.movement}}</div>
+                </div>
+            </div>
+
+            <!-- DOMÍNIOS -->
+            <div class="sec">
+                <div class="sec-head">Domínios</div>
+                <div class="domain-matrix">
+                    {{#each domains}}
+                    <div class="domain-cell {{#if experience_checked}}exp{{/if}}">
+                        <div class="d-name">{{@key}}</div>
+                        <div class="d-die">{{die}}</div>
+                        {{#if experience_checked}}<div class="d-exp-badge">✦ EXP</div>{{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="sec">
+                <div class="sec-head">Perícias</div>
+                <div class="spell-chips">
+                    {{#each skills_and_proficiencies.skills}}
+                    <span class="spell-chip">{{name}} · <span style="color:var(--terra)">{{domain}}</span></span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- HABILIDADES -->
+            <div class="sec">
+                <div class="sec-head">Habilidades</div>
+                <div class="feat-group">
+                    <div class="feat-group-title">HERANÇA — {{ancestry}}</div>
+                    {{#each features.ancestry_features}}
+                    <div class="feat-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                <div class="feat-group">
+                    <div class="feat-group-title">CLASSE — {{class}}</div>
+                    {{#each features.class_features}}
+                    <div class="feat-item">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- MAGIAS -->
+            <div class="sec">
+                <div class="sec-head">Magias Conhecidas</div>
+                <div style="font-size:8px;color:var(--text-muted);margin-bottom:6px;font-family:'Space Mono',monospace">
+                    Fichas de Ação: <span style="color:var(--gold)">{{actions_and_spells.action_tokens}}</span>
+                    Espaços: <span style="color:var(--gold)">{{actions_and_spells.spell_slots}}</span>
+                </div>
+                <div class="spell-chips">
+                    {{#each actions_and_spells.known_spells}}
+                    <span class="spell-chip">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec">
+                <div class="sec-head">Equipamento — Carga {{equipment.load.current}}/{{equipment.load.max}} | Glitter:
+                    {{equipment.glimmer}}</div>
+                <div class="two-col">
+                    <div>
+                        {{#each equipment.weapons_and_armor}}
+                        <div class="equip-row">{{this}}</div>
+                        {{/each}}
+                    </div>
+                    <div>
+                        {{#each equipment.important_items}}
+                        <div class="equip-row magic">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONEXÕES / MEMÓRIAS -->
+            <div class="sec">
+                <div class="sec-head">Conexões &amp; Memórias</div>
+                <div
+                    style="font-family:'Spectral',serif;font-size:10px;font-style:italic;color:var(--gold);margin-bottom:6px;padding:6px;border:1px solid rgba(240,179,64,0.2);background:rgba(240,179,64,0.05)">
+                    "{{values_connections_memories.value}}"
+                </div>
+                {{#each values_connections_memories.connections}}
+                <div class="conn-item">{{this}}</div>
+                {{/each}}
+                {{#each values_connections_memories.memories}}
+                <div class="conn-item memory">{{this}}</div>
+                {{/each}}
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="sec">
+                <div class="sec-head">História</div>
+                <div class="backstory">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.schema_version}}</span>
+            <span class="footer-brand">Daggerheart</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

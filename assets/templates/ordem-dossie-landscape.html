@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>{{metadata.template_title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00f2ff;
+    --cyan-dim: rgba(0, 242, 255, 0.3);
+    --red: #ff3c3c;
+    --bg-tech: rgba(5, 10, 15, 0.88);
+    --bg-blur: 15px;
+    --white: #e0faff;
+    --border: rgba(0, 242, 255, 0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #020406;
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden;
+  }
+
+  /* CONTAINER LANDSCAPE */
+  .landscape-wrapper {
+    width: 297mm;
+    height: 210mm;
+    position: relative;
+    display: flex;
+    background: #000;
+  }
+
+  /* BACKGROUND IMAGE */
+  .dossier-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .dossier-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.5) contrast(1.2) brightness(0.6);
+  }
+  .dossier-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 70% 50%, transparent, rgba(0,0,0,0.8));
+    z-index: 1;
+  }
+
+  /* HUD SCAN LINES */
+  .scanline {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.3;
+  }
+
+  /* LEFT SIDE (PHOTO AREA) */
+  .agent-profile {
+    flex: 1;
+    z-index: 2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .status-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: var(--cyan);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    padding: 5px 15px;
+    border: 1px solid var(--cyan-dim);
+    display: inline-block;
+    align-self: flex-start;
+    background: rgba(0, 242, 255, 0.05);
+  }
+
+  /* RIGHT SIDE (DATA INTERFACE) */
+  .data-console {
+    flex: 1.4;
+    z-index: 2;
+    background: var(--bg-tech);
+    backdrop-filter: blur(var(--bg-blur));
+    -webkit-backdrop-filter: blur(var(--bg-blur));
+    border-left: 2px solid var(--cyan-dim);
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -30px 0 60px rgba(0,0,0,0.9);
+  }
+
+  /* HEADER */
+  .console-header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .agent-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .agent-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 5px;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+  }
+  .nex-indicator {
+    text-align: right;
+    border: 1px solid var(--red);
+    padding: 10px 15px;
+    background: rgba(255, 60, 60, 0.05);
+  }
+  .nex-val { font-family: 'Orbitron', sans-serif; font-size: 28px; color: var(--red); }
+  .nex-lbl { font-size: 10px; color: var(--red); letter-spacing: 2px; font-weight: 700; margin-top: -5px;}
+
+  /* VITALS GRID */
+  .vitals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  .vital-item {
+    background: rgba(0, 242, 255, 0.03);
+    border: 1px solid var(--border);
+    padding: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vital-item::before {
+    content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--cyan);
+  }
+  .vital-item.danger::before { background: var(--red); }
+  .v-lbl { font-size: 10px; font-weight: 700; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; }
+  .v-val { font-family: 'Share Tech Mono', monospace; font-size: 24px; color: #fff; }
+
+  /* ATTRIBUTES */
+  .attr-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .attr-cell {
+    border: 1px solid var(--border);
+    padding: 10px;
+    text-align: center;
+    background: rgba(255,255,255,0.02);
+  }
+  .a-lbl { font-size: 10px; font-weight: 700; color: var(--text-dim); }
+  .a-val { font-family: 'Orbitron', sans-serif; font-size: 22px; color: #fff; margin: 4px 0; }
+  
+  /* HIGHLIGHTS / SKILLS */
+  .highlights-section {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .h-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+    border-bottom: 1px solid var(--cyan-dim);
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+  }
+  .skill-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(0, 242, 255, 0.08);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    margin-bottom: 5px; margin-right: 5px;
+    color: #fff;
+  }
+
+  /* LOG / BACKSTORY */
+  .back-log {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.3);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    position: relative;
+  }
+  .back-log::before {
+    content: 'DEBRIEFING_LOG_RESTRICTED';
+    position: absolute; top: -10px; left: 15px;
+    font-size: 9px; font-family: 'Share Tech Mono', monospace;
+    color: var(--cyan); background: var(--bg-tech); padding: 0 5px;
+  }
+
+  /* FOOTER */
+  .console-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    color: rgba(0, 242, 255, 0.2);
+    letter-spacing: 2px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="landscape-wrapper">
+  <div class="scanline"></div>
+  
+  <!-- BACKGROUND -->
+  <div class="dossier-bg">
+    {{#if appearance_and_style.image_file}}
+      <img src="{{appearance_and_style.image_file}}" alt="Agent Portrait">
+    {{else}}
+      <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=2070" alt="Default Tech">
+    {{/if}}
+  </div>
+
+  <!-- AGENT PROFILE (LEFT) -->
+  <div class="agent-profile">
+    <div class="status-tag">ACTIVE_INVESTIGATION</div>
+    <div class="agent-meta" style="color: var(--white); font-size: 12px">ORDEM PARANORMAL OPS</div>
+  </div>
+
+  <!-- DATA CONSOLE (RIGHT) -->
+  <div class="data-console">
+    
+    <header class="console-header">
+      <div>
+        <div class="agent-meta">{{origin}} // CLASS: {{class}}</div>
+        <h1 class="agent-name">{{character_name}}</h1>
+      </div>
+      <div class="nex-indicator">
+        <div class="nex-val">{{nex_percent}}%</div>
+        <div class="nex-lbl">LEVEL_NEX</div>
+      </div>
+    </header>
+
+    <!-- STATUS CORE -->
+    <div class="vitals-grid">
+      <div class="vital-item danger">
+        <div class="v-lbl">Health_Vitality</div>
+        <div class="v-val">{{vital_resources.hp.current}} / {{vital_resources.hp.max}}</div>
+      </div>
+      <div class="vital-item">
+        <div class="v-lbl">Sanity_Stability</div>
+        <div class="v-val">{{vital_resources.sanity.current}} / {{vital_resources.sanity.max}}</div>
+      </div>
+      <div class="vital-item">
+        <div class="v-lbl">Effort_Energy</div>
+        <div class="v-val">{{vital_resources.effort.current}} / {{vital_resources.effort.max}}</div>
+      </div>
+    </div>
+
+    <!-- ATTRIBUTES BASE -->
+    <div class="attr-row">
+      <div class="attr-cell"><div class="a-lbl">AGI</div><div class="a-val">{{attributes.agility}}</div></div>
+      <div class="attr-cell"><div class="a-lbl">FOR</div><div class="a-val">{{attributes.strength}}</div></div>
+      <div class="attr-cell"><div class="a-lbl">INT</div><div class="a-val">{{attributes.intellect}}</div></div>
+      <div class="attr-cell"><div class="a-lbl">PRE</div><div class="a-val">{{attributes.presence}}</div></div>
+      <div class="attr-cell"><div class="a-lbl">VIG</div><div class="a-val">{{attributes.vigor}}</div></div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
+    <div class="highlights-section">
+      <div>
+        <h3 class="h-title">Expertise_Field</h3>
+        <div style="display: flex; flex-wrap: wrap;">
+          {{#each skills_trained}}
+            <span class="skill-pill">{{@key}} {{this}}</span>
+          {{/each}}
+        </div>
+      </div>
+      <div>
+        <h3 class="h-title">Paranormal_Records</h3>
+        {{#each powers_and_features.paranormal_abilities}}
+          <div style="font-size: 11px; margin-bottom: 5px; border-left: 2px solid var(--cyan); padding-left: 10px">
+            {{this}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <!-- LOG -->
+    <div class="back-log">
+      {{backstory}}
+    </div>
+
+    <footer class="console-footer">
+      <span>SYS_RECORD: ORDEM_PARANORMAL_v2.0</span>
+      <span>RESTRICTED_ACCESS_ONLY</span>
+    </footer>
+
+  </div>
+
+</div>
+
+</body>
+</html>

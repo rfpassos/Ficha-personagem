@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Oswald:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --surface: #141414;
+            --surface2: #1c1c1c;
+            --border: #2a2a2a;
+            --crimson: #c0392b;
+            --crimson-g: #922b21;
+            --gold: #d4a017;
+            --text: #e8e8e8;
+            --text-dim: #888;
+            --text-muted: #555;
+            --accent: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 60px rgba(192, 57, 43, 0.08), 0 0 120px rgba(0, 0, 0, 0.9);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Side stripe */
+        .sheet::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--crimson) 0%, var(--crimson-g) 50%, var(--crimson) 100%);
+        }
+
+        /* ── HEADER ─────────────────────────────────────── */
+        .header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: stretch;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding-left: 4px;
+        }
+
+        .header-accent {
+            width: 40px;
+            background: var(--crimson-g);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .header-main {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .char-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .char-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 4px;
+        }
+
+        .meta-pill {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border: 1px solid var(--border);
+            background: var(--surface2);
+        }
+
+        .meta-pill.accent {
+            border-color: var(--crimson);
+            color: var(--crimson);
+        }
+
+        .header-level {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--border);
+            min-width: 60px;
+        }
+
+        .level-label {
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .level-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--crimson);
+            line-height: 1;
+        }
+
+        /* ── CONTENT ─────────────────────────────────────── */
+        .content {
+            padding: 12px 16px 12px 20px;
+        }
+
+        /* ── SECTION LABEL ───────────────────────────────── */
+        .section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--crimson);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        .section-label::before {
+            content: '▶ ';
+            font-size: 7px;
+            color: var(--crimson);
+        }
+
+        /* ── VITAL STATS STRIP ───────────────────────────── */
+        .vitals {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .vital-cell {
+            background: var(--surface);
+            padding: 8px 4px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .vital-cell.primary {
+            background: var(--surface2);
+        }
+
+        .vital-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .vital-cell.hp-cell .vital-value {
+            color: var(--crimson);
+            font-size: 18px;
+        }
+
+        /* ── HP BAR ──────────────────────────────────────── */
+        .hp-bar {
+            height: 3px;
+            background: var(--surface2);
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .hp-bar-fill {
+            height: 100%;
+            background: var(--crimson);
+            width: var(--hp-pct, 100%);
+        }
+
+        /* ── MAIN LAYOUT ─────────────────────────────────── */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 80px 1fr 130px;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* ── ATRIBUTOS ───────────────────────────────────── */
+        .attrs-col {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .attr-cell {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--crimson-g);
+            padding: 4px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .attr-name {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .attr-score {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .attr-bottom {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .attr-mod {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--crimson);
+        }
+
+        .attr-save {
+            font-size: 8px;
+            color: var(--text-muted);
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        /* ── SKILLS ──────────────────────────────────────── */
+        .skills-col {
+            overflow: hidden;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 8px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-pip {
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .skill-pip.prof {
+            background: var(--crimson);
+            border-color: var(--crimson);
+        }
+
+        .skill-pip.exp {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .skill-name {
+            font-size: 9px;
+            color: var(--text-dim);
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .skill-mod {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text);
+            min-width: 22px;
+            text-align: right;
+        }
+
+        /* ── PORTRAIT + GEAR ─────────────────────────────── */
+        .portrait-gear-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .portrait {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portrait .portrait-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .portrait::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                linear-gradient(135deg, var(--crimson) 0%, transparent 50%) border-box;
+            pointer-events: none;
+        }
+
+        /* ── ATAQUES ─────────────────────────────────────── */
+        .attacks-block {
+            margin-bottom: 12px;
+        }
+
+        .attack-row {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+            padding: 5px 0;
+            align-items: center;
+        }
+
+        .attack-row:first-child {
+            border-top: 1px solid var(--border);
+        }
+
+        .attack-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .attack-bonus {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--crimson);
+            text-align: center;
+        }
+
+        .attack-damage {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 10px;
+            color: var(--gold);
+        }
+
+        /* ── FEATS ───────────────────────────────────────── */
+        .feat-item {
+            display: flex;
+            gap: 6px;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: flex-start;
+        }
+
+        .feat-bullet {
+            width: 4px;
+            height: 4px;
+            background: var(--crimson);
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .feat-text {
+            font-size: 9.5px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .feat-name {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* ── SPELLCASTING ────────────────────────────────── */
+        .spell-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 8px;
+        }
+
+        .spell-stat {
+            text-align: center;
+        }
+
+        .spell-stat-label {
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spell-stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .spell-list {
+            columns: 3;
+            column-gap: 8px;
+            list-style: none;
+        }
+
+        .spell-list li {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 2px 0;
+            border-bottom: 1px solid var(--border);
+            break-inside: avoid;
+        }
+
+        .spell-list li::before {
+            content: '▸ ';
+            color: var(--crimson);
+            font-size: 8px;
+        }
+
+        /* ── PERSONALIDADE ───────────────────────────────── */
+        .personality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .pers-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--crimson-g);
+            padding: 8px;
+        }
+
+        .pers-label {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--crimson);
+            margin-bottom: 4px;
+        }
+
+        .pers-text {
+            font-size: 9px;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* ── BACKSTORY ───────────────────────────────────── */
+        .backstory-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--gold);
+            padding: 10px 12px;
+            font-size: 9px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* ── EQUIPMENT ───────────────────────────────────── */
+        .equip-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .equip-item {
+            font-size: 9.5px;
+            color: var(--text-dim);
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .equip-item::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--crimson-g);
+            flex-shrink: 0;
+        }
+
+        .equip-magic {
+            color: var(--gold) !important;
+        }
+
+        .equip-magic::before {
+            background: var(--gold) !important;
+        }
+
+        .money-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            align-items: center;
+        }
+
+        .coin {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 9px;
+            color: var(--text-dim);
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+        }
+
+        .coin .coin-label {
+            color: var(--text-muted);
+        }
+
+        /* ── FOOTER ──────────────────────────────────────── */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px 8px 20px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-text {
+            font-size: 8px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .footer-system {
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--crimson);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-accent">⚔</div>
+            <div class="header-main">
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-meta">
+                    <span class="meta-pill accent">{{race}}</span>
+                    <span class="meta-pill">{{class}}</span>
+                    <span class="meta-pill">{{basic_info.archetype}}</span>
+                    <span class="meta-pill">{{basic_info.background}}</span>
+                    <span class="meta-pill">{{basic_info.alignment}}</span>
+                </div>
+            </div>
+            <div class="header-level">
+                <span class="level-label">Nível</span>
+                <span class="level-value">{{level}}</span>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- VITAIS -->
+            <div class="vitals">
+                <div class="vital-cell hp-cell">
+                    <div class="vital-label">PV Atual / Máx</div>
+                    <div class="vital-value">{{health_and_defense.current_hp}}/{{health_and_defense.max_hp}}</div>
+                    <div class="hp-bar">
+                        <div class="hp-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="vital-cell primary">
+                    <div class="vital-label">CA</div>
+                    <div class="vital-value">{{health_and_defense.armor_class}}</div>
+                </div>
+                <div class="vital-cell">
+                    <div class="vital-label">Iniciativa</div>
+                    <div class="vital-value">{{health_and_defense.initiative}}</div>
+                </div>
+                <div class="vital-cell">
+                    <div class="vital-label">Movimento</div>
+                    <div class="vital-value" style="font-size:16px">{{health_and_defense.movement}}</div>
+                </div>
+                <div class="vital-cell">
+                    <div class="vital-label">Dados de Vida</div>
+                    <div class="vital-value" style="font-size:16px">{{health_and_defense.hit_dice}}</div>
+                </div>
+            </div>
+
+            <!-- MAIN 3-COL LAYOUT -->
+            <div class="main-layout">
+
+                <!-- ATRIBUTOS -->
+                <div class="attrs-col">
+                    <div class="section-label">Atributos</div>
+                    {{#each attributes}}
+                    <div class="attr-cell">
+                        <div class="attr-name">{{@key}}</div>
+                        <div class="attr-score">{{value}}</div>
+                        <div class="attr-bottom">
+                            <span class="attr-mod">{{modifier}}</span>
+                            <span class="attr-save">TR{{save}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <!-- PERÍCIAS -->
+                <div class="skills-col">
+                    <div class="section-label">Perícias</div>
+                    <div class="skills-grid">
+                        {{#each proficiencies.skill_proficiencies}}
+                        <div class="skill-row">
+                            <div class="skill-pip {{#if expertise}}exp{{else}}{{#if proficient}}prof{{/if}}{{/if}}">
+                            </div>
+                            <span class="skill-name">{{name}}</span>
+                            <span class="skill-mod">{{modifier}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <!-- RETRATO + EQUIPAMENTO -->
+                <div class="portrait-gear-col">
+                    <div class="portrait">
+                        {{#if appearance_and_style.image_file}}
+                        <img src="{{appearance_and_style.image_file}}" alt="{{appearance_and_style.image_alt}}">
+                        {{else}}
+                        <div class="portrait-placeholder">
+                            <span style="font-size:28px;margin-bottom:4px;color:#333">⚔</span>
+                            <span>RETRATO</span>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <!-- Equipment summary -->
+                    <div>
+                        <div class="section-label">Armadura</div>
+                        {{#each equipment.armor}}
+                        <div class="equip-item">{{this}}</div>
+                        {{/each}}
+                        {{#each equipment.magic_items}}
+                        <div class="equip-item equip-magic">{{this}}</div>
+                        {{/each}}
+                        <div class="money-row">
+                            <span class="coin"><span class="coin-label">MO </span>{{equipment.money.gold}}</span>
+                            <span class="coin"><span class="coin-label">MP </span>{{equipment.money.platinum}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATAQUES -->
+            <div class="attacks-block">
+                <div class="section-label">Ataques &amp; Combate</div>
+                {{#each attacks}}
+                <div class="attack-row">
+                    <div class="attack-name">{{name}}</div>
+                    <div class="attack-bonus">{{attack_bonus}}</div>
+                    <div class="attack-damage">{{damage_and_type}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- HABILIDADES -->
+            <div style="margin-bottom:12px">
+                <div class="section-label">Habilidades &amp; Características</div>
+                <div style="columns:2; column-gap:12px">
+                    {{#each abilities_and_features.class_features}}
+                    <div class="feat-item">
+                        <div class="feat-bullet"></div>
+                        <div class="feat-text"><span class="feat-name">{{this}}</span></div>
+                    </div>
+                    {{/each}}
+                    {{#each abilities_and_features.racial_traits}}
+                    <div class="feat-item">
+                        <div class="feat-bullet" style="background:var(--gold)"></div>
+                        <div class="feat-text"><span class="feat-name" style="color:var(--gold)">Racial ·
+                            </span>{{this}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- MAGIAS -->
+            {{#if spellcasting.cantrips.length}}
+            <div style="margin-bottom:12px">
+                <div class="section-label">Conjuração</div>
+                <div class="spell-meta">
+                    <div class="spell-stat">
+                        <div class="spell-stat-label">Habilidade</div>
+                        <div class="spell-stat-value" style="font-size:14px">{{spellcasting.spellcasting_ability}}</div>
+                    </div>
+                    <div class="spell-stat">
+                        <div class="spell-stat-label">CD Magia</div>
+                        <div class="spell-stat-value">{{spellcasting.spell_save_dc}}</div>
+                    </div>
+                    <div class="spell-stat">
+                        <div class="spell-stat-label">Ataque</div>
+                        <div class="spell-stat-value">{{spellcasting.spell_attack_bonus}}</div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <div>
+                        <div style="font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px">TRUQUES
+                        </div>
+                        <ul class="spell-list" style="columns:1">
+                            {{#each spellcasting.cantrips}}<li>{{this}}</li>{{/each}}
+                        </ul>
+                    </div>
+                    <div>
+                        <div style="font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px">MAGIAS
+                            PREPARADAS</div>
+                        <ul class="spell-list" style="columns:1">
+                            {{#each spellcasting.spells_prepared}}<li>{{this}}</li>{{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+            <!-- EQUIPAMENTO GERAL -->
+            <div style="margin-bottom:12px">
+                <div class="section-label">Equipamento Geral</div>
+                <div class="equip-cols">
+                    <div>
+                        {{#each equipment.general_equipment}}
+                        <div class="equip-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                    <div>
+                        <div style="font-size:8px;color:var(--text-muted);margin-bottom:4px;letter-spacing:1px">IDIOMAS
+                            &amp; FERRAMENTAS</div>
+                        {{#each proficiencies.tools_and_languages}}
+                        <div class="equip-item" style="color:var(--text-dim)">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div>
+                <div class="section-label">Personalidade</div>
+                <div class="personality-grid">
+                    <div class="pers-card">
+                        <div class="pers-label">Traço</div>
+                        <div class="pers-text">"{{personality.trait}}"</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Ideal</div>
+                        <div class="pers-text">"{{personality.ideal}}"</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Vínculo</div>
+                        <div class="pers-text">"{{personality.bond}}"</div>
+                    </div>
+                    <div class="pers-card">
+                        <div class="pers-label">Defeito</div>
+                        <div class="pers-text">"{{personality.flaw}}"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div style="margin-bottom:12px">
+                <div class="section-label">História</div>
+                <div class="backstory-block">{{backstory}}</div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.version}} · {{metadata.locale}}</span>
+            <span class="footer-system">D&amp;D 5e</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

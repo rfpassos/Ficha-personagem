@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #fdf6ec;
+            --cream-dk: #f0e4d0;
+            --terracotta: #c4663a;
+            --terra-dk: #8b3a1e;
+            --amber: #e8a832;
+            --amber-dk: #b87c1a;
+            --slate: #2d3142;
+            --slate-lt: #4a5568;
+            --text: #1a1a2e;
+            --text-dim: #4a4560;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5ebe0;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--cream);
+            box-shadow: 0 8px 40px rgba(60, 20, 0, 0.15), 0 0 0 1px rgba(196, 102, 58, 0.2);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* ── HEADER ─────────────────────────────────────── */
+        .header {
+            background: var(--slate);
+            padding: 20px 24px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 16px;
+        }
+
+        .system-tag {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 6px;
+        }
+
+        .char-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .char-pillars {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pillar-badge {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--cream-dk);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2px 10px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .pillar-badge.main {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+            color: #fff;
+        }
+
+        .header-portrait {
+            width: 90px;
+            height: 90px;
+            border: 3px solid var(--amber);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .header-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portrait-ph {
+            width: 100%;
+            height: 100%;
+            background: var(--slate-lt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ── CONTENT ─────────────────────────────────────── */
+        .content {
+            padding: 16px 24px;
+        }
+
+        /* ── SECTION HEAD ────────────────────────────────── */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            margin-top: 14px;
+        }
+
+        .section-head h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--terracotta);
+            white-space: nowrap;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--terracotta), transparent);
+        }
+
+        /* ── TRAGIC PILLARS ──────────────────────────────── */
+        .tragic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tragic-card {
+            background: var(--slate);
+            padding: 10px 12px;
+            border-radius: 0;
+            border-top: 3px solid var(--terracotta);
+        }
+
+        .tragic-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .tragic-value {
+            font-family: 'Lora', serif;
+            font-size: 10px;
+            font-style: italic;
+            color: #e0d4c0;
+            line-height: 1.4;
+        }
+
+        /* ── VITAIS ──────────────────────────────────────── */
+        .vitals-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+            background: var(--cream-dk);
+            border: 1px solid rgba(196, 102, 58, 0.2);
+            padding: 10px;
+        }
+
+        .vital {
+            text-align: center;
+            border-right: 1px solid rgba(196, 102, 58, 0.2);
+            padding-right: 6px;
+        }
+
+        .vital:last-child {
+            border-right: none;
+        }
+
+        .vital-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--slate);
+            line-height: 1;
+        }
+
+        /* ── DOMAINS ─────────────────────────────────────── */
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .domain-card {
+            background: var(--cream-dk);
+            border: 1px solid rgba(196, 102, 58, 0.2);
+            padding: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domain-card.highlight {
+            border-color: var(--terracotta);
+        }
+
+        .domain-name {
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--slate-lt);
+            margin-bottom: 4px;
+        }
+
+        .domain-die {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--terracotta);
+        }
+
+        .domain-exp {
+            font-size: 7px;
+            color: var(--amber-dk);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* ── SKILLS ──────────────────────────────────────── */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .skill-tag {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--slate);
+            background: var(--cream-dk);
+            border: 1px solid rgba(196, 102, 58, 0.25);
+            padding: 3px 10px;
+            border-radius: 0;
+        }
+
+        /* ── FEATURES ────────────────────────────────────── */
+        .feature-block {
+            background: var(--cream-dk);
+            border-left: 4px solid var(--terracotta);
+            padding: 8px 10px;
+            margin-bottom: 6px;
+        }
+
+        .feature-category {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--amber-dk);
+            margin-bottom: 4px;
+        }
+
+        .feature-item {
+            font-size: 9px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            padding: 2px 0;
+            border-bottom: 1px dashed rgba(196, 102, 58, 0.2);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ── EQUIPMENT ───────────────────────────────────── */
+        .equip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .equip-item {
+            font-size: 9.5px;
+            color: var(--text-dim);
+            padding: 3px 0;
+            border-bottom: 1px dashed rgba(196, 102, 58, 0.2);
+        }
+
+        .equip-item::before {
+            content: '— ';
+            color: var(--amber-dk);
+        }
+
+        /* ── SPELL SLOTS ─────────────────────────────────── */
+        .spell-row {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .slot-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--terracotta);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            color: var(--terracotta);
+        }
+
+        .slot-box.used {
+            background: var(--terracotta);
+            color: #fff;
+        }
+
+        /* ── MEMORIES / VALUES ───────────────────────────── */
+        .narrative-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .narrative-card {
+            border: 1px solid rgba(196, 102, 58, 0.2);
+            padding: 10px;
+            background: var(--cream-dk);
+        }
+
+        .narrative-card-label {
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--amber-dk);
+            margin-bottom: 6px;
+        }
+
+        .narrative-card-item {
+            font-family: 'Lora', serif;
+            font-size: 8.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.4;
+            padding: 3px 0;
+            border-bottom: 1px dashed rgba(196, 102, 58, 0.2);
+        }
+
+        .narrative-card-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ── BACKSTORY ───────────────────────────────────── */
+        .backstory {
+            font-family: 'Lora', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.6;
+            border: 1px solid rgba(196, 102, 58, 0.2);
+            background: var(--cream-dk);
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────── */
+        .footer {
+            background: var(--slate);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-system {
+            font-family: 'Playfair Display', serif;
+            font-size: 11px;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--amber);
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div>
+                <div class="system-tag">Daggerheart — Ficha de Personagem</div>
+                <div class="char-name">{{character_name}}</div>
+                <div class="char-pillars">
+                    <span class="pillar-badge main">{{ancestry}}</span>
+                    <span class="pillar-badge">{{class}}</span>
+                    <span class="pillar-badge">{{subclass}}</span>
+                    <span class="pillar-badge">Nv. {{level}}</span>
+                    <span class="pillar-badge">{{community}}</span>
+                </div>
+            </div>
+            <div class="header-portrait">
+                {{#if appearance_and_style.image_file}}
+                <img src="{{appearance_and_style.image_file}}" alt="{{appearance_and_style.image_alt}}">
+                {{else}}
+                <div class="portrait-ph">RETRATO</div>
+                {{/if}}
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- PILARES TRÁGICOS -->
+            <div class="section-head">
+                <h3>Pilares Centrais</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="tragic-grid">
+                <div class="tragic-card">
+                    <div class="tragic-label">Nemesis</div>
+                    <div class="tragic-value">{{tragic_pillars.nemesis}}</div>
+                </div>
+                <div class="tragic-card">
+                    <div class="tragic-label">Melancolia</div>
+                    <div class="tragic-value">{{tragic_pillars.melancholy}}</div>
+                </div>
+                <div class="tragic-card">
+                    <div class="tragic-label">Fardo</div>
+                    <div class="tragic-value">{{tragic_pillars.burden}}</div>
+                </div>
+            </div>
+
+            <!-- VITAIS -->
+            <div class="vitals-strip">
+                <div class="vital">
+                    <div class="vital-label">Armadura</div>
+                    <div class="vital-value">{{stress_and_defense.armor}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">Evasão</div>
+                    <div class="vital-value">{{stress_and_defense.evasion}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">Resiliência</div>
+                    <div class="vital-value">{{stress_and_defense.resolve}}</div>
+                </div>
+                <div class="vital">
+                    <div class="vital-label">Movimentação</div>
+                    <div class="vital-value" style="font-size:16px">{{stress_and_defense.movement}}</div>
+                </div>
+            </div>
+
+            <!-- DOMÍNIOS -->
+            <div class="section-head">
+                <h3>Domínios de Ação</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="domains-grid">
+                {{#each domains}}
+                <div class="domain-card {{#if experience_checked}}highlight{{/if}}">
+                    <div class="domain-name">{{@key}}</div>
+                    <div class="domain-die">{{die}}</div>
+                    {{#if experience_checked}}<div class="domain-exp">★ Experiente</div>{{/if}}
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- PERÍCIAS -->
+            <div class="section-head">
+                <h3>Perícias</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-list">
+                {{#each skills_and_proficiencies.skills}}
+                <span class="skill-tag">{{name}} <span
+                        style="color:var(--terracotta);font-weight:700">({{domain}})</span></span>
+                {{/each}}
+            </div>
+            <div class="skills-list" style="margin-top:4px">
+                {{#each skills_and_proficiencies.tools_and_languages}}
+                <span class="skill-tag" style="background:transparent;border-style:dashed">{{this}}</span>
+                {{/each}}
+            </div>
+
+            <!-- HABILIDADES -->
+            <div class="section-head">
+                <h3>Habilidades</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="feature-block">
+                <div class="feature-category">Herança — {{ancestry}}</div>
+                {{#each features.ancestry_features}}
+                <div class="feature-item">{{this}}</div>
+                {{/each}}
+            </div>
+            <div class="feature-block">
+                <div class="feature-category">Classe — {{class}}</div>
+                {{#each features.class_features}}
+                <div class="feature-item">{{this}}</div>
+                {{/each}}
+            </div>
+            {{#if features.community_features.length}}
+            <div class="feature-block" style="border-left-color:var(--amber)">
+                <div class="feature-category">Comunidade</div>
+                {{#each features.community_features}}
+                <div class="feature-item">{{this}}</div>
+                {{/each}}
+            </div>
+            {{/if}}
+
+            <!-- MAGIAS -->
+            <div class="section-head">
+                <h3>Magias &amp; Ações</h3>
+                <div class="section-line"></div>
+            </div>
+            <div style="margin-bottom:8px">
+                <div style="font-size:8px;color:var(--terracotta);font-weight:700;letter-spacing:1px;margin-bottom:4px">
+                    FICHAS DE AÇÃO: {{actions_and_spells.action_tokens}} | ESPAÇOS DE MAGIA:
+                    {{actions_and_spells.spell_slots}}</div>
+                <div class="skills-list">
+                    {{#each actions_and_spells.known_spells}}
+                    <span class="skill-tag">{{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- EQUIPAMENTO -->
+            <div class="section-head">
+                <h3>Equipamento</h3>
+                <div class="section-line"></div>
+            </div>
+            <div
+                style="background:var(--cream-dk);border:1px solid rgba(196,102,58,0.2);padding:10px;margin-bottom:12px">
+                <div style="display:flex;gap:16px;align-items:center;margin-bottom:8px">
+                    <div>
+                        <div class="vital-label">Carga Atual</div>
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--slate)">
+                            {{equipment.load.current}} / {{equipment.load.max}}</div>
+                    </div>
+                    <div>
+                        <div class="vital-label">Glitter</div>
+                        <div
+                            style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--amber-dk)">
+                            {{equipment.glimmer}}</div>
+                    </div>
+                </div>
+                <div class="equip-grid">
+                    <div>
+                        <div class="feature-category" style="margin-bottom:4px">Armas &amp; Armaduras</div>
+                        {{#each equipment.weapons_and_armor}}
+                        <div class="equip-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                    <div>
+                        <div class="feature-category" style="margin-bottom:4px">Itens Importantes</div>
+                        {{#each equipment.important_items}}
+                        <div class="equip-item">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEMÓRIAS / VALORES / CONEXÕES -->
+            <div class="section-head">
+                <h3>Valores, Conexões e Memórias</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="narrative-strip">
+                <div class="narrative-card">
+                    <div class="narrative-card-label">Valor Central</div>
+                    <div class="narrative-card-item">{{values_connections_memories.value}}</div>
+                </div>
+                <div class="narrative-card">
+                    <div class="narrative-card-label">Conexões</div>
+                    {{#each values_connections_memories.connections}}
+                    <div class="narrative-card-item">{{this}}</div>
+                    {{/each}}
+                </div>
+                <div class="narrative-card">
+                    <div class="narrative-card-label">Memórias</div>
+                    {{#each values_connections_memories.memories}}
+                    <div class="narrative-card-item">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="section-head">
+                <h3>História</h3>
+                <div class="section-line"></div>
+            </div>
+            <div class="backstory">{{backstory}}</div>
+
+            <!-- APARÊNCIA -->
+            <div class="section-head">
+                <h3>Aparência &amp; Expressão</h3>
+                <div class="section-line"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+                <div class="narrative-card">
+                    <div class="narrative-card-label">Aparência</div>
+                    <div class="narrative-card-item">{{appearance_and_style.appearance}}</div>
+                </div>
+                <div class="narrative-card">
+                    <div class="narrative-card-label">Expressão Única</div>
+                    <div class="narrative-card-item">{{appearance_and_style.signature_expression}}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.schema_version}} · {{metadata.locale}}</span>
+            <span class="footer-system">Daggerheart</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{metadata.template_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #12100e;
+            --surface: #1a1714;
+            --surface2: #221f1b;
+            --border: #332e28;
+            --border2: #4a4238;
+            --moss: #4d6e55;
+            --moss-lt: #6a9472;
+            --ash: #8a807a;
+            --rust: #8b4513;
+            --rust-lt: #a0522d;
+            --lavender: #7c6e8a;
+            --cream: #d4c8b8;
+            --text: #cdc0b0;
+            --text-dim: #887870;
+            --white: #e8dece;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0a08;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+        }
+
+        .sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Etching texture overlay */
+        .sheet::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(255, 255, 255, 0.005) 3px,
+                    rgba(255, 255, 255, 0.005) 4px);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* HEADER */
+        .header {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            min-height: 100px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left {
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            gap: 4px;
+        }
+
+        .system-icon {
+            font-size: 28px;
+        }
+
+        .level-circle {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border2);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface2);
+        }
+
+        .lv-label {
+            font-size: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .lv-val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--moss-lt);
+            line-height: 1;
+        }
+
+        .header-right {
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .char-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 26px;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .char-details {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .detail-chip {
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            background: var(--surface);
+        }
+
+        .detail-chip.mossy {
+            border-color: var(--moss);
+            color: var(--moss-lt);
+        }
+
+        .origin-tag {
+            font-size: 9px;
+            font-style: italic;
+            color: var(--ash);
+            font-family: 'DM Serif Display', serif;
+            margin-top: 4px;
+        }
+
+        .content {
+            padding: 14px 18px;
+        }
+
+        /* SECTION */
+        .sec {
+            margin-bottom: 12px;
+        }
+
+        .sec-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 11px;
+            font-style: italic;
+            color: var(--moss-lt);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sec-title::before {
+            content: '';
+            width: 3px;
+            height: 12px;
+            background: var(--moss);
+            flex-shrink: 0;
+        }
+
+        /* TRAGEDY PILLARS */
+        .tragedy-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--rust);
+            padding: 10px 12px;
+            margin-bottom: 6px;
+        }
+
+        .tragedy-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rust-lt);
+            margin-bottom: 4px;
+        }
+
+        .tragedy-text {
+            font-family: 'DM Serif Display', serif;
+            font-size: 10px;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* VITALS */
+        .vitals {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .vit {
+            text-align: center;
+            padding: 8px 4px;
+            border-right: 1px solid var(--border);
+        }
+
+        .vit:last-child {
+            border-right: none;
+        }
+
+        .vit-lbl {
+            font-size: 6px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .vit-val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .vit-sub {
+            font-size: 7px;
+            color: var(--text-dim);
+            margin-top: 1px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* ATTRIBUTES */
+        .attrs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .attr-cell {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 6px 4px;
+            text-align: center;
+        }
+
+        .attr-name {
+            font-size: 6px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .attr-val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .attr-mod {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: var(--moss-lt);
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 8px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2.5px 0;
+            border-bottom: 1px solid rgba(51, 46, 40, 0.6);
+        }
+
+        .skill-dot {
+            width: 5px;
+            height: 5px;
+            border: 1px solid var(--border2);
+            flex-shrink: 0;
+        }
+
+        .skill-dot.trained {
+            background: var(--moss);
+            border-color: var(--moss);
+        }
+
+        .skill-dot.expert {
+            background: var(--lavender);
+            border-color: var(--lavender);
+        }
+
+        .skill-name {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            flex: 1;
+        }
+
+        .skill-mod {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        /* POWERS */
+        .power-item {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(51, 46, 40, 0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .power-name {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--moss-lt);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .power-name::before {
+            content: '';
+            width: 8px;
+            height: 1px;
+            background: var(--moss);
+            flex-shrink: 0;
+        }
+
+        .power-desc {
+            font-size: 8.5px;
+            color: var(--text-dim);
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        /* EQUIPMENT */
+        .equip-item {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(51, 46, 40, 0.4);
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .equip-item::before {
+            content: '–';
+            color: var(--rust-lt);
+            font-size: 10px;
+        }
+
+        /* NARRATIVE */
+        .narrative {
+            font-family: 'DM Serif Display', serif;
+            font-size: 9.5px;
+            font-style: italic;
+            color: var(--text-dim);
+            line-height: 1.6;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            padding: 10px 12px;
+        }
+
+        /* SAVES */
+        .saves-row {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .save-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            border: 1px solid var(--border2);
+            padding: 2px 8px;
+            background: var(--surface2);
+            color: var(--text-dim);
+        }
+
+        .save-chip b {
+            color: var(--moss-lt);
+        }
+
+        /* TWO COL */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+        }
+
+        .footer-text {
+            font-size: 7px;
+            color: var(--text-dim);
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .footer-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 12px;
+            font-style: italic;
+            color: var(--moss-lt);
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <header class="header">
+            <div class="header-left">
+                <div class="system-icon">🌑</div>
+                <div class="level-circle">
+                    <div class="lv-label">NV</div>
+                    <div class="lv-val">{{level}}</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div>
+                    <div class="char-name">{{character_name}}</div>
+                    <div class="origin-tag">— {{origin}}</div>
+                </div>
+                <div class="char-details">
+                    <span class="detail-chip mossy">{{people}}</span>
+                    <span class="detail-chip">{{class}}</span>
+                    {{#each tragic_pillars}}
+                    <span class="detail-chip">{{@key}}: {{this}}</span>
+                    {{/each}}
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <!-- PILARES TRÁGICOS -->
+            <div class="sec">
+                <div class="sec-title">Pilares Trágicos</div>
+                {{#each tragic_pillars}}
+                <div class="tragedy-block">
+                    <div class="tragedy-label">{{@key}}</div>
+                    <div class="tragedy-text">{{this}}</div>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- VITAIS -->
+            <div class="vitals">
+                <div class="vit">
+                    <div class="vit-lbl">PV</div>
+                    <div class="vit-val">{{health.hp_current}}</div>
+                    <div class="vit-sub">/ {{health.hp_max}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-lbl">PM</div>
+                    <div class="vit-val">{{health.mp_current}}</div>
+                    <div class="vit-sub">/ {{health.mp_max}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-lbl">Defesa</div>
+                    <div class="vit-val">{{health.defense}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-lbl">Resistência</div>
+                    <div class="vit-val">{{health.resistance}}</div>
+                </div>
+                <div class="vit">
+                    <div class="vit-lbl">Deslocamento</div>
+                    <div class="vit-val" style="font-size:13px">{{health.movement}}</div>
+                </div>
+            </div>
+
+            <!-- ATRIBUTOS -->
+            <div class="sec">
+                <div class="sec-title">Atributos</div>
+                <div class="attrs">
+                    {{#each attributes}}
+                    <div class="attr-cell">
+                        <div class="attr-name">{{@key}}</div>
+                        <div class="attr-val">{{value}}</div>
+                        <div class="attr-mod">{{modifier}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- SALVAGUARDAS -->
+            <div class="sec">
+                <div class="sec-title">Salvaguardas</div>
+                <div class="saves-row">
+                    {{#each saves}}
+                    <div class="save-chip"><b>{{@key}}</b>: {{modifier}}</div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- PERÍCIAS -->
+            <div class="sec">
+                <div class="sec-title">Perícias</div>
+                <div class="skills-grid">
+                    {{#each skills}}
+                    <div class="skill-row">
+                        <div class="skill-dot {{trained}}"></div>
+                        <span class="skill-name">{{name}}</span>
+                        <span class="skill-mod">{{modifier}}</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- PODERES -->
+            <div class="sec">
+                <div class="sec-title">Poderes &amp; Habilidades</div>
+                <div class="two-col">
+                    <div>
+                        <div
+                            style="font-size:7px;font-weight:700;letter-spacing:2px;color:var(--rust-lt);text-transform:uppercase;margin-bottom:4px">
+                            POVO</div>
+                        {{#each powers_and_features.people_powers}}
+                        <div class="power-item">
+                            <div class="power-name">{{this}}</div>
+                        </div>
+                        {{/each}}
+                        <div
+                            style="font-size:7px;font-weight:700;letter-spacing:2px;color:var(--rust-lt);text-transform:uppercase;margin:6px 0 4px">
+                            CLASSE</div>
+                        {{#each powers_and_features.class_powers}}
+                        <div class="power-item">
+                            <div class="power-name">{{this}}</div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div>
+                        <div
+                            style="font-size:7px;font-weight:700;letter-spacing:2px;color:var(--lavender);text-transform:uppercase;margin-bottom:4px">
+                            MAGIA</div>
+                        {{#each powers_and_features.spells}}
+                        <div class="power-item">
+                            <div class="power-name" style="color:var(--lavender)">{{name}}</div>
+                            <div class="power-desc">{{description}}</div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- EQUIPAMENTO -->
+            <div class="sec">
+                <div class="sec-title">Equipamento</div>
+                <div class="two-col">
+                    <div>
+                        <div
+                            style="font-size:7px;font-weight:600;letter-spacing:1px;color:var(--text-dim);margin-bottom:4px">
+                            ARMAMENTO</div>
+                        {{#each equipment.weapons}}<div class="equip-item">{{this}}</div>{{/each}}
+                        {{#each equipment.armor}}<div class="equip-item">{{this}}</div>{{/each}}
+                    </div>
+                    <div>
+                        <div
+                            style="font-size:7px;font-weight:600;letter-spacing:1px;color:var(--text-dim);margin-bottom:4px">
+                            OUTROS</div>
+                        {{#each equipment.items}}<div class="equip-item">{{this}}</div>{{/each}}
+                        {{#if equipment.money}}<div
+                            style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--moss-lt);margin-top:6px">
+                            Ç {{equipment.money}}</div>{{/if}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRIA -->
+            <div class="sec">
+                <div class="sec-title">História</div>
+                <div class="narrative">{{backstory}}</div>
+            </div>
+
+            <!-- PERSONALIDADE -->
+            <div class="sec">
+                <div class="sec-title">Personalidade &amp; Aparência</div>
+                <div class="two-col">
+                    <div>
+                        <div class="narrative" style="margin-bottom:6px">
+                            <b
+                                style="color:var(--moss-lt);font-style:normal;font-size:8px;display:block;margin-bottom:3px">TRAÇO</b>{{personality.trait}}
+                        </div>
+                        <div class="narrative">
+                            <b
+                                style="color:var(--moss-lt);font-style:normal;font-size:8px;display:block;margin-bottom:3px">IDEAL</b>{{personality.ideal}}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="narrative" style="margin-bottom:6px">
+                            <b
+                                style="color:var(--rust-lt);font-style:normal;font-size:8px;display:block;margin-bottom:3px">VÍNCULO</b>{{personality.bond}}
+                        </div>
+                        <div class="narrative">
+                            <b
+                                style="color:var(--rust-lt);font-style:normal;font-size:8px;display:block;margin-bottom:3px">DEFEITO</b>{{personality.flaw}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <span class="footer-text">{{metadata.system}} · v{{metadata.version}}</span>
+            <span class="footer-brand">Skyfall RPG</span>
+            <span class="footer-text">{{metadata.template_title}}</span>
+        </footer>
+
+    </article>
+</body>
+
+</html>

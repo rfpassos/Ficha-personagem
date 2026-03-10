@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{metadata.template_title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:    #f5e9c9;
+    --parchment-dk: #e8d3a0;
+    --parchment-xd: #c9a96e;
+    --ink:          #1a0e00;
+    --ink-brown:    #3d2b1a;
+    --crimson:      #8b1a1a;
+    --crimson-dk:   #5e0f0f;
+    --gold:         #b8860b;
+    --gold-lt:      #d4a017;
+    --shadow:       rgba(26,14,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #2a1a0a;
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px;
+    font-family: 'IM Fell English', Georgia, serif;
+    color: var(--ink);
+  }
+
+  /* ── PÁGINA ─────────────────────────────────────── */
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 20% 10%, #e8d3a0 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 90%, #c9a96e 0%, transparent 50%);
+    border: 2px solid var(--parchment-xd);
+    box-shadow:
+      inset 0 0 80px rgba(138,100,40,0.15),
+      0 0 40px rgba(0,0,0,0.6),
+      0 0 100px rgba(0,0,0,0.4);
+    padding: 12mm 10mm;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Bordas ornamentais */
+  .sheet::before, .sheet::after {
+    content: '';
+    position: absolute;
+    border: 2px solid var(--gold);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .sheet::before { inset: 6mm; }
+  .sheet::after  { inset: 8mm; border-color: var(--parchment-xd); }
+
+  /* ── CABEÇALHO ───────────────────────────────────── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    border-bottom: 3px double var(--crimson);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .header-ornament {
+    font-size: 28px;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 8px;
+  }
+  .system-badge {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 8px;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: right;
+  }
+  .sheet-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--crimson-dk);
+    text-align: center;
+    text-shadow: 1px 1px 0 var(--gold);
+    line-height: 1.1;
+  }
+
+  /* ── BLOCO DE IDENTIDADE ─────────────────────────── */
+  .identity-block {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--parchment-xd);
+    background: rgba(200,160,80,0.08);
+  }
+
+  .portrait-frame {
+    width: 110px;
+    height: 110px;
+    border: 3px solid var(--gold);
+    border-radius: 0;
+    background: var(--parchment-dk);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .portrait-frame::before {
+    content: '✦';
+    position: absolute;
+    top: -1px; left: -1px;
+    font-size: 10px;
+    color: var(--gold);
+  }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .portrait-frame .placeholder {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--parchment-xd);
+    text-align: center;
+    padding: 8px;
+  }
+
+  .identity-fields {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .char-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--crimson-dk);
+    border-bottom: 1px solid var(--parchment-xd);
+    padding-bottom: 3px;
+  }
+  .field-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .field-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .field-label {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 600;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .field-value {
+    font-size: 11px;
+    color: var(--ink-brown);
+    font-weight: 500;
+    border-bottom: 1px dotted var(--parchment-xd);
+    padding-bottom: 1px;
+    min-width: 60px;
+  }
+
+  /* ── GRID PRINCIPAL ──────────────────────────────── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 8px;
+  }
+
+  /* ── ATRIBUTOS ───────────────────────────────────── */
+  .attributes-col { display: flex; flex-direction: column; gap: 4px; }
+  .attr-box {
+    border: 2px solid var(--parchment-xd);
+    background: rgba(184,134,11,0.06);
+    text-align: center;
+    padding: 4px 2px;
+    position: relative;
+  }
+  .attr-box::before {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    border: 1px solid rgba(184,134,11,0.25);
+    pointer-events: none;
+  }
+  .attr-name {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .attr-value {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin: 2px 0;
+  }
+  .attr-mod {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--crimson);
+    background: var(--parchment-dk);
+    border: 1px solid var(--parchment-xd);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+  }
+  .attr-save {
+    font-size: 8px;
+    color: var(--ink-brown);
+    margin-top: 2px;
+  }
+
+  /* ── COLUNA DIREITA ──────────────────────────────── */
+  .right-col { display: flex; flex-direction: column; gap: 6px; }
+
+  /* ── COMBATE ─────────────────────────────────────── */
+  .combat-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    border: 1px solid var(--parchment-xd);
+    padding: 6px;
+    background: rgba(200,160,80,0.06);
+  }
+  .combat-stat {
+    text-align: center;
+    border-right: 1px dotted var(--parchment-xd);
+    padding-right: 4px;
+  }
+  .combat-stat:last-child { border-right: none; }
+  .combat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 600;
+    color: var(--crimson);
+    text-transform: uppercase;
+  }
+  .combat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  /* ── SECTION TITLE ───────────────────────────────── */
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--parchment);
+    background: var(--crimson-dk);
+    padding: 3px 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%);
+  }
+
+  /* ── PERÍCIAS ─────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px 8px;
+  }
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1px dotted rgba(201,169,110,0.5);
+    padding: 2px 0;
+  }
+  .skill-dot {
+    width: 8px; height: 8px;
+    border: 1px solid var(--crimson);
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: transparent;
+  }
+  .skill-dot.proficient { background: var(--crimson); }
+  .skill-dot.expertise  { background: var(--gold); border-color: var(--gold); }
+  .skill-name { font-size: 9px; color: var(--ink-brown); flex: 1; }
+  .skill-mod  {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--crimson);
+    min-width: 24px;
+    text-align: right;
+  }
+
+  /* ── ATAQUES ─────────────────────────────────────── */
+  .attacks-table { width: 100%; border-collapse: collapse; }
+  .attacks-table th {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 4px;
+    background: rgba(200,160,80,0.1);
+    border-bottom: 1px solid var(--parchment-xd);
+    text-align: left;
+  }
+  .attacks-table td {
+    font-size: 9px;
+    color: var(--ink-brown);
+    padding: 3px 4px;
+    border-bottom: 1px dotted rgba(201,169,110,0.5);
+  }
+  .attacks-table tr:last-child td { border-bottom: none; }
+
+  /* ── MAGIAS ──────────────────────────────────────── */
+  .spells-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .spell-info { font-size: 9px; color: var(--ink-brown); }
+  .spell-label {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+  }
+  .spell-value { font-size: 11px; font-weight: bold; color: var(--ink); }
+
+  .cantrip-list, .spell-list {
+    font-size: 9px;
+    color: var(--ink-brown);
+    columns: 2;
+    column-gap: 8px;
+  }
+  .cantrip-list li, .spell-list li {
+    list-style: none;
+    padding: 1px 0;
+    border-bottom: 1px dotted rgba(201,169,110,0.4);
+  }
+  .cantrip-list li::before, .spell-list li::before {
+    content: '✦ ';
+    color: var(--gold);
+    font-size: 7px;
+  }
+
+  /* ── PERSONALIDADE ───────────────────────────────── */
+  .personality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .personality-box {
+    border: 1px solid var(--parchment-xd);
+    padding: 4px 6px;
+    background: rgba(200,160,80,0.06);
+  }
+  .personality-label {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .personality-text {
+    font-size: 8.5px;
+    color: var(--ink-brown);
+    font-style: italic;
+    line-height: 1.35;
+  }
+
+  /* ── HISTÓRIA / APARÊNCIA ────────────────────────── */
+  .narrative-block {
+    border-left: 3px solid var(--gold);
+    padding-left: 8px;
+    font-size: 8.5px;
+    color: var(--ink-brown);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .sheet-footer {
+    border-top: 2px double var(--crimson);
+    margin-top: 12px;
+    padding-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 7px;
+    color: var(--parchment-xd);
+    letter-spacing: 1px;
+  }
+  .footer-ornament { font-size: 14px; color: var(--gold); letter-spacing: 4px; }
+
+  /* ── EQUIPAMENTOS ────────────────────────────────── */
+  .equip-list { font-size: 9px; color: var(--ink-brown); line-height: 1.6; }
+  .equip-list li { list-style: none; }
+  .equip-list li::before { content: '⚔ '; color: var(--crimson); font-size: 8px; }
+
+  /* ── HABILIDADES ─────────────────────────────────── */
+  .feature-item { margin-bottom: 4px; }
+  .feature-name {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--crimson);
+    display: inline;
+  }
+  .feature-desc { font-size: 8px; color: var(--ink-brown); display: inline; line-height: 1.35; }
+
+  /* ── HP BAR ──────────────────────────────────────── */
+  .hp-bar-container { margin-top: 3px; }
+  .hp-bar-track {
+    height: 6px;
+    background: var(--parchment-dk);
+    border: 1px solid var(--parchment-xd);
+    overflow: hidden;
+  }
+  .hp-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--crimson-dk), var(--crimson));
+    width: var(--hp-pct, 100%);
+  }
+  .hp-text {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<article class="sheet">
+
+  <!-- CABEÇALHO -->
+  <header class="header">
+    <div class="system-badge">{{basic_info.system}}</div>
+    <div class="sheet-title">Ficha de Personagem</div>
+    <div class="system-badge" style="text-align:left">Nível {{level}}</div>
+  </header>
+  <div class="header-ornament" style="text-align:center;margin-bottom:10px;font-size:16px;color:var(--gold);letter-spacing:6px;">
+    ✦ ✦ ✦ ✦ ✦
+  </div>
+
+  <!-- IDENTIDADE -->
+  <section class="identity-block">
+    <div class="portrait-frame">
+      {{#if appearance_and_style.image_file}}
+        <img src="{{appearance_and_style.image_file}}" alt="{{appearance_and_style.image_alt}}">
+      {{else}}
+        <div class="placeholder">📜<br>Retrato<br>do Herói</div>
+      {{/if}}
+    </div>
+    <div class="identity-fields">
+      <div class="char-name">{{character_name}}</div>
+      <div class="field-row">
+        <div class="field-item">
+          <span class="field-label">Raça</span>
+          <span class="field-value">{{race}}</span>
+        </div>
+        <div class="field-item">
+          <span class="field-label">Classe</span>
+          <span class="field-value">{{class}}</span>
+        </div>
+        <div class="field-item">
+          <span class="field-label">Arquétipo</span>
+          <span class="field-value">{{basic_info.archetype}}</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-item">
+          <span class="field-label">Histórico</span>
+          <span class="field-value">{{basic_info.background}}</span>
+        </div>
+        <div class="field-item">
+          <span class="field-label">Alinhamento</span>
+          <span class="field-value">{{basic_info.alignment}}</span>
+        </div>
+      </div>
+      <!-- HP -->
+      <div class="field-item" style="margin-top:6px">
+        <span class="field-label">Pontos de Vida</span>
+        <div class="hp-text">{{health_and_defense.current_hp}} / {{health_and_defense.max_hp}}</div>
+        <div class="hp-bar-container">
+          <div class="hp-bar-track"><div class="hp-bar-fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS DE COMBATE -->
+  <div class="combat-row" style="margin-bottom:8px">
+    <div class="combat-stat">
+      <div class="combat-label">CA</div>
+      <div class="combat-value">{{health_and_defense.armor_class}}</div>
+    </div>
+    <div class="combat-stat">
+      <div class="combat-label">Iniciativa</div>
+      <div class="combat-value">{{health_and_defense.initiative}}</div>
+    </div>
+    <div class="combat-stat">
+      <div class="combat-label">Movimento</div>
+      <div class="combat-value" style="font-size:13px">{{health_and_defense.movement}}</div>
+    </div>
+    <div class="combat-stat">
+      <div class="combat-label">Dados de Vida</div>
+      <div class="combat-value" style="font-size:13px">{{health_and_defense.hit_dice}}</div>
+    </div>
+    <div class="combat-stat">
+      <div class="combat-label">Nível</div>
+      <div class="combat-value">{{level}}</div>
+    </div>
+  </div>
+
+  <!-- GRID PRINCIPAL -->
+  <div class="main-grid">
+
+    <!-- ATRIBUTOS -->
+    <div class="attributes-col">
+      <div class="section-title">Atributos</div>
+      {{#each attributes}}
+      <div class="attr-box">
+        <div class="attr-name">{{@key}}</div>
+        <div class="attr-value">{{value}}</div>
+        <div class="attr-mod">{{modifier}}</div>
+        <div class="attr-save">TR: {{save}}</div>
+      </div>
+      {{/each}}
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="right-col">
+
+      <!-- PERÍCIAS -->
+      <div>
+        <div class="section-title">Perícias</div>
+        <div class="skills-grid">
+          {{#each proficiencies.skill_proficiencies}}
+          <div class="skill-row">
+            <div class="skill-dot {{#if expertise}}expertise{{else}}{{#if proficient}}proficient{{/if}}{{/if}}"></div>
+            <span class="skill-name">{{name}}</span>
+            <span class="skill-mod">{{modifier}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- ATAQUES -->
+      <div>
+        <div class="section-title">Ataques</div>
+        <table class="attacks-table">
+          <thead>
+            <tr>
+              <th>Arma / Ataque</th>
+              <th>Bônus</th>
+              <th>Dano e Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each attacks}}
+            <tr>
+              <td>{{name}}</td>
+              <td style="text-align:center;font-weight:700;color:var(--crimson)">{{attack_bonus}}</td>
+              <td>{{damage_and_type}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- HABILIDADES -->
+      <div>
+        <div class="section-title">Habilidades Especiais</div>
+        <div>
+          {{#each abilities_and_features.class_features}}
+          <div class="feature-item">
+            <span class="feature-name">✦ {{this}} </span>
+          </div>
+          {{/each}}
+          {{#each abilities_and_features.racial_traits}}
+          <div class="feature-item">
+            <span class="feature-name" style="color:var(--gold)">◈ Traço Racial: </span>
+            <span class="feature-desc">{{this}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MAGIAS -->
+  {{#if spellcasting.cantrips.length}}
+  <div style="margin-top:8px">
+    <div class="section-title">Conjuração</div>
+    <div class="spells-grid" style="margin-bottom:6px">
+      <div class="spell-info">
+        <div class="spell-label">Habilidade</div>
+        <div class="spell-value">{{spellcasting.spellcasting_ability}}</div>
+      </div>
+      <div class="spell-info">
+        <div class="spell-label">CD para Resistir</div>
+        <div class="spell-value">{{spellcasting.spell_save_dc}}</div>
+      </div>
+      <div class="spell-info">
+        <div class="spell-label">Bônus de Ataque</div>
+        <div class="spell-value">{{spellcasting.spell_attack_bonus}}</div>
+      </div>
+      <div class="spell-info">
+        <div class="spell-label">Espaços de Magia</div>
+        <div class="spell-value">{{spellcasting.spell_slots}}</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <span class="field-label">Truques</span>
+        <ul class="cantrip-list">
+          {{#each spellcasting.cantrips}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </div>
+      <div>
+        <span class="field-label">Magias Preparadas</span>
+        <ul class="spell-list">
+          {{#each spellcasting.spells_prepared}}<li>{{this}}</li>{{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  <!-- EQUIPAMENTOS -->
+  <div style="margin-top:8px">
+    <div class="section-title">Equipamento &amp; Tesouros</div>
+    <div class="two-col">
+      <div>
+        <span class="field-label" style="display:block;margin-bottom:2px">Armadura &amp; Itens Mágicos</span>
+        <ul class="equip-list">
+          {{#each equipment.armor}}<li>{{this}}</li>{{/each}}
+          {{#each equipment.magic_items}}<li style="color:var(--gold)">{{this}}</li>{{/each}}
+        </ul>
+      </div>
+      <div>
+        <span class="field-label" style="display:block;margin-bottom:2px">Equipamentos Gerais</span>
+        <ul class="equip-list" style="list-style:none">
+          {{#each equipment.general_equipment}}<li>{{this}}</li>{{/each}}
+        </ul>
+        <div style="margin-top:4px;font-size:8px;color:var(--ink-brown)">
+          💰 Mo: {{equipment.money.gold}} · Mp: {{equipment.money.platinum}} · Mg: {{equipment.money.silver}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONALIDADE -->
+  <div style="margin-top:8px">
+    <div class="section-title">Personalidade &amp; Vínculos</div>
+    <div class="personality-grid">
+      <div class="personality-box">
+        <span class="personality-label">Traço de Personalidade</span>
+        <p class="personality-text">"{{personality.trait}}"</p>
+      </div>
+      <div class="personality-box">
+        <span class="personality-label">Ideal</span>
+        <p class="personality-text">"{{personality.ideal}}"</p>
+      </div>
+      <div class="personality-box">
+        <span class="personality-label">Vínculo</span>
+        <p class="personality-text">"{{personality.bond}}"</p>
+      </div>
+      <div class="personality-box">
+        <span class="personality-label">Defeito</span>
+        <p class="personality-text">"{{personality.flaw}}"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORIA & APARÊNCIA -->
+  <div style="margin-top:8px">
+    <div class="two-col">
+      <div>
+        <div class="section-title">História</div>
+        <div class="narrative-block">{{backstory}}</div>
+      </div>
+      <div>
+        <div class="section-title">Aparência</div>
+        <div class="narrative-block">{{appearance_and_style.physical_appearance}}</div>
+        {{#if goals_and_motivations.main_goal}}
+        <div style="margin-top:6px">
+          <div class="section-title">Objetivos</div>
+          <div class="narrative-block">{{goals_and_motivations.main_goal}}</div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="sheet-footer">
+    <span class="footer-text">{{metadata.system}} · {{metadata.locale}} · v{{metadata.version}}</span>
+    <span class="footer-ornament">⚔ ✦ ⚔</span>
+    <span class="footer-text">{{metadata.template_title}}</span>
+  </footer>
+
+</article>
+</body>
+</html>

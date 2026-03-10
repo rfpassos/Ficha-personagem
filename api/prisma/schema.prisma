@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model ApiKey {
+  id          String    @id @default(uuid())
+  keyPrefix   String    @unique
+  keyHash     String    @unique
+  name        String
+  isActive    Boolean   @default(true)
+  rateLimit   Int       @default(10)
+  createdAt   DateTime  @default(now())
+  lastUsedAt  DateTime?
+  usageCount  Int       @default(0)
+  generations Generation[]
+
+  @@map("api_keys")
+}
+
+model Generation {
+  id             String           @id @default(uuid())
+  apiKeyId       String
+  apiKey         ApiKey           @relation(fields: [apiKeyId], references: [id])
+  characterName  String
+  characterRace  String
+  characterClass String
+  status         GenerationStatus @default(PENDING)
+  imageSource    ImageSource?
+  imageUrl       String?
+  pdfSizeBytes   Int?
+  errorMessage   String?
+  durationMs     Int?
+  createdAt      DateTime         @default(now())
+
+  @@map("generations")
+  @@index([apiKeyId])
+  @@index([createdAt(sort: Desc)])
+  @@index([status])
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+enum GenerationStatus {
+  PENDING
+  SUCCESS
+  ERROR
+}
+
+enum ImageSource {
+  GEMINI
+  FREEPIK
+  PLACEHOLDER
+}
