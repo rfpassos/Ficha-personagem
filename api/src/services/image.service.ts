@@ -1,7 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { googleImage } from './google-api.service';
 import { getFallbackImageBuffer } from '../lib/minio';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export type ImageSource = 'GEMINI' | 'FREEPIK' | 'PLACEHOLDER';
 
@@ -10,33 +8,24 @@ export interface ImageResult {
     source: ImageSource;
 }
 
-// ── 1. Gemini Image Generation ─────────────────────────────
-async function generateWithGemini(prompt: string): Promise<string> {
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp-image-generation' });
-
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: {
-            // @ts-expect-error - responseModalities is supported at runtime
-            responseModalities: ['IMAGE'],
-        },
-    });
-
-    const parts = result.response.candidates?.[0]?.content?.parts ?? [];
-    for (const part of parts) {
-        if (part.inlineData?.mimeType?.startsWith('image/')) {
-            return part.inlineData.data; // base64
+// ── 1. Gemini Image Generation (REST) ────────────────────────
+async function generateWithGeminiRest(prompt: string): Promise<string> {
+    console.log('[image.service] Gerando imagem com gemini-3.1-flash-image-preview (REST)...');
+    
+    return await googleImage('gemini-3.1-flash-image-preview', prompt, {
+        thinking_config: {
+            include_thoughts: true,
+            thinking_level: "MINIMAL"
         }
-    }
-    throw new Error('Gemini did not return an image');
+    });
 }
 
-// ── 2. Freepik Mystic API (async + polling) ────────────────
-async function generateWithFreepik(prompt: string): Promise<string> {
+// ── 2. Freepik API (Fallback) ──────────────────────────────
+async function generateWithFreepikInternal(prompt: string, aspectRatio: string): Promise<string> {
     const POLLING_INTERVAL = parseInt(process.env.FREEPIK_POLLING_INTERVAL_MS ?? '2000');
     const POLLING_TIMEOUT = parseInt(process.env.FREEPIK_POLLING_TIMEOUT_MS ?? '30000');
 
-    // Submete a tarefa
+    console.log('[image.service] Chamando Freepik Mystic...');
     const submitRes = await fetch('https://api.freepik.com/v1/ai/mystic', {
         method: 'POST',
         headers: {
@@ -46,7 +35,7 @@ async function generateWithFreepik(prompt: string): Promise<string> {
         body: JSON.stringify({
             prompt,
             resolution: '2k',
-            aspect_ratio: 'portrait_3_4',
+            aspect_ratio: aspectRatio === 'portrait_4_5' ? 'portrait_4_5' : 'portrait_3_4',
             model: 'realism',
             filter_nsfw: true,
             engine: 'automatic',
@@ -59,41 +48,26 @@ async function generateWithFreepik(prompt: string): Promise<string> {
 
     const { data } = await submitRes.json() as { data: { task_id: string; status: string } };
     const taskId = data.task_id;
-
-    // Polling até completar ou timeout
     const deadline = Date.now() + POLLING_TIMEOUT;
 
     while (Date.now() < deadline) {
         await new Promise(r => setTimeout(r, POLLING_INTERVAL));
-
         const statusRes = await fetch(`https://api.freepik.com/v1/ai/mystic/${taskId}`, {
             headers: { 'x-freepik-api-key': process.env.FREEPIK_API_KEY! },
         });
-
         if (!statusRes.ok) continue;
-
-        const statusData = await statusRes.json() as {
-            data: { status: string; generated: Array<{ url?: string; base64?: string }> }
-        };
-
+        const statusData = await statusRes.json() as any;
         if (statusData.data.status === 'COMPLETED') {
             const generated = statusData.data.generated?.[0];
             if (generated?.base64) return generated.base64;
-
-            // Freepik retorna URL — faz download e converte para base64
             if (generated?.url) {
                 const imgRes = await fetch(generated.url);
                 const buf = Buffer.from(await imgRes.arrayBuffer());
                 return buf.toString('base64');
             }
-            throw new Error('Freepik completed but no image found');
         }
-
-        if (statusData.data.status === 'FAILED') {
-            throw new Error('Freepik task failed');
-        }
+        if (statusData.data.status === 'FAILED') throw new Error('Freepik task failed');
     }
-
     throw new Error('Freepik polling timeout');
 }
 
@@ -104,23 +78,23 @@ async function getFallbackBase64(): Promise<string> {
 }
 
 // ── Cascata principal ──────────────────────────────────────
-export async function generateCharacterImage(prompt: string): Promise<ImageResult> {
-    // Tentativa 1: Gemini
+export async function generateImage(prompt: string, options: { aspect_ratio?: string } = {}): Promise<ImageResult> {
+    const aspectRatio = options.aspect_ratio || 'portrait_3_4';
+
+    // Tentativa 1: Gemini (REST 3.1)
     try {
-        console.log('[image.service] Trying Gemini...');
-        const base64 = await generateWithGemini(prompt);
+        const base64 = await generateWithGeminiRest(prompt);
         return { base64, source: 'GEMINI' };
-    } catch (err) {
-        console.warn('[image.service] Gemini failed:', (err as Error).message);
+    } catch (err: any) {
+        console.warn('[image.service] Gemini REST failed:', err.message);
     }
 
     // Tentativa 2: Freepik
     try {
-        console.log('[image.service] Trying Freepik...');
-        const base64 = await generateWithFreepik(prompt);
+        const base64 = await generateWithFreepikInternal(prompt, aspectRatio);
         return { base64, source: 'FREEPIK' };
-    } catch (err) {
-        console.warn('[image.service] Freepik failed:', (err as Error).message);
+    } catch (err: any) {
+        console.warn('[image.service] Freepik failed:', err.message);
     }
 
     // Fallback final: imagem de erro
@@ -129,3 +103,4 @@ export async function generateCharacterImage(prompt: string): Promise<ImageResul
     return { base64, source: 'PLACEHOLDER' };
 }
 
+export const generateCharacterImage = (prompt: string) => generateImage(prompt);
