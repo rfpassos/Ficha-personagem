@@ -13,7 +13,14 @@
     --bg-blur: 12px;
     --white: #f5f5f5;
     --text-dim: rgba(255, 255, 255, 0.7);
-    --border: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.15);
+
+    /* TIPOGRAFIA PADRONIZADA */
+    --font-h1: 44px;
+    --font-h2: 12px;
+    --font-h3: 10px;
+    --font-body: 11px;
+    --font-small: 9px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,14 +45,14 @@
   /* RESET PARA SEGUNDA PÁGINA (Sem imagem de fundo gigante) */
   .standard-page {
     width: 297mm;
-    height: 209.5mm;
+    height: 209.3mm; /* Ligeiramente menor para evitar bleed entre páginas no Puppeteer */
     background: #0a0a0a;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
+    display: block; /* Mudado de flex para block para melhor controle de flow */
+    padding: 30px 50px;
     position: relative;
     border: 1px solid var(--border);
     page-break-after: always;
+    overflow: hidden; /* Garante que o conteúdo não "suje" a próxima página */
   }
 
   .page-title {
@@ -118,9 +125,9 @@
   .header-info { margin-bottom: 15px; }
   .char-name {
     font-family: 'Playfair Display', serif;
-    font-size: 48px;
+    font-size: var(--font-h1);
     line-height: 1.1;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -175,20 +182,57 @@
   
   .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 11px;
+    font-size: var(--font-h2);
     letter-spacing: 2px;
     color: var(--gold);
-    border-top: 1px solid var(--border); /* Invertido para cima */
-    padding-top: 10px;
-    margin-top: 25px; /* Mais espaço antes do título */
-    margin-bottom: 15px;
+    border-top: 1px solid var(--border); 
+    padding-top: 8px;
+    margin-top: 15px; 
+    margin-bottom: 10px;
     text-transform: uppercase;
     display: block;
     width: 100%;
   }
 
+  .content-text {
+    font-size: var(--font-body);
+    line-height: 1.5;
+    color: var(--white);
+  }
+
+  /* SAVING THROWS & PASSIVES (PAG 1) */
+  .technical-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .saving-throws-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .save-item {
+    font-size: var(--font-small);
+    padding: 3px 6px;
+    background: rgba(255,255,255,0.03);
+    border-left: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .save-proficient { border-left-color: var(--gold); color: var(--gold-bright); font-weight: bold; }
+
   .content-block {
-    margin-bottom: 30px; /* Mais espaço entre blocos */
+    margin-bottom: 20px;
+    page-break-inside: avoid; /* Crucial para PDF */
+    break-inside: avoid;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    height: calc(100% - 60px); /* Ajuste para caber com o título da página */
   }
 
   .tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -281,70 +325,69 @@
         <div class="vital-value">{{hit_points.current}} <span style="font-size: 14px; opacity: 0.5">/ {{hit_points.max}}</span></div>
       </div>
       <div class="vital-card">
-        <div class="vital-label">Classe de Armadura</div>
-        <div class="vital-value">{{armor_class}}</div>
+        <div class="vital-label">Armadura & Iniciativa</div>
+        <div style="display: flex; justify-content: space-around; align-items: baseline;">
+          <div class="vital-value" style="font-size: 28px;">{{armor_class}} <span style="font-size: 9px; opacity: 0.5">CA</span></div>
+          <div class="vital-value" style="font-size: 28px;">{{#if (gt initiative 0)}}+{{/if}}{{initiative}} <span style="font-size: 9px; opacity: 0.5">INI</span></div>
+        </div>
       </div>
       <div class="vital-card">
-        <div class="vital-label">Iniciativa</div>
-        <div class="vital-value">{{#if (gt initiative 0)}}+{{/if}}{{initiative}}</div>
+        <div class="vital-label">Deslocamento (Vel)</div>
+        <div class="vital-value">{{speed}} <span style="font-size: 14px; opacity: 0.5">m</span></div>
       </div>
     </div>
 
     <!-- ATTRIBUTES -->
-    <div class="attr-list">
+    <div class="attr-list" style="margin-bottom: 15px;">
+      {{#each attributes}}
       <div class="attr-item">
-        <div class="attr-name">FOR</div>
-        <div class="attr-val">{{attributes.strength.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.strength.modifier 0)}}+{{/if}}{{attributes.strength.modifier}}</div>
+        <div class="attr-name">{{@key}}</div>
+        <div class="attr-val" style="font-size: 18px;">{{value}}</div>
+        <div class="attr-mod" style="font-size: 9px;">{{#if (gt modifier 0)}}+{{/if}}{{modifier}}</div>
       </div>
-      <div class="attr-item">
-        <div class="attr-name">DES</div>
-        <div class="attr-val">{{attributes.dexterity.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.dexterity.modifier 0)}}+{{/if}}{{attributes.dexterity.modifier}}</div>
-      </div>
-      <div class="attr-item">
-        <div class="attr-name">CON</div>
-        <div class="attr-val">{{attributes.constitution.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.constitution.modifier 0)}}+{{/if}}{{attributes.constitution.modifier}}</div>
-      </div>
-      <div class="attr-item">
-        <div class="attr-name">INT</div>
-        <div class="attr-val">{{attributes.intelligence.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.intelligence.modifier 0)}}+{{/if}}{{attributes.intelligence.modifier}}</div>
-      </div>
-      <div class="attr-item">
-        <div class="attr-name">SAB</div>
-        <div class="attr-val">{{attributes.wisdom.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.wisdom.modifier 0)}}+{{/if}}{{attributes.wisdom.modifier}}</div>
-      </div>
-      <div class="attr-item">
-        <div class="attr-name">CAR</div>
-        <div class="attr-val">{{attributes.charisma.value}}</div>
-        <div class="attr-mod">{{#if (gt attributes.charisma.modifier 0)}}+{{/if}}{{attributes.charisma.modifier}}</div>
-      </div>
+      {{/each}}
     </div>
 
-    <!-- HIGHLIGHTS & SKILLS -->
-    <div class="secondary-zone">
+    <!-- TECHNICAL SUB-GRID (SAVES & PASSIVES) -->
+    <div class="technical-grid">
       <div>
-        <h2 class="section-title">Perícias & Treinamento</h2>
-        <div class="skills-list">
-          {{#each proficiencies.skill_proficiencies}}
-            <div class="skill-row {{#if proficient}}skill-proficient{{/if}}">
-              <span>{{name}} ({{attribute}})</span>
+        <h2 class="section-title" style="margin-top: 0;">Resistências (Saving Throws)</h2>
+        <div class="saving-throws-list">
+          {{#each saving_throws}}
+            <div class="save-item {{#if proficient}}save-proficient{{/if}}">
+              <span>{{name}}</span>
               <span>{{modifier}}</span>
             </div>
           {{/each}}
         </div>
       </div>
+      <div>
+        <h2 class="section-title" style="margin-top: 0;">Sentidos Passivos</h2>
+        <div class="saving-throws-list" style="grid-template-columns: 1fr;">
+          <div class="save-item"><span>Percepção Passiva</span> <span>{{passive_perception}}</span></div>
+          <div class="save-item"><span>Investigação Passiva</span> <span>{{passive_investigation}}</span></div>
+          <div class="save-item"><span>Intuição Passiva</span> <span>{{passive_insight}}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
+    <div class="secondary-zone">
+      <div>
+        <h2 class="section-title">Talentos & Proficiências de Raça</h2>
+        <div class="tags-container">
+          {{#each feats}}<span class="tag">{{this}}</span>{{/each}}
+          {{#each features_and_traits.racial_traits}}<span class="tag" style="border-color: var(--gold);">{{this}}</span>{{/each}}
+        </div>
+      </div>
       
-      <div style="margin-top: 10px;">
-        <h2 class="section-title">Ações & Ataques Rápidos</h2>
+      <div>
+        <h2 class="section-title">Ações de Combate Rápido</h2>
         <div class="tags-container" style="gap: 15px;">
           {{#each attacks}}
-            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border-color: var(--gold);">
-              <div style="font-weight: bold; color: var(--gold-bright); font-size: 12px;">{{name}}</div>
-              <div style="font-size: 11px;">Bonus: {{attack_bonus}} | {{damage_and_type}}</div>
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">{{name}}</div>
+              <div style="font-size: 10px;">Bonus: {{attack_bonus}} | {{damage_and_type}}</div>
             </div>
           {{/each}}
         </div>
@@ -376,32 +419,47 @@
   </header>
 
   <div class="data-grid">
-    <div class="data-column">
+    <div class="data-column" style="max-height: 160mm; overflow: hidden;">
       <div class="content-block">
-        <h2 class="section-title">História do Personagem</h2>
-        <div class="content-text">{{backstory}}</div>
+        <h2 class="section-title" style="margin-top:0;">História do Personagem</h2>
+        <div class="content-text" style="text-align: justify; max-height: 140mm; overflow-y: auto;">{{backstory}}</div>
       </div>
     </div>
 
     <div class="data-column">
       <div class="content-block">
+        <h2 class="section-title" style="margin-top:0;">Perícias & Treinamento</h2>
+        <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 5px;">
+          {{#each proficiencies.skill_proficiencies}}
+            <div class="skill-row {{#if proficient}}skill-proficient{{/if}}" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>{{name}}</span>
+              <span>{{modifier}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2 class="section-title">Características Físicas</h2>
+        <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 5px;">
+          <div class="save-item"><span>Idade</span> <span>{{appearance_and_style.age}}</span></div>
+          <div class="save-item"><span>Altura</span> <span>{{appearance_and_style.height}}</span></div>
+          <div class="save-item"><span>Peso</span> <span>{{appearance_and_style.weight}}</span></div>
+          <div class="save-item"><span>Olhos</span> <span>{{appearance_and_style.eyes}}</span></div>
+          <div class="save-item"><span>Cabelo</span> <span>{{appearance_and_style.hair}}</span></div>
+          <div class="save-item"><span>Pele</span> <span>{{appearance_and_style.skin}}</span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
         <h2 class="section-title">Traços de Personalidade</h2>
         <div class="content-text">{{personality.trait}}</div>
       </div>
-      <div class="content-block">
-        <h2 class="section-title">Ideais e Vínculos</h2>
-        <div class="content-text"><strong>Ideal:</strong> {{personality.ideal}}</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Vínculo:</strong> {{personality.bond}}</div>
-      </div>
-      <div class="content-block">
-        <h2 class="section-title">Defeitos e Medos</h2>
-        <div class="content-text"><strong>Defeito:</strong> {{personality.flaw}}</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Medos:</strong> {{goals_and_motivations.fears}}</div>
-      </div>
+      
       <div class="content-block">
         <h2 class="section-title">Notas de Combate & Social</h2>
         <div class="content-text"><strong>Combate:</strong> {{game_notes.combat_behavior}}</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Social:</strong> {{game_notes.social_interactions}}</div>
+        <div class="content-text" style="margin-top: 5px;"><strong>Social:</strong> {{game_notes.social_interactions}}</div>
       </div>
     </div>
   </div>
@@ -468,28 +526,36 @@
 
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Arsenal & Vestimentas</h2>
+        <h2 class="section-title" style="margin-top:0;">Arsenal & Vestimentas</h2>
         <div class="content-text">
           <div style="margin-bottom: 15px;">
             <strong style="color: var(--gold);">Armadura/Vestes:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               {{#each equipment.armor}}<li>{{this}}</li>{{/each}}
             </ul>
           </div>
           
           <div style="margin-bottom: 15px;">
             <strong style="color: var(--gold);">Itens Mágicos:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               {{#each equipment.magic_items}}<li>{{this}}</li>{{/each}}
             </ul>
           </div>
 
           <div>
             <strong style="color: var(--gold-bright);">Equipamento de Aventura:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               {{#each equipment.general_equipment}}<li>{{this}}</li>{{/each}}
             </ul>
           </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2 class="section-title">Proficiências de Itens</h2>
+        <div class="content-text">
+          <div style="font-size: var(--font-small); color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">Armaduras / Armas / Ferramentas</div>
+          <div style="font-size: var(--font-body);">{{proficiencies.armor_proficiencies}} | {{proficiencies.weapon_proficiencies}}</div>
         </div>
       </div>
       <div class="content-block">
@@ -520,13 +586,13 @@
   <div class="data-grid" style="grid-template-columns: 1.2fr 1fr;">
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Descrições do Grimório</h2>
+        <h2 class="section-title" style="margin-top:0;">Descrições do Grimório</h2>
         {{#each spell_description}}
-          <div style="margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 15px;">
-            <div style="font-weight: bold; color: var(--gold-bright);">{{name}} (Nível {{level}})</div>
-            <div style="font-size: 10px; color: var(--gold); text-transform: uppercase;">{{school}} | {{casting_time}} | {{range}}</div>
-            <div class="content-text" style="margin-top: 5px; font-size: 11px;">{{description}}</div>
-            <div class="content-text" style="font-style: italic; margin-top: 5px; font-size: 10px;">"{{narrative}}"</div>
+          <div style="margin-bottom: 15px; border-left: 2px solid var(--gold); padding-left: 12px;">
+            <div style="font-weight: bold; color: var(--gold-bright); font-size: var(--font-body);">{{name}} (Nível {{level}})</div>
+            <div style="font-size: var(--font-small); color: var(--gold); text-transform: uppercase;">{{school}} | {{casting_time}} | {{range}}</div>
+            <div class="content-text" style="margin-top: 4px; font-size: var(--font-body);">{{description}}</div>
+            <div class="content-text" style="font-style: italic; margin-top: 4px; font-size: var(--font-small); color: var(--gold-bright);">"{{narrative}}"</div>
           </div>
         {{/each}}
       </div>
@@ -534,16 +600,16 @@
 
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Habilidades de Raça & Classe</h2>
+        <h2 class="section-title" style="margin-top:0;">Habilidades de Raça & Classe</h2>
         <div class="content-text">
-          <ul style="margin-left: 20px; list-style-type: square;">
+          <ul style="margin-left: 15px; list-style-type: square; font-size: var(--font-body);">
             {{#each features_and_traits.racial_traits}}
-              <li style="margin-bottom: 10px;">{{this}}</li>
+              <li style="margin-bottom: 5px;">{{this}}</li>
             {{/each}}
             {{#each features_and_traits.class_features}}
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">{{this}}</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">{{this}}</li>
             {{/each}}
-            <li style="margin-bottom: 10px;">{{abilities_and_features.background_features}}</li>
+            <li style="margin-bottom: 5px;">{{abilities_and_features.background_features}}</li>
           </ul>
         </div>
       </div>

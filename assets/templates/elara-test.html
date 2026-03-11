@@ -13,7 +13,14 @@
     --bg-blur: 12px;
     --white: #f5f5f5;
     --text-dim: rgba(255, 255, 255, 0.7);
-    --border: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.15);
+
+    /* TIPOGRAFIA PADRONIZADA */
+    --font-h1: 44px;
+    --font-h2: 12px;
+    --font-h3: 10px;
+    --font-body: 11px;
+    --font-small: 9px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,14 +45,14 @@
   /* RESET PARA SEGUNDA PÁGINA (Sem imagem de fundo gigante) */
   .standard-page {
     width: 297mm;
-    height: 209.5mm;
+    height: 209.3mm; /* Ligeiramente menor para evitar bleed entre páginas no Puppeteer */
     background: #0a0a0a;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
+    display: block; /* Mudado de flex para block para melhor controle de flow */
+    padding: 30px 50px;
     position: relative;
     border: 1px solid var(--border);
     page-break-after: always;
+    overflow: hidden; /* Garante que o conteúdo não "suje" a próxima página */
   }
 
   .page-title {
@@ -118,9 +125,9 @@
   .header-info { margin-bottom: 15px; }
   .char-name {
     font-family: 'Playfair Display', serif;
-    font-size: 48px;
+    font-size: var(--font-h1);
     line-height: 1.1;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -175,20 +182,57 @@
   
   .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 11px;
+    font-size: var(--font-h2);
     letter-spacing: 2px;
     color: var(--gold);
-    border-top: 1px solid var(--border); /* Invertido para cima */
-    padding-top: 10px;
-    margin-top: 25px; /* Mais espaço antes do título */
-    margin-bottom: 15px;
+    border-top: 1px solid var(--border); 
+    padding-top: 8px;
+    margin-top: 15px; 
+    margin-bottom: 10px;
     text-transform: uppercase;
     display: block;
     width: 100%;
   }
 
+  .content-text {
+    font-size: var(--font-body);
+    line-height: 1.5;
+    color: var(--white);
+  }
+
+  /* SAVING THROWS & PASSIVES (PAG 1) */
+  .technical-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .saving-throws-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .save-item {
+    font-size: var(--font-small);
+    padding: 3px 6px;
+    background: rgba(255,255,255,0.03);
+    border-left: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+  }
+  .save-proficient { border-left-color: var(--gold); color: var(--gold-bright); font-weight: bold; }
+
   .content-block {
-    margin-bottom: 30px; /* Mais espaço entre blocos */
+    margin-bottom: 20px;
+    page-break-inside: avoid; /* Crucial para PDF */
+    break-inside: avoid;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    height: calc(100% - 60px); /* Ajuste para caber com o título da página */
   }
 
   .tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -277,139 +321,89 @@
         <div class="vital-value">78 <span style="font-size: 14px; opacity: 0.5">/ 78</span></div>
       </div>
       <div class="vital-card">
-        <div class="vital-label">Classe de Armadura</div>
-        <div class="vital-value">13</div>
+        <div class="vital-label">Armadura & Iniciativa</div>
+        <div style="display: flex; justify-content: space-around; align-items: baseline;">
+          <div class="vital-value" style="font-size: 28px;">13 <span style="font-size: 9px; opacity: 0.5">CA</span></div>
+          <div class="vital-value" style="font-size: 28px;">+1 <span style="font-size: 9px; opacity: 0.5">INI</span></div>
+        </div>
       </div>
       <div class="vital-card">
-        <div class="vital-label">Iniciativa</div>
-        <div class="vital-value">+1</div>
+        <div class="vital-label">Deslocamento (Vel)</div>
+        <div class="vital-value"> <span style="font-size: 14px; opacity: 0.5">m</span></div>
       </div>
     </div>
 
     <!-- ATTRIBUTES -->
-    <div class="attr-list">
+    <div class="attr-list" style="margin-bottom: 15px;">
       <div class="attr-item">
-        <div class="attr-name">FOR</div>
-        <div class="attr-val">8</div>
-        <div class="attr-mod">-1</div>
+        <div class="attr-name">strength</div>
+        <div class="attr-val" style="font-size: 18px;">8</div>
+        <div class="attr-mod" style="font-size: 9px;">-1</div>
       </div>
       <div class="attr-item">
-        <div class="attr-name">DES</div>
-        <div class="attr-val">12</div>
-        <div class="attr-mod">+1</div>
+        <div class="attr-name">dexterity</div>
+        <div class="attr-val" style="font-size: 18px;">12</div>
+        <div class="attr-mod" style="font-size: 9px;">+1</div>
       </div>
       <div class="attr-item">
-        <div class="attr-name">CON</div>
-        <div class="attr-val">14</div>
-        <div class="attr-mod">+2</div>
+        <div class="attr-name">constitution</div>
+        <div class="attr-val" style="font-size: 18px;">14</div>
+        <div class="attr-mod" style="font-size: 9px;">+2</div>
       </div>
       <div class="attr-item">
-        <div class="attr-name">INT</div>
-        <div class="attr-val">18</div>
-        <div class="attr-mod">+4</div>
+        <div class="attr-name">intelligence</div>
+        <div class="attr-val" style="font-size: 18px;">18</div>
+        <div class="attr-mod" style="font-size: 9px;">+4</div>
       </div>
       <div class="attr-item">
-        <div class="attr-name">SAB</div>
-        <div class="attr-val">16</div>
-        <div class="attr-mod">+3</div>
+        <div class="attr-name">wisdom</div>
+        <div class="attr-val" style="font-size: 18px;">16</div>
+        <div class="attr-mod" style="font-size: 9px;">+3</div>
       </div>
       <div class="attr-item">
-        <div class="attr-name">CAR</div>
-        <div class="attr-val">10</div>
-        <div class="attr-mod">0</div>
+        <div class="attr-name">charisma</div>
+        <div class="attr-val" style="font-size: 18px;">10</div>
+        <div class="attr-mod" style="font-size: 9px;">0</div>
       </div>
     </div>
 
-    <!-- HIGHLIGHTS & SKILLS -->
+    <!-- TECHNICAL SUB-GRID (SAVES & PASSIVES) -->
+    <div class="technical-grid">
+      <div>
+        <h2 class="section-title" style="margin-top: 0;">Resistências (Saving Throws)</h2>
+        <div class="saving-throws-list">
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title" style="margin-top: 0;">Sentidos Passivos</h2>
+        <div class="saving-throws-list" style="grid-template-columns: 1fr;">
+          <div class="save-item"><span>Percepção Passiva</span> <span></span></div>
+          <div class="save-item"><span>Investigação Passiva</span> <span></span></div>
+          <div class="save-item"><span>Intuição Passiva</span> <span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
     <div class="secondary-zone">
       <div>
-        <h2 class="section-title">Perícias & Treinamento</h2>
-        <div class="skills-list">
-            <div class="skill-row ">
-              <span>Acrobacia (Des)</span>
-              <span>+1</span>
-            </div>
-            <div class="skill-row ">
-              <span>Adestrar Animais (Sab)</span>
-              <span>+3</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>Arcanismo (Int)</span>
-              <span>+9</span>
-            </div>
-            <div class="skill-row ">
-              <span>Atletismo (For)</span>
-              <span>-1</span>
-            </div>
-            <div class="skill-row ">
-              <span>Atuação (Car)</span>
-              <span>+0</span>
-            </div>
-            <div class="skill-row ">
-              <span>Enganação (Car)</span>
-              <span>+0</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>Furtividade (Des)</span>
-              <span>+6</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>História (Int)</span>
-              <span>+9</span>
-            </div>
-            <div class="skill-row ">
-              <span>Intimidação (Car)</span>
-              <span>+0</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>Intuição (Sab)</span>
-              <span>+8</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>Investigação (Int)</span>
-              <span>+9</span>
-            </div>
-            <div class="skill-row ">
-              <span>Medicina (Sab)</span>
-              <span>+3</span>
-            </div>
-            <div class="skill-row ">
-              <span>Natureza (Int)</span>
-              <span>+4</span>
-            </div>
-            <div class="skill-row skill-proficient">
-              <span>Percepção (Sab)</span>
-              <span>+8</span>
-            </div>
-            <div class="skill-row ">
-              <span>Persuasão (Car)</span>
-              <span>+0</span>
-            </div>
-            <div class="skill-row ">
-              <span>Prestidigitação (Des)</span>
-              <span>+1</span>
-            </div>
-            <div class="skill-row ">
-              <span>Religião (Int)</span>
-              <span>+4</span>
-            </div>
-            <div class="skill-row ">
-              <span>Sobrevivência (Sab)</span>
-              <span>+3</span>
-            </div>
+        <h2 class="section-title">Talentos & Proficiências de Raça</h2>
+        <div class="tags-container">
+          <span class="tag">Arcanismo</span><span class="tag">Furtividade</span><span class="tag">História</span><span class="tag">Intuição</span><span class="tag">Investigação</span><span class="tag">Percepção</span>
+          <span class="tag" style="border-color: var(--gold);">Visão no Escuro 18m</span><span class="tag" style="border-color: var(--gold);">Ancestral Feérico (vantagem contra encantamento, imunidade a sono mágico)</span><span class="tag" style="border-color: var(--gold);">Versatilidade em Perícia</span>
         </div>
       </div>
       
-      <div style="margin-top: 10px;">
-        <h2 class="section-title">Ações & Ataques Rápidos</h2>
+      <div>
+        <h2 class="section-title">Ações de Combate Rápido</h2>
         <div class="tags-container" style="gap: 15px;">
-            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border-color: var(--gold);">
-              <div style="font-weight: bold; color: var(--gold-bright); font-size: 12px;">Toque de Magia</div>
-              <div style="font-size: 11px;">Bonus: +9 | 1d10+4 Força</div>
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">Toque de Magia</div>
+              <div style="font-size: 10px;">Bonus: +9 | 1d10+4 Força</div>
             </div>
-            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border-color: var(--gold);">
-              <div style="font-weight: bold; color: var(--gold-bright); font-size: 12px;">Cajado de Quartzita</div>
-              <div style="font-size: 11px;">Bonus: +4 | 1d6-1 Contundente</div>
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">Cajado de Quartzita</div>
+              <div style="font-size: 10px;">Bonus: +4 | 1d6-1 Contundente</div>
             </div>
         </div>
       </div>
@@ -436,32 +430,113 @@
   </header>
 
   <div class="data-grid">
-    <div class="data-column">
+    <div class="data-column" style="max-height: 160mm; overflow: hidden;">
       <div class="content-block">
-        <h2 class="section-title">História do Personagem</h2>
-        <div class="content-text">Nascida da união entre um diplomata humano e uma maga elfa, Elara Menrva sempre viveu entre dois mundos. Com uma vida mais longa que a de seus pares humanos, mas sentindo o tempo passar de forma mais urgente que os elfos, ela encontrou seu propósito no estudo e na preservação do conhecimento arcano. Dedicou-se à Escola de Transmutação, fascinada pela ideia de que nada é verdadeiramente fixo. Após décadas como pesquisadora e sábia, aceitou a posição de professora na Grande Escola de Magia, que se tornou seu verdadeiro lar e legado. Hoje, a Professora Menrva é uma instituição, uma mestra severa mas justa, que vê em cada aluno um potencial a ser moldado e aprimorado.</div>
+        <h2 class="section-title" style="margin-top:0;">História do Personagem</h2>
+        <div class="content-text" style="text-align: justify; max-height: 140mm; overflow-y: auto;">Nascida da união entre um diplomata humano e uma maga elfa, Elara Menrva sempre viveu entre dois mundos. Com uma vida mais longa que a de seus pares humanos, mas sentindo o tempo passar de forma mais urgente que os elfos, ela encontrou seu propósito no estudo e na preservação do conhecimento arcano. Dedicou-se à Escola de Transmutação, fascinada pela ideia de que nada é verdadeiramente fixo. Após décadas como pesquisadora e sábia, aceitou a posição de professora na Grande Escola de Magia, que se tornou seu verdadeiro lar e legado. Hoje, a Professora Menrva é uma instituição, uma mestra severa mas justa, que vê em cada aluno um potencial a ser moldado e aprimorado.</div>
       </div>
     </div>
 
     <div class="data-column">
       <div class="content-block">
+        <h2 class="section-title" style="margin-top:0;">Perícias & Treinamento</h2>
+        <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 5px;">
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Acrobacia</span>
+              <span>+1</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Adestrar Animais</span>
+              <span>+3</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Arcanismo</span>
+              <span>+9</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Atletismo</span>
+              <span>-1</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Atuação</span>
+              <span>+0</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Enganação</span>
+              <span>+0</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Furtividade</span>
+              <span>+6</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>História</span>
+              <span>+9</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Intimidação</span>
+              <span>+0</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Intuição</span>
+              <span>+8</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Investigação</span>
+              <span>+9</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Medicina</span>
+              <span>+3</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Natureza</span>
+              <span>+4</span>
+            </div>
+            <div class="skill-row skill-proficient" style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Percepção</span>
+              <span>+8</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Persuasão</span>
+              <span>+0</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Prestidigitação</span>
+              <span>+1</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Religião</span>
+              <span>+4</span>
+            </div>
+            <div class="skill-row " style="font-size: var(--font-small); padding: 3px 6px;">
+              <span>Sobrevivência</span>
+              <span>+3</span>
+            </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2 class="section-title">Características Físicas</h2>
+        <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 5px;">
+          <div class="save-item"><span>Idade</span> <span></span></div>
+          <div class="save-item"><span>Altura</span> <span></span></div>
+          <div class="save-item"><span>Peso</span> <span></span></div>
+          <div class="save-item"><span>Olhos</span> <span></span></div>
+          <div class="save-item"><span>Cabelo</span> <span></span></div>
+          <div class="save-item"><span>Pele</span> <span></span></div>
+        </div>
+      </div>
+
+      <div class="content-block">
         <h2 class="section-title">Traços de Personalidade</h2>
         <div class="content-text">Sempre que um aluno faz algo indevido, eu dou um pigarro alto e seco para chamar sua atenção. É mais eficaz que qualquer grito.</div>
       </div>
-      <div class="content-block">
-        <h2 class="section-title">Ideais e Vínculos</h2>
-        <div class="content-text"><strong>Ideal:</strong> Potencial. Acredito que dentro de cada um, por mais desviado que esteja, existe a capacidade de fazer o bem. Meu papel é ajudá-los a encontrar esse caminho.</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Vínculo:</strong> Esta escola é meu lar e meu legado. Protegeria seus muros e seus alunos com minha própria vida.</div>
-      </div>
-      <div class="content-block">
-        <h2 class="section-title">Defeitos e Medos</h2>
-        <div class="content-text"><strong>Defeito:</strong> Eu vejo com desconfiança as novas formas de magia &#x27;selvagem&#x27;. A verdadeira maestria arcana vem da disciplina e do estudo das escolas clássicas, não de atalhos perigosos.</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Medos:</strong> Perder novamente pessoas sob seus cuidados. Ver a magia selvagem e indisciplinada destruir o que foi construído com tanto sacrifício.</div>
-      </div>
+      
       <div class="content-block">
         <h2 class="section-title">Notas de Combate & Social</h2>
         <div class="content-text"><strong>Combate:</strong> Prefere controle e transmutação. Usará Metamorfose e Velocidade para posicionar aliados, Desintegrar contra alvos prioritários. Forma Felina para espionagem, não combate.</div>
-        <div class="content-text" style="margin-top: 10px;"><strong>Social:</strong> Autoritária mas justa em sala de aula. Fora do ambiente acadêmico, é observadora e direta. Desconfia de estranhos, mas respeita demonstrações de conhecimento e disciplina.</div>
+        <div class="content-text" style="margin-top: 5px;"><strong>Social:</strong> Autoritária mas justa em sala de aula. Fora do ambiente acadêmico, é observadora e direta. Desconfia de estranhos, mas respeita demonstrações de conhecimento e disciplina.</div>
       </div>
     </div>
   </div>
@@ -534,28 +609,36 @@
 
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Arsenal & Vestimentas</h2>
+        <h2 class="section-title" style="margin-top:0;">Arsenal & Vestimentas</h2>
         <div class="content-text">
           <div style="margin-bottom: 15px;">
             <strong style="color: var(--gold);">Armadura/Vestes:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               <li>Vestes de Professora (verde-escuro, preto, cinza-chumbo)</li>
             </ul>
           </div>
           
           <div style="margin-bottom: 15px;">
             <strong style="color: var(--gold);">Itens Mágicos:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               <li>Varinha Longa de Teixo com Núcleo de Pena de Fênix</li>
             </ul>
           </div>
 
           <div>
             <strong style="color: var(--gold-bright);">Equipamento de Aventura:</strong>
-            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: 11px;">
+            <ul style="margin-left: 20px; list-style-type: square; margin-top: 5px; font-size: var(--font-body);">
               <li>Grimório encadernado em couro verde-escuro</li><li>Óculos de meia-lua</li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2 class="section-title">Proficiências de Itens</h2>
+        <div class="content-text">
+          <div style="font-size: var(--font-small); color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">Armaduras / Armas / Ferramentas</div>
+          <div style="font-size: var(--font-body);"> | </div>
         </div>
       </div>
       <div class="content-block">
@@ -586,36 +669,36 @@
   <div class="data-grid" style="grid-template-columns: 1.2fr 1fr;">
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Descrições do Grimório</h2>
-          <div style="margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 15px;">
-            <div style="font-weight: bold; color: var(--gold-bright);">Metamorfose (Nível 4)</div>
-            <div style="font-size: 10px; color: var(--gold); text-transform: uppercase;">Transmutação | 1 ação | 18m</div>
-            <div class="content-text" style="margin-top: 5px; font-size: 11px;">Transforma uma criatura que você pode ver dentro do alcance em uma nova forma. Uma criatura involuntária pode realizar um teste de resistência de Sabedoria para resistir.</div>
-            <div class="content-text" style="font-style: italic; margin-top: 5px; font-size: 10px;">"Nas mãos de Menrva, esta magia é uma aula sobre a natureza da identidade e do potencial. &#x27;Nada é fixo&#x27;, ela diz, enquanto a magia flui de sua varinha."</div>
+        <h2 class="section-title" style="margin-top:0;">Descrições do Grimório</h2>
+          <div style="margin-bottom: 15px; border-left: 2px solid var(--gold); padding-left: 12px;">
+            <div style="font-weight: bold; color: var(--gold-bright); font-size: var(--font-body);">Metamorfose (Nível 4)</div>
+            <div style="font-size: var(--font-small); color: var(--gold); text-transform: uppercase;">Transmutação | 1 ação | 18m</div>
+            <div class="content-text" style="margin-top: 4px; font-size: var(--font-body);">Transforma uma criatura que você pode ver dentro do alcance em uma nova forma. Uma criatura involuntária pode realizar um teste de resistência de Sabedoria para resistir.</div>
+            <div class="content-text" style="font-style: italic; margin-top: 4px; font-size: var(--font-small); color: var(--gold-bright);">"Nas mãos de Menrva, esta magia é uma aula sobre a natureza da identidade e do potencial. &#x27;Nada é fixo&#x27;, ela diz, enquanto a magia flui de sua varinha."</div>
           </div>
-          <div style="margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 15px;">
-            <div style="font-weight: bold; color: var(--gold-bright);">Forma Felina (Alterar-se – uso pessoal) (Nível 2)</div>
-            <div style="font-size: 10px; color: var(--gold); text-transform: uppercase;">Transmutação | 1 ação | Pessoal</div>
-            <div class="content-text" style="margin-top: 5px; font-size: 11px;">Transforma-se em uma gata cinza com listras pretas. Mantém inteligência, sabedoria, memórias e pode se comunicar telepaticamente.</div>
-            <div class="content-text" style="font-style: italic; margin-top: 5px; font-size: 10px;">"Sua forma mais íntima e reveladora. É no corpo felino que a professora severa desaparece e a observadora curiosa emerge."</div>
+          <div style="margin-bottom: 15px; border-left: 2px solid var(--gold); padding-left: 12px;">
+            <div style="font-weight: bold; color: var(--gold-bright); font-size: var(--font-body);">Forma Felina (Alterar-se – uso pessoal) (Nível 2)</div>
+            <div style="font-size: var(--font-small); color: var(--gold); text-transform: uppercase;">Transmutação | 1 ação | Pessoal</div>
+            <div class="content-text" style="margin-top: 4px; font-size: var(--font-body);">Transforma-se em uma gata cinza com listras pretas. Mantém inteligência, sabedoria, memórias e pode se comunicar telepaticamente.</div>
+            <div class="content-text" style="font-style: italic; margin-top: 4px; font-size: var(--font-small); color: var(--gold-bright);">"Sua forma mais íntima e reveladora. É no corpo felino que a professora severa desaparece e a observadora curiosa emerge."</div>
           </div>
       </div>
     </div>
 
     <div class="data-column">
       <div class="content-block">
-        <h2 class="section-title">Habilidades de Raça & Classe</h2>
+        <h2 class="section-title" style="margin-top:0;">Habilidades de Raça & Classe</h2>
         <div class="content-text">
-          <ul style="margin-left: 20px; list-style-type: square;">
-              <li style="margin-bottom: 10px;">Visão no Escuro 18m</li>
-              <li style="margin-bottom: 10px;">Ancestral Feérico (vantagem contra encantamento, imunidade a sono mágico)</li>
-              <li style="margin-bottom: 10px;">Versatilidade em Perícia</li>
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">Arquetipos de Magia: Transmutação</li>
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">Forma Felina (Metamorfose – gata cinza com listras pretas; mantém Int, Sab e memórias; comunicação telepática)</li>
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">Recuperação Arcana</li>
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">Alquimista de Pedras Transmutadas</li>
-              <li style="margin-bottom: 10px; color: var(--gold-bright);">Conjurar Magia (CD 17, +9 ataque)</li>
-            <li style="margin-bottom: 10px;">Pesquisadora (acesso a bibliotecas e sábios para obter informações)</li>
+          <ul style="margin-left: 15px; list-style-type: square; font-size: var(--font-body);">
+              <li style="margin-bottom: 5px;">Visão no Escuro 18m</li>
+              <li style="margin-bottom: 5px;">Ancestral Feérico (vantagem contra encantamento, imunidade a sono mágico)</li>
+              <li style="margin-bottom: 5px;">Versatilidade em Perícia</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">Arquetipos de Magia: Transmutação</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">Forma Felina (Metamorfose – gata cinza com listras pretas; mantém Int, Sab e memórias; comunicação telepática)</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">Recuperação Arcana</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">Alquimista de Pedras Transmutadas</li>
+              <li style="margin-bottom: 5px; color: var(--gold-bright);">Conjurar Magia (CD 17, +9 ataque)</li>
+            <li style="margin-bottom: 5px;">Pesquisadora (acesso a bibliotecas e sábios para obter informações)</li>
           </ul>
         </div>
       </div>
