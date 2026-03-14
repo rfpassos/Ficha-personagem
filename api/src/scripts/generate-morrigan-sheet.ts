@@ -187,11 +187,25 @@ async function main() {
         margin: { top: '0', right: '0', bottom: '0', left: '0' },
     });
 
-    const outputPath = path.resolve(__dirname, '../../../assets/sheets/Morrigan Aensland-DnD-landscape.pdf');
-    fs.writeFileSync(outputPath, pdfBuffer);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const outputPath = path.resolve(__dirname, `../../../assets/sheets/Morrigan Aensland-DnD-landscape.pdf`);
+    const outputPathTs = path.resolve(__dirname, `../../../assets/sheets/Morrigan Aensland-DnD-landscape_${timestamp}.pdf`);
 
-    console.log(`\n✨ Ficha landscape gerada com sucesso!`);
-    console.log(`   📄 PDF: assets/sheets/Morrigan Aensland-DnD-landscape.pdf (${Math.round(pdfBuffer.length / 1024)}KB)`);
+    // Tenta salvar no nome principal, caso bloqueado usa nome com timestamp
+    try {
+        fs.writeFileSync(outputPath, pdfBuffer);
+        console.log(`\n✨ Ficha landscape gerada com sucesso!`);
+        console.log(`   📄 PDF: assets/sheets/Morrigan Aensland-DnD-landscape.pdf (${Math.round(pdfBuffer.length / 1024)}KB)`);
+    } catch (err: any) {
+        if (err.code === 'EBUSY') {
+            fs.writeFileSync(outputPathTs, pdfBuffer);
+            console.log(`\n✨ Ficha landscape gerada (arquivo original bloqueado, salvo com timestamp)!`);
+            console.log(`   📄 PDF: assets/sheets/Morrigan Aensland-DnD-landscape_${timestamp}.pdf (${Math.round(pdfBuffer.length / 1024)}KB)`);
+            console.log(`   ⚠️  Feche o PDF anterior no visualizador para substituí-lo.`);
+        } else {
+            throw err;
+        }
+    }
 }
 
 main().catch(err => {

@@ -1,0 +1,22 @@
+﻿[dotenv@17.3.1] injecting env (15) from .env -- tip: ÔÜÖ´©Å  specify custom .env file path with { path: '/custom/path/.env' }
+--- ­ƒºÖÔÇìÔÖÇ´©Å Gerando Ficha Completa (Landscape Hero): Morrigan Aensland ---
+
+[1/3] Gerando imagem do personagem via Gemini...
+   Portrait existente encontrado, reutilizando...
+Ô£à Imagem: CACHE (1654KB)
+
+[2/3] Adaptando dados para o template landscape-hero...
+Ô£à HTML renderizado.
+   HTML salvo para revis├úo: assets/sheets/Morrigan Aensland-DnD-landscape.html
+
+[3/3] Gerando PDF (m├║ltiplas p├íginas A4 landscape)...
+node.exe : 
+No C:\Program Files\nodejs\npx.ps1:29 caractere:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ÔØî Falha: EBUSY: resource busy or locked, open 
+'C:\Projetos\Ficha-personagem\assets\sheets\Morrigan 
+Aensland-DnD-landscape.pdf'
