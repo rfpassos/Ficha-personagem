@@ -1,0 +1,336 @@
+{
+    "character_name": "Morrigan Aensland",
+    "race": "Tiefling (com Asas)",
+    "class": "Bruxo",
+    "level": "3",
+    "basic_info": {
+        "system": "Dungeons & Dragons",
+        "full_name": "Morrigan Aensland",
+        "archetype": "Patrono Arquifey",
+        "background": "Nobre",
+        "alignment": "Caótico e Neutro",
+        "inspiration": false
+    },
+    "health_and_defense": {
+        "current_hp": "22",
+        "max_hp": "22",
+        "hit_dice": "3d8",
+        "armor_class": "15",
+        "movement": "9m (Voo 9m)",
+        "initiative": "+2",
+        "death_saves": {
+            "successes": 0,
+            "failures": 0
+        },
+        "resistances_immunities": "Resistência a dano de fogo"
+    },
+    "attributes": {
+        "strength": {
+            "value": "8",
+            "modifier": "-1",
+            "save": "-1"
+        },
+        "dexterity": {
+            "value": "14",
+            "modifier": "+2",
+            "save": "+2"
+        },
+        "constitution": {
+            "value": "14",
+            "modifier": "+2",
+            "save": "+4"
+        },
+        "intelligence": {
+            "value": "10",
+            "modifier": "+0",
+            "save": "+2"
+        },
+        "wisdom": {
+            "value": "10",
+            "modifier": "+0",
+            "save": "+0"
+        },
+        "charisma": {
+            "value": "17",
+            "modifier": "+3",
+            "save": "+5"
+        }
+    },
+    "proficiencies": {
+        "proficiency_bonus": "+2",
+        "saving_throws": [
+            "Sabedoria",
+            "Carisma"
+        ],
+        "skill_proficiencies": [
+            {
+                "name": "Acrobacia",
+                "attribute": "Des",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Adestrar Animais",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Arcanismo",
+                "attribute": "Int",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Atletismo",
+                "attribute": "For",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "-1"
+            },
+            {
+                "name": "Atuação",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+3"
+            },
+            {
+                "name": "Enganação",
+                "attribute": "Car",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+5"
+            },
+            {
+                "name": "Furtividade",
+                "attribute": "Des",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "História",
+                "attribute": "Int",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Intimidação",
+                "attribute": "Car",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+3"
+            },
+            {
+                "name": "Intuição",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Investigação",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Medicina",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Natureza",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Percepção",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Persuasão",
+                "attribute": "Car",
+                "proficient": true,
+                "expertise": false,
+                "modifier": "+5"
+            },
+            {
+                "name": "Prestidigitação",
+                "attribute": "Des",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+2"
+            },
+            {
+                "name": "Religião",
+                "attribute": "Int",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            },
+            {
+                "name": "Sobrevivência",
+                "attribute": "Sab",
+                "proficient": false,
+                "expertise": false,
+                "modifier": "+0"
+            }
+        ],
+        "tools_and_languages": [
+            "Comum",
+            "Infernal",
+            "Élfico"
+        ]
+    },
+    "abilities_and_features": {
+        "racial_traits": [
+            "Visão no Escuro 18m",
+            "Herança Infernal (Resistência a fogo)",
+            "Asas de Tiefling (deslocamento de voo 9m)"
+        ],
+        "class_features": [
+            "Magia do Patrono (Arquifey)",
+            "Presença Feérica (CD 13): amedrontar ou encantar criaturas em cubo de 3m por 1 minuto (Descanso Curto)",
+            "Fuga Nebulosa: teleportar até 18m como reação ao sofrer dano (Descanso Curto)",
+            "Dádiva do Pacto – Corrente do Patrono: invocar familiar especial (Diabrete)",
+            "Invocação Mística – Rajada Agonizante: adiciona modificador de Carisma (+3) ao dano do Eldritch Blast",
+            "Invocação Mística – Armadura de Sombras: conjura Mage Armor em si à vontade (CA 13 + Des)",
+            "Espaços de Magia de Bruxo: 2 espaços de 2º círculo (recarregam em descanso curto)"
+        ],
+        "background_features": [
+            "Posição de Privilégio: acesso a alta sociedade, hospedagem em melhores estabelecimentos e respeito da nobreza"
+        ]
+    },
+    "attacks": [
+        {
+            "name": "Rajada Mística",
+            "attack_bonus": "+5",
+            "damage_and_type": "1d10+3 Energia (+ Agonizante)"
+        },
+        {
+            "name": "Adaga Ornamentada",
+            "attack_bonus": "+4",
+            "damage_and_type": "1d4+2 Perfurante"
+        }
+    ],
+    "spellcasting": {
+        "spellcasting_ability": "Carisma",
+        "spell_save_dc": "13",
+        "spell_attack_bonus": "+5",
+        "cantrips": [
+            "Rajada Mística (Eldritch Blast)",
+            "Ilusão Menor (Minor Illusion)"
+        ],
+        "spell_slots": "2 espaços de 2º círculo (recarregam em descanso curto)",
+        "spells_prepared": [
+            "Enfeitiçar Pessoa (Charm Person)",
+            "Imagem Espelhada (Mirror Image)",
+            "Lâmina Sombria (Shadow Blade)",
+            "Passo Nebuloso (Misty Step)"
+        ]
+    },
+    "equipment": {
+        "armor": [
+            "Nenhuma (Protegida pela Armadura de Sombras – CA 15)"
+        ],
+        "magic_items": [
+            "Foco Arcano (Joia preciosa)"
+        ],
+        "general_equipment": [
+            "Roupas Finas",
+            "Anel de Sinete da família Aensland",
+            "Adaga Ornamentada",
+            "Pergaminho de Linhagem Nobre",
+            "Bolsa de viagem de couro refinado"
+        ],
+        "money": {
+            "copper": "0",
+            "silver": "0",
+            "electrum": "0",
+            "gold": "25",
+            "platinum": "0"
+        }
+    },
+    "personality": {
+        "trait": "Sou confiante e despreocupada, sempre em busca da próxima emoção forte para aliviar meu tédio existencial.",
+        "ideal": "Liberdade. A vida é um banquete de sensações, e eu me recuso a ser acorrentada por regras ou responsabilidades.",
+        "bond": "Meu poder selado, que deu vida a Lilith, é uma parte de mim que não compreendo totalmente.",
+        "flaw": "Minha busca incessante por estímulo me torna impulsiva e alheia às consequências de minhas ações."
+    },
+    "backstory": "Morrigan Aensland, herdeira do trono do Makai, vive uma eternidade de tédio na corte. Para escapar da monotonia, ela viaja ao plano mortal em busca de estímulos, tratando batalhas como uma dança e adversários como parceiros em sua busca por emoção. Ela não luta por maldade, mas pelo prazer do momento, uma força da natureza entediada com seu próprio poder. Seu pacto com o Arquifey reflete sua natureza sedutora e caprichosa — um acordo feito por curiosidade, não por necessidade.",
+    "appearance_and_style": {
+        "image_alt": "Morrigan Aensland",
+        "image_file": "Morrigan Aensland.png",
+        "image_prompt": "A full-body digital painting of Morrigan Aensland, a voluptuous succubus noble, in a semi-realistic western fantasy art style. She has long, vibrant green hair and matching eyes that sparkle with mischief. Her skin is fair, and she has large, dark bat wings on her back and a smaller pair on her head. She wears a daring and revealing black and purple leather outfit. The background is a mystical, otherworldly landscape, hinting at her origins, with polished digital painting finish and naturalistic lighting to create a credible and immersive atmosphere.",
+        "physical_appearance": "Figura voluptuosa com porte altivo e postura teatral. Cabelo longo verde-vibrante, olhos verdes cintilantes de malícia. Pele clara e imaculada. Grandes asas de morcego negras nas costas e um par menor na cabeça.",
+        "clothing_style": "Traje ousado e revelador de couro negro e roxo, com detalhes dourados. Elegante e intimidante ao mesmo tempo.",
+        "unique_accessories": "Anel de sinete da família Aensland, joia arcana usada como foco mágico.",
+        "signature_expression": "Sorriso de canto de boca enquanto analisa a situação com tédio calculado."
+    },
+    "goals_and_motivations": {
+        "main_goal": "Encontrar sensações genuínas que quebrem o tédio de uma existência com poder demais e desafios de menos.",
+        "motivations": "Curiosidade insaciável, busca por prazer e a estranha compulsão de entender o poder que ela inadvertidamente liberou ao criar Lilith.",
+        "fears": "Solidão real. Não a ausência de companhia, mas a ausência de alguém que genuinamente a desafie.",
+        "secrets": "A criação de Lilith não foi acidental — foi um experimento mal calculado com fragmentos de sua própria alma, algo que ela nunca admite abertamente."
+    },
+    "game_notes": {
+        "combat_behavior": "Agressiva e teatral em combate. Prioriza Rajada Mística com Agonizante para dano sustentado, Lâmina Sombria para engajamento corpo a corpo, e Passo Nebuloso para reposicionamento. Usa Fuga Nebulosa como last resort.",
+        "social_interactions": "Extremamente carismática e manipuladora. Tende a tratar todos como peças em seu entretenimento pessoal. Pode ser surpreendentemente honesta quando algo genuinamente a interessa.",
+        "future_development": "Potencial arco de descoberta sobre a natureza do seu poder selado e o significado de Lilith como extensão de sua alma."
+    },
+    "spell_description": [
+        {
+            "name": "Rajada Mística (Eldritch Blast)",
+            "level": "Cantrip",
+            "school": "Evocação",
+            "casting_time": "1 ação",
+            "range": "36m",
+            "components": "V, S",
+            "duration": "Instantânea",
+            "description": "Um feixe de energia crepitante se lança em direção a uma criatura dentro do alcance. Faça um ataque de magia à distância contra o alvo. Em um acerto, o alvo sofre 1d10 de dano de energia.",
+            "narrative": "Nas mãos de Morrigan, a Rajada Mística parece mais um brinquedo do que uma arma — ela a dispara com a despreocupação de quem atira pétalas ao vento."
+        },
+        {
+            "name": "Lâmina Sombria (Shadow Blade)",
+            "level": "2",
+            "school": "Ilusão",
+            "casting_time": "1 ação bônus",
+            "range": "Pessoal",
+            "components": "V, S",
+            "duration": "Concentração, até 1 minuto",
+            "description": "Você tece ilusões sombrias para criar uma espada de sombra solidificada na mão. Causa 2d8 de dano psíquico e tem propriedade de arremesso.",
+            "narrative": "A lâmina que Morrigan invoca parece uma extensão de sua própria essência — sombria, elegante e mais letal do que aparenta."
+        },
+        {
+            "name": "Presença Feérica",
+            "level": "—",
+            "school": "Característica de Patrono",
+            "casting_time": "1 ação",
+            "range": "Si mesma (cubo de 3m)",
+            "components": "—",
+            "duration": "1 minuto (Concentração)",
+            "description": "Cada criatura em um cubo de 3m deve superar um teste de resistência de Sabedoria (CD 13) ou ficar encantada ou amedrontada até o fim do seu próximo turno.",
+            "narrative": "O aura de Morrigan não precisa de palavras. Quando ela decide ser notada, o ambiente muda, como se o próprio espaço cedesse à sua vontade."
+        }
+    ],
+    "metadata": {
+        "template_title": "Morrigan Aensland - Ficha de Personagem Tiefling | Bruxo (Arquifey) | Nível 3",
+        "system": "D&D 5e",
+        "locale": "pt-BR",
+        "version": "1.4.0"
+    }
+}

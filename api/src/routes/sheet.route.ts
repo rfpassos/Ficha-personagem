@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { characterSchema } from '../schemas/character.schema';
 import type { CharacterInput } from '../types/character.types';
 import { authMiddleware } from '../middleware/auth.middleware';
-import { generateImagePrompt } from '../services/prompt.service';
+import { generateCharacterPrompt } from '../services/prompt.service';
 import { generateCharacterImage } from '../services/image.service';
 import { renderSheetHtml } from '../services/template.service';
 import { generatePdfFromHtml } from '../services/pdf.service';
@@ -34,7 +34,7 @@ export async function sheetRoutes(app: FastifyInstance): Promise<void> {
 
             try {
                 // 1. Gera prompt descritivo
-                const imagePrompt = await generateImagePrompt(character);
+                const imagePrompt = await generateCharacterPrompt(character);
 
                 // 2. Gera imagem (cascata Gemini → Freepik → placeholder)
                 const { base64: imageBase64, source } = await generateCharacterImage(imagePrompt);

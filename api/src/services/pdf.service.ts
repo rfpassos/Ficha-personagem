@@ -1,6 +1,11 @@
 import puppeteer from 'puppeteer';
 
-export async function generatePdfFromHtml(html: string): Promise<Buffer> {
+export interface PdfOptions {
+    landscape?: boolean;
+    margin?: { top?: string; right?: string; bottom?: string; left?: string };
+}
+
+export async function generatePdfFromHtml(html: string, options: PdfOptions = {}): Promise<Buffer> {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
         headless: true,
@@ -16,8 +21,9 @@ export async function generatePdfFromHtml(html: string): Promise<Buffer> {
 
         const pdfBuffer = await page.pdf({
             format: 'A4',
+            landscape: options.landscape ?? false,
             printBackground: true,
-            margin: {
+            margin: options.margin ?? {
                 top: '10mm',
                 right: '10mm',
                 bottom: '10mm',

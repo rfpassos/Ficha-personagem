@@ -4,7 +4,7 @@ import { convertToRealismPrompt } from '../services/realism.service';
 import { generateImage } from '../services/image.service';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 async function generateSpellArts() {
     const tsvPath = path.resolve(__dirname, '../../../assets/templates/Lista e Descrições de Magias D&D - D&D.tsv');

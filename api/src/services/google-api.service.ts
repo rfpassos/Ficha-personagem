@@ -1,102 +1,78 @@
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 /**
- * Chamada genérica de texto via REST API
+ * Obtém a instância do SDK garantindo que a chave esteja atualizada (process.env)
  */
-export async function googleChat(model: string, prompt: string, config: any = {}): Promise<string> {
-    const url = `${BASE_URL}/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-    
-    console.log(`[google-api] Chamando REST: ${model}...`);
-    
-    const body = {
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-            ...config,
-            // Fallback para campos específicos se necessário
-            stopSequences: config.stopSequences || [],
-            temperature: config.temperature ?? 0.7,
-            maxOutputTokens: config.maxOutputTokens ?? 2048,
-        }
-    };
-
-    let lastError: any;
-    for (let i = 0; i < 3; i++) {
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-
-            if (response.status === 429 || response.status === 400) {
-                const errJson = await response.clone().json() as any;
-                console.warn(`[google-api] Alerta/Erro (${response.status}): ${JSON.stringify(errJson)}`);
-                if (errJson?.error?.status === 'RESOURCE_EXHAUSTED' || response.status === 429) {
-                    console.warn(`[google-api] Limite atingido. Tentando em ${5 * (i + 1)}s...`);
-                    await new Promise(r => setTimeout(r, 5000 * (i + 1)));
-                    continue;
-                }
-            }
-
-            if (!response.ok) {
-                const errData = await response.json() as any;
-                throw new Error(`Google API REST Error: ${response.status} - ${JSON.stringify(errData)}`);
-            }
-
-            const data = await response.json() as any;
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-        } catch (err: any) {
-            lastError = err;
-            if (i === 2) break;
-            await new Promise(r => setTimeout(r, 2000));
-        }
-    }
-    throw lastError;
+function getGenAI() {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) throw new Error('GEMINI_API_KEY não encontrada no process.env');
+    return new GoogleGenerativeAI(key);
 }
 
 /**
- * Chamada de imagem via REST API
+ * Chamada genérica de texto via SDK Oficial
+ */
+export async function googleChat(model: string, prompt: string, config: any = {}): Promise<string> {
+    console.log(`[google-api] Chamando SDK: ${model}...`);
+    
+    try {
+        const genAI = getGenAI();
+        const genModel = genAI.getGenerativeModel({ 
+            model,
+            systemInstruction: config.systemInstruction,
+            generationConfig: {
+                temperature: config.temperature ?? 0.7,
+                maxOutputTokens: config.maxOutputTokens ?? 2048,
+                topP: config.topP,
+                topK: config.topK,
+                stopSequences: config.stopSequences,
+            }
+        });
+
+        const result = await genModel.generateContent(prompt);
+        return result.response.text();
+    } catch (err: any) {
+        console.error(`[google-api] Erro no SDK:`, err.message || err);
+        throw err;
+    }
+}
+
+/**
+ * Chamada de imagem via SDK Oficial (Modelos 3.1 Flash Lite)
  */
 export async function googleImage(model: string, prompt: string, config: any = {}): Promise<string> {
-    const url = `${BASE_URL}/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-    
-    console.log(`[google-api] Chamando REST (Image): ${model}...`);
+    console.log(`[google-api] Chamando SDK (Image): ${model}...`);
 
-    const body = {
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-            ...config,
-            response_modalities: ["IMAGE", "TEXT"]
+    try {
+        const genAI = getGenAI();
+        // Extraímos campos que sabemos que o SDK v0.x pode rejeitar na raiz da config
+        const { aspect_ratio, ...safeConfig } = config;
+
+        const genModel = genAI.getGenerativeModel({ 
+            model,
+            generationConfig: {
+                // @ts-ignore
+                response_modalities: ["IMAGE", "TEXT"],
+                ...safeConfig
+            }
+        });
+
+        // Para o Gemini 3.1 Flash Image Preview, o aspect ratio costuma ser inferido ou 
+        // passado via parâmetros experimentais. Por enquanto, vamos confiar no prompt reforçado.
+        const finalPrompt = aspect_ratio ? `${prompt} [ASPECT RATIO ${aspect_ratio}]` : prompt;
+
+        const result = await genModel.generateContent(finalPrompt);
+        const parts = result.response.candidates?.[0]?.content?.parts || [];
+        
+        for (const part of parts) {
+            if (part.inlineData) {
+                return part.inlineData.data; // base64
+            }
         }
-    };
 
-    // Para modelos 3.1 Preview de imagem, o thinking_config pode ser passado aqui
-    if (config.thinking_config) {
-        // @ts-ignore
-        body.generationConfig.thinking_config = config.thinking_config;
+        throw new Error('Google SDK did not return an image part. Verifique se o prompt não foi bloqueado por filtros de segurança.');
+    } catch (err: any) {
+        console.error(`[google-api] Erro na imagem (SDK):`, err.message || err);
+        throw err;
     }
-
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-    });
-
-    if (!response.ok) {
-        const errData = await response.json() as any;
-        throw new Error(`Google API REST Error: ${response.status} - ${JSON.stringify(errData)}`);
-    }
-
-    const data = await response.json() as any;
-    const parts = data.candidates?.[0]?.content?.parts || [];
-    
-    for (const part of parts) {
-        if (part.inline_data || part.inlineData) {
-            const inline = part.inline_data || part.inlineData;
-            return inline.data; // base64
-        }
-    }
-
-    throw new Error('Google REST API did not return an image part. Verifique se o prompt não foi bloqueado por filtros de segurança.');
 }
