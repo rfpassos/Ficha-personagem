@@ -2,68 +2,110 @@
 
 ## 🛡️ Autenticação
 
-Todas as requisições públicas (exceto `/health`) exigem o header:
-- `X-API-Key`: Sua chave de API gerada no Admin ou CLI.
+Todas as requisições públicas (exceto `/health`) exigem autenticação via:
+- **Header:** `x-api-key: SUA_CHAVE`
+- **Query Param:** `?x-api-key=SUA_CHAVE` (Ideal para links de download direto no navegador)
 
 Requisições administrativas exigem o header:
-- `X-Admin-Secret`: Segredo global definido no `.env`.
+- `x-admin-secret`: Segredo global definido no `.env`.
 
 ---
 
-## 🎲 Endpoints Públicos
+## 🎲 Endpoints de Geração (Versão 1 - Assíncrona)
 
-### 1. Geração de Ficha
-`POST /api/generate-sheet`
+O processo de geração é demorado (IA + Imagem + PDF), por isso a API utiliza um modelo de **Jobs**.
 
-**Payload (JSON):**
+### 1. Iniciar Geração de Ficha
+`POST /api/v1/sheets`
+
+**Payload:**
 ```json
 {
-  "nome": "Aragorn",
-  "raca": "Humano",
-  "classe": "Ranger",
-  "nivel": 5,
-  "atributos": {
-    "forca": 16,
-    "destreza": 14,
-    "constituicao": 15,
-    "inteligencia": 10,
-    "sabedoria": 14,
-    "carisma": 12
-  },
-  "aparencia": "Cabelos longos, capa verde, olhar determinado.",
-  "historia": "Herdeiro do trono de Gondor..."
+  "contentType": "markdown", // "json" ou "markdown"
+  "content": "# Nome: Aragorn\n...", // Texto bruto ou JSON da ficha
+  "options": {
+    "refreshImage": false
+  }
 }
 ```
 
 **Resposta:**
-- `200 OK`: Buffer binário do arquivo PDF (`Content-Type: application/pdf`).
-- `401 Unauthorized`: Chave de API inválida ou ausente.
-- `429 Too Many Requests`: Limite de taxa excedido.
-- `500 Internal Error`: Falha no pipeline (detalhes no JSON de erro).
+- `202 Accepted`: Job iniciado.
+```json
+{
+  "jobId": "uuid-aqui",
+  "status": "PENDING",
+  "links": { 
+    "status": "/api/v1/sheets/uuid-aqui",
+    "download": "/api/v1/sheets/uuid-aqui/download"
+  }
+}
+```
+
+---
+
+### 2. Consultar Status/Polling
+`GET /api/v1/sheets/:id`
+
+**Resposta (Concluído):**
+```json
+{
+  "jobId": "uuid",
+  "status": "SUCCESS",
+  "character": "Aragorn",
+  "downloadUrl": "/api/v1/sheets/uuid/download",
+  "createdAt": "..."
+}
+```
+
+---
+
+### 3. Download Seguro (Proxy)
+`GET /api/v1/sheets/:id/download`
+
+Este endpoint faz o streaming do arquivo PDF diretamente do armazenamento seguro.
+
+**Exemplo de uso via Link:**
+`http://localhost:3000/api/v1/sheets/ID/download?x-api-key=SUA_CHAVE`
+
+**Resposta (Erro):**
+```json
+{
+  "jobId": "uuid",
+  "status": "ERROR",
+  "error": "Mensagem amigável de erro aqui."
+}
+```
 
 ---
 
 ## 🛠️ Endpoints Administrativos (Prefix: `/admin`)
 
-### 1. Listar API Keys
-`GET /admin/api-keys`
-Retorna metadados das chaves (exceto o hash/segredo).
+### 1. Expurgo de Arquivos (Cleanup)
+`DELETE /admin/purge?emergency=false`
 
-### 2. Criar API Key
-`POST /admin/api-keys`
-**Body:** `{ "name": "Prod App", "rateLimit": 50 }`
-**Importante:** A chave em plain-text é exibida apenas uma vez na resposta.
+Remove arquivos antigos do MinIO e limpa logs de erro na DB.
+- `emergency=false` (Padrão): Remove arquivos com mais de 5 dias.
+- `emergency=true`: Remove tudo com mais de 24 horas (excedente).
 
-### 3. Listar Gerações (Logs)
+**Resposta:**
+```json
+{
+  "message": "Expurgo concluído",
+  "deletedFiles": 150,
+  "deletedDbRecords": 45,
+  "policy": "5 dias"
+}
+```
+
+### 2. Listar Gerações (Monitor)
 `GET /admin/generations?page=1&status=SUCCESS`
-Retorna histórico de fichas geradas com métricas de tempo e links de imagem.
 
-### 4. Gerenciar Settings
-- `GET /admin/settings`: Lista todas as configs (`settings` table).
-- `PATCH /admin/settings`: Atualiza em massa (Body: `{ "key": "value" }`).
+### 3. API Keys e Settings
+Consulte os endpoints `/admin/api-keys` e `/admin/settings` para gerenciamento de chaves e variáveis do sistema.
 
 ---
 
-## 💓 Monitoramento
+## 💓 Health Check
 `GET /health`
-Resposta: `{"status": "ok", "timestamp": "...", "version": "1.0.0"}`
+Resumo do estado do sistema.

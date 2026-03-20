@@ -134,6 +134,16 @@ When user's prompt is NOT in English:
 - Skills: `.agent/skills/` (Project)
 - Runtime Scripts: `.agent/skills/<skill>/scripts/`
 
+### 🚀 Optimization & Token Saving
+
+> 🔴 **MANDATORY:** Always consult `ARCHITECTURE.md` BEFORE planning or using any Skill, Agent, or Workflow.
+
+**Goal:** Reduce token consumption and ensure the most accurate module is selected for the task.
+
+1. Check the System Map in `ARCHITECTURE.md` to identify the correct specialist.
+2. Verify if a Skill already exists for the domain before suggesting a new one.
+3. Use the defined Workflows for standardized procedures.
+
 ### 🧠 Read → Understand → Apply
 
 ```

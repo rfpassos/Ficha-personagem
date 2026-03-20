@@ -8,13 +8,15 @@ Registro de funcionalidades por prioridade e status de desenvolvimento.
 - [x] Integração MinIO (Storage)
 - [x] Service de Imagem (Cascata Gemini/Freepik)
 - [x] Service de PDF (Puppeteer)
-- [x] Autenticação via API Key
+- [x] Autenticação via API Key (Header & Query String)
 - [x] CLI de geração de chaves
+- [x] **Segurança:** Proxy de Download Seguro (Oculta MinIO)
+- [x] **Persistência:** Registro de `pdfPath` na base de dados
 
 ## 🎨 Sprint 2: Visual & Templates (EM ANDAMENTO)
+- [x] Correção de Renderização de Atributos/Layout
 - [ ] Design visual do PDF (estilo grimório/pergaminho)
 - [ ] Implementação de `sheet.hbs` (HTML/CSS)
-- [ ] Validação de fontes do Google Fonts
 - [ ] Imagem de fallback customizada (`image-error.png`)
 
 ## 🖥️ Sprint 3: Painel Admin (Next.js 16)
@@ -29,4 +31,4 @@ Registro de funcionalidades por prioridade e status de desenvolvimento.
 - [ ] CI/CD via GitHub Actions
 
 ---
-**Status Atual**: Backend core pronto para receber o template visual.
+**Status Atual**: Core seguro e persistência de arquivos validada. Iniciando refinamento visual dos templates.

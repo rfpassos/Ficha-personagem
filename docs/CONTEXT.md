@@ -29,4 +29,5 @@ O sistema recebe um JSON com dados de personagem (Nome, Raça, Classe, Nível, A
 
 -   **Rate Limiting**: Aplicado via `@fastify/rate-limit` por IP/Key.
 -   **Hashes**: API Keys nunca são salvas em texto puro (SHA-256).
+-   **Download Proxy**: Proteção contra vazamento de credenciais administrativas. Os arquivos são servidos via streaming autenticado por Header ou Query String (`x-api-key`).
 -   **Admin**: Rotas `/admin/*` exigem segredo forte definido em variável de ambiente.

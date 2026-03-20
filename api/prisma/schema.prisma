@@ -30,12 +30,13 @@ model Generation {
   apiKeyId       String
   apiKey         ApiKey           @relation(fields: [apiKeyId], references: [id])
   characterName  String
-  characterRace  String
-  characterClass String
+  characterRace  String?
+  characterClass String?
   status         GenerationStatus @default(PENDING)
   imageSource    ImageSource?
   imageUrl       String?
   pdfSizeBytes   Int?
+  pdfPath        String?
   errorMessage   String?
   durationMs     Int?
   createdAt      DateTime         @default(now())

@@ -16,8 +16,8 @@ export async function convertToRealismPrompt(basePrompt: string): Promise<string
 
         const systemInstruction = "Você é um especialista em engenharia de prompt para IA de imagem fotorrealista. Sua tarefa é converter o PROMPT BASE em um prompt técnico e altamente detalhado para geradores de imagem (como FLUX ou Gemini). Retorne APENAS o prompt convertido em inglês, sem explicações, saudações ou comentários de qualquer tipo.";
         
-        console.log('[realism.service] Chamando Gemini (3.1 Lite) para conversão de realismo...');
-        const converted = await googleChat('gemini-flash-latest', metaPrompt, { 
+        console.log('[realism.service] Chamando Gemini 3.1 Flash Lite para conversão de realismo...');
+        const converted = await googleChat('gemini-3.1-flash-lite-preview', metaPrompt, { 
             systemInstruction,
             temperature: 0.9,
             maxOutputTokens: 600

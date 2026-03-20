@@ -6,22 +6,24 @@ export async function authMiddleware(
     request: FastifyRequest,
     reply: FastifyReply
 ): Promise<void> {
-    const apiKey = request.headers['x-api-key'] as string | undefined;
+    const apiKey = (request.headers['x-api-key'] || (request.query as any)['x-api-key']) as string | undefined;
 
     if (!apiKey || typeof apiKey !== 'string') {
-        reply.status(401).send({ error: 'Missing X-API-Key header' });
+        reply.status(401).send({ error: 'Missing X-API-Key (header or query param)' });
         return;
     }
 
-    // Extrai prefixo (primeiros 12 chars) para lookup rápido
     const prefix = apiKey.substring(0, 12);
     const keyHash = createHash('sha256').update(apiKey).digest('hex');
+
+    console.log(`[DEBUG_AUTH] Prefix: ${prefix}, Hash: ${keyHash}`);
 
     const record = await prisma.apiKey.findFirst({
         where: { keyPrefix: prefix, keyHash, isActive: true },
     });
 
     if (!record) {
+        console.log(`[DEBUG_AUTH] No record found for Prefix: ${prefix}`);
         reply.status(401).send({ error: 'Invalid or inactive API Key' });
         return;
     }

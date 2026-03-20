@@ -3,6 +3,7 @@ import { adminAuthMiddleware } from '../middleware/auth.middleware';
 import { prisma } from '../lib/db';
 import { createHash, randomBytes } from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
+import { StorageService } from '../services/storage.service';
 
 export async function adminRoutes(app: FastifyInstance): Promise<void> {
     // Aplica auth de admin em todas as rotas deste plugin
@@ -123,6 +124,41 @@ export async function adminRoutes(app: FastifyInstance): Promise<void> {
                 )
             );
             return { message: 'Settings updated', updated: updates.length };
+        }
+    );
+    // ── DELETE /admin/purge ────────────────────────────────
+    app.delete<{ Querystring: { emergency?: string } }>(
+        '/purge',
+        async (request) => {
+            const isEmergency = request.query.emergency === 'true';
+            const days = isEmergency ? 1 : 5;
+
+            request.log.info({ days, isEmergency }, 'Iniciando expurgo de arquivos');
+            
+            try {
+                const deletedCount = await StorageService.deleteOldFiles(days);
+                
+                // Também podemos limpar logs de erro muito antigos na DB
+                const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() - (isEmergency ? 7 : 30));
+                
+                const { count: dbDeleted } = await prisma.generation.deleteMany({
+                    where: {
+                        createdAt: { lt: expirationDate },
+                        status: { in: ['ERROR', 'SUCCESS'] }
+                    }
+                });
+
+                return { 
+                    message: 'Expurgo concluído', 
+                    deletedFiles: deletedCount,
+                    deletedDbRecords: dbDeleted,
+                    policy: `${days} dias`
+                };
+            } catch (err) {
+                request.log.error(err, 'Erro durante expurgo');
+                throw err;
+            }
         }
     );
 }

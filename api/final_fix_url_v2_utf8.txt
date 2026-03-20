@@ -1,0 +1,1 @@
+﻿https://n8n-minio.vazxzm.easypanel.host/ficha.loopstudio/rpgsheet/pdfs/sheet_7bf58f75-2e78-4810-a15c-19324c48f914.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin_agencia%2F20260316%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260316T024825Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=337cf3fdfc8b95ec4093626139b1ad812fe0d758c9315fe87fdcf8898609f7b1

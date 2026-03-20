@@ -7,8 +7,9 @@ Sistema automatizado para geração de fichas de personagens de RPG (estilo D&D 
 O projeto é dividido em dois módulos principais:
 
 - **`api/`**: Backend construído com **Fastify (Node.js)** e **TypeScript**.
-  - Geração de prompts via Gemini Flash.
-  - Geração de imagens com cascata (Gemini → Freepik).
+  - Geração de prompts via Gemini Flash 1.5.
+  - Geração de imagens com cascata (Gemini → Freepik) e meta-prompts de realismo épico.
+  - Suporte a templates **Landscape Hero** de 4 páginas com mapeamento rico.
   - Conversão de HTML para PDF via Puppeteer.
 - **`admin/`**: Painel administrativo customizado baseado em **Next.js 16**.
 
@@ -62,11 +63,12 @@ npm run generate-key -- --name "Minha Chave de Teste"
 npm run dev
 ```
 
-## 🔒 Segurança
+## 🔒 Segurança e Download
 
-O acesso à API é protegido por **X-API-Key**. 
-As chaves são armazenadas com hash **SHA-256** e lookup rápido por prefixo de 12 caracteres.
-Operações administrativas exigem o header **X-Admin-Secret**.
+- **X-API-Key**: Proteção obrigatória para todos os endpoints. Suporta autenticação via **Header** ou **Query String** (`?x-api-key=...`), facilitando o acesso direto via navegador para downloads.
+- **Hashes SHA-256**: Chaves de API nunca são armazenadas em texto puro, utilizando lookup rápido por prefixo.
+- **Download Proxy**: Os PDFs são servidos via streaming autenticado direto do backend, ocultando totalmente as credenciais e infraestrutura do MinIO (S3).
+- **Admin**: Operações administrativas exigem o header **X-Admin-Secret**.
 
 ## 📖 Documentação Detalhada
 

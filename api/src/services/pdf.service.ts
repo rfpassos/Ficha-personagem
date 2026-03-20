@@ -54,7 +54,7 @@ export async function generatePdfFromHtml(html: string, options: PdfOptions = {}
         await page.addStyleTag({ content: PDF_FIX_CSS });
 
         // Aguarda fontes e imagens carregarem completamente
-        await page.evaluate(() => document.fonts.ready);
+        await page.evaluate(`document.fonts.ready`);
         await new Promise(r => setTimeout(r, 1000));
 
         const pdfBuffer = await page.pdf({
