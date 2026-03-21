@@ -7,7 +7,7 @@ Siga RIGOROSAMENTE o esquema e nomes de campos em INGLÊS conforme o exemplo "ES
 
 1. Extraia o máximo de detalhes possível do texto original.
 2. Calcule modificadores (Ex: For 18 = +4) e perícias se não estiverem explícitos.
-3. Se não houver magias, o campo spell_description deve ser um array vazio [].
+3. No campo spell_description, extraia APENAS o nome (name) de cada magia em português (BR), omitindo regras, níveis ou descrições. Se não houver magias, o campo spell_description deve ser um array vazio [].
 4. Os valores de atributos devem ser apenas o NÚMERO (Ex: 15).
 5. Traduza os valores (Raça, Classe, Perícias) para Português, mas mantenha as CHAVES do JSON em Inglês conforme acima.
 
@@ -63,6 +63,6 @@ Siga RIGOROSAMENTE o esquema e nomes de campos em INGLÊS conforme o exemplo "ES
   },
   "goals_and_motivations": { "main_goal": "string", "motivations": "string" },
   "game_notes": { "combat_behavior": "string", "social_interactions": "string" },
-  "spell_description": [ { "name": "string", "level": "string", "school": "string", "casting_time": "string", "range": "string", "description": "string", "narrative": "string" } ],
+  "spell_description": [ { "name": "string" } ],
   "metadata": { "template_title": "string", "version": "1.4.0" }
 }

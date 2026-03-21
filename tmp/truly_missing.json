@@ -1,0 +1,702 @@
+[
+  {
+    "SpellName": "Badalar Fúnebre",
+    "Level": 0,
+    "School": "Necromancia",
+    "VisualDescription": "O som de um sino fúnebre que causa dano a criaturas feridas.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Badalar Fúnebre' que é do tipo 'Necromancia', do nível 0, com o efeito 'O som de um sino fúnebre que causa dano a criaturas feridas.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Elementalismo",
+    "Level": 0,
+    "School": "Transmutação",
+    "VisualDescription": "Controle direto sobre os elementos, criando efeitos de terra, ar, fogo ou água.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Elementalismo' que é do tipo 'Transmutação', do nível 0, com o efeito 'Controle direto sobre os elementos, criando efeitos de terra, ar, fogo ou água.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Explosão Elemental",
+    "Level": 0,
+    "School": "Evocação",
+    "VisualDescription": "Uma liberação súbita de energia elemental.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Explosão Elemental' que é do tipo 'Evocação', do nível 0, com o efeito 'Uma liberação súbita de energia elemental.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Fagulha Estelar",
+    "Level": 0,
+    "School": "Evocação",
+    "VisualDescription": "Um brilho celestial ou faísca estelar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Fagulha Estelar' que é do tipo 'Evocação', do nível 0, com o efeito 'Um brilho celestial ou faísca estelar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Golpe Certeiro",
+    "Level": 0,
+    "School": "Adivinhação",
+    "VisualDescription": "Um breve vislumbre do futuro que garante precisão no próximo ataque.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Golpe Certeiro' que é do tipo 'Adivinhação', do nível 0, com o efeito 'Um breve vislumbre do futuro que garante precisão no próximo ataque.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Luzes Dançantes",
+    "Level": 0,
+    "School": "Ilusão",
+    "VisualDescription": "Cria até quatro luzes flutuantes (como tochas ou esferas) que se movem pelo ar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Luzes Dançantes' que é do tipo 'Ilusão', do nível 0, com o efeito 'Cria até quatro luzes flutuantes (como tochas ou esferas) que se movem pelo ar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Palavra de Radiância",
+    "Level": 0,
+    "School": "Evocação",
+    "VisualDescription": "Uma explosão de luz sagrada que emana do conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Palavra de Radiância' que é do tipo 'Evocação', do nível 0, com o efeito 'Uma explosão de luz sagrada que emana do conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Prestidigitação Arcana",
+    "Level": 0,
+    "School": "Transmutação",
+    "VisualDescription": "Pequenos truques mágicos: faíscas, odores, limpeza ou aquecimento.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Prestidigitação Arcana' que é do tipo 'Transmutação', do nível 0, com o efeito 'Pequenos truques mágicos: faíscas, odores, limpeza ou aquecimento.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Talho Mental",
+    "Level": 0,
+    "School": "Encantamento",
+    "VisualDescription": "Uma punhalada de energia psíquica que desorienta o alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Talho Mental' que é do tipo 'Encantamento', do nível 0, com o efeito 'Uma punhalada de energia psíquica que desorienta o alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Toque Necrótico",
+    "Level": 0,
+    "School": "Necromancia",
+    "VisualDescription": "Uma mão esquelética fantasmagórica que impede a cura do alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Toque Necrótico' que é do tipo 'Necromancia', do nível 0, com o efeito 'Uma mão esquelética fantasmagórica que impede a cura do alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Trovão",
+    "Level": 0,
+    "School": "Evocação",
+    "VisualDescription": "Cria uma onda de som estrondoso audível à distância.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Trovão' que é do tipo 'Evocação', do nível 0, com o efeito 'Cria uma onda de som estrondoso audível à distância.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Zombaria Perversa",
+    "Level": 0,
+    "School": "Encantamento",
+    "VisualDescription": "Insultos imbuídos de magia que causam dor mental ao alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Zombaria Perversa' que é do tipo 'Encantamento', do nível 0, com o efeito 'Insultos imbuídos de magia que causam dor mental ao alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Danação (Hex)",
+    "Level": 1,
+    "School": "Encantamento",
+    "VisualDescription": "Uma maldição que causa dano necrótico extra ao alvo e o atrapalha em testes de atributo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Danação (Hex)' que é do tipo 'Encantamento', do nível 1, com o efeito 'Uma maldição que causa dano necrótico extra ao alvo e o atrapalha em testes de atributo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Destruição Cauterizante",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "O próximo ataque com arma incendeia o alvo, causando dano ígneo contínuo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Destruição Cauterizante' que é do tipo 'Evocação', do nível 1, com o efeito 'O próximo ataque com arma incendeia o alvo, causando dano ígneo contínuo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Destruição Divina",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "Um golpe marcial fortalecido com radiância divina.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Destruição Divina' que é do tipo 'Evocação', do nível 1, com o efeito 'Um golpe marcial fortalecido com radiância divina.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Destruição Estrondosa",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "Um golpe que emite um estrondo sônico, podendo derrubar o inimigo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Destruição Estrondosa' que é do tipo 'Evocação', do nível 1, com o efeito 'Um golpe que emite um estrondo sônico, podendo derrubar o inimigo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Detectar o Bem e o Mal",
+    "Level": 1,
+    "School": "Adivinhação",
+    "VisualDescription": "Revela se criaturas extraplanares (celestiais, ínferos, etc.) estão por perto.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Detectar o Bem e o Mal' que é do tipo 'Adivinhação', do nível 1, com o efeito 'Revela se criaturas extraplanares (celestiais, ínferos, etc.) estão por perto.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Faca de Gelo",
+    "Level": 1,
+    "School": "Invocação",
+    "VisualDescription": "Cria um estilhaço de gelo que explode em fragmentos ao atingir o alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Faca de Gelo' que é do tipo 'Invocação', do nível 1, com o efeito 'Cria um estilhaço de gelo que explode em fragmentos ao atingir o alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Favor Divino",
+    "Level": 1,
+    "School": "Transmutação",
+    "VisualDescription": "O conjurador irradia uma energia que faz suas armas causarem dano radiante extra.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Favor Divino' que é do tipo 'Transmutação', do nível 1, com o efeito 'O conjurador irradia uma energia que faz suas armas causarem dano radiante extra.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Gargalhada Nefasta de Tasha",
+    "Level": 1,
+    "School": "Encantamento",
+    "VisualDescription": "O alvo é tomado por uma crise de riso incontrolável e cai no chão.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Gargalhada Nefasta de Tasha' que é do tipo 'Encantamento', do nível 1, com o efeito 'O alvo é tomado por uma crise de riso incontrolável e cai no chão.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Marca do Predador",
+    "Level": 1,
+    "School": "Adivinhação",
+    "VisualDescription": "Marca magicamente uma presa, facilitando o rastreio e o dano causado a ela.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Marca do Predador' que é do tipo 'Adivinhação', do nível 1, com o efeito 'Marca magicamente uma presa, facilitando o rastreio e o dano causado a ela.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Orbe Cromático",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "Uma esfera de energia elementar (fogo, gelo, etc.) arremessada contra o alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Orbe Cromático' que é do tipo 'Evocação', do nível 1, com o efeito 'Uma esfera de energia elementar (fogo, gelo, etc.) arremessada contra o alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Proteção Contra o Bem e o Mal",
+    "Level": 1,
+    "School": "Abjuração",
+    "VisualDescription": "Protege contra tipos específicos de criaturas (aberrações, mortos-vivos, etc.).",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Proteção Contra o Bem e o Mal' que é do tipo 'Abjuração', do nível 1, com o efeito 'Protege contra tipos específicos de criaturas (aberrações, mortos-vivos, etc.).'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Purificar Alimentos e Bebidas",
+    "Level": 1,
+    "School": "Transmutação",
+    "VisualDescription": "Remove veneno e podridão de comidas e bebidas não mágicas.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Purificar Alimentos e Bebidas' que é do tipo 'Transmutação', do nível 1, com o efeito 'Remove veneno e podridão de comidas e bebidas não mágicas.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Raio Guia",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "Um feixe de luz radiante que atinge o alvo e facilita o próximo ataque contra ele.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Raio Guia' que é do tipo 'Evocação', do nível 1, com o efeito 'Um feixe de luz radiante que atinge o alvo e facilita o próximo ataque contra ele.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Raio Nauseante",
+    "Level": 1,
+    "School": "Necromancia",
+    "VisualDescription": "Um raio de energia tóxica que pode deixar o alvo envenenado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Raio Nauseante' que é do tipo 'Necromancia', do nível 1, com o efeito 'Um raio de energia tóxica que pode deixar o alvo envenenado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Repreensão Diabólica",
+    "Level": 1,
+    "School": "Evocação",
+    "VisualDescription": "Uma reação que envolve em chamas quem causou dano ao conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Repreensão Diabólica' que é do tipo 'Evocação', do nível 1, com o efeito 'Uma reação que envolve em chamas quem causou dano ao conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Retirada Acelerada",
+    "Level": 1,
+    "School": "Transmutação",
+    "VisualDescription": "Permite que o conjurador se mova com extrema rapidez como uma ação bônus.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Retirada Acelerada' que é do tipo 'Transmutação', do nível 1, com o efeito 'Permite que o conjurador se mova com extrema rapidez como uma ação bônus.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Vitalidade Vazia",
+    "Level": 1,
+    "School": "Necromancia",
+    "VisualDescription": "Concede pontos de vida temporários através de energia necrótica.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Vitalidade Vazia' que é do tipo 'Necromancia', do nível 1, com o efeito 'Concede pontos de vida temporários através de energia necrótica.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Aprimorar Atributo",
+    "Level": 2,
+    "School": "Transmutação",
+    "VisualDescription": "Concede bônus mágicos em atributos físicos ou mentais (como força de touro ou astúcia da raposa).",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Aprimorar Atributo' que é do tipo 'Transmutação', do nível 2, com o efeito 'Concede bônus mágicos em atributos físicos ou mentais (como força de touro ou astúcia da raposa).'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Auxílio",
+    "Level": 2,
+    "School": "Abjuração",
+    "VisualDescription": "Três aliados são imbuídos de vitalidade extra por várias horas.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Auxílio' que é do tipo 'Abjuração', do nível 2, com o efeito 'Três aliados são imbuídos de vitalidade extra por várias horas.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Destruição Radiante",
+    "Level": 2,
+    "School": "Transmutação",
+    "VisualDescription": "O próximo ataque com arma explode em luz divina ao atingir o inimigo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Destruição Radiante' que é do tipo 'Transmutação', do nível 2, com o efeito 'O próximo ataque com arma explode em luz divina ao atingir o inimigo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Espinho Mental",
+    "Level": 2,
+    "School": "Adivinhação",
+    "VisualDescription": "Um ataque psíquico que inflige dor e permite rastrear a mente do alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Espinho Mental' que é do tipo 'Adivinhação', do nível 2, com o efeito 'Um ataque psíquico que inflige dor e permite rastrear a mente do alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Força Espectral",
+    "Level": 2,
+    "School": "Ilusão",
+    "VisualDescription": "Cria uma ilusão tão realista na mente do alvo que ele acredita sofrer danos reais.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Força Espectral' que é do tipo 'Ilusão', do nível 2, com o efeito 'Cria uma ilusão tão realista na mente do alvo que ele acredita sofrer danos reais.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Fera",
+    "Level": 2,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito bestial para lutar ao lado do grupo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Fera' que é do tipo 'Invocação', do nível 2, com o efeito 'Conjura um espírito bestial para lutar ao lado do grupo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Oração de Cura",
+    "Level": 2,
+    "School": "Abjuração",
+    "VisualDescription": "Uma prece prolongada que restaura a vida de vários aliados próximos.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Oração de Cura' que é do tipo 'Abjuração', do nível 2, com o efeito 'Uma prece prolongada que restaura a vida de vários aliados próximos.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Paralisar Pessoa",
+    "Level": 2,
+    "School": "Encantamento",
+    "VisualDescription": "Vincula um humanoide com paralisia mágica.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Paralisar Pessoa' que é do tipo 'Encantamento', do nível 2, com o efeito 'Vincula um humanoide com paralisia mágica.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Sentido Feral",
+    "Level": 2,
+    "School": "Adivinhação",
+    "VisualDescription": "Concede sentidos aguçados de um animal selvagem.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Sentido Feral' que é do tipo 'Adivinhação', do nível 2, com o efeito 'Concede sentidos aguçados de um animal selvagem.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Sopro de Dragão",
+    "Level": 2,
+    "School": "Transmutação",
+    "VisualDescription": "Imbuí uma criatura com a capacidade de exalar energia elemental (fogo, ácido, etc.).",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Sopro de Dragão' que é do tipo 'Transmutação', do nível 2, com o efeito 'Imbuí uma criatura com a capacidade de exalar energia elemental (fogo, ácido, etc.).'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Turvar (Blur)",
+    "Level": 2,
+    "School": "Ilusão",
+    "VisualDescription": "O corpo do conjurador torna-se oscilante e desfocado, dificultando ataques.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Turvar (Blur)' que é do tipo 'Ilusão', do nível 2, com o efeito 'O corpo do conjurador torna-se oscilante e desfocado, dificultando ataques.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Contramagia",
+    "Level": 3,
+    "School": "Abjuração",
+    "VisualDescription": "O conjurador tenta interromper o processo de conjuração de uma magia de outra criatura no momento em que ela ocorre.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Contramagia' que é do tipo 'Abjuração', do nível 3, com o efeito 'O conjurador tenta interromper o processo de conjuração de uma magia de outra criatura no momento em que ela ocorre.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Convocar Feérico",
+    "Level": 3,
+    "School": "Invocação",
+    "VisualDescription": "Invoca um espírito de Faéria que assume uma forma corpórea para auxiliar em combate.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Convocar Feérico' que é do tipo 'Invocação', do nível 3, com o efeito 'Invoca um espírito de Faéria que assume uma forma corpórea para auxiliar em combate.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Indetectável",
+    "Level": 3,
+    "School": "Abjuração",
+    "VisualDescription": "Oculta uma criatura ou objeto de sensores de adivinhação e magias de localização.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Indetectável' que é do tipo 'Abjuração', do nível 3, com o efeito 'Oculta uma criatura ou objeto de sensores de adivinhação e magias de localização.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Animais",
+    "Level": 3,
+    "School": "Invocação",
+    "VisualDescription": "Conjura espíritos da natureza que assumem formas de feras para lutar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Animais' que é do tipo 'Invocação', do nível 3, com o efeito 'Conjura espíritos da natureza que assumem formas de feras para lutar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Barragem",
+    "Level": 3,
+    "School": "Invocação",
+    "VisualDescription": "Cria uma chuva massiva de cópias da arma utilizada, atingindo uma área em cone.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Barragem' que é do tipo 'Invocação', do nível 3, com o efeito 'Cria uma chuva massiva de cópias da arma utilizada, atingindo uma área em cone.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Morto-vivo",
+    "Level": 3,
+    "School": "Necromancia",
+    "VisualDescription": "Conjura um espírito morto-vivo que se manifesta em uma forma física escolhida.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Morto-vivo' que é do tipo 'Necromancia', do nível 3, com o efeito 'Conjura um espírito morto-vivo que se manifesta em uma forma física escolhida.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Línguas",
+    "Level": 3,
+    "School": "Adivinhação",
+    "VisualDescription": "Concede a habilidade de entender e falar qualquer idioma fluentemente.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Línguas' que é do tipo 'Adivinhação', do nível 3, com o efeito 'Concede a habilidade de entender e falar qualquer idioma fluentemente.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Nuvem Fétida",
+    "Level": 3,
+    "School": "Invocação",
+    "VisualDescription": "Gera uma nuvem de gás nauseante que pode incapacitar criaturas dentro dela.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Nuvem Fétida' que é do tipo 'Invocação', do nível 3, com o efeito 'Gera uma nuvem de gás nauseante que pode incapacitar criaturas dentro dela.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Pequeno Refúgio de Leomund",
+    "Level": 3,
+    "School": "Evocação",
+    "VisualDescription": "Cria uma cúpula de força imóvel que protege quem está dentro contra o ambiente e ataques externos.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Pequeno Refúgio de Leomund' que é do tipo 'Evocação', do nível 3, com o efeito 'Cria uma cúpula de força imóvel que protege quem está dentro contra o ambiente e ataques externos.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Remeter (Sending)",
+    "Level": 3,
+    "School": "Adivinhação",
+    "VisualDescription": "Permite enviar uma mensagem curta para qualquer criatura conhecida, independentemente da distância.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Remeter (Sending)' que é do tipo 'Adivinhação', do nível 3, com o efeito 'Permite enviar uma mensagem curta para qualquer criatura conhecida, independentemente da distância.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Simular Morte",
+    "Level": 3,
+    "School": "Necromancia",
+    "VisualDescription": "Coloca uma criatura em um estado cataléptico que é indistinguível da morte real.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Simular Morte' que é do tipo 'Necromancia', do nível 3, com o efeito 'Coloca uma criatura em um estado cataléptico que é indistinguível da morte real.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Convocar Elemental",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Invoca um espírito elemental que se manifesta fisicamente para lutar ao seu lado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Convocar Elemental' que é do tipo 'Invocação', do nível 4, com o efeito 'Invoca um espírito elemental que se manifesta fisicamente para lutar ao seu lado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Defensor da Fé",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito guardião que protege uma área e golpeia inimigos próximos.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Defensor da Fé' que é do tipo 'Invocação', do nível 4, com o efeito 'Conjura um espírito guardião que protege uma área e golpeia inimigos próximos.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Destruição Atordoante",
+    "Level": 4,
+    "School": "Encantamento",
+    "VisualDescription": "Um ataque imbuído de energia divina que pode deixar o alvo atordoado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Destruição Atordoante' que é do tipo 'Encantamento', do nível 4, com o efeito 'Um ataque imbuído de energia divina que pode deixar o alvo atordoado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Dominar Fera",
+    "Level": 4,
+    "School": "Encantamento",
+    "VisualDescription": "Estabelece controle telepático total sobre uma criatura do tipo fera.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Dominar Fera' que é do tipo 'Encantamento', do nível 4, com o efeito 'Estabelece controle telepático total sobre uma criatura do tipo fera.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Enfeitiçar Monstro",
+    "Level": 4,
+    "School": "Encantamento",
+    "VisualDescription": "Encanta magicamente qualquer criatura, fazendo-a ver o conjurador como um aliado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Enfeitiçar Monstro' que é do tipo 'Encantamento', do nível 4, com o efeito 'Encanta magicamente qualquer criatura, fazendo-a ver o conjurador como um aliado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Escudo Ardente",
+    "Level": 4,
+    "School": "Evocação",
+    "VisualDescription": "Chamas envolvem o conjurador, concedendo resistência a dano elemental e queimando atacantes.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Escudo Ardente' que é do tipo 'Evocação', do nível 4, com o efeito 'Chamas envolvem o conjurador, concedendo resistência a dano elemental e queimando atacantes.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Esfera Vitriólica",
+    "Level": 4,
+    "School": "Evocação",
+    "VisualDescription": "Uma esfera de ácido verde que explode, causando dano corrosivo imediato e persistente.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Esfera Vitriólica' que é do tipo 'Evocação', do nível 4, com o efeito 'Uma esfera de ácido verde que explode, causando dano corrosivo imediato e persistente.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Fonte do Luar",
+    "Level": 4,
+    "School": "Evocação",
+    "VisualDescription": "Cria um brilho prateado em área que causa dano radiante a inimigos e protege aliados.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Fonte do Luar' que é do tipo 'Evocação', do nível 4, com o efeito 'Cria um brilho prateado em área que causa dano radiante a inimigos e protege aliados.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Aberração",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito bizarro e alienígena vindo de reinos distantes para o combate.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Aberração' que é do tipo 'Invocação', do nível 4, com o efeito 'Conjura um espírito bizarro e alienígena vindo de reinos distantes para o combate.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Constructo",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito que assume a forma de um autômato ou guardião mecânico.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Constructo' que é do tipo 'Invocação', do nível 4, com o efeito 'Conjura um espírito que assume a forma de um autômato ou guardião mecânico.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Elementais Menores",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Conjura vários espíritos elementais pequenos que voam ao redor do conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Elementais Menores' que é do tipo 'Invocação', do nível 4, com o efeito 'Conjura vários espíritos elementais pequenos que voam ao redor do conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Seres da Floresta",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Invoca espíritos da natureza que se manifestam como criaturas feéricas.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Seres da Floresta' que é do tipo 'Invocação', do nível 4, com o efeito 'Invoca espíritos da natureza que se manifestam como criaturas feéricas.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Polimorfia",
+    "Level": 4,
+    "School": "Transmutação",
+    "VisualDescription": "Transforma uma criatura completamente em uma forma animal à escolha do conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Polimorfia' que é do tipo 'Transmutação', do nível 4, com o efeito 'Transforma uma criatura completamente em uma forma animal à escolha do conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Presságio",
+    "Level": 4,
+    "School": "Adivinhação",
+    "VisualDescription": "O conjurador contata uma divindade para receber conselhos ou revelações sobre o futuro.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Presságio' que é do tipo 'Adivinhação', do nível 4, com o efeito 'O conjurador contata uma divindade para receber conselhos ou revelações sobre o futuro.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Tempestade Glacial",
+    "Level": 4,
+    "School": "Evocação",
+    "VisualDescription": "Faz cair granizo e gelo pesado em uma grande área, dificultando o movimento.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Tempestade Glacial' que é do tipo 'Evocação', do nível 4, com o efeito 'Faz cair granizo e gelo pesado em uma grande área, dificultando o movimento.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Terreno Alucinatório",
+    "Level": 4,
+    "School": "Ilusão",
+    "VisualDescription": "Altera a aparência visual e tátil de uma área natural inteira para enganar os sentidos.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Terreno Alucinatório' que é do tipo 'Ilusão', do nível 4, com o efeito 'Altera a aparência visual e tátil de uma área natural inteira para enganar os sentidos.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Vinha Agarradora",
+    "Level": 4,
+    "School": "Invocação",
+    "VisualDescription": "Conjura uma vinha forte que pode ser comandada para puxar criaturas próximas.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Vinha Agarradora' que é do tipo 'Invocação', do nível 4, com o efeito 'Conjura uma vinha forte que pode ser comandada para puxar criaturas próximas.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Contágio",
+    "Level": 5,
+    "School": "Necromancia",
+    "VisualDescription": "O toque do conjurador infecta o alvo com uma doença mágica debilitante imediata.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Contágio' que é do tipo 'Necromancia', do nível 5, com o efeito 'O toque do conjurador infecta o alvo com uma doença mágica debilitante imediata.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Convocar Celestial",
+    "Level": 5,
+    "School": "Invocação",
+    "VisualDescription": "Invoca um espírito celestial que assume uma forma física para lutar em nome do conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Convocar Celestial' que é do tipo 'Invocação', do nível 5, com o efeito 'Invoca um espírito celestial que assume uma forma física para lutar em nome do conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Dissipar o Bem e o Mal",
+    "Level": 5,
+    "School": "Abjuração",
+    "VisualDescription": "Protege o conjurador e permite expulsar seres de outros planos com um toque.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Dissipar o Bem e o Mal' que é do tipo 'Abjuração', do nível 5, com o efeito 'Protege o conjurador e permite expulsar seres de outros planos com um toque.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Estática Sináptica",
+    "Level": 5,
+    "School": "Encantamento",
+    "VisualDescription": "Uma explosão de energia psíquica desorienta as mentes e causa dano em uma área.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Estática Sináptica' que é do tipo 'Encantamento', do nível 5, com o efeito 'Uma explosão de energia psíquica desorienta as mentes e causa dano em uma área.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Golpe de Arço",
+    "Level": 5,
+    "School": "Invocação",
+    "VisualDescription": "O conjurador se teleporta rapidamente entre vários alvos, desferindo ataques de energia.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Golpe de Arço' que é do tipo 'Invocação', do nível 5, com o efeito 'O conjurador se teleporta rapidamente entre vários alvos, desferindo ataques de energia.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Dragão",
+    "Level": 5,
+    "School": "Invocação",
+    "VisualDescription": "Convoca o espírito de um dragão que se manifesta para atacar ou proteger.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Dragão' que é do tipo 'Invocação', do nível 5, com o efeito 'Convoca o espírito de um dragão que se manifesta para atacar ou proteger.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Elemental",
+    "Level": 5,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito elemental poderoso que se manifesta fisicamente no campo de batalha.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Elemental' que é do tipo 'Invocação', do nível 5, com o efeito 'Conjura um espírito elemental poderoso que se manifesta fisicamente no campo de batalha.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Lendas e Histórias",
+    "Level": 5,
+    "School": "Adivinhação",
+    "VisualDescription": "Traz à mente informações lendárias ou esquecidas sobre uma pessoa, lugar ou objeto.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Lendas e Histórias' que é do tipo 'Adivinhação', do nível 5, com o efeito 'Traz à mente informações lendárias ou esquecidas sobre uma pessoa, lugar ou objeto.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Paralisar Monstro",
+    "Level": 5,
+    "School": "Encantamento",
+    "VisualDescription": "Paralisa magicamente qualquer tipo de criatura, independentemente de ser humana ou não.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Paralisar Monstro' que é do tipo 'Encantamento', do nível 5, com o efeito 'Paralisa magicamente qualquer tipo de criatura, independentemente de ser humana ou não.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Passo Arbóreo",
+    "Level": 5,
+    "School": "Invocação",
+    "VisualDescription": "Permite que o conjurador entre em uma árvore e saia instantaneamente por outra distante.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Passo Arbóreo' que é do tipo 'Invocação', do nível 5, com o efeito 'Permite que o conjurador entre em uma árvore e saia instantaneamente por outra distante.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Presença Régia de Yolande",
+    "Level": 5,
+    "School": "Encantamento",
+    "VisualDescription": "O conjurador irradia uma aura de autoridade que pode incapacitar quem se aproxima.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Presença Régia de Yolande' que é do tipo 'Encantamento', do nível 5, com o efeito 'O conjurador irradia uma aura de autoridade que pode incapacitar quem se aproxima.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Reencarnar",
+    "Level": 5,
+    "School": "Necromancia",
+    "VisualDescription": "Traz uma criatura morta de volta à vida, mas em um corpo de uma raça aleatória.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Reencarnar' que é do tipo 'Necromancia', do nível 5, com o efeito 'Traz uma criatura morta de volta à vida, mas em um corpo de uma raça aleatória.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Tempestade Radiante de Jallarzi",
+    "Level": 5,
+    "School": "Evocação",
+    "VisualDescription": "Uma zona de luz cintilante que causa dano e impede a conjuração de magias.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Tempestade Radiante de Jallarzi' que é do tipo 'Evocação', do nível 5, com o efeito 'Uma zona de luz cintilante que causa dano e impede a conjuração de magias.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Aliado Extraplanar",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "O conjurador suplica a uma entidade poderosa que envie um servo celestial, feérico ou infernal para realizar uma tarefa.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Aliado Extraplanar' que é do tipo 'Invocação', do nível 6, com o efeito 'O conjurador suplica a uma entidade poderosa que envie um servo celestial, feérico ou infernal para realizar uma tarefa.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Caldeirão Borbulhante de Tasha",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "Utiliza um caldeirão e uma colher de ouro para produzir uma poção mágica lendária.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Caldeirão Borbulhante de Tasha' que é do tipo 'Invocação', do nível 6, com o efeito 'Utiliza um caldeirão e uma colher de ouro para produzir uma poção mágica lendária.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Feérico",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito de Faéria que assume uma forma corpórea poderosa para auxiliar em combate.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Feérico' que é do tipo 'Invocação', do nível 6, com o efeito 'Conjura um espírito de Faéria que assume uma forma corpórea poderosa para auxiliar em combate.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Ínfero",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "Invoca um demônio ou diabo para o campo de batalha sob o comando do conjurador.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Ínfero' que é do tipo 'Invocação', do nível 6, com o efeito 'Invoca um demônio ou diabo para o campo de batalha sob o comando do conjurador.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Mau Olhado",
+    "Level": 6,
+    "School": "Necromancia",
+    "VisualDescription": "Os olhos do conjurador tornam-se negros, permitindo que ele apavore, adormeça ou fira inimigos com o olhar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Mau Olhado' que é do tipo 'Necromancia', do nível 6, com o efeito 'Os olhos do conjurador tornam-se negros, permitindo que ele apavore, adormeça ou fira inimigos com o olhar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Moléstia",
+    "Level": 6,
+    "School": "Necromancia",
+    "VisualDescription": "Um toque que inflige uma dor terrível ou uma doença debilitante imediata no alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Moléstia' que é do tipo 'Necromancia', do nível 6, com o efeito 'Um toque que inflige uma dor terrível ou uma doença debilitante imediata no alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Portais Arcanos",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "Abre dois portais de teleporte interligados que permitem a passagem livre de criaturas entre dois pontos.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Portais Arcanos' que é do tipo 'Invocação', do nível 6, com o efeito 'Abre dois portais de teleporte interligados que permitem a passagem livre de criaturas entre dois pontos.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Receptáculo Arcano",
+    "Level": 6,
+    "School": "Necromancia",
+    "VisualDescription": "Tenta aprisionar a alma de uma criatura em uma gema para que o conjurador possa possuir o seu corpo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Receptáculo Arcano' que é do tipo 'Necromancia', do nível 6, com o efeito 'Tenta aprisionar a alma de uma criatura em uma gema para que o conjurador possa possuir o seu corpo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Transporte via Plantas",
+    "Level": 6,
+    "School": "Invocação",
+    "VisualDescription": "Cria um vínculo mágico momentâneo entre duas plantas grandes para teleporte instantâneo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Transporte via Plantas' que é do tipo 'Invocação', do nível 6, com o efeito 'Cria um vínculo mágico momentâneo entre duas plantas grandes para teleporte instantâneo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Bola de Fogo Adiável",
+    "Level": 7,
+    "School": "Evocação",
+    "VisualDescription": "Uma pequena conta de luz amarela brilha intensamente e explode em chamas massivas ao ser tocada ou após um tempo determinado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Bola de Fogo Adiável' que é do tipo 'Evocação', do nível 7, com o efeito 'Uma pequena conta de luz amarela brilha intensamente e explode em chamas massivas ao ser tocada ou após um tempo determinado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Invocar Celestial",
+    "Level": 7,
+    "School": "Invocação",
+    "VisualDescription": "Conjura um espírito angelical majestoso que assume forma física para lutar, curar ou proteger o grupo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Invocar Celestial' que é do tipo 'Invocação', do nível 7, com o efeito 'Conjura um espírito angelical majestoso que assume forma física para lutar, curar ou proteger o grupo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Miragem Arcana",
+    "Level": 7,
+    "School": "Ilusão",
+    "VisualDescription": "Altera visualmente o terreno de uma vasta área (incluindo cheiros e sons), podendo transformar um deserto em uma floresta verdejante.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Miragem Arcana' que é do tipo 'Ilusão', do nível 7, com o efeito 'Altera visualmente o terreno de uma vasta área (incluindo cheiros e sons), podendo transformar um deserto em uma floresta verdejante.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Palavra de Poder: Fortificar",
+    "Level": 7,
+    "School": "Encantamento",
+    "VisualDescription": "Uma palavra de comando que imbui aliados com uma vitalidade imensa, restaurando-os e fortalecendo seu vigor.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Palavra de Poder: Fortificar' que é do tipo 'Encantamento', do nível 7, com o efeito 'Uma palavra de comando que imbui aliados com uma vitalidade imensa, restaurando-os e fortalecendo seu vigor.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Palavra Sagrada",
+    "Level": 7,
+    "School": "Evocação",
+    "VisualDescription": "Uma declaração divina que emite uma onda de poder capaz de banir, cegar, ensurdecer ou matar inimigos com base em sua resistência.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Palavra Sagrada' que é do tipo 'Evocação', do nível 7, com o efeito 'Uma declaração divina que emite uma onda de poder capaz de banir, cegar, ensurdecer ou matar inimigos com base em sua resistência.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Refugiar",
+    "Level": 7,
+    "School": "Transmutação",
+    "VisualDescription": "Teleporta o conjurador e alvos voluntários instantaneamente para um local de descanso seguro e pré-determinado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Refugiar' que é do tipo 'Transmutação', do nível 7, com o efeito 'Teleporta o conjurador e alvos voluntários instantaneamente para um local de descanso seguro e pré-determinado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Teleporte",
+    "Level": 7,
+    "School": "Invocação",
+    "VisualDescription": "Transporta o conjurador e aliados instantaneamente para qualquer local conhecido, embora haja risco de desvio se o local não for familiar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Teleporte' que é do tipo 'Invocação', do nível 7, com o efeito 'Transporta o conjurador e aliados instantaneamente para qualquer local conhecido, embora haja risco de desvio se o local não for familiar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Suplício",
+    "Level": 8,
+    "School": "Encantamento",
+    "VisualDescription": "Atormenta a mente de uma criatura com agonia psíquica, reduzindo drasticamente sua capacidade de agir, pensar ou conjurar.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Suplício' que é do tipo 'Encantamento', do nível 8, com o efeito 'Atormenta a mente de uma criatura com agonia psíquica, reduzindo drasticamente sua capacidade de agir, pensar ou conjurar.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Palavra de Poder: Salvar",
+    "Level": 9,
+    "School": "Encantamento",
+    "VisualDescription": "Uma palavra de cura suprema que restaura todos os pontos de vida e remove condições negativas de um alvo.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Palavra de Poder: Salvar' que é do tipo 'Encantamento', do nível 9, com o efeito 'Uma palavra de cura suprema que restaura todos os pontos de vida e remove condições negativas de um alvo.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  },
+  {
+    "SpellName": "Polimorfia Total",
+    "Level": 9,
+    "School": "Transmutação",
+    "VisualDescription": "Transforma permanentemente uma criatura em outra espécie ou até mesmo em um objeto inanimado.",
+    "BasePrompt": "Cria a imagem de D&D para a Magia 'Polimorfia Total' que é do tipo 'Transmutação', do nível 9, com o efeito 'Transforma permanentemente uma criatura em outra espécie ou até mesmo em um objeto inanimado.'. Será utilizada como imagem de fundo para ilustrar uma carta de magia. Sem textos. --ar 4:5"
+  }
+]

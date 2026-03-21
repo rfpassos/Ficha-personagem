@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type { CharacterInput } from '../types/character.types';
 
+const SPELL_ART_DIR = path.join(__dirname, '../../assets/spells/art');
+
 // Registra helpers do Handlebars (o helper 'modifier' original foi removido pois causava conflito com as chaves locais)
 
 Handlebars.registerHelper('join', (arr: string[], sep: string) => {
@@ -15,17 +17,39 @@ Handlebars.registerHelper('default', (value: unknown, fallback: string) => {
 });
 
 const TEMPLATE_PATH = path.join(__dirname, '../../../assets/templates/dnd-landscape-hero.html');
+const SPELLS_DATA_PATH = path.join(__dirname, '../../assets/data/magias-dnd-ptbr.json');
+
 let compiledTemplate: HandlebarsTemplateDelegate | null = null;
+let spellsDatabase: any[] | null = null;
+
+function getSpellsDatabase() {
+    if (!spellsDatabase) {
+        if (fs.existsSync(SPELLS_DATA_PATH)) {
+            const rawData = fs.readFileSync(SPELLS_DATA_PATH, 'utf-8');
+            spellsDatabase = JSON.parse(rawData);
+        } else {
+            console.warn(`[template.service] Banco de magias não encontrado em: ${SPELLS_DATA_PATH}`);
+            spellsDatabase = [];
+        }
+    }
+    return spellsDatabase || [];
+}
+
+function normalizeName(name: string): string {
+    return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+}
+
+let compiledTemplateVar: HandlebarsTemplateDelegate | null = null;
 
 function getTemplate(): HandlebarsTemplateDelegate {
-    if (!compiledTemplate) {
+    if (!compiledTemplateVar) {
         if (!fs.existsSync(TEMPLATE_PATH)) {
             throw new Error(`Template não encontrado em: ${TEMPLATE_PATH}`);
         }
         const templateSource = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
-        compiledTemplate = Handlebars.compile(templateSource);
+        compiledTemplateVar = Handlebars.compile(templateSource);
     }
-    return compiledTemplate;
+    return compiledTemplateVar;
 }
 
 // Funções utilitárias para cálculos de D&D 5e
@@ -157,7 +181,15 @@ export function renderSheetHtml(
         passive_investigation: 10 + attrMods.intelligence + ((character.proficiencies?.skill_proficiencies || []).find(s => s.name.toLowerCase().includes('investigação'))?.proficient ? profBonus : 0),
         passive_insight: 10 + attrMods.wisdom + ((character.proficiencies?.skill_proficiencies || []).find(s => s.name.toLowerCase().includes('intuição'))?.proficient ? profBonus : 0),
         
-        spell_card_pages: paginateSpells(character, imageBase64)
+        spell_card_pages: paginateSpells(character, imageBase64),
+        
+        // Enriquece o spell_description com dados do banco e pagina para a página 4 (Descrições do Grimório)
+        spell_description_pages: paginateSpellDescriptions(
+            character.spellcasting?.spells_prepared?.length
+                ? character.spellcasting.spells_prepared
+                : (character.spell_description?.map((s: any) => s.name) || []),
+            getSpellsDatabase()
+        )
     };
 
     console.log(`[template.service] Renderizando ficha para ${character.character_name}`);
@@ -167,30 +199,127 @@ export function renderSheetHtml(
     return template(data);
 }
 
+// Carrega a arte de uma magia do diretório de artes, ou usa a arte do personagem como fallback
+function getSpellArt(spellName: string, fallbackBase64: string): string {
+    const cleanName = spellName.split('(')[0].trim().toLowerCase().replace(/\s+/g, '_');
+    const artPath = path.join(SPELL_ART_DIR, `${cleanName}.png`);
+    if (fs.existsSync(artPath)) {
+        const buf = fs.readFileSync(artPath);
+        return `data:image/png;base64,${buf.toString('base64')}`;
+    }
+    // Fallback para a imagem do personagem
+    return `data:image/png;base64,${fallbackBase64}`;
+}
+
 function paginateSpells(character: CharacterInput, artBase64: string) {
     const pages = [];
     const itemsPerPage = 4;
-    const spells = character.spellcasting.spells_prepared;
-    const descriptions = character.spell_description || [];
+    
+    // Captura apenas os nomes das magias, seja do array de preparadas ou extraídas do prompt
+    const spells = character.spellcasting?.spells_prepared?.length 
+        ? character.spellcasting.spells_prepared 
+        : (character.spell_description?.map(s => s.name) || []);
+        
+    const database = getSpellsDatabase();
     
     for (let i = 0; i < spells.length; i += itemsPerPage) {
         const pageSpells = spells.slice(i, i + itemsPerPage);
+        
         pages.push({
-            frontRow: pageSpells.map(name => ({ name, art: `data:image/png;base64,${artBase64}` })),
+            frontRow: pageSpells.map(name => ({
+                name,
+                art: getSpellArt(name, artBase64)
+            })),
             backRow: pageSpells.map(name => {
-                const desc = descriptions.find(d => d.name.toLowerCase() === name.toLowerCase());
+                const normName = normalizeName(name);
+                const dbSpell = database.find(s => 
+                    normalizeName(s.SpellName || '') === normName
+                );
+                
+                if (dbSpell) {
+                    const levelStr = String(dbSpell.Level) === '0' || String(dbSpell.Level).toLowerCase() === 'truque' 
+                                     ? 'Truque' 
+                                     : `Nível ${dbSpell.Level}`;
+                    
+                    // Components (VSM)
+                    const parts: string[] = [];
+                    if (dbSpell.Verbal) parts.push('V');
+                    if (dbSpell.Somatic) parts.push('S');
+                    if (dbSpell.Material) parts.push('M');
+                    const components = parts.join(', ') || '—';
+
+                    return {
+                        name: dbSpell.SpellName,
+                        level: levelStr,
+                        school: dbSpell.School || '—',
+                        casting_time: dbSpell.Time || dbSpell.CastingTime || '—',
+                        range: dbSpell.Reach || dbSpell.Range || '—',
+                        components,
+                        duration: dbSpell.Duration || '—',
+                        concentration: dbSpell.Concentration ? 'Conc.' : '',
+                        description: dbSpell.VisualDescription || dbSpell.Description || 'Descrição não disponível.',
+                        narrative: dbSpell.BasePrompt || ''
+                    };
+                }
+
+                // Fallback para magia não encontrada
                 return {
                     name,
-                    level: desc?.level || '—',
-                    school: desc?.school || '—',
-                    casting_time: desc?.casting_time || '—',
-                    range: desc?.range || '—',
-                    description: desc?.description || 'Descrição não disponível.',
-                    narrative: desc?.narrative || ''
+                    level: '—',
+                    school: '—',
+                    casting_time: '—',
+                    range: '—',
+                    description: 'Magia não encontrada no compêndio local.',
+                    narrative: ''
                 };
             })
         });
     }
+    return pages;
+}
+
+function paginateSpellDescriptions(spellNames: string[], database: any[]) {
+    const pages = [];
+    const itemsPerPage = 5; // Limita a magias por página para evitar estouro
+    let isFirstPage = true;
+
+    for (let i = 0; i < spellNames.length; i += itemsPerPage) {
+        const chunk = spellNames.slice(i, i + itemsPerPage);
+        
+        const mappedSpells = chunk.map((name: string) => {
+            const normName = normalizeName(name);
+            const db = database.find(s => normalizeName(s.SpellName || '') === normName);
+            if (!db) return { name, level: '—', school: '—', casting_time: '—', range: '—', description: name, narrative: '' };
+            
+            const levelStr = String(db.Level) === '0' || String(db.Level).toLowerCase() === 'truque'
+                ? 'Truque' : `Nível ${db.Level}`;
+            const parts: string[] = [];
+            if (db.Verbal) parts.push('V');
+            if (db.Somatic) parts.push('S');
+            if (db.Material) parts.push('M');
+            
+            return {
+                name: db.SpellName,
+                level: levelStr,
+                school: db.School || '—',
+                casting_time: db.Time || db.CastingTime || '—',
+                range: db.Reach || db.Range || '—',
+                components: parts.join(', ') || '—',
+                duration: db.Duration || '—',
+                description: db.Description || db.VisualDescription || '—',
+                narrative: db.BasePrompt || ''
+            };
+        });
+
+        pages.push({
+            isFirstPage,
+            spells: mappedSpells,
+            pageIndex: pages.length + 1
+        });
+        
+        isFirstPage = false;
+    }
+    
     return pages;
 }
 

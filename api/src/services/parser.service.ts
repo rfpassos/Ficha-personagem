@@ -29,22 +29,32 @@ export class LLMParserService {
         try {
             const result = await this.model.generateContent(prompt);
             const response = result.response;
-            let text = response.text();
+            let text = response.text().trim();
             
-            // Tenta encontrar e extrair apenas o bloco JSON
-            const firstBrace = text.indexOf('{');
-            const lastBrace = text.lastIndexOf('}');
-            
-            if (firstBrace !== -1 && lastBrace !== -1) {
-                text = text.substring(firstBrace, lastBrace + 1);
-            }
+            // Limpa formatação markdown caso o Gemini retorne ```json ... ```
+            text = text.replace(/^```(json)?|```$/gi, '').trim();
 
             let parsed: any;
             try {
                 parsed = JSON.parse(text);
             } catch (err) {
-                console.error('[LLMParserService] Texto gerado que falhou no parse:', text);
-                throw err;
+                // Tenta reparar caso a IA tenha adicionado chaves `}` sobrando no final do JSON
+                let fixedText = text;
+                while (fixedText.length > 0) {
+                    try {
+                        parsed = JSON.parse(fixedText);
+                        break;
+                    } catch (e) {
+                        const lastBraceIdx = fixedText.lastIndexOf('}');
+                        if (lastBraceIdx === -1) break;
+                        fixedText = fixedText.substring(0, lastBraceIdx).trim();
+                    }
+                }
+                
+                if (!parsed) {
+                    console.error('[LLMParserService] Texto gerado que falhou no parse:', text);
+                    throw err;
+                }
             }
             
             return parsed as CharacterInput;
