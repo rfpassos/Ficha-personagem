@@ -1,0 +1,15 @@
+{
+  "name": "rpg-sheet-generator-root",
+  "version": "1.0.0",
+  "description": "Root orchestration for RPG Character Sheet Generator",
+  "private": true,
+  "scripts": {
+    "dev": "npx concurrently \"npm run dev:api\" \"npm run dev:admin\"",
+    "dev:api": "cd api && npm run dev",
+    "dev:admin": "cd admin-base && npm run dev",
+    "install:all": "npm install && cd api && npm install && cd ../admin-base && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

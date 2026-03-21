@@ -1,8 +1,4 @@
-import dotenv from 'dotenv';
-import path from 'path';
-
-// Carrega o .env da raiz do projeto
-dotenv.config({ path: path.join(__dirname, '../../.env') });
+import './preload';
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
@@ -43,7 +39,7 @@ async function main(): Promise<void> {
     await app.register(adminRoutes, { prefix: '/admin' });
 
     // ── Start ─────────────────────────────────────────────────
-    const port = parseInt(process.env.PORT ?? '3000');
+    const port = parseInt(process.env.PORT ?? '3001');
     const host = '0.0.0.0';
 
     try {

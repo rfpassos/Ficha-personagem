@@ -19,6 +19,7 @@ import {
     ChevronRight,
     Kanban,
     Palette,
+    Sparkles,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -28,6 +29,7 @@ const mainNavItems = [
     { name: "Inbox", href: "/dashboard/inbox", icon: Inbox },
     { name: "Clientes", href: "/dashboard/customers", icon: Users },
     { name: "Tickets", href: "/dashboard/tickets", icon: Ticket },
+    { name: "Teste de Ficha", href: "/dashboard/test-sheet", icon: Sparkles },
 ]
 
 const analyticsNavItems = [

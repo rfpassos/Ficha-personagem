@@ -11,6 +11,7 @@ export interface CharacterInput {
     character_name: string;
     race: string;
     class: string;
+    subclass: string;
     level: number;
     basic_info: {
         archetype: string;
@@ -36,12 +37,15 @@ export interface CharacterInput {
             expertise: boolean;
             modifier: string;
         }[];
+        armor_proficiencies: string;
+        weapon_proficiencies: string;
         tools_and_languages: string[];
     };
     abilities_and_features: {
         racial_traits: string[];
         class_features: string[];
         background_features: string[];
+        feats: string[];
     };
     attacks: {
         name: string;
