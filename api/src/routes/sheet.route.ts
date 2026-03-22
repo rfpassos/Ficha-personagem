@@ -6,7 +6,7 @@ import { prisma } from '../lib/db';
 import { LLMParserService } from '../services/parser.service';
 import { generateCharacterPrompt } from '../services/prompt.service';
 import { generateCharacterImage } from '../services/image.service';
-import { renderSheetHtml } from '../services/template.service';
+import { renderSheetHtml, ensureSpellArts } from '../services/template.service';
 import { generatePdfFromHtml } from '../services/pdf.service';
 import { StorageService } from '../services/storage.service';
 
@@ -137,6 +137,10 @@ async function processInBackground(jobId: string, input: any, log: any) {
         // Upload imagem para MinIO
         const imgBuffer = Buffer.from(imageBase64, 'base64');
         const imageUrl = await StorageService.uploadCharacterImage(jobId, imgBuffer);
+
+        // 2.5 Gerar/carregar artes das Magias sob demanda
+        log.info({ jobId }, 'Garantindo artes para o Grimório');
+        await ensureSpellArts(character);
 
         // 3. PDF
         log.info({ jobId }, 'Gerando PDF');

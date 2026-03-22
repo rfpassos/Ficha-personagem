@@ -7,9 +7,14 @@ Siga RIGOROSAMENTE o esquema e nomes de campos em INGLÊS conforme o exemplo "ES
 
 1. Extraia o máximo de detalhes possível do texto original.
 2. Calcule modificadores (Ex: For 18 = +4) e perícias se não estiverem explícitos.
-3. No campo spell_description, extraia APENAS o nome (name) de cada magia em português (BR), omitindo regras, níveis ou descrições. Se não houver magias, o campo spell_description deve ser um array vazio [].
+3. No campo spell_description, se houver magias, mapeie-as para o ID oficial com a ajuda do Dicionário Fornecido. No JSON resultante, o campo "id" DEVE ser o ID oficial do dicionário, mas o campo "name" DEVE ser o nome exatamente como aparece no PDF original (mesmo que seja um sinônimo ou apelido). Oculte níveis e descrições. Exemplo: [{"id": "muralha-de-energia", "name": "Muralha de Força"}]. Se não houver magias, o campo spell_description deve ser um array vazio [].
 4. Os valores de atributos devem ser apenas o NÚMERO (Ex: 15).
 5. Traduza os valores (Raça, Classe, Perícias) para Português, mas mantenha as CHAVES do JSON em Inglês conforme acima.
+6. ATENÇÃO: Nunca use aspas duplas não escapadas dentro de strings. O sistema deve gerar um JSON sintaticamente perfeito e livre de chaves adicionais.
+7. O conteúdo do JSON deve ser em Português (BR), deve manter as chaves do JSON em inglês.
+8. Quando não tiver informação suficiente para preencher um campo, deixe-o como null.
+9. Se não tiver informação para uma lista, deixe-a como [] (array vazio).
+10. Você deve fazer somente um parser de fichas de RPG. Responda APENAS com o JSON puro, sem blocos de código, sem explicações, sem ```json```. Apenas o objeto JSON diretamente.
 
 ## CONTEÚDO PARA PARSE
 
@@ -63,6 +68,6 @@ Siga RIGOROSAMENTE o esquema e nomes de campos em INGLÊS conforme o exemplo "ES
   },
   "goals_and_motivations": { "main_goal": "string", "motivations": "string" },
   "game_notes": { "combat_behavior": "string", "social_interactions": "string" },
-  "spell_description": [ { "name": "string" } ],
-  "metadata": { "template_title": "string", "version": "1.4.0" }
+  "spell_description": [ { "id": "string", "name": "string" } ],
+  "metadata": { "template_title": "string", "version": "1.4.0", "system": "D&D 5e" }
 }

@@ -1,6 +1,6 @@
 # OBJETIVO
 
-Converta o PROMPT BASE abaixo em um prompt foto realista de alta fidelidade, que terá uso na geração de imagens de personagens de RPG utilizando o Nano Banana 2, deve manter a essência do PROMPT BASE.
+Converta o PROMPT BASE abaixo em um prompt foto realista de alta fidelidade, que terá uso na geração de imagens de personagens ou magias de RPG utilizando o Nano Banana 2, deve manter a essência do PROMPT BASE.
 
 ---
 
@@ -12,8 +12,7 @@ Converta o PROMPT BASE abaixo em um prompt foto realista de alta fidelidade, que
 * **PROIBIDO:** "Caricature, low-quality CGI, plastic textures, blurry backgrounds"
 * **NEGATIVO (Adicione explicitamente no prompt final):** "Avoid entirely any deformed shapes, extra limbs, extra arms, extra fingers, bad anatomy, mutated body parts, fused limbs, disproportionate figures, unnatural pose."
 * **FOCO:** "O resultado deve parecer um frame estático de um filme épico de fantasia com efeitos práticos de alta qualidade. Mantenha os elementos mágicos/fantásticos vibrantes e nítidos."
-* **DIMENSÕES:** "2k", Deve garantir que a imagem seja gerada com o Aspect Ratio de "16:9"
-* **POSIÇÃO:** "O personagem deve estar em primeiro plano, ocupando cerca de 25% da imagem, posicionado à esquerda da imagem."
+* **DIMENSÕES:** "2k", "--ar 4:5"
 * **OBSERVAÇÃO:** "Retorne somente o novo prompt formatado em Markdown, sem nenhum comentário ou informação extra, apenas o novo prompt"
 
 ---

@@ -24,7 +24,29 @@ export class LLMParserService {
      */
     static async parseToCharacter(content: string): Promise<CharacterInput> {
         const template = this.getPromptTemplate();
-        const prompt = template.replace('{{content}}', content);
+        let prompt = template.replace('{{content}}', content);
+
+        // Anexar Lista Opcional de Magias Oficiais para resolução de sinônimos/tradução
+        try {
+            const spellsDataPath = path.join(__dirname, '../../assets/data/magias-dnd-ptbr.json');
+            const synonymsPath = path.join(__dirname, '../../assets/data/spell-synonyms.json');
+            
+            if (fs.existsSync(spellsDataPath)) {
+                const spellsDb = JSON.parse(fs.readFileSync(spellsDataPath, 'utf8'));
+                const dictionary = spellsDb.map((s: any) => `- ID: "${s.id}" | Nome: "${s.SpellName}"`).join('\n');
+                
+                let extraSynonyms = '';
+                if (fs.existsSync(synonymsPath)) {
+                    const synData = JSON.parse(fs.readFileSync(synonymsPath, 'utf8'));
+                    extraSynonyms = `\n\n### APELIDOS/SINÔNIMOS CONHECIDOS (MAPEAMENTO DIRETO):\nUtilize esse mapeamento se encontrar estes termos no PDF:\n` + 
+                        Object.entries(synData).map(([alias, id]) => `- "${alias}" -> ID: "${id}"`).join('\n');
+                }
+
+                prompt += `\n\n### DICIONÁRIO FORNECIDO (MAGIAS OFICIAIS)\nUtilize esta lista estrita para preencher as chaves "id" e "name" do spell_description e solucionar divergências de tradução.\n\n${dictionary}${extraSynonyms}\n`;
+            }
+        } catch (e) {
+            console.error('[parser.service] Erro ao carregar dicionário de magias:', e);
+        }
 
         try {
             const result = await this.model.generateContent(prompt);

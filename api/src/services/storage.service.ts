@@ -46,6 +46,36 @@ export class StorageService {
     }
 
     /**
+     * Faz upload da arte de grimório para MinIO
+     */
+    static async uploadSpellArt(fileName: string, buffer: Buffer, contentType: string): Promise<string> {
+        const client = getMinioClient();
+        await this.ensureBucketExists(client);
+        const fullPath = `grimorio/DnD/${fileName}`;
+        await client.putObject(MINIO_BUCKET, fullPath, buffer, buffer.length, { 'Content-Type': contentType });
+        return fullPath;
+    }
+
+    /**
+     * Tenta puxar a arte do grimório do MinIO como Buffer
+     */
+    static async getSpellArtBuffer(fileName: string): Promise<Buffer | null> {
+        const client = getMinioClient();
+        try {
+            const stream = await client.getObject(MINIO_BUCKET, `grimorio/DnD/${fileName}`);
+            return new Promise<Buffer>((resolve, reject) => {
+                const chunks: Buffer[] = [];
+                stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+                stream.on('end', () => resolve(Buffer.concat(chunks)));
+                stream.on('error', reject);
+            });
+        } catch (e: any) {
+            // Se erro for NoSuchKey ou similar, retorna null
+            return null;
+        }
+    }
+
+    /**
      * Obtém um stream de leitura de um objeto do MinIO
      */
     static async getObject(path: string): Promise<Readable> {

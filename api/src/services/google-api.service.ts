@@ -51,17 +51,19 @@ export async function googleImage(model: string, prompt: string, config: any = {
         const genModel = genAI.getGenerativeModel({ 
             model,
             generationConfig: {
-                // @ts-ignore
-                response_modalities: ["IMAGE", "TEXT"],
+                // @ts-ignore - CamelCase é o padrão no SDK de Node.js
+                thinkingConfig: {
+                    includeThoughts: true,
+                },
+                // @ts-ignore - Passando individualmente o que o SDK suporta no generationConfig
+                responseModalities: ["IMAGE", "TEXT"],
                 ...safeConfig
             }
         });
 
-        // Para o Gemini 3.1 Flash Image Preview, o aspect ratio costuma ser inferido ou 
-        // passado via parâmetros experimentais. Por enquanto, vamos confiar no prompt reforçado.
-        const finalPrompt = aspect_ratio ? `${prompt} [ASPECT RATIO ${aspect_ratio}]` : prompt;
-
-        const result = await genModel.generateContent(finalPrompt);
+        // Chamada direta. Como a IA recebe 'IMAGE', ela entende que deve gerar pixels.
+        // Como o aspect_ratio agora está ausente no config, ela lerá do prompt.
+        const result = await genModel.generateContent(prompt);
         const parts = result.response.candidates?.[0]?.content?.parts || [];
         
         for (const part of parts) {
@@ -70,7 +72,7 @@ export async function googleImage(model: string, prompt: string, config: any = {
             }
         }
 
-        throw new Error('Google SDK did not return an image part. Verifique se o prompt não foi bloqueado por filtros de segurança.');
+        throw new Error('O Google SDK não retornou uma parte de imagem. Isso pode ocorrer por bloqueio de segurança (Hate/Harassment) ou falta de suporte do modelo para este prompt específico.');
     } catch (err: any) {
         console.error(`[google-api] Erro na imagem (SDK):`, err.message || err);
         throw err;

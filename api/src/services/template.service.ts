@@ -5,11 +5,149 @@ import type { CharacterInput } from '../types/character.types';
 
 const SPELL_ART_DIR = path.join(__dirname, '../../assets/spells/art');
 
+import { generateImage } from './image.service';
+import { convertToRealismPrompt } from './realism.service';
+
+import sharp from 'sharp';
+import { StorageService } from './storage.service';
+
+interface SpellEntry {
+    name: string;
+    id?: string;
+}
+
+function getCharacterSpells(character: CharacterInput): SpellEntry[] {
+    const database = getSpellsDatabase();
+    const synonyms = getSpellSynonyms();
+    const spellMap = new Map<string, SpellEntry>();
+    const seenNames = new Set<string>();
+
+    // 1. Processar primeiro spell_description (tem mais informações e IDs resolvidos pela IA)
+    if (character.spell_description) {
+        for (const s of character.spell_description) {
+            const normName = normalizeName(s.name);
+            let resolvedId = s.id;
+            
+            // Tenta resolver ID pelo nome se vier vazio
+            if (!resolvedId) {
+                // Tenta biblioteca de sinônimos manual primeiro
+                resolvedId = synonyms[s.name] || synonyms[normName];
+
+                // Fallback para busca por nome normalizado no banco
+                if (!resolvedId) {
+                    const dbMatch = database.find(db => normalizeName(db.SpellName || '') === normName);
+                    if (dbMatch?.id) resolvedId = dbMatch.id;
+                }
+            }
+
+            const key = resolvedId || normName;
+            if (!spellMap.has(key)) {
+                spellMap.set(key, { name: s.name, id: resolvedId });
+                seenNames.add(normName);
+            }
+        }
+    }
+
+    // 2. Processar spells_prepared (são apenas strings de nomes)
+    if (character.spellcasting?.spells_prepared) {
+        for (const name of character.spellcasting.spells_prepared) {
+            const normName = normalizeName(name);
+            
+            // Tenta biblioteca de sinônimos manual primeiro
+            let resolvedId = synonyms[name] || synonyms[normName];
+
+            // Tenta resolver ID pelo banco se não estiver nos sinônimos
+            if (!resolvedId) {
+                const dbMatch = database.find(db => normalizeName(db.SpellName || '') === normName);
+                resolvedId = dbMatch?.id;
+            }
+
+            const key = resolvedId || normName;
+
+            // Se o ID ou Nome Normalizado já foi processado no passo 1, ignora
+            if (spellMap.has(key) || seenNames.has(normName)) {
+                continue;
+            }
+
+            spellMap.set(key, { name: name, id: resolvedId });
+            seenNames.add(normName);
+        }
+    }
+
+    return Array.from(spellMap.values());
+}
+
+export async function ensureSpellArts(character: CharacterInput) {
+    const database = getSpellsDatabase();
+    const spells = getCharacterSpells(character);
+
+    for (const spell of spells) {
+        // Usa o ID da magia como nome de arquivo, ou faz fallback para o nome formatado
+        const cleanName = spell.id || spell.name.split('(')[0].trim().toLowerCase().replace(/\s+/g, '_');
+        
+        const jpgPath = path.join(SPELL_ART_DIR, `${cleanName}.jpg`);
+        const pngPath = path.join(SPELL_ART_DIR, `${cleanName}.png`);
+        
+        // Se a magia já está baixada em disco local, pula
+        if (fs.existsSync(jpgPath) || fs.existsSync(pngPath)) {
+            continue;
+        }
+
+        // Tenta puxar do MinIO antes de gastar recursos da IA
+        let minioBuffer = await StorageService.getSpellArtBuffer(`${cleanName}.jpg`);
+        if (minioBuffer) {
+            fs.writeFileSync(jpgPath, minioBuffer);
+            continue;
+        }
+
+        minioBuffer = await StorageService.getSpellArtBuffer(`${cleanName}.png`);
+        if (minioBuffer) {
+            fs.writeFileSync(pngPath, minioBuffer);
+            continue;
+        }
+
+        // Se realmente não existe (nem local, nem MinIO), gera uma nova imagem
+        const normName = normalizeName(spell.name);
+        const dbSpell = database.find(s => 
+            (spell.id && s.id === spell.id) || 
+            normalizeName(s.SpellName || '') === normName
+        );
+        
+        if (dbSpell && dbSpell.BasePrompt) {
+            console.log(`[template.service] Gerando arte nova para magia sob demanda: ${spell.name}`);
+            try {
+                const realismPrompt = await convertToRealismPrompt(dbSpell.BasePrompt, 'grimoire');
+                const result = await generateImage(realismPrompt, { aspect_ratio: 'portrait_4_5' });
+                
+                const imgBuffer = Buffer.from(result.base64, 'base64');
+                // Comprime para JPG 90%
+                const compressedBuffer = await sharp(imgBuffer).jpeg({ quality: 90 }).toBuffer();
+                
+                // Salva na maquina local
+                fs.writeFileSync(jpgPath, compressedBuffer);
+                
+                // Distribui no MinIO para as outras execuções
+                await StorageService.uploadSpellArt(`${cleanName}.jpg`, compressedBuffer, 'image/jpeg');
+                
+                // Delay para não estourar rate limit da API
+                await new Promise(r => setTimeout(r, 2000));
+            } catch (err) {
+                console.error(`[template.service] Erro gerando arte sob demanda de ${spell.name}:`, err);
+            }
+        }
+    }
+}
+
 // Registra helpers do Handlebars (o helper 'modifier' original foi removido pois causava conflito com as chaves locais)
 
 Handlebars.registerHelper('join', (arr: string[], sep: string) => {
     if (!Array.isArray(arr) || arr.length === 0) return '—';
     return arr.join(typeof sep === 'string' ? sep : ', ');
+});
+
+Handlebars.registerHelper('nl2br', function(text: unknown) {
+    if (typeof text !== 'string') return '';
+    return new Handlebars.SafeString(text.replace(/\n/g, '<br />'));
 });
 
 Handlebars.registerHelper('default', (value: unknown, fallback: string) => {
@@ -18,9 +156,11 @@ Handlebars.registerHelper('default', (value: unknown, fallback: string) => {
 
 const TEMPLATE_PATH = path.join(__dirname, '../../../assets/templates/dnd-landscape-hero.html');
 const SPELLS_DATA_PATH = path.join(__dirname, '../../assets/data/magias-dnd-ptbr.json');
+const SYNONYMS_PATH = path.join(__dirname, '../../assets/data/spell-synonyms.json');
 
 let compiledTemplate: HandlebarsTemplateDelegate | null = null;
 let spellsDatabase: any[] | null = null;
+let spellSynonyms: Record<string, string> | null = null;
 
 function getSpellsDatabase() {
     if (!spellsDatabase) {
@@ -35,21 +175,30 @@ function getSpellsDatabase() {
     return spellsDatabase || [];
 }
 
+function getSpellSynonyms(): Record<string, string> {
+    if (!spellSynonyms) {
+        if (fs.existsSync(SYNONYMS_PATH)) {
+            spellSynonyms = JSON.parse(fs.readFileSync(SYNONYMS_PATH, 'utf-8'));
+        } else {
+            spellSynonyms = {};
+        }
+    }
+    return spellSynonyms || {};
+}
+
 function normalizeName(name: string): string {
     return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 }
 
-let compiledTemplateVar: HandlebarsTemplateDelegate | null = null;
-
 function getTemplate(): HandlebarsTemplateDelegate {
-    if (!compiledTemplateVar) {
+    if (!compiledTemplate) {
         if (!fs.existsSync(TEMPLATE_PATH)) {
             throw new Error(`Template não encontrado em: ${TEMPLATE_PATH}`);
         }
         const templateSource = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
-        compiledTemplateVar = Handlebars.compile(templateSource);
+        compiledTemplate = Handlebars.compile(templateSource);
     }
-    return compiledTemplateVar;
+    return compiledTemplate;
 }
 
 // Funções utilitárias para cálculos de D&D 5e
@@ -185,9 +334,7 @@ export function renderSheetHtml(
         
         // Enriquece o spell_description com dados do banco e pagina para a página 4 (Descrições do Grimório)
         spell_description_pages: paginateSpellDescriptions(
-            character.spellcasting?.spells_prepared?.length
-                ? character.spellcasting.spells_prepared
-                : (character.spell_description?.map((s: any) => s.name) || []),
+            getCharacterSpells(character),
             getSpellsDatabase()
         )
     };
@@ -202,23 +349,32 @@ export function renderSheetHtml(
 // Carrega a arte de uma magia do diretório de artes, ou usa a arte do personagem como fallback
 function getSpellArt(spellName: string, fallbackBase64: string): string {
     const cleanName = spellName.split('(')[0].trim().toLowerCase().replace(/\s+/g, '_');
-    const artPath = path.join(SPELL_ART_DIR, `${cleanName}.png`);
-    if (fs.existsSync(artPath)) {
-        const buf = fs.readFileSync(artPath);
+    
+    // Procura primeiro pelo JPG comprimido
+    const jpgPath = path.join(SPELL_ART_DIR, `${cleanName}.jpg`);
+    if (fs.existsSync(jpgPath)) {
+        const buf = fs.readFileSync(jpgPath);
+        return `data:image/jpeg;base64,${buf.toString('base64')}`;
+    }
+
+    // Procura legado PNG
+    const pngPath = path.join(SPELL_ART_DIR, `${cleanName}.png`);
+    if (fs.existsSync(pngPath)) {
+        const buf = fs.readFileSync(pngPath);
         return `data:image/png;base64,${buf.toString('base64')}`;
     }
+    
     // Fallback para a imagem do personagem
     return `data:image/png;base64,${fallbackBase64}`;
 }
+
 
 function paginateSpells(character: CharacterInput, artBase64: string) {
     const pages = [];
     const itemsPerPage = 4;
     
-    // Captura apenas os nomes das magias, seja do array de preparadas ou extraídas do prompt
-    const spells = character.spellcasting?.spells_prepared?.length 
-        ? character.spellcasting.spells_prepared 
-        : (character.spell_description?.map(s => s.name) || []);
+    // Captura as magias unificando nomes e IDs
+    const spells = getCharacterSpells(character);
         
     const database = getSpellsDatabase();
     
@@ -226,32 +382,36 @@ function paginateSpells(character: CharacterInput, artBase64: string) {
         const pageSpells = spells.slice(i, i + itemsPerPage);
         
         pages.push({
-            frontRow: pageSpells.map(name => ({
-                name,
-                art: getSpellArt(name, artBase64)
+            frontRow: pageSpells.map(spell => ({
+                name: spell.name,
+                art: getSpellArt(spell.id || spell.name, artBase64)
             })),
-            backRow: pageSpells.map(name => {
-                const normName = normalizeName(name);
+            backRow: pageSpells.map(spell => {
+                // Tenta achar pelo ID oficial, ou faz fallback para nome aproximado
+                const normName = normalizeName(spell.name);
                 const dbSpell = database.find(s => 
+                    (spell.id && s.id === spell.id) || 
                     normalizeName(s.SpellName || '') === normName
                 );
                 
                 if (dbSpell) {
-                    const levelStr = String(dbSpell.Level) === '0' || String(dbSpell.Level).toLowerCase() === 'truque' 
-                                     ? 'Truque' 
-                                     : `Nível ${dbSpell.Level}`;
+                    const levelStr = String(dbSpell.Level) === '0' || String(dbSpell.Level).toLowerCase() === 'truque'
+                        ? 'Truque' : `Nível ${dbSpell.Level}`;
                     
-                    // Components (VSM)
+                    const classesArr = Array.isArray(dbSpell.Classes) ? dbSpell.Classes : [];
+                    const classList = classesArr.length > 0 ? classesArr.join(', ') : '';
+
                     const parts: string[] = [];
                     if (dbSpell.Verbal) parts.push('V');
                     if (dbSpell.Somatic) parts.push('S');
-                    if (dbSpell.Material) parts.push('M');
-                    const components = parts.join(', ') || '—';
-
+                    if (dbSpell.Material) parts.push(`M (${dbSpell.Material})`);
+                    const components = parts.join(', ') || 'Nenhum';
+                    
                     return {
-                        name: dbSpell.SpellName,
+                        name: spell.name,
                         level: levelStr,
                         school: dbSpell.School || '—',
+                        classes: classList,
                         casting_time: dbSpell.Time || dbSpell.CastingTime || '—',
                         range: dbSpell.Reach || dbSpell.Range || '—',
                         components,
@@ -264,7 +424,7 @@ function paginateSpells(character: CharacterInput, artBase64: string) {
 
                 // Fallback para magia não encontrada
                 return {
-                    name,
+                    name: spell.name,
                     level: '—',
                     school: '—',
                     casting_time: '—',
@@ -278,19 +438,30 @@ function paginateSpells(character: CharacterInput, artBase64: string) {
     return pages;
 }
 
-function paginateSpellDescriptions(spellNames: string[], database: any[]) {
+function paginateSpellDescriptions(spellNames: SpellEntry[], database: any[]) {
     const pages = [];
-    const itemsPerPage = 5; // Limita a magias por página para evitar estouro
+    const MAX_CHARS_FIRST_PAGE = 1800; // 1 coluna dividindo com seção "Habilidades de Raça e Classe"
+    const MAX_CHARS_SUBSEQUENT_PAGE = 4500; // 2 colunas amplas (full width) dividindo entre si
+    
+    let currentSpells = [];
+    let currentChars = 0;
     let isFirstPage = true;
+    let pageIndex = 1;
 
-    for (let i = 0; i < spellNames.length; i += itemsPerPage) {
-        const chunk = spellNames.slice(i, i + itemsPerPage);
+    for (let i = 0; i < spellNames.length; i++) {
+        const spell = spellNames[i];
+        const normName = normalizeName(spell.name);
+        const db = database.find(s => 
+            (spell.id && s.id === spell.id) || 
+            normalizeName(s.SpellName || '') === normName
+        );
         
-        const mappedSpells = chunk.map((name: string) => {
-            const normName = normalizeName(name);
-            const db = database.find(s => normalizeName(s.SpellName || '') === normName);
-            if (!db) return { name, level: '—', school: '—', casting_time: '—', range: '—', description: name, narrative: '' };
-            
+        let descText = spell.name;
+        let dbSpell: any = null;
+
+        if (!db) {
+            dbSpell = { name: spell.name, level: '—', school: '—', casting_time: '—', range: '—', components: '—', duration: '—', description: 'Magia não encontrada no compêndio local.', narrative: '' };
+        } else {
             const levelStr = String(db.Level) === '0' || String(db.Level).toLowerCase() === 'truque'
                 ? 'Truque' : `Nível ${db.Level}`;
             const parts: string[] = [];
@@ -298,26 +469,48 @@ function paginateSpellDescriptions(spellNames: string[], database: any[]) {
             if (db.Somatic) parts.push('S');
             if (db.Material) parts.push('M');
             
-            return {
-                name: db.SpellName,
+            descText = db.Description || db.VisualDescription || '—';
+
+            dbSpell = {
+                name: spell.name,
                 level: levelStr,
                 school: db.School || '—',
                 casting_time: db.Time || db.CastingTime || '—',
                 range: db.Reach || db.Range || '—',
                 components: parts.join(', ') || '—',
                 duration: db.Duration || '—',
-                description: db.Description || db.VisualDescription || '—',
+                description: descText,
                 narrative: db.BasePrompt || ''
             };
-        });
+        }
 
+        // Estima tamanho em caracteres (+overhead de 250 pro cabeçalho de cada card de magia na página de leitura)
+        const spellCharCost = descText.length + 250;
+        const pageLimit = isFirstPage ? MAX_CHARS_FIRST_PAGE : MAX_CHARS_SUBSEQUENT_PAGE;
+        
+        // Se exceder a carga cognitiva máxima da página, empurra pra uma página nova (salvo se a página original estiver vazia)
+        if (currentChars + spellCharCost > pageLimit && currentSpells.length > 0) {
+            pages.push({
+                isFirstPage,
+                spells: currentSpells,
+                pageIndex: pageIndex
+            });
+            isFirstPage = false;
+            pageIndex++;
+            currentSpells = [];
+            currentChars = 0;
+        }
+
+        currentSpells.push(dbSpell);
+        currentChars += spellCharCost;
+    }
+    
+    if (currentSpells.length > 0) {
         pages.push({
             isFirstPage,
-            spells: mappedSpells,
-            pageIndex: pages.length + 1
+            spells: currentSpells,
+            pageIndex: pageIndex
         });
-        
-        isFirstPage = false;
     }
     
     return pages;

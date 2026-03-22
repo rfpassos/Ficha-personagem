@@ -10,20 +10,15 @@ async function generateSpellArts() {
     const spellsDataPath = path.resolve(__dirname, '../../../api/assets/data/magias-dnd-ptbr.json');
     const outputDir = path.resolve(__dirname, '../../../assets/spells/art');
 
-    // Lista de magias da Elara para processar
-    const elaraSpells = [
-        "Metamorfose",
-        "Alterar-se",
-        "Tranca Arcana",
-        "Levitação",
-        "Velocidade",
-        "Fabricar",
-        "Teletransporte",
-        "Desintegrar",
-        "Transmutação de Pedra",
+    // Lista específica de magias para gerar as artes agora
+    const allowedSpells = [
+        "Mísseis Mágicos",
+        "Imagem Silenciosa",
+        "Leque Cromático",
+        "Sono",
+        "Ilusão Menor",
         "Prestidigitação",
-        "Mãos Mágicas",
-        "Remendar"
+        "Mãos Mágicas"
     ];
 
     const spells = JSON.parse(fs.readFileSync(spellsDataPath, 'utf8'));
@@ -34,14 +29,14 @@ async function generateSpellArts() {
 
         if (!name || !basePrompt) continue;
 
-        // Verifica se a magia está na lista da Elara (ou contém o nome base)
-        const isElaraSpell = elaraSpells.some((s: string) => name.toLowerCase().includes(s.toLowerCase()));
-        if (!isElaraSpell) continue;
+        // Verifica se a magia está na lista
+        const isAllowed = allowedSpells.some((s: string) => name.toLowerCase().includes(s.toLowerCase()));
+        if (!isAllowed) continue;
 
         console.log(`\n--- Processando: ${name} ---`);
         try {
             console.log(`Convertendo prompt para realismo...`);
-            const realismPrompt = await convertToRealismPrompt(basePrompt);
+            const realismPrompt = await convertToRealismPrompt(basePrompt, 'grimoire');
             
             console.log(`Gerando imagem (4:5)...`);
             const result = await generateImage(realismPrompt, { aspect_ratio: 'portrait_4_5' });

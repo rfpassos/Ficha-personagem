@@ -46,8 +46,8 @@ export async function generatePdfFromHtml(html: string, options: PdfOptions = {}
         await page.setViewport({ width: 1122, height: 794, deviceScaleFactor: 2 });
 
         await page.setContent(html, {
-            waitUntil: 'networkidle0',
-            timeout: 60000,
+            waitUntil: 'networkidle2',
+            timeout: 180000,
         });
 
         // Injeta correções CSS para PDF

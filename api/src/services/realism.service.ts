@@ -6,9 +6,13 @@ import { googleChat } from './google-api.service';
  * Converte um prompt base em um prompt fotorrealista de alta fidelidade.
  * Lê a configuração de um arquivo markdown externo para facilitar ajustes.
  */
-export async function convertToRealismPrompt(basePrompt: string): Promise<string> {
+export async function convertToRealismPrompt(
+    basePrompt: string, 
+    type: 'character' | 'grimoire' = 'character'
+): Promise<string> {
     try {
-        const metaPromptPath = path.join(__dirname, '../../assets/prompts/realism-meta.md');
+        const fileName = type === 'grimoire' ? 'realism-meta-grimoire.md' : 'realism-meta.md';
+        const metaPromptPath = path.join(__dirname, `../../assets/prompts/${fileName}`);
         let metaPrompt = fs.readFileSync(metaPromptPath, 'utf8');
         
         // Injeta o prompt base no local indicado

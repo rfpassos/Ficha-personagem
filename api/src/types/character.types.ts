@@ -95,6 +95,7 @@ export interface CharacterInput {
         social_interactions: string;
     };
     spell_description: {
+        id?: string;
         name: string;
         level: string;
         school: string;

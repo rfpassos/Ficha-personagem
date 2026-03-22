@@ -16,8 +16,10 @@ Registro de funcionalidades por prioridade e status de desenvolvimento.
 ## 🎨 Sprint 2: Visual & Templates (EM ANDAMENTO)
 - [x] Correção de Renderização de Atributos/Layout
 - [ ] Design visual do PDF (estilo grimório/pergaminho)
-- [ ] Implementação de `sheet.hbs` (HTML/CSS)
-- [ ] Imagem de fallback customizada (`image-error.png`)
+- [x] Implementação de `sheet.hbs` (HTML/CSS)
+- [x] Imagem de fallback customizada (`image-error.png`)
+- [x] **Spell Unification (Sinônimos):** Unificação de magias e IDs (Muralha de Força vs Muralha de Energia)
+- [x] **Spell Description Layout:** Melhoria na quebra de linha de descrições longas (Teletransporte resumido)
 
 ## 🖥️ Sprint 3: Painel Admin (Next.js 16)
 - [ ] Setup do Projeto-Base na pasta `admin/`

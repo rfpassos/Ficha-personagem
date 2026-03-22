@@ -15,9 +15,13 @@ O sistema recebe um JSON com dados de personagem (Nome, Raça, Classe, Nível, A
     -   Se falhar, tenta **Freepik Mystic** (30s polling).
     -   Se falhar, usa **Placeholder/Error Image** do MinIO.
 5.  **Storage**: Imagem gerada é salva no MinIO (S3).
-6.  **Template Service**: Handlebars compila o HTML injetando a imagem (base64) e dados.
-7.  **PDF Service**: Puppeteer renderiza o HTML e gera o PDF (A4).
-8.  **Database**: Registro de uso (Generation log) é atualizado com status, duração e URL da imagem.
+6.  **Realism Service**: Converte o prompt base em um prompt detalhado e fotorrealista. Oferece dois perfis:
+    -   **Personagem**: Usa `realism-meta.md` (16:9, com regra de composição lateral).
+    -   **Grimório**: Usa `realism-meta-grimoire.md` (4:5, focado na arte da magia).
+7.  **Template Service**: Handlebars compila o HTML injetando a imagem (base64) e dados.
+8.  **PDF Service**: Puppeteer renderiza o HTML e gera o PDF (A4).
+9.  **Database**: Registro de uso (Generation log) é atualizado com status, duração e URL da imagem.
+10. **Spell Engine**: Unificação de magias preparando para sinônimos. Se no PDF vier "Muralha de Força", o sistema mapeia para o ID oficial "muralha-de-energia", mantendo o nome customizado do jogador no título mas a descrição oficial do compêndio.
 
 ## 3. Infraestrutura
 
