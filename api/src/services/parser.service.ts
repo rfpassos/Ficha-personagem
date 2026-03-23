@@ -53,6 +53,8 @@ export class LLMParserService {
             const response = result.response;
             let text = response.text().trim();
             
+            console.log('[LLMParserService] Resposta bruta da Gemini:', text);
+            
             // Limpa formatação markdown caso o Gemini retorne ```json ... ```
             text = text.replace(/^```(json)?|```$/gi, '').trim();
 

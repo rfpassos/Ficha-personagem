@@ -1,16 +1,133 @@
 {
-    "character_name": "{{CHARACTER_NAME}}", "ancestry": "{{ANCESTRY}}", "class": "{{CLASS}}", "subclass": "{{SUBCLASS}}", "level": "{{LEVEL}}", "community": "{{COMMUNITY}}",
-    "basic_info": { "full_name": "{{CHARACTER_NAME}}", "action_dice": { "hope_d12_checked": false, "fear_d12_checked": false } },
-    "stress_and_defense": { "armor": "{{ARMOR_STRESS}}", "evasion": "{{EVASION_STRESS}}", "resolve": "{{RESOLVE_STRESS}}", "thresholds": "{{THRESHOLDS}}", "movement": "{{MOVEMENT}}" },
-    "domains": { "agility": { "die": "d{{AGILITY_DIE}}", "experience_checked": false }, "strength": { "die": "d{{STRENGTH_DIE}}", "experience_checked": false }, "finesse": { "die": "d{{FINESSE_DIE}}", "experience_checked": false }, "instinct": { "die": "d{{INSTINCT_DIE}}", "experience_checked": false }, "knowledge": { "die": "d{{KNOWLEDGE_DIE}}", "experience_checked": false }, "presence": { "die": "d{{PRESENCE_DIE}}", "experience_checked": false } },
-    "skills_and_proficiencies": { "skills": [ { "name": "{{SKILL_1_NAME}}", "domain": "{{DOMAIN_1}}" }, { "name": "{{SKILL_2_NAME}}", "domain": "{{DOMAIN_2}}" } ], "tools_and_languages": [ "{{TOOLS_LANGUAGES}}" ] },
-    "features": { "ancestry_features": [ "{{ANCESTRY_FEATURES}}" ], "class_features": [ "{{CLASS_FEATURES}}" ], "community_features": [ "{{COMMUNITY_FEATURES}}" ] },
-    "actions_and_spells": { "action_tokens": "{{ACTION_TOKENS}}", "spell_slots": "{{SPELL_SLOTS}}", "known_spells": [ "{{SPELL_LIST}}" ] },
-    "equipment": { "load": { "current": "{{CURRENT_LOAD}}", "max": "{{MAX_LOAD}}" }, "glimmer": "{{GLIMMER_VALUE}}", "weapons_and_armor": [ "{{WEAPONS_ARMOR_LIST}}" ], "important_items": [ "{{IMPORTANT_ITEMS}}" ], "money": "{{MONEY}}" },
-    "values_connections_memories": { "value": "{{VALUE}}", "connections": [ "{{CONNECTION_1}}", "{{CONNECTION_2}}" ], "memories": [ "{{MEMORY_1}}", "{{MEMORY_2}}" ] },
+    "character_name": "{{CHARACTER_NAME}}",
+    "ancestry": "{{ANCESTRY}}",
+    "class": "{{CLASS}}",
+    "subclass": "{{SUBCLASS}}",
+    "level": "{{LEVEL}}",
+    "community": "{{COMMUNITY}}",
+    "basic_info": {
+        "full_name": "{{CHARACTER_NAME}}",
+        "action_dice": {
+            "hope_d12_checked": false,
+            "fear_d12_checked": false
+        }
+    },
+    "stress_and_defense": {
+        "armor": "{{ARMOR_STRESS}}",
+        "evasion": "{{EVASION_STRESS}}",
+        "resolve": "{{RESOLVE_STRESS}}",
+        "thresholds": "{{THRESHOLDS}}",
+        "movement": "{{MOVEMENT}}"
+    },
+    "domains": {
+        "agility": {
+            "die": "d{{AGILITY_DIE}}",
+            "experience_checked": false
+        },
+        "strength": {
+            "die": "d{{STRENGTH_DIE}}",
+            "experience_checked": false
+        },
+        "finesse": {
+            "die": "d{{FINESSE_DIE}}",
+            "experience_checked": false
+        },
+        "instinct": {
+            "die": "d{{INSTINCT_DIE}}",
+            "experience_checked": false
+        },
+        "knowledge": {
+            "die": "d{{KNOWLEDGE_DIE}}",
+            "experience_checked": false
+        },
+        "presence": {
+            "die": "d{{PRESENCE_DIE}}",
+            "experience_checked": false
+        }
+    },
+    "skills_and_proficiencies": {
+        "skills": [
+            {
+                "name": "{{SKILL_1_NAME}}",
+                "domain": "{{DOMAIN_1}}"
+            },
+            {
+                "name": "{{SKILL_2_NAME}}",
+                "domain": "{{DOMAIN_2}}"
+            }
+        ],
+        "tools_and_languages": [
+            "{{TOOLS_LANGUAGES}}"
+        ]
+    },
+    "features": {
+        "ancestry_features": [
+            "{{ANCESTRY_FEATURES}}"
+        ],
+        "class_features": [
+            "{{CLASS_FEATURES}}"
+        ],
+        "community_features": [
+            "{{COMMUNITY_FEATURES}}"
+        ]
+    },
+    "actions_and_spells": {
+        "action_tokens": "{{ACTION_TOKENS}}",
+        "spell_slots": "{{SPELL_SLOTS}}",
+        "known_spells": [
+            "{{SPELL_LIST}}"
+        ]
+    },
+    "equipment": {
+        "load": {
+            "current": "{{CURRENT_LOAD}}",
+            "max": "{{MAX_LOAD}}"
+        },
+        "glimmer": "{{GLIMMER_VALUE}}",
+        "weapons_and_armor": [
+            "{{WEAPONS_ARMOR_LIST}}"
+        ],
+        "important_items": [
+            "{{IMPORTANT_ITEMS}}"
+        ],
+        "money": "{{MONEY}}"
+    },
+    "values_connections_memories": {
+        "value": "{{VALUE}}",
+        "connections": [
+            "{{CONNECTION_1}}",
+            "{{CONNECTION_2}}"
+        ],
+        "memories": [
+            "{{MEMORY_1}}",
+            "{{MEMORY_2}}"
+        ]
+    },
     "backstory": "{{BACKSTORY}}",
-    "appearance_and_style": { "image_alt": "{{CHARACTER_NAME}}", "image_file": "{{IMAGE_FILE.png}}", "image_prompt": "{{IMAGE_PROMPT}}", "appearance": "{{APPEARANCE}}", "clothing_style": "{{CLOTHING_STYLE}}", "unique_accessories": "{{UNIQUE_ACCESSORIES}}", "signature_expression": "{{SIGNATURE_EXPRESSION}}" },
-    "goals_and_motivations": { "main_goal": "{{MAIN_GOAL}}", "motivations": "{{MOTIVATIONS}}", "fears": "{{FEARS}}", "secrets": "{{SECRETS}}" },
-    "game_notes": { "combat_behavior": "{{COMBAT_BEHAVIOR}}", "social_interactions": "{{SOCIAL_INTERACTIONS}}", "future_development": "{{FUTURE_DEVELOPMENT}}" },
-    "metadata": { "template_title": "{{CHARACTER_NAME}} - Ficha de Personagem {{ANCESTRY}} | {{CLASS}} | Nível {{LEVEL}}", "system": "Daggerheart", "locale": "pt-BR", "schema_version": "1.0.0" }
+    "appearance_and_style": {
+        "image_alt": "{{CHARACTER_NAME}}",
+        "image_file": "{{IMAGE_FILE.png}}",
+        "image_prompt": "{{IMAGE_PROMPT}}",
+        "appearance": "{{APPEARANCE}}",
+        "clothing_style": "{{CLOTHING_STYLE}}",
+        "unique_accessories": "{{UNIQUE_ACCESSORIES}}",
+        "signature_expression": "{{SIGNATURE_EXPRESSION}}"
+    },
+    "goals_and_motivations": {
+        "main_goal": "{{MAIN_GOAL}}",
+        "motivations": "{{MOTIVATIONS}}",
+        "fears": "{{FEARS}}",
+        "secrets": "{{SECRETS}}"
+    },
+    "game_notes": {
+        "combat_behavior": "{{COMBAT_BEHAVIOR}}",
+        "social_interactions": "{{SOCIAL_INTERACTIONS}}",
+        "future_development": "{{FUTURE_DEVELOPMENT}}"
+    },
+    "metadata": {
+        "template_title": "{{CHARACTER_NAME}} - Ficha de Personagem {{ANCESTRY}} | {{CLASS}} | Nível {{LEVEL}}",
+        "system": "Daggerheart",
+        "locale": "pt-BR",
+        "schema_version": "1.0.0"
+    }
 }

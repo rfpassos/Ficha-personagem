@@ -18,64 +18,237 @@
     "armor_class": "{{AC}}",
     "movement": "{{MOVEMENT}}",
     "initiative": "{{INITIATIVE}}",
-    "death_saves": { "successes": 0, "failures": 0 },
+    "death_saves": {
+      "successes": 0,
+      "failures": 0
+    },
     "resistances_immunities": "{{RESISTANCES}}"
   },
   "attributes": {
-    "strength": { "value": "{{STRENGTH_VALUE}}", "modifier": "{{STRENGTH_MOD}}", "save": "{{STRENGTH_SAVE}}" },
-    "dexterity": { "value": "{{DEXTERITY_VALUE}}", "modifier": "{{DEXTERITY_MOD}}", "save": "{{DEXTERITY_SAVE}}" },
-    "constitution": { "value": "{{CONSTITUTION_VALUE}}", "modifier": "{{CONSTITUTION_MOD}}", "save": "{{CONSTITUTION_SAVE}}" },
-    "intelligence": { "value": "{{INTELLIGENCE_VALUE}}", "modifier": "{{INTELLIGENCE_MOD}}", "save": "{{INTELLIGENCE_SAVE}}" },
-    "wisdom": { "value": "{{WISDOM_VALUE}}", "modifier": "{{WISDOM_MOD}}", "save": "{{WISDOM_SAVE}}" },
-    "charisma": { "value": "{{CHARISMA_VALUE}}", "modifier": "{{CHARISMA_MOD}}", "save": "{{CHARISMA_SAVE}}" }
+    "strength": {
+      "value": "{{STRENGTH_VALUE}}",
+      "modifier": "{{STRENGTH_MOD}}",
+      "save": "{{STRENGTH_SAVE}}"
+    },
+    "dexterity": {
+      "value": "{{DEXTERITY_VALUE}}",
+      "modifier": "{{DEXTERITY_MOD}}",
+      "save": "{{DEXTERITY_SAVE}}"
+    },
+    "constitution": {
+      "value": "{{CONSTITUTION_VALUE}}",
+      "modifier": "{{CONSTITUTION_MOD}}",
+      "save": "{{CONSTITUTION_SAVE}}"
+    },
+    "intelligence": {
+      "value": "{{INTELLIGENCE_VALUE}}",
+      "modifier": "{{INTELLIGENCE_MOD}}",
+      "save": "{{INTELLIGENCE_SAVE}}"
+    },
+    "wisdom": {
+      "value": "{{WISDOM_VALUE}}",
+      "modifier": "{{WISDOM_MOD}}",
+      "save": "{{WISDOM_SAVE}}"
+    },
+    "charisma": {
+      "value": "{{CHARISMA_VALUE}}",
+      "modifier": "{{CHARISMA_MOD}}",
+      "save": "{{CHARISMA_SAVE}}"
+    }
   },
   "proficiencies": {
-    "saving_throws": [ "{{SAVE_PROFICIENCIES}}" ],
-    "skill_proficiencies": [
-      { "name": "Acrobacia", "attribute": "Des", "proficient": "{{ACROBACIA_PROFICIENT}}", "expertise": "{{ACROBACIA_EXPERTISE}}", "modifier": "{{ACROBACIA_MODIFIER}}" },
-      { "name": "Adestrar Animais", "attribute": "Sab", "proficient": "{{ADESTRAR_ANIMAIS_PROFICIENT}}", "expertise": "{{ADESTRAR_ANIMAIS_EXPERTISE}}", "modifier": "{{ADESTRAR_ANIMAIS_MODIFIER}}" },
-      { "name": "Arcanismo", "attribute": "Int", "proficient": "{{ARCANISMO_PROFICIENT}}", "expertise": "{{ARCANISMO_EXPERTISE}}", "modifier": "{{ARCANISMO_MODIFIER}}" },
-      { "name": "Atletismo", "attribute": "For", "proficient": "{{ATLETISMO_PROFICIENT}}", "expertise": "{{ATLETISMO_EXPERTISE}}", "modifier": "{{ATLETISMO_MODIFIER}}" },
-      { "name": "Atuação", "attribute": "Car", "proficient": "{{ATUACAO_PROFICIENT}}", "expertise": "{{ATUACAO_EXPERTISE}}", "modifier": "{{ATUACAO_MODIFIER}}" },
-      { "name": "Enganação", "attribute": "Car", "proficient": "{{ENGANACAO_PROFICIENT}}", "expertise": "{{ENGANACAO_EXPERTISE}}", "modifier": "{{ENGANACAO_MODIFIER}}" },
-      { "name": "Furtividade", "attribute": "Des", "proficient": "{{FURTIVIDADE_PROFICIENT}}", "expertise": "{{FURTIVIDADE_EXPERTISE}}", "modifier": "{{FURTIVIDADE_MODIFIER}}" },
-      { "name": "História", "attribute": "Int", "proficient": "{{HISTORIA_PROFICIENT}}", "expertise": "{{HISTORIA_EXPERTISE}}", "modifier": "{{HISTORIA_MODIFIER}}" },
-      { "name": "Intimidação", "attribute": "Car", "proficient": "{{INTIMIDACAO_PROFICIENT}}", "expertise": "{{INTIMIDACAO_EXPERTISE}}", "modifier": "{{INTIMIDACAO_MODIFIER}}" },
-      { "name": "Intuição", "attribute": "Sab", "proficient": "{{INTUICAO_PROFICIENT}}", "expertise": "{{INTUICAO_EXPERTISE}}", "modifier": "{{INTUICAO_MODIFIER}}" },
-      { "name": "Investigação", "attribute": "Int", "proficient": "{{INVESTIGACAO_PROFICIENT}}", "expertise": "{{INVESTIGACAO_EXPERTISE}}", "modifier": "{{INVESTIGACAO_MODIFIER}}" },
-      { "name": "Medicina", "attribute": "Sab", "proficient": "{{MEDICINA_PROFICIENT}}", "expertise": "{{MEDICINA_EXPERTISE}}", "modifier": "{{MEDICINA_MODIFIER}}" },
-      { "name": "Natureza", "attribute": "Int", "proficient": "{{NATUREZA_PROFICIENT}}", "expertise": "{{NATUREZA_EXPERTISE}}", "modifier": "{{NATUREZA_MODIFIER}}" },
-      { "name": "Percepção", "attribute": "Sab", "proficient": "{{PERCEPCAO_PROFICIENT}}", "expertise": "{{PERCEPCAO_EXPERTISE}}", "modifier": "{{PERCEPCAO_MODIFIER}}" },
-      { "name": "Persuasão", "attribute": "Car", "proficient": "{{PERSUASAO_PROFICIENT}}", "expertise": "{{PERSUASAO_EXPERTISE}}", "modifier": "{{PERSUASAO_MODIFIER}}" },
-      { "name": "Prestidigitação", "attribute": "Des", "proficient": "{{PRESTIDIGITACAO_PROFICIENT}}", "expertise": "{{PRESTIDIGITACAO_EXPERTISE}}", "modifier": "{{PRESTIDIGITACAO_MODIFIER}}" },
-      { "name": "Religião", "attribute": "Int", "proficient": "{{RELIGIAO_PROFICIENT}}", "expertise": "{{RELIGIAO_EXPERTISE}}", "modifier": "{{RELIGIAO_MODIFIER}}" },
-      { "name": "Sobrevivência", "attribute": "Sab", "proficient": "{{SOBREVIVENCIA_PROFICIENT}}", "expertise": "{{SOBREVIVENCIA_EXPERTISE}}", "modifier": "{{SOBREVIVENCIA_MODIFIER}}" }
+    "saving_throws": [
+      "{{SAVE_PROFICIENCIES}}"
     ],
-    "tools_and_languages": [ "{{TOOLS_LANGUAGES}}" ]
+    "skill_proficiencies": [
+      {
+        "name": "Acrobacia",
+        "attribute": "Des",
+        "proficient": "{{ACROBACIA_PROFICIENT}}",
+        "expertise": "{{ACROBACIA_EXPERTISE}}",
+        "modifier": "{{ACROBACIA_MODIFIER}}"
+      },
+      {
+        "name": "Adestrar Animais",
+        "attribute": "Sab",
+        "proficient": "{{ADESTRAR_ANIMAIS_PROFICIENT}}",
+        "expertise": "{{ADESTRAR_ANIMAIS_EXPERTISE}}",
+        "modifier": "{{ADESTRAR_ANIMAIS_MODIFIER}}"
+      },
+      {
+        "name": "Arcanismo",
+        "attribute": "Int",
+        "proficient": "{{ARCANISMO_PROFICIENT}}",
+        "expertise": "{{ARCANISMO_EXPERTISE}}",
+        "modifier": "{{ARCANISMO_MODIFIER}}"
+      },
+      {
+        "name": "Atletismo",
+        "attribute": "For",
+        "proficient": "{{ATLETISMO_PROFICIENT}}",
+        "expertise": "{{ATLETISMO_EXPERTISE}}",
+        "modifier": "{{ATLETISMO_MODIFIER}}"
+      },
+      {
+        "name": "Atuação",
+        "attribute": "Car",
+        "proficient": "{{ATUACAO_PROFICIENT}}",
+        "expertise": "{{ATUACAO_EXPERTISE}}",
+        "modifier": "{{ATUACAO_MODIFIER}}"
+      },
+      {
+        "name": "Enganação",
+        "attribute": "Car",
+        "proficient": "{{ENGANACAO_PROFICIENT}}",
+        "expertise": "{{ENGANACAO_EXPERTISE}}",
+        "modifier": "{{ENGANACAO_MODIFIER}}"
+      },
+      {
+        "name": "Furtividade",
+        "attribute": "Des",
+        "proficient": "{{FURTIVIDADE_PROFICIENT}}",
+        "expertise": "{{FURTIVIDADE_EXPERTISE}}",
+        "modifier": "{{FURTIVIDADE_MODIFIER}}"
+      },
+      {
+        "name": "História",
+        "attribute": "Int",
+        "proficient": "{{HISTORIA_PROFICIENT}}",
+        "expertise": "{{HISTORIA_EXPERTISE}}",
+        "modifier": "{{HISTORIA_MODIFIER}}"
+      },
+      {
+        "name": "Intimidação",
+        "attribute": "Car",
+        "proficient": "{{INTIMIDACAO_PROFICIENT}}",
+        "expertise": "{{INTIMIDACAO_EXPERTISE}}",
+        "modifier": "{{INTIMIDACAO_MODIFIER}}"
+      },
+      {
+        "name": "Intuição",
+        "attribute": "Sab",
+        "proficient": "{{INTUICAO_PROFICIENT}}",
+        "expertise": "{{INTUICAO_EXPERTISE}}",
+        "modifier": "{{INTUICAO_MODIFIER}}"
+      },
+      {
+        "name": "Investigação",
+        "attribute": "Int",
+        "proficient": "{{INVESTIGACAO_PROFICIENT}}",
+        "expertise": "{{INVESTIGACAO_EXPERTISE}}",
+        "modifier": "{{INVESTIGACAO_MODIFIER}}"
+      },
+      {
+        "name": "Medicina",
+        "attribute": "Sab",
+        "proficient": "{{MEDICINA_PROFICIENT}}",
+        "expertise": "{{MEDICINA_EXPERTISE}}",
+        "modifier": "{{MEDICINA_MODIFIER}}"
+      },
+      {
+        "name": "Natureza",
+        "attribute": "Int",
+        "proficient": "{{NATUREZA_PROFICIENT}}",
+        "expertise": "{{NATUREZA_EXPERTISE}}",
+        "modifier": "{{NATUREZA_MODIFIER}}"
+      },
+      {
+        "name": "Percepção",
+        "attribute": "Sab",
+        "proficient": "{{PERCEPCAO_PROFICIENT}}",
+        "expertise": "{{PERCEPCAO_EXPERTISE}}",
+        "modifier": "{{PERCEPCAO_MODIFIER}}"
+      },
+      {
+        "name": "Persuasão",
+        "attribute": "Car",
+        "proficient": "{{PERSUASAO_PROFICIENT}}",
+        "expertise": "{{PERSUASAO_EXPERTISE}}",
+        "modifier": "{{PERSUASAO_MODIFIER}}"
+      },
+      {
+        "name": "Prestidigitação",
+        "attribute": "Des",
+        "proficient": "{{PRESTIDIGITACAO_PROFICIENT}}",
+        "expertise": "{{PRESTIDIGITACAO_EXPERTISE}}",
+        "modifier": "{{PRESTIDIGITACAO_MODIFIER}}"
+      },
+      {
+        "name": "Religião",
+        "attribute": "Int",
+        "proficient": "{{RELIGIAO_PROFICIENT}}",
+        "expertise": "{{RELIGIAO_EXPERTISE}}",
+        "modifier": "{{RELIGIAO_MODIFIER}}"
+      },
+      {
+        "name": "Sobrevivência",
+        "attribute": "Sab",
+        "proficient": "{{SOBREVIVENCIA_PROFICIENT}}",
+        "expertise": "{{SOBREVIVENCIA_EXPERTISE}}",
+        "modifier": "{{SOBREVIVENCIA_MODIFIER}}"
+      }
+    ],
+    "tools_and_languages": [
+      "{{TOOLS_LANGUAGES}}"
+    ]
   },
   "abilities_and_features": {
-    "racial_traits": [ "{{RACIAL_TRAITS}}" ],
-    "class_features": [ "{{CLASS_FEATURES}}" ],
-    "background_features": [ "{{BACKGROUND_FEATURES}}" ]
+    "racial_traits": [
+      "{{RACIAL_TRAITS}}"
+    ],
+    "class_features": [
+      "{{CLASS_FEATURES}}"
+    ],
+    "background_features": [
+      "{{BACKGROUND_FEATURES}}"
+    ]
   },
   "attacks": [
-    { "name": "{{WEAPON_1_NAME}}", "attack_bonus": "{{WEAPON_1_BONUS}}", "damage_and_type": "{{WEAPON_1_DAMAGE}}" },
-    { "name": "{{WEAPON_2_NAME}}", "attack_bonus": "{{WEAPON_2_BONUS}}", "damage_and_type": "{{WEAPON_2_DAMAGE}}" },
-    { "name": "{{WEAPON_3_NAME}}", "attack_bonus": "{{WEAPON_3_BONUS}}", "damage_and_type": "{{WEAPON_3_DAMAGE}}" }
+    {
+      "name": "{{WEAPON_1_NAME}}",
+      "attack_bonus": "{{WEAPON_1_BONUS}}",
+      "damage_and_type": "{{WEAPON_1_DAMAGE}}"
+    },
+    {
+      "name": "{{WEAPON_2_NAME}}",
+      "attack_bonus": "{{WEAPON_2_BONUS}}",
+      "damage_and_type": "{{WEAPON_2_DAMAGE}}"
+    },
+    {
+      "name": "{{WEAPON_3_NAME}}",
+      "attack_bonus": "{{WEAPON_3_BONUS}}",
+      "damage_and_type": "{{WEAPON_3_DAMAGE}}"
+    }
   ],
   "spellcasting": {
     "spellcasting_ability": "{{SPELLCASTING_ABILITY}}",
     "spell_save_dc": "{{SPELL_SAVE_DC}}",
     "spell_attack_bonus": "{{SPELL_ATTACK_BONUS}}",
-    "cantrips": [ "{{CANTRIP_LIST}}" ],
+    "cantrips": [
+      "{{CANTRIP_LIST}}"
+    ],
     "spell_slots": "{{SPELL_SLOTS_TABLE}}",
-    "spells_prepared": [ "{{SPELL_LIST}}" ]
+    "spells_prepared": [
+      "{{SPELL_LIST}}"
+    ]
   },
   "equipment": {
-    "armor": [ "{{ARMOR_LIST}}" ],
-    "magic_items": [ "{{MAGIC_ITEMS}}" ],
-    "general_equipment": [ "{{GENERAL_EQUIPMENT}}" ],
-    "money": { "copper": "{{CP_VALUE}}", "silver": "{{SP_VALUE}}", "electrum": "{{EP_VALUE}}", "gold": "{{GP_VALUE}}", "platinum": "{{PP_VALUE}}" }
+    "armor": [
+      "{{ARMOR_LIST}}"
+    ],
+    "magic_items": [
+      "{{MAGIC_ITEMS}}"
+    ],
+    "general_equipment": [
+      "{{GENERAL_EQUIPMENT}}"
+    ],
+    "money": {
+      "copper": "{{CP_VALUE}}",
+      "silver": "{{SP_VALUE}}",
+      "electrum": "{{EP_VALUE}}",
+      "gold": "{{GP_VALUE}}",
+      "platinum": "{{PP_VALUE}}"
+    }
   },
   "personality": {
     "trait": "{{PERSONALITY_TRAIT}}",

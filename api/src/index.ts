@@ -39,7 +39,7 @@ async function main(): Promise<void> {
     await app.register(adminRoutes, { prefix: '/admin' });
 
     // ── Start ─────────────────────────────────────────────────
-    const port = parseInt(process.env.PORT ?? '3001');
+    const port = parseInt(process.env.PORT ?? '3002');
     const host = '0.0.0.0';
 
     try {

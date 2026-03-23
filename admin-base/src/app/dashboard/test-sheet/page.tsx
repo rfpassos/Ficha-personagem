@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 
 // Chave gerada para teste
 const TEST_API_KEY = "rgs_4ea62aa32c5458c397ef621236ded7f061c0d960"
-const API_BASE_URL = "http://localhost:3001"
+const API_BASE_URL = "http://localhost:3002"
 
 interface LogEntry {
     message: string
@@ -272,7 +272,7 @@ export default function TestSheetPage() {
                                 ) : (
                                     logs.map((log, i) => (
                                         <div key={i} className="flex gap-3 animate-in fade-in duration-300">
-                                            <span className="text-muted-foreground/40 shrink-0">[{log.timestamp}]</span>
+                                            <span className="text-muted-foreground/70 shrink-0">[{log.timestamp}]</span>
                                             <span className={cn(
                                                 "break-words",
                                                 log.type === "success" && "text-emerald-400",
