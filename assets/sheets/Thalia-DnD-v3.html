@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thalia Windrunner - Ficha de Personagem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper-light: #f7f4eb;
+      --paper-mid: #ebe5d5;
+      --paper-dark: #d9d0bc;
+      --ink-primary: #1a1610;
+      --ink-secondary: #3d3428;
+      --ink-faded: #6b5f4f;
+      --accent-copper: #9a5f28;
+      --accent-verdigris: #4a7c6f;
+      --accent-deep: #3d4a3d;
+      --shadow-ink: rgba(44, 36, 22, 0.1);
+      --border-aged: rgba(92, 77, 50, 0.4);
+
+      --font-h1: 36px;
+      --font-h2: 18px;
+      --font-h3: 15px;
+      --font-body: 14px;
+      --font-small: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Crimson Pro', serif;
+      background: var(--paper-light);
+      color: var(--ink-primary);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .portrait-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper-light);
+      position: relative;
+      padding: 40px 50px;
+      page-break-after: always;
+      box-shadow: inset 0 0 80px var(--shadow-ink);
+    }
+
+    .portrait-page::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border: 1px solid var(--border-aged);
+      pointer-events: none;
+    }
+
+    .portrait-page::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(212, 207, 194, 0.2) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .display-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-primary);
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-family: 'Spectral', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--ink-secondary);
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--font-h2);
+      font-weight: 600;
+      color: var(--ink-primary);
+      border-bottom: 2px solid var(--border-aged);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      margin-top: 30px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-header:first-of-type {
+      margin-top: 0;
+    }
+
+    .portrait-frame {
+      position: absolute;
+      top: 40px;
+      right: 50px;
+      width: 200px;
+      height: 280px;
+      border: 6px solid var(--ink-primary);
+      background: var(--paper-mid);
+      overflow: hidden;
+      box-shadow: 6px 6px 15px var(--shadow-ink);
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compass-attributes {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .attr-compass {
+      flex: 1;
+      text-align: center;
+      padding: 20px 10px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+      position: relative;
+    }
+
+    .attr-compass::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--border-aged);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .attr-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--ink-faded);
+      text-transform: uppercase;
+    }
+
+    .attr-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.2;
+    }
+
+    .attr-mod {
+      font-family: 'Spectral', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--accent-copper);
+    }
+
+    .vitals-bar {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 25px;
+      padding: 20px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+    }
+
+    .vital-stat {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid var(--border-aged);
+    }
+
+    .vital-stat:last-child {
+      border-right: none;
+    }
+
+    .vital-label {
+      font-size: var(--font-small);
+      color: var(--ink-faded);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .vital-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-entry {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px;
+      background: transparent;
+      border-left: 3px solid var(--border-aged);
+      font-size: var(--font-body);
+    }
+
+    .skill-entry.proficient {
+      border-left-color: var(--accent-copper);
+      background: rgba(154, 95, 40, 0.08);
+    }
+
+    .skill-name {
+      color: var(--ink-primary);
+      font-weight: 500;
+    }
+
+    .skill-mod {
+      font-family: 'Crimson Pro', serif;
+      color: var(--ink-secondary);
+      font-weight: 600;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .feature-tag {
+      padding: 8px 16px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+      font-size: var(--font-body);
+      color: var(--ink-secondary);
+    }
+
+    .feature-tag.special {
+      border-color: var(--accent-copper);
+      color: var(--accent-copper);
+      background: rgba(154, 95, 40, 0.08);
+    }
+
+    .attack-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .attack-entry {
+      padding: 15px;
+      background: rgba(0,0,0,0.02);
+      border-left: 3px solid var(--accent-copper);
+    }
+
+    .attack-name {
+      font-weight: 700;
+      color: var(--ink-primary);
+      font-size: var(--font-body);
+    }
+
+    .attack-detail {
+      font-size: var(--font-body);
+      color: var(--ink-secondary);
+    }
+
+    .quote-manuscript {
+      margin-top: 30px;
+      padding: 30px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+      position: relative;
+    }
+
+    .quote-manuscript::before {
+      content: '✦';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 22px;
+      color: var(--accent-copper);
+      background: var(--paper-light);
+      padding: 0 15px;
+    }
+
+    .quote-text {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-secondary);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .spell-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .spell-card-manuscript {
+      padding: 18px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+    }
+
+    .spell-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--ink-primary);
+      font-size: var(--font-body);
+      margin-bottom: 8px;
+    }
+
+    .spell-meta {
+      font-size: var(--font-small);
+      color: var(--ink-faded);
+      margin-bottom: 10px;
+    }
+
+    .spell-desc {
+      font-size: var(--font-small);
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    .equipment-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .equipment-list {
+      list-style: none;
+    }
+
+    .equipment-list li {
+      padding: 10px 0;
+      border-bottom: 1px dotted var(--border-aged);
+      font-size: var(--font-body);
+      color: var(--ink-primary);
+    }
+
+    .equipment-list li::before {
+      content: '◆';
+      color: var(--accent-copper);
+      margin-right: 10px;
+      font-size: 8px;
+    }
+
+    .money-pouch {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin: 25px 0;
+    }
+
+    .coin-pouch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--paper-mid);
+      border: 1px solid var(--border-aged);
+    }
+
+    .coin-label {
+      font-size: var(--font-small);
+      color: var(--ink-faded);
+    }
+
+    .coin-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 25px;
+      right: 50px;
+      font-family: 'Spectral', serif;
+      font-size: var(--font-body);
+      color: var(--ink-faded);
+      font-style: italic;
+    }
+
+    .corner-decor {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-aged);
+      opacity: 0.5;
+    }
+
+    .corner-decor.top-left { top: 30px; left: 30px; border-right: none; border-bottom: none; }
+    .corner-decor.top-right { top: 30px; right: 30px; border-left: none; border-bottom: none; }
+    .corner-decor.bottom-left { bottom: 30px; left: 30px; border-right: none; border-top: none; }
+    .corner-decor.bottom-right { bottom: 30px; right: 30px; border-left: none; border-top: none; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-aged), transparent);
+      margin: 25px 0;
+    }
+
+    .info-box {
+      padding: 15px;
+      background: var(--paper-mid);
+      border-left: 3px solid var(--accent-copper);
+    }
+
+    .info-box.faded {
+      border-left-color: var(--ink-faded);
+    }
+
+    .info-label {
+      font-weight: 700;
+      color: var(--ink-primary);
+      margin-bottom: 5px;
+    }
+
+    .info-text {
+      font-size: var(--font-body);
+      color: var(--ink-secondary);
+    }
+
+    @media print {
+      body { background: var(--paper-light); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PÁGINA 1: IDENTIDADE DO PERSONAGEM -->
+  <div class="portrait-page">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <div class="portrait-frame">
+      <img src="Thalia-DnD.png" alt="Thalia Windrunner">
+    </div>
+
+    <h1 class="display-name">Thalia Windrunner</h1>
+    <p class="subtitle">Meio-Elfa · Patrulheira · Andarilha do Horizonte · Nível 3</p>
+
+    <div class="vitals-bar">
+      <div class="vital-stat">
+        <div class="vital-label">Pontos de Vida</div>
+        <div class="vital-value">28</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">Classe de Armadura</div>
+        <div class="vital-value">16</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">Iniciativa</div>
+        <div class="vital-value">+3</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">Deslocamento</div>
+        <div class="vital-value">9m</div>
+      </div>
+    </div>
+
+    <div class="compass-attributes">
+      <div class="attr-compass">
+        <div class="attr-name">FOR</div>
+        <div class="attr-value">8</div>
+        <div class="attr-mod">-1</div>
+      </div>
+      <div class="attr-compass">
+        <div class="attr-name">DES</div>
+        <div class="attr-value">17</div>
+        <div class="attr-mod">+3</div>
+      </div>
+      <div class="attr-compass">
+        <div class="attr-name">CON</div>
+        <div class="attr-value">14</div>
+        <div class="attr-mod">+2</div>
+      </div>
+      <div class="attr-compass">
+        <div class="attr-name">INT</div>
+        <div class="attr-value">10</div>
+        <div class="attr-mod">+0</div>
+      </div>
+      <div class="attr-compass">
+        <div class="attr-name">SAB</div>
+        <div class="attr-value">15</div>
+        <div class="attr-mod">+2</div>
+      </div>
+      <div class="attr-compass">
+        <div class="attr-name">CAR</div>
+        <div class="attr-value">12</div>
+        <div class="attr-mod">+1</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 class="section-header">Salvaguardas</h2>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">FOR </span><span style="font-weight: 700; font-size: 16px;">+1</span>
+      </div>
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">DES </span><span style="font-weight: 700; font-size: 16px;">+5</span>
+      </div>
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">CON </span><span style="font-weight: 700; font-size: 16px;">+2</span>
+      </div>
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">INT </span><span style="font-weight: 700; font-size: 16px;">+0</span>
+      </div>
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">SAB </span><span style="font-weight: 700; font-size: 16px;">+2</span>
+      </div>
+      <div style="padding: 10px 18px; background: var(--paper-mid); border: 1px solid var(--border-aged);">
+        <span style="color: var(--ink-faded);">CAR </span><span style="font-weight: 700; font-size: 16px;">+1</span>
+      </div>
+    </div>
+
+    <h2 class="section-header">Características de Classe</h2>
+    <div class="feature-tags">
+      <span class="feature-tag">Inimigo Favorito</span>
+      <span class="feature-tag">Explorador Natural</span>
+      <span class="feature-tag">Estilo de Luta: Arquearia</span>
+      <span class="feature-tag">Consciência Primitiva</span>
+      <span class="feature-tag">Detectar Portal</span>
+      <span class="feature-tag">Golpe Planar</span>
+      <span class="feature-tag">Vagante</span>
+    </div>
+
+    <h2 class="section-header">Ações de Combate</h2>
+    <div class="attack-list">
+      <div class="attack-entry">
+        <div class="attack-name">Arco Longo</div>
+        <div class="attack-detail">+7 · 1d8+3 Perfurante</div>
+      </div>
+      <div class="attack-entry">
+        <div class="attack-name">Espada Curta</div>
+        <div class="attack-detail">+5 · 1d6+3 Perfurante</div>
+      </div>
+      <div class="attack-entry">
+        <div class="attack-name">Espada Curta (2ª)</div>
+        <div class="attack-detail">+5 · 1d6+3 Perfurante</div>
+      </div>
+    </div>
+
+    <div class="quote-manuscript">
+      <p class="quote-text">Sinto-me mais em casa na estrada aberta, com o vento no rosto, do que em qualquer cidade murada.</p>
+    </div>
+
+    <div class="page-number">Página I</div>
+  </div>
+
+  <!-- PÁGINA 2: BIOGRAFIA E ESSÊNCIA -->
+  <div class="portrait-page">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <h1 class="display-name" style="font-size: 32px;">Thalia Windrunner</h1>
+    <p class="subtitle">Crônicas & Essência</p>
+
+    <div class="two-col">
+      <div class="column">
+        <h2 class="section-header">História & Origem</h2>
+        <p style="font-size: var(--font-body); text-align: justify; color: var(--ink-secondary); line-height: 1.7;">
+          Thalia Windrunner não é apenas uma mensageira; é uma veterana forjada no fogo de uma guerra recente. Recrutada pelo rigoroso General Theron Vance, ela se tornou a mais veloz e confiável de suas batedoras, uma mestre das estradas e sombras. No entanto, sua carreira foi marcada por uma tragédia: a destruição da vila de Cinzavale — um evento que ela carrega como sua maior falha, sem saber que foi um sacrifício deliberado orquestrado por seu mentor. Essa falha despertou nela um poder latente e mágico, transformando-a de uma simples batedora em uma Andarilha do Horizonte. Agora cavalga em busca de redenção, carregando a promessa feita a uma moribunda e o broche de salgueiro que deve ser entregue.
+        </p>
+
+        <h2 class="section-header">Personalidade</h2>
+        <div style="font-size: var(--font-body); line-height: 1.7;">
+          <p style="margin-bottom: 12px;"><span style="font-weight: 700; color: var(--ink-primary);">Traço:</span> Sinto-me mais em casa na estrada aberta, com o vento no rosto, do que em qualquer cidade murada.</p>
+          <p style="margin-bottom: 12px;"><span style="font-weight: 700; color: var(--ink-primary);">Ideal:</span> Dever. As mensagens que carrego são a linha da vida que conecta reinos e salva inocentes.</p>
+          <p style="margin-bottom: 12px;"><span style="font-weight: 700; color: var(--ink-primary);">Vínculo:</span> Minha lealdade pertence ao General que me recrutou.</p>
+          <p><span style="font-weight: 700; color: var(--ink-primary);">Defeito:</span> Uma vez, uma mensagem minha chegou tarde demais, e uma vila inteira pagou o preço.</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="section-header">Metas & Segredos</h2>
+        <p style="margin-bottom: 15px; font-size: var(--font-body);">
+          <span style="font-weight: 700; color: var(--ink-primary);">Missão:</span> Encontrar Elara (neta da herbalista de Cinzavale) e entregar o broche de salgueiro.
+        </p>
+        <p style="margin-bottom: 15px; font-size: var(--font-body);">
+          <span style="font-weight: 700; color: var(--ink-primary);">Motivação:</span> Redenção pela destruição de Cinzavale. Honrar o dever de mensageira.
+        </p>
+        
+        <div class="info-box">
+          <p style="font-size: var(--font-body);">
+            <span style="font-weight: 700; color: var(--ink-primary);">Medos:</span> Chegar tarde demais novamente. Descobrir que o General foi o verdadeiro culpado por Cinzavale.
+          </p>
+        </div>
+        
+        <div class="info-box faded" style="margin-top: 15px;">
+          <p style="font-size: var(--font-body);">
+            <span style="font-weight: 700; color: var(--ink-primary);">Segredos:</span> O poder mágico que despertou em Cinzavale. A sensação de que o General sabia o que aconteceria.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="two-col">
+      <div class="column">
+        <h2 class="section-header">Aparência</h2>
+        <p style="font-size: var(--font-body); color: var(--ink-secondary); line-height: 1.6;">
+          Meio-elfa de constituição atlética e esguia. Cabelos castanhos longos, geralmente em trança prática. Olhos verdes aguçados com melancolia silenciosa. Pele levemente bronzeada pelo sol.
+        </p>
+        <p style="font-size: var(--font-body); margin-top: 12px;">
+          <span style="font-weight: 700; color: var(--ink-primary);">Vestimenta:</span> Armadura de couro batido gasta pelo uso, mas bem cuidada.
+        </p>
+        <p style="font-size: var(--font-body); margin-top: 12px;">
+          <span style="font-weight: 700; color: var(--ink-primary);">Acessórios:</span> Broche de prata em formato de folha de salgueiro.
+        </p>
+      </div>
+
+      <div class="column">
+        <h2 class="section-header">Notas de Jogo</h2>
+        <p style="font-size: var(--font-body); color: var(--ink-secondary);">
+          <span style="font-weight: 700;">Combate:</span> Arqueira à distância com mobilidade. Usa Furtividade para posicionamento.
+        </p>
+        <p style="font-size: var(--font-body); color: var(--ink-secondary); margin-top: 10px;">
+          <span style="font-weight: 700;">Social:</span> Direta e prática. Leal a quem demonstra comprometimento real.
+        </p>
+        <p style="font-size: var(--font-body); color: var(--ink-secondary); margin-top: 10px;">
+          <span style="font-weight: 700;">Futuro:</span> Confronto com a verdade sobre General Vance e Cinzavale.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-number">Página II</div>
+  </div>
+
+  <!-- PÁGINA 3: PERÍCIAS E TREINAMENTO -->
+  <div class="portrait-page">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <h1 class="display-name" style="font-size: 32px;">Thalia Windrunner</h1>
+    <p class="subtitle">Treinamento & Capacidades</p>
+
+    <div class="two-col">
+      <div class="column">
+        <h2 class="section-header">Perícias</h2>
+        <div class="skill-list">
+          <div class="skill-entry"><span class="skill-name">Acrobacia</span><span class="skill-mod">+3</span></div>
+          <div class="skill-entry"><span class="skill-name">Adestrar Animais</span><span class="skill-mod">+2</span></div>
+          <div class="skill-entry"><span class="skill-name">Arcanismo</span><span class="skill-mod">+0</span></div>
+          <div class="skill-entry proficient"><span class="skill-name">Atletismo</span><span class="skill-mod">+1</span></div>
+          <div class="skill-entry"><span class="skill-name">Atuação</span><span class="skill-mod">+1</span></div>
+          <div class="skill-entry"><span class="skill-name">Enganação</span><span class="skill-mod">+1</span></div>
+          <div class="skill-entry proficient"><span class="skill-name">Furtividade</span><span class="skill-mod">+5</span></div>
+          <div class="skill-entry"><span class="skill-name">História</span><span class="skill-mod">+0</span></div>
+          <div class="skill-entry"><span class="skill-name">Intimidação</span><span class="skill-mod">+1</span></div>
+          <div class="skill-entry proficient"><span class="skill-name">Intuição</span><span class="skill-mod">+4</span></div>
+          <div class="skill-entry"><span class="skill-name">Investigação</span><span class="skill-mod">+0</span></div>
+          <div class="skill-entry"><span class="skill-name">Medicina</span><span class="skill-mod">+2</span></div>
+          <div class="skill-entry"><span class="skill-name">Natureza</span><span class="skill-mod">+0</span></div>
+          <div class="skill-entry proficient"><span class="skill-name">Percepção</span><span class="skill-mod">+4</span></div>
+          <div class="skill-entry"><span class="skill-name">Persuasão</span><span class="skill-mod">+1</span></div>
+          <div class="skill-entry"><span class="skill-name">Prestidigitação</span><span class="skill-mod">+3</span></div>
+          <div class="skill-entry"><span class="skill-name">Religião</span><span class="skill-mod">+0</span></div>
+          <div class="skill-entry proficient"><span class="skill-name">Sobrevivência</span><span class="skill-mod">+4</span></div>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="section-header">Características de Raça</h2>
+        <div class="feature-tags">
+          <span class="feature-tag special">Visão no Escuro 18m</span>
+          <span class="feature-tag special">Ancestral Feérico</span>
+          <span class="feature-tag special">Versatilidade em Perícia</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="section-header">Idiomas & Ferramentas</h2>
+        <div class="feature-tags">
+          <span class="feature-tag">Comum</span>
+          <span class="feature-tag">Élfico</span>
+          <span class="feature-tag">Silvestre</span>
+          <span class="feature-tag">Flauta (instrumento musical)</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="section-header">Origem</h2>
+        <p style="font-size: var(--font-body); color: var(--ink-secondary);">Forasteira · Leal e Neutro</p>
+        <div style="margin-top: 12px;">
+          <span class="feature-tag special">Andarilha (rota de passagem segura)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Página III</div>
+  </div>
+
+  <!-- PÁGINA 4: CONJURAÇÃO -->
+  <div class="portrait-page">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <h1 class="display-name" style="font-size: 32px;">Thalia Windrunner</h1>
+    <p class="subtitle">Artes Arcanas</p>
+
+    <div class="vitals-bar">
+      <div class="vital-stat">
+        <div class="vital-label">Atributo de Conjuração</div>
+        <div class="vital-value" style="font-size: 22px;">Sabedoria</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">CD do Salvamento</div>
+        <div class="vital-value" style="font-size: 22px;">12</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">Bônus de Ataque</div>
+        <div class="vital-value" style="font-size: 22px;">+4</div>
+      </div>
+      <div class="vital-stat">
+        <div class="vital-label">Espaços de Magia</div>
+        <div class="vital-value" style="font-size: 18px;">2 (1º nível)</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="column">
+        <h2 class="section-header">Magias Preparadas</h2>
+        <div class="feature-tags">
+          <span class="feature-tag special">Curar Ferimentos (1º círculo - Evocação)</span>
+          <span class="feature-tag special">Passos Longos (1º círculo - Transmutação)</span>
+          <span class="feature-tag special">Absorver Elementos (1º círculo - Abjuração)</span>
+          <span class="feature-tag special">Proteção contra o Bem e o Mal (1º círculo - Abjuração)</span>
+        </div>
+
+        <div class="divider"></div>
+        
+        <h2 class="section-header">Truques</h2>
+        <p style="font-size: var(--font-body); color: var(--ink-faded); font-style: italic;">Nenhum truque conhecido</p>
+      </div>
+
+      <div class="column">
+        <h2 class="section-header">Descrições das Magias</h2>
+        <div class="spell-grid">
+          <div class="spell-card-manuscript">
+            <div class="spell-title">Curar Ferimentos</div>
+            <div class="spell-meta">1º Círculo · Evocação · Toque · Instantânea</div>
+            <div class="spell-desc">Recupera 1d8 + modificador de Sabedoria em pontos de vida.</div>
+            <div style="font-style: italic; font-size: var(--font-small); color: var(--accent-copper); margin-top: 10px;">
+              "Para Thalia, curar ferimentos é um ato de responsabilidade — a mensageira que não pode se dar ao luxo de perder aliados no campo."
+            </div>
+          </div>
+          <div class="spell-card-manuscript">
+            <div class="spell-title">Passos Longos</div>
+            <div class="spell-meta">1º Círculo · Transmutação · Pessoal · 1 hora</div>
+            <div class="spell-desc">Seu deslocamento aumenta em 3 metros até a magia acabar.</div>
+          </div>
+          <div class="spell-card-manuscript">
+            <div class="spell-title">Absorver Elementos</div>
+            <div class="spell-meta">1º Círculo · Abjuração · Reação · 1 rodada</div>
+            <div class="spell-desc">Como reação, absorve dano de ácido, frio, fogo, elétrico ou trovejante e fica resistente a esse tipo de dano até o início do seu próximo turno.</div>
+          </div>
+          <div class="spell-card-manuscript">
+            <div class="spell-title">Proteção contra o Bem e o Mal</div>
+            <div class="spell-meta">1º Círculo · Abjuração · Toque · Concentração · 10 min</div>
+            <div class="spell-desc">Uma criatura tocada fica protegida contra criaturas designadas como aberrantes, celestiais, elementais, feéricas ou infernais.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Página IV</div>
+  </div>
+
+  <!-- PÁGINA 5: EQUIPAMENTO -->
+  <div class="portrait-page">
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <h1 class="display-name" style="font-size: 32px;">Thalia Windrunner</h1>
+    <p class="subtitle">Pertences & Tesouro</p>
+
+    <h2 class="section-header">Bolsa de Moedas</h2>
+    <div class="money-pouch">
+      <div class="coin-pouch">
+        <div class="coin-label">PC</div>
+        <div class="coin-value">0</div>
+      </div>
+      <div class="coin-pouch">
+        <div class="coin-label">PP</div>
+        <div class="coin-value">0</div>
+      </div>
+      <div class="coin-pouch">
+        <div class="coin-label">PE</div>
+        <div class="coin-value">0</div>
+      </div>
+      <div class="coin-pouch">
+        <div class="coin-label">PO</div>
+        <div class="coin-value">10</div>
+      </div>
+      <div class="coin-pouch">
+        <div class="coin-label">PL</div>
+        <div class="coin-value">0</div>
+      </div>
+    </div>
+
+    <div class="equipment-section">
+      <div>
+        <h2 class="section-header">Arsenal</h2>
+        <ul class="equipment-list">
+          <li>Armadura de Couro Batido</li>
+        </ul>
+
+        <div class="divider"></div>
+        
+        <h2 class="section-header">Itens Mágicos</h2>
+        <p style="font-size: var(--font-body); color: var(--ink-faded); font-style: italic;">Nenhum item mágico registrado</p>
+      </div>
+
+      <div>
+        <h2 class="section-header">Equipamento Geral</h2>
+        <ul class="equipment-list">
+          <li>Duas espadas curtas</li>
+          <li>Arco longo</li>
+          <li>Aljava com 20 flechas</li>
+          <li>Pacote de explorador</li>
+          <li>Cajado</li>
+          <li>Laço de caça</li>
+          <li>Troféu de presa de lobo</li>
+          <li>Broche de prata em formato de folha de salgueiro</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px; padding: 25px; border-top: 1px solid var(--border-aged);">
+      <p style="font-family: 'Spectral', serif; font-style: italic; color: var(--ink-faded); font-size: var(--font-body);">
+        D&D 5e · Thalia Windrunner · Patrulheira (Andarilha do Horizonte) · Nível 3 · Versão 1.4.0
+      </p>
+    </div>
+
+    <div class="page-number">Página V — Fim</div>
+  </div>
+
+</body>
+
+</html>

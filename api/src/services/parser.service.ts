@@ -7,7 +7,14 @@ export class LLMParserService {
     private static genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     private static model = LLMParserService.genAI.getGenerativeModel({ 
         model: 'gemini-3.1-flash-lite-preview',
-        generationConfig: { responseMimeType: 'application/json' }
+        generationConfig: { 
+            responseMimeType: 'application/json',
+            // @ts-ignore - Ativando o raciocínio da IA para melhor precisão no parse
+            thinkingConfig: {
+                includeThoughts: true,
+                thinkingLevel: 'MEDIUM'
+            }
+        }
     });
 
     private static getPromptTemplate(): string {
@@ -53,9 +60,15 @@ export class LLMParserService {
             const response = result.response;
             let text = response.text().trim();
             
-            console.log('[LLMParserService] Resposta bruta da Gemini:', text);
+            // Limpa pensamentos ou textos explicativos fora do JSON (comum com thinking_level ativo)
+            const firstBrace = text.indexOf('{');
+            const lastBrace = text.lastIndexOf('}');
             
-            // Limpa formatação markdown caso o Gemini retorne ```json ... ```
+            if (firstBrace !== -1 && lastBrace !== -1) {
+                text = text.substring(firstBrace, lastBrace + 1);
+            }
+            
+            // Limpa formatação markdown caso ainda reste algo
             text = text.replace(/^```(json)?|```$/gi, '').trim();
 
             let parsed: any;

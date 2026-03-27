@@ -18,10 +18,16 @@ O sistema recebe um JSON com dados de personagem (Nome, Raça, Classe, Nível, A
 6.  **Realism Service**: Converte o prompt base em um prompt detalhado e fotorrealista. Oferece dois perfis:
     -   **Personagem**: Usa `realism-meta.md` (16:9, com regra de composição lateral).
     -   **Grimório**: Usa `realism-meta-grimoire.md` (4:5, focado na arte da magia).
-7.  **Template Service**: Handlebars compila o HTML injetando a imagem (base64) e dados.
-8.  **PDF Service**: Puppeteer renderiza o HTML e gera o PDF (A4).
+7.  **Template Service**: Handlebars compila o HTML injetando a imagem (base64) e dados. Implementa **paginações dinâmicas**:
+    -   **Grimório**: Divide magias por carga cognitiva por página.
+    -   **Biografia**: Divide histórias longas automaticamente, alternando entre layout de 1 e 2 colunas para maximizar legibilidade.
+    -   **Reordenação**: Seções técnicas como Arsenal são movidas para a página final para evitar cortes.
+8.  **PDF Service**: Puppeteer renderiza o HTML e gera o PDF (A4 Paisagem). Configurado com `overflow: visible` para garantir que o conteúdo dinâmico flua sem perdas.
 9.  **Database**: Registro de uso (Generation log) é atualizado com status, duração e URL da imagem.
-10. **Spell Engine**: Unificação de magias preparando para sinônimos. Se no PDF vier "Muralha de Força", o sistema mapeia para o ID oficial "muralha-de-energia", mantendo o nome customizado do jogador no título mas a descrição oficial do compêndio.
+10. **Spell Engine**: 
+    -   **Unificação**: Remove duplicatas e normaliza nomes (ex: unifica "Escudo Arcano" e "Shield").
+    -   **Sinônimos**: Mapeia nomes customizados para IDs oficiais, mantendo o sabor do jogador mas a regra oficial.
+
 
 ## 3. Infraestrutura
 

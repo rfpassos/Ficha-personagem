@@ -9,6 +9,7 @@ import { generateCharacterImage } from '../services/image.service';
 import { renderSheetHtml, ensureSpellArts } from '../services/template.service';
 import { generatePdfFromHtml } from '../services/pdf.service';
 import { StorageService } from '../services/storage.service';
+import { Readable } from 'stream';
 
 export async function sheetRoutes(app: FastifyInstance): Promise<void> {
     
@@ -20,26 +21,33 @@ export async function sheetRoutes(app: FastifyInstance): Promise<void> {
             const body = sheetRequestSchema.parse(request.body);
             const apiKeyRecord = (request as any).apiKeyRecord;
 
-            // Cria o registro na DB como PENDING
-            const generation = await prisma.generation.create({
-                data: {
-                    apiKeyId: apiKeyRecord.id,
-                    characterName: 'Processando...', // Será atualizado após o parse
+            try {
+                // Cria o registro na DB como PENDING
+                const generation = await prisma.generation.create({
+                    data: {
+                        apiKeyId: apiKeyRecord.id,
+                        characterName: 'Processando...', // Será atualizado após o parse
+                        status: 'PENDING',
+                    },
+                });
+
+                // Inicia o processamento em background (não bloqueia o HTTP)
+                processInBackground(generation.id, body, request.log);
+
+                return reply.status(202).send({
+                    jobId: generation.id,
                     status: 'PENDING',
-                },
-            });
-
-            // Inicia o processamento em background (não bloqueia o HTTP)
-            processInBackground(generation.id, body, request.log);
-
-            return reply.status(202).send({
-                jobId: generation.id,
-                status: 'PENDING',
-                links: {
-                    status: `/api/v1/sheets/${generation.id}`,
-                    download: `/api/v1/sheets/${generation.id}/download`
-                }
-            });
+                    links: {
+                        status: `/api/v1/sheets/${generation.id}`,
+                        download: `/api/v1/sheets/${generation.id}/download`
+                    }
+                });
+            } catch (err) {
+                request.log.error({ err }, 'Falha ao criar registro de geração no banco');
+                return reply.status(503).send({ 
+                    error: 'Não foi possível iniciar a geração. O banco de dados está instável ou em manutenção.' 
+                });
+            }
         }
     );
 
@@ -72,6 +80,35 @@ export async function sheetRoutes(app: FastifyInstance): Promise<void> {
         }
     );
 
+    // 3. GET /api/v1/sheets/:id/html - Download do HTML [NOVO]
+    app.get<{ Params: { id: string } }>(
+        '/api/v1/sheets/:id/html',
+        { preHandler: [authMiddleware] },
+        async (request, reply) => {
+            const { id } = request.params;
+
+            const job = await prisma.generation.findUnique({
+                where: { id }
+            });
+
+            if (!job || job.status !== 'SUCCESS' || !job.htmlPath) {
+                return reply.status(404).send({ error: 'HTML não disponível ou ficha ainda em processamento' });
+            }
+
+            try {
+                const stream = await StorageService.getObject(job.htmlPath);
+                
+                reply.header('Content-Type', 'text/html');
+                reply.header('Content-Disposition', `attachment; filename="ficha_${job.characterName || id}.html"`);
+                
+                return reply.send(stream);
+            } catch (err) {
+                request.log.error({ err, jobId: id }, 'Erro ao buscar HTML no MinIO');
+                return reply.status(500).send({ error: 'Erro ao recuperar o HTML.' });
+            }
+        }
+    );
+
     // 2. GET /api/v1/sheets/:id - Poll Status
     app.get<{ Params: { id: string } }>(
         '/api/v1/sheets/:id',
@@ -92,6 +129,10 @@ export async function sheetRoutes(app: FastifyInstance): Promise<void> {
             const downloadUrl = job.status === 'SUCCESS' 
                 ? `/api/v1/sheets/${job.id}/download`
                 : null;
+            
+            const htmlDownloadUrl = job.status === 'SUCCESS' && job.htmlPath
+                ? `/api/v1/sheets/${job.id}/html`
+                : null;
 
             return {
                 jobId: job.id,
@@ -99,6 +140,7 @@ export async function sheetRoutes(app: FastifyInstance): Promise<void> {
                 character: job.characterName,
                 progress: job.status === 'PENDING' ? 'Na fila' : (job.status === 'SUCCESS' ? 'Concluído' : 'Erro'),
                 downloadUrl,
+                htmlDownloadUrl,
                 error: job.status === 'ERROR' ? job.errorMessage : null,
                 createdAt: job.createdAt
             };
@@ -142,10 +184,18 @@ async function processInBackground(jobId: string, input: any, log: any) {
         log.info({ jobId }, 'Garantindo artes para o Grimório');
         await ensureSpellArts(character);
 
-        // 3. PDF
-        log.info({ jobId }, 'Gerando PDF');
+        // 3. PDF e HTML
+        log.info({ jobId }, 'Gerando PDF e HTML');
         const html = renderSheetHtml(character, imageBase64);
-        const pdfBuffer = await generatePdfFromHtml(html, { landscape: true, margin: { top: '0', right: '0', bottom: '0', left: '0' }});
+        
+        // Upload HTML para MinIO
+        const htmlPath = await StorageService.upload(`htmls/sheet_${jobId}.html`, html, 'text/html');
+
+        const pdfBuffer = await generatePdfFromHtml(html, { 
+            landscape: true, 
+            margin: { top: '0', right: '0', bottom: '0', left: '0' },
+            ...({ printBackground: true } as any)
+        });
         
         // Upload PDF para MinIO
         const pdfPath = await StorageService.uploadSheetPdf(jobId, pdfBuffer);
@@ -160,6 +210,7 @@ async function processInBackground(jobId: string, input: any, log: any) {
                 imageSource: source,
                 imageUrl, // Caminho relativo no bucket
                 pdfPath, // NOVO: Salvando o caminho completo do PDF
+                htmlPath, // NOVO: Salvando o caminho do HTML
                 pdfSizeBytes: pdfBuffer.length,
                 durationMs,
             },

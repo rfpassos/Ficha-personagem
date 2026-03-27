@@ -16,7 +16,8 @@ import {
     CheckCircle2, 
     AlertCircle, 
     Loader2, 
-    ExternalLink 
+    ExternalLink,
+    FileCode
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -37,6 +38,7 @@ export default function TestSheetPage() {
     const [jobId, setJobId] = React.useState<string | null>(null)
     const [status, setStatus] = React.useState<"IDLE" | "PENDING" | "SUCCESS" | "ERROR">("IDLE")
     const [downloadUrl, setDownloadUrl] = React.useState<string | null>(null)
+    const [htmlDownloadUrl, setHtmlDownloadUrl] = React.useState<string | null>(null)
     const [progressValue, setProgressValue] = React.useState(0)
 
     const scrollRef = React.useRef<HTMLDivElement>(null)
@@ -60,6 +62,7 @@ export default function TestSheetPage() {
         setJobId(null)
         setStatus("IDLE")
         setDownloadUrl(null)
+        setHtmlDownloadUrl(null)
         setProgressValue(0)
     }
 
@@ -129,6 +132,9 @@ export default function TestSheetPage() {
                     addLog("Processamento concluído com sucesso!", "success")
                     addLog(`Personagem identificado: ${data.character}`, "info")
                     setDownloadUrl(`${API_BASE_URL}${data.downloadUrl}?x-api-key=${TEST_API_KEY}`)
+                    if (data.htmlDownloadUrl) {
+                        setHtmlDownloadUrl(`${API_BASE_URL}${data.htmlDownloadUrl}?x-api-key=${TEST_API_KEY}`)
+                    }
                     setStatus("SUCCESS")
                     setIsProcessing(false)
                     setProgressValue(100)
@@ -218,19 +224,22 @@ export default function TestSheetPage() {
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <p className="text-sm text-muted-foreground">O processo foi finalizado e o arquivo está pronto para download.</p>
-                                <div className="flex gap-3">
-                                    <Button asChild className="flex-1 bg-emerald-600 hover:bg-emerald-700">
-                                        <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                                            <Download className="w-4 h-4 mr-2" />
-                                            Baixar PDF
-                                        </a>
-                                    </Button>
-                                    <Button variant="outline" asChild>
-                                        <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
-                                            <ExternalLink className="w-4 h-4" />
-                                        </a>
-                                    </Button>
-                                </div>
+                                    <div className="flex gap-2 w-full">
+                                        <Button asChild className="flex-1 bg-emerald-600 hover:bg-emerald-700">
+                                            <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                                                <Download className="w-4 h-4 mr-2" />
+                                                Baixar PDF
+                                            </a>
+                                        </Button>
+                                        {htmlDownloadUrl && (
+                                            <Button variant="outline" asChild className="flex-1 border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
+                                                <a href={htmlDownloadUrl} target="_blank" rel="noopener noreferrer">
+                                                    <FileCode className="w-4 h-4 mr-2" />
+                                                    Baixar HTML
+                                                </a>
+                                            </Button>
+                                        )}
+                                    </div>
                             </CardContent>
                         </Card>
                     )}

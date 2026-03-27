@@ -18,27 +18,35 @@ export async function authMiddleware(
 
     console.log(`[DEBUG_AUTH] Prefix: ${prefix}, Hash: ${keyHash}`);
 
-    const record = await prisma.apiKey.findFirst({
-        where: { keyPrefix: prefix, keyHash, isActive: true },
-    });
+    try {
+        const record = await prisma.apiKey.findFirst({
+            where: { keyPrefix: prefix, keyHash, isActive: true },
+        });
 
-    if (!record) {
-        console.log(`[DEBUG_AUTH] No record found for Prefix: ${prefix}`);
-        reply.status(401).send({ error: 'Invalid or inactive API Key' });
+        if (!record) {
+            console.log(`[DEBUG_AUTH] No record found for Prefix: ${prefix}`);
+            reply.status(401).send({ error: 'Chave de API inválida ou inativa.' });
+            return;
+        }
+
+        // Atualiza uso em background (não bloqueia a resposta)
+        prisma.apiKey.update({
+            where: { id: record.id },
+            data: {
+                lastUsedAt: new Date(),
+                usageCount: { increment: 1 },
+            },
+        }).catch(() => { /* silencioso — não crítico */ });
+
+        // Anexa dados da key à requisição para uso na rota
+        (request as FastifyRequest & { apiKeyRecord: typeof record }).apiKeyRecord = record;
+    } catch (err) {
+        console.error('[AUTH_ERROR] Falha na conexão com o banco:', err);
+        reply.status(503).send({ 
+            error: 'Serviço temporariamente indisponível. Falha na conexão com o banco de dados (VPS em manutenção).' 
+        });
         return;
     }
-
-    // Atualiza uso em background (não bloqueia a resposta)
-    prisma.apiKey.update({
-        where: { id: record.id },
-        data: {
-            lastUsedAt: new Date(),
-            usageCount: { increment: 1 },
-        },
-    }).catch(() => { /* silencioso — não crítico */ });
-
-    // Anexa dados da key à requisição para uso na rota
-    (request as FastifyRequest & { apiKeyRecord: typeof record }).apiKeyRecord = record;
 }
 
 export async function adminAuthMiddleware(

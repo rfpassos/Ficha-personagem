@@ -64,130 +64,13 @@
       {
         "name": "Acrobacia",
         "attribute": "Des",
-        "proficient": "{{ACROBACIA_PROFICIENT}}",
-        "expertise": "{{ACROBACIA_EXPERTISE}}",
-        "modifier": "{{ACROBACIA_MODIFIER}}"
-      },
-      {
-        "name": "Adestrar Animais",
-        "attribute": "Sab",
-        "proficient": "{{ADESTRAR_ANIMAIS_PROFICIENT}}",
-        "expertise": "{{ADESTRAR_ANIMAIS_EXPERTISE}}",
-        "modifier": "{{ADESTRAR_ANIMAIS_MODIFIER}}"
-      },
-      {
-        "name": "Arcanismo",
-        "attribute": "Int",
-        "proficient": "{{ARCANISMO_PROFICIENT}}",
-        "expertise": "{{ARCANISMO_EXPERTISE}}",
-        "modifier": "{{ARCANISMO_MODIFIER}}"
-      },
-      {
-        "name": "Atletismo",
-        "attribute": "For",
-        "proficient": "{{ATLETISMO_PROFICIENT}}",
-        "expertise": "{{ATLETISMO_EXPERTISE}}",
-        "modifier": "{{ATLETISMO_MODIFIER}}"
-      },
-      {
-        "name": "Atuação",
-        "attribute": "Car",
-        "proficient": "{{ATUACAO_PROFICIENT}}",
-        "expertise": "{{ATUACAO_EXPERTISE}}",
-        "modifier": "{{ATUACAO_MODIFIER}}"
-      },
-      {
-        "name": "Enganação",
-        "attribute": "Car",
-        "proficient": "{{ENGANACAO_PROFICIENT}}",
-        "expertise": "{{ENGANACAO_EXPERTISE}}",
-        "modifier": "{{ENGANACAO_MODIFIER}}"
-      },
-      {
-        "name": "Furtividade",
-        "attribute": "Des",
-        "proficient": "{{FURTIVIDADE_PROFICIENT}}",
-        "expertise": "{{FURTIVIDADE_EXPERTISE}}",
-        "modifier": "{{FURTIVIDADE_MODIFIER}}"
-      },
-      {
-        "name": "História",
-        "attribute": "Int",
-        "proficient": "{{HISTORIA_PROFICIENT}}",
-        "expertise": "{{HISTORIA_EXPERTISE}}",
-        "modifier": "{{HISTORIA_MODIFIER}}"
-      },
-      {
-        "name": "Intimidação",
-        "attribute": "Car",
-        "proficient": "{{INTIMIDACAO_PROFICIENT}}",
-        "expertise": "{{INTIMIDACAO_EXPERTISE}}",
-        "modifier": "{{INTIMIDACAO_MODIFIER}}"
-      },
-      {
-        "name": "Intuição",
-        "attribute": "Sab",
-        "proficient": "{{INTUICAO_PROFICIENT}}",
-        "expertise": "{{INTUICAO_EXPERTISE}}",
-        "modifier": "{{INTUICAO_MODIFIER}}"
-      },
-      {
-        "name": "Investigação",
-        "attribute": "Int",
-        "proficient": "{{INVESTIGACAO_PROFICIENT}}",
-        "expertise": "{{INVESTIGACAO_EXPERTISE}}",
-        "modifier": "{{INVESTIGACAO_MODIFIER}}"
-      },
-      {
-        "name": "Medicina",
-        "attribute": "Sab",
-        "proficient": "{{MEDICINA_PROFICIENT}}",
-        "expertise": "{{MEDICINA_EXPERTISE}}",
-        "modifier": "{{MEDICINA_MODIFIER}}"
-      },
-      {
-        "name": "Natureza",
-        "attribute": "Int",
-        "proficient": "{{NATUREZA_PROFICIENT}}",
-        "expertise": "{{NATUREZA_EXPERTISE}}",
-        "modifier": "{{NATUREZA_MODIFIER}}"
-      },
-      {
-        "name": "Percepção",
-        "attribute": "Sab",
-        "proficient": "{{PERCEPCAO_PROFICIENT}}",
-        "expertise": "{{PERCEPCAO_EXPERTISE}}",
-        "modifier": "{{PERCEPCAO_MODIFIER}}"
-      },
-      {
-        "name": "Persuasão",
-        "attribute": "Car",
-        "proficient": "{{PERSUASAO_PROFICIENT}}",
-        "expertise": "{{PERSUASAO_EXPERTISE}}",
-        "modifier": "{{PERSUASAO_MODIFIER}}"
-      },
-      {
-        "name": "Prestidigitação",
-        "attribute": "Des",
-        "proficient": "{{PRESTIDIGITACAO_PROFICIENT}}",
-        "expertise": "{{PRESTIDIGITACAO_EXPERTISE}}",
-        "modifier": "{{PRESTIDIGITACAO_MODIFIER}}"
-      },
-      {
-        "name": "Religião",
-        "attribute": "Int",
-        "proficient": "{{RELIGIAO_PROFICIENT}}",
-        "expertise": "{{RELIGIAO_EXPERTISE}}",
-        "modifier": "{{RELIGIAO_MODIFIER}}"
-      },
-      {
-        "name": "Sobrevivência",
-        "attribute": "Sab",
-        "proficient": "{{SOBREVIVENCIA_PROFICIENT}}",
-        "expertise": "{{SOBREVIVENCIA_EXPERTISE}}",
-        "modifier": "{{SOBREVIVENCIA_MODIFIER}}"
+        "proficient": false,
+        "expertise": false,
+        "modifier": 0
       }
     ],
+    "weapon_proficiencies": "string",
+    "armor_proficiencies": "string",
     "tools_and_languages": [
       "{{TOOLS_LANGUAGES}}"
     ]
@@ -201,6 +84,9 @@
     ],
     "background_features": [
       "{{BACKGROUND_FEATURES}}"
+    ],
+    "feats": [
+      "{{FEATS}}"
     ]
   },
   "attacks": [

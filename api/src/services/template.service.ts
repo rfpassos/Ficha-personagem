@@ -145,6 +145,10 @@ Handlebars.registerHelper('join', (arr: string[], sep: string) => {
     return arr.join(typeof sep === 'string' ? sep : ', ');
 });
 
+Handlebars.registerHelper('add', (a: number, b: number) => {
+    return (Number(a) || 0) + (Number(b) || 0);
+});
+
 Handlebars.registerHelper('nl2br', function(text: unknown) {
     if (typeof text !== 'string') return '';
     return new Handlebars.SafeString(text.replace(/\n/g, '<br />'));
@@ -187,18 +191,17 @@ function getSpellSynonyms(): Record<string, string> {
 }
 
 function normalizeName(name: string): string {
-    return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    // Remove conteúdo entre parênteses (como "(Shield)") e normaliza texto
+    const cleanName = name.replace(/\s*\(.*?\)\s*/g, ' ').trim();
+    return cleanName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 }
 
 function getTemplate(): HandlebarsTemplateDelegate {
-    if (!compiledTemplate) {
-        if (!fs.existsSync(TEMPLATE_PATH)) {
-            throw new Error(`Template não encontrado em: ${TEMPLATE_PATH}`);
-        }
-        const templateSource = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
-        compiledTemplate = Handlebars.compile(templateSource);
+    if (!fs.existsSync(TEMPLATE_PATH)) {
+        throw new Error(`Template não encontrado em: ${TEMPLATE_PATH}`);
     }
-    return compiledTemplate;
+    const templateSource = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
+    return Handlebars.compile(templateSource);
 }
 
 // Funções utilitárias para cálculos de D&D 5e
@@ -246,6 +249,8 @@ export function renderSheetHtml(
         armor_class: character.health_and_defense?.armor_class || 10,
         initiative: character.health_and_defense?.initiative || formatModifier(attrMods.dexterity),
         speed: (character.health_and_defense?.movement || '9').replace(/[^0-9.]/g, ''), // Pega só o número se vier "9m"
+        background: character.basic_info?.background || '—',
+        alignment: character.basic_info?.alignment || '—',
         
         health_and_defense: {
             ...character.health_and_defense,
@@ -264,7 +269,38 @@ export function renderSheetHtml(
             image_file: `data:image/png;base64,${imageBase64}`
         },
 
+        // Mapeamento de Notas de Jogo (Garantindo que os campos cheguem com os nomes que o template espera)
+        game_notes: {
+            combat_behavior: character.game_notes?.combat_behavior || '—',
+            social_interactions: character.game_notes?.social_interactions || '—',
+            future_development: character.game_notes?.future_development || '—',
+            notes: '—'
+        },
+
+        // Mapeamento de Moedas (JSON: gold, copper, silver, electrum, platinum -> Template: gp, cp, sp, ep, pp)
+        equipment: {
+            ...character.equipment,
+            money: {
+                copper: character.equipment?.money?.copper || 0,
+                silver: character.equipment?.money?.silver || 0,
+                electrum: character.equipment?.money?.electrum || 0,
+                gold: character.equipment?.money?.gold || 0,
+                platinum: character.equipment?.money?.platinum || 0,
+                // Mantém aliases se necessário
+                cp: character.equipment?.money?.copper || 0,
+                sp: character.equipment?.money?.silver || 0,
+            }
+        },
+
+        personality: character.personality || {
+            trait: '',
+            ideal: '',
+            bond: '',
+            flaw: ''
+        },
         personality_traits: character.personality?.trait || '',
+        
+        backstory_pages: paginateBackstory(character.backstory || '—'),
         
         // Mapeia para o nome que o template espera
         features_and_traits: {
@@ -342,6 +378,7 @@ export function renderSheetHtml(
     console.log(`[template.service] Renderizando ficha para ${character.character_name}`);
     console.log(`[template.service] Total de magias preparadas: ${character.spellcasting?.spells_prepared?.length || 0}`);
     console.log(`[template.service] Total de páginas de cards de magia: ${data.spell_card_pages.length}`);
+    console.log(`[template.service] Total de páginas de biografia: ${data.backstory_pages.length}`);
 
     return template(data);
 }
@@ -515,4 +552,46 @@ function paginateSpellDescriptions(spellNames: SpellEntry[], database: any[]) {
     
     return pages;
 }
+function paginateBackstory(backstory: string) {
+    const pages = [];
+    const MAX_CHARS_PER_PAGE = 2400; // Limite aproximado para caber na seção lateral da página 2
 
+    if (!backstory || backstory === '—') {
+        pages.push({ text: '—', pageIndex: 1, isFirstPage: true });
+        return pages;
+    }
+
+    // Se for pequeno, apenas uma página
+    if (backstory.length <= MAX_CHARS_PER_PAGE) {
+        pages.push({ text: backstory, pageIndex: 1, isFirstPage: true });
+        return pages;
+    }
+
+    // Divide o texto em parágrafos para evitar cortes no meio de frases
+    const paragraphs = backstory.split('\n');
+    let currentText = '';
+    let pageIndex = 1;
+
+    for (const p of paragraphs) {
+        if (currentText.length + p.length > MAX_CHARS_PER_PAGE && currentText.length > 0) {
+            pages.push({
+                text: currentText.trim(),
+                pageIndex,
+                isFirstPage: pageIndex === 1
+            });
+            currentText = '';
+            pageIndex++;
+        }
+        currentText += p + '\n';
+    }
+
+    if (currentText.trim().length > 0) {
+        pages.push({
+            text: currentText.trim(),
+            pageIndex,
+            isFirstPage: pageIndex === 1
+        });
+    }
+
+    return pages;
+}

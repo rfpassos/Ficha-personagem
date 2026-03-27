@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thalia Windrunner - Ficha de Personagem Meio-Elfa | Patrulheira (Andarilha do Horizonte) | Nível 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c3a34a;
+      --gold-bright: #f0d080;
+      --bg-dark: rgba(10, 10, 10, 0.85);
+      --bg-blur: 12px;
+      --white: #f5f5f5;
+      --text-dim: rgba(255, 255, 255, 0.7);
+      --border: rgba(255, 255, 255, 0.15);
+
+      --font-h1: 35px;
+      --font-h2: 14px;
+      --font-h3: 11px;
+      --font-body: 11px;
+      --font-small: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #050505;
+      color: var(--white);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .landscape-container {
+      width: 297mm;
+      min-height: 210mm;
+      position: relative;
+      display: flex;
+      background: #000;
+      overflow: visible;
+      page-break-after: always;
+    }
+
+    .standard-page {
+      width: 297mm;
+      min-height: 210mm;
+      background: #0a0a0a;
+      display: block;
+      padding: 30px 50px;
+      position: relative;
+      border: 1px solid var(--border);
+      page-break-after: always;
+      overflow: visible;
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: var(--gold);
+      margin-bottom: 40px;
+      border-top: 2px solid var(--gold);
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.0) contrast(1.05);
+    }
+
+    .hero-background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 40%, rgba(0, 0, 0, 0.3) 60%, #000 98%);
+    }
+
+    .art-zone {
+      flex: 1.2;
+      z-index: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px;
+    }
+
+    .art-overlay-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--gold);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      margin-bottom: 5px;
+    }
+
+    .info-panel {
+      flex: 1;
+      min-height: 100%;
+      z-index: 2;
+      background: var(--bg-dark);
+      backdrop-filter: blur(var(--bg-blur));
+      -webkit-backdrop-filter: blur(var(--bg-blur));
+      border-left: 1px solid var(--border);
+      padding: 15px 40px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.5);
+      overflow: visible;
+    }
+
+    .header-info {
+      margin-bottom: 15px;
+    }
+
+    .char-name {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--font-h1);
+      line-height: 1.1;
+      margin-bottom: 5px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .char-meta {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .vitals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .vital-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .vital-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .vital-value {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      color: var(--gold-bright);
+    }
+
+    .attr-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .attr-item {
+      text-align: center;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 10px;
+    }
+
+    .attr-name {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+
+    .attr-val {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .attr-mod {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .secondary-zone {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: var(--font-h2);
+      letter-spacing: 2px;
+      color: var(--gold);
+      border-top: 1px solid var(--border);
+      padding-top: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      display: block;
+      width: 100%;
+    }
+
+    .content-text {
+      font-size: var(--font-body);
+      line-height: 1.5;
+      color: var(--white);
+      break-inside: auto;
+    }
+
+    .technical-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .saving-throws-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .save-item {
+      font-size: var(--font-small);
+      padding: 3px 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .save-proficient {
+      border-left-color: var(--gold);
+      color: var(--gold-bright);
+      font-weight: bold;
+    }
+
+    .content-block {
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+      break-inside: avoid-page;
+      display: block;
+      position: relative;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      height: calc(100% - 60px);
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tag-gold {
+      border-color: var(--gold);
+    }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 2px;
+    }
+
+    .skill-proficient {
+      color: var(--gold-bright);
+      font-weight: bold;
+      border-left: 2px solid var(--gold);
+    }
+
+    .quote-box {
+      margin-top: auto;
+      padding-top: 20px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+    }
+
+    .quote-box::before {
+      content: '"';
+      font-size: 40px;
+      color: var(--gold);
+      position: absolute;
+      margin-left: -30px;
+      margin-top: -10px;
+      opacity: 0.5;
+    }
+
+    .footer-landscape {
+      position: absolute;
+      bottom: 20px;
+      right: 50px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    .data-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .resistances-box {
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(195, 163, 74, 0.05);
+      border-left: 2px solid var(--gold);
+      font-size: var(--font-small);
+    }
+
+    .spell-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .spell-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 2px solid var(--gold);
+      padding: 10px;
+    }
+
+    .spell-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .spell-name {
+      font-weight: bold;
+      color: var(--gold-bright);
+    }
+
+    .spell-level {
+      font-size: var(--font-small);
+      color: var(--gold);
+    }
+
+    .spell-meta {
+      font-size: var(--font-small);
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+
+    .spell-narrative {
+      font-style: italic;
+      opacity: 0.7;
+      font-size: var(--font-small);
+      margin-top: 5px;
+    }
+
+    .equipment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .equipment-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--font-body);
+    }
+
+    .equipment-item::before {
+      content: "•";
+      color: var(--gold);
+    }
+
+    .money-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .money-item {
+      text-align: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    .money-label {
+      font-size: var(--font-small);
+      color: var(--text-dim);
+    }
+
+    .money-value {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--gold-bright);
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PÁGINA 1: HERO (DADOS PRINCIPAIS) -->
+  <div class="landscape-container">
+    <div class="hero-background">
+      <img src="Thalia-DnD.png" alt="Character Art">
+    </div>
+
+    <div class="art-zone">
+      <div class="art-overlay-title">DUNGEONS & DRAGONS 5E</div>
+    </div>
+
+    <div class="info-panel">
+      <header class="header-info">
+        <div class="char-meta">Meio-Elfa · Patrulheira · Andarilha do Horizonte · NÍVEL 3</div>
+        <h1 class="char-name">Thalia Windrunner</h1>
+      </header>
+
+      <!-- VITAIS -->
+      <div class="vitals-grid">
+        <div class="vital-card">
+          <div class="vital-label">PV</div>
+          <div class="vital-value" style="font-size: 28px;">28</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">CA</div>
+          <div class="vital-value" style="font-size: 28px;">16</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">INI</div>
+          <div class="vital-value" style="font-size: 28px;">+3</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">VEL</div>
+          <div class="vital-value" style="font-size: 28px;">9m</div>
+        </div>
+      </div>
+
+      <!-- ATRIBUTOS -->
+      <div class="attr-list" style="margin-bottom: 15px;">
+        <div class="attr-item">
+          <div class="attr-name">FOR</div>
+          <div class="attr-val" style="font-size: 18px;">8</div>
+          <div class="attr-mod" style="font-size: 9px;">-1</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">DES</div>
+          <div class="attr-val" style="font-size: 18px;">17</div>
+          <div class="attr-mod" style="font-size: 9px;">+3</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">CON</div>
+          <div class="attr-val" style="font-size: 18px;">14</div>
+          <div class="attr-mod" style="font-size: 9px;">+2</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">INT</div>
+          <div class="attr-val" style="font-size: 18px;">10</div>
+          <div class="attr-mod" style="font-size: 9px;">+0</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">SAB</div>
+          <div class="attr-val" style="font-size: 18px;">15</div>
+          <div class="attr-mod" style="font-size: 9px;">+2</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">CAR</div>
+          <div class="attr-val" style="font-size: 18px;">12</div>
+          <div class="attr-mod" style="font-size: 9px;">+1</div>
+        </div>
+      </div>
+
+      <!-- SALVAGUARDAS E PASSIVAS -->
+      <div class="technical-grid">
+        <div>
+          <h2 class="section-title" style="margin-top: 0;">Salvaguardas</h2>
+          <div class="saving-throws-list">
+            <div class="save-item save-proficient">
+              <span>Força</span>
+              <span>+1</span>
+            </div>
+            <div class="save-item save-proficient">
+              <span>Destreza</span>
+              <span>+5</span>
+            </div>
+            <div class="save-item">
+              <span>Constituição</span>
+              <span>+2</span>
+            </div>
+            <div class="save-item">
+              <span>Inteligência</span>
+              <span>+0</span>
+            </div>
+            <div class="save-item">
+              <span>Sabedoria</span>
+              <span>+2</span>
+            </div>
+            <div class="save-item">
+              <span>Carisma</span>
+              <span>+1</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 class="section-title" style="margin-top: 0;">Sentidos Passivos</h2>
+          <div class="saving-throws-list" style="grid-template-columns: 1fr;">
+            <div class="save-item"><span>Percepção</span> <span>+4 (14)</span></div>
+            <div class="save-item"><span>Investigação</span> <span>+0 (10)</span></div>
+            <div class="save-item"><span>Intuição</span> <span>+4 (14)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURES -->
+      <div class="secondary-zone">
+        <div>
+          <h2 class="section-title">Características de Raça</h2>
+          <div class="tags-container">
+            <span class="tag tag-gold">Visão no Escuro 18m</span>
+            <span class="tag tag-gold">Ancestral Feérico</span>
+            <span class="tag tag-gold">Versatilidade em Perícia</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Características de Classe</h2>
+          <div class="tags-container">
+            <span class="tag">Inimigo Favorito</span>
+            <span class="tag">Explorador Natural</span>
+            <span class="tag">Estilo de Luta: Arquearia</span>
+            <span class="tag">Consciência Primitiva</span>
+            <span class="tag">Detectar Portal</span>
+            <span class="tag">Golpe Planar</span>
+            <span class="tag">Vagante</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Ataques</h2>
+          <div class="tags-container" style="gap: 15px;">
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">Arco Longo</div>
+              <div style="font-size: 10px;">Bônus: +7 | 1d8+3 Perfurante</div>
+            </div>
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">Espada Curta</div>
+              <div style="font-size: 10px;">Bônus: +5 | 1d6+3 Perfurante</div>
+            </div>
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+              <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">Espada Curta 2</div>
+              <div style="font-size: 10px;">Bônus: +5 | 1d6+3 Perfurante</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-box">
+        Sinto-me mais em casa na estrada aberta, com o vento no rosto, do que em qualquer cidade murada.
+      </div>
+
+      <div class="footer-landscape">
+        D&D 5E · Andarilha do Horizonte · D&D 5e
+      </div>
+    </div>
+  </div>
+
+  <!-- PÁGINA 2: BIOGRAFIA E ESSÊNCIA -->
+  <div class="standard-page">
+    <header class="page-title">
+      <span>Biografia & Essência</span>
+      <span style="font-size: 12px; opacity: 0.5">Thalia Windrunner // D&D 5E</span>
+    </header>
+
+    <div class="data-grid" style="grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">História do Personagem</h2>
+          <div class="content-text" style="text-align: justify;">Thalia Windrunner não é apenas uma mensageira; é uma veterana forjada no fogo de uma guerra recente. Recrutada pelo rigoroso General Theron Vance, ela se tornou a mais veloz e confiável de suas batedoras, uma mestre das estradas e sombras. No entanto, sua carreira foi marcada por uma tragédia: a destruição da vila de Cinzavale — um evento que ela carrega como sua maior falha, sem saber que foi um sacrifício deliberado orquestrado por seu mentor. Essa falha despertou nela um poder latente e mágico, transformando-a de uma simples batedora em uma Andarilha do Horizonte. Agora cavalga em busca de redenção, carregando a promessa feita a uma moribunda e o broche de salgueiro que deve ser entregue.</div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Personalidade & Psicologia</h2>
+          <div class="content-text"><strong>Traços:</strong> Sinto-me mais em casa na estrada aberta, com o vento no rosto, do que em qualquer cidade murada.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Ideais:</strong> Dever. As mensagens que carrego são a linha da vida que conecta reinos e salva inocentes. Elas são mais importantes que eu.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Vínculos:</strong> Minha lealdade pertence ao General que me recrutou, que viu em mim não apenas uma mensageira, mas uma arma para a vitória.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Defeitos:</strong> Uma vez, uma mensagem minha chegou tarde demais, e uma vila inteira pagou o preço. O peso dessa falha me assombra a cada galope.</div>
+        </div>
+      </div>
+
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Metas, Motivações & Segredos</h2>
+          <div class="content-text"><strong>Objetivo Principal:</strong> Encontrar Elara (neta da herbalista de Cinzavale) e entregar o broche de salgueiro, cumprindo a promessa de redenção.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Motivações:</strong> Redenção pela destruição de Cinzavale. Honrar o dever de mensageira como proteção dos inocentes.</div>
+          <div class="content-text" style="margin-top: 15px; padding: 10px; background: rgba(195, 163, 74, 0.05); border-left: 2px solid var(--gold);">
+            <strong>Medos:</strong> Chegar tarde demais novamente. Descobrir que o General — seu mentor — foi o verdadeiro culpado por Cinzavale.<br>
+            <strong>Segredos:</strong> O poder mágico que despertou em Cinzavale. A sensação de que o General sabia o que aconteceria.
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Notas de Jogo & Comportamento</h2>
+          <div class="content-text"><strong>Combate:</strong> Arqueira à distância com mobilidade. Usa Furtividade para posicionamento. Golpe Planar em alvos prioritários. Evita combate corpo a corpo mas capaz com duas espadas curtas.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Social:</strong> Direta e prática. Leal a quem demonstra comprometimento real. Desconfia de políticos e líderes militares desde Cinzavale. Gentil com civis vulneráveis.</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Futuro:</strong> Confronto inevitável com a verdade sobre General Vance e Cinzavale. Desenvolvimento do poder de Andarilha do Horizonte. Cumprimento da promessa do broche de salgueiro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-landscape">
+      D&D 5E · 1.4.0 · PÁGINA 2
+    </div>
+  </div>
+
+  <!-- PÁGINA 3: PERFIL TÉCNICO & ESTILO -->
+  <div class="standard-page">
+    <header class="page-title">
+      <span>Perfil Técnico & Estilo</span>
+      <span style="font-size: 12px; opacity: 0.5">Thalia Windrunner // D&D 5E</span>
+    </header>
+
+    <div class="data-grid" style="grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Aparência & Estilo Único</h2>
+          <div class="content-text" style="margin-bottom: 10px;">Meio-elfa de constituição atlética e esguia. Cabelos castanhos longos, geralmente em trança prática. Olhos verdes aguçados com melancolia silenciosa. Pele levemente bronzeada pelo sol.</div>
+          <div class="content-text"><strong>Vestimenta:</strong> Armadura de couro batido gasta pelo uso, mas bem cuidada, sobre roupas de viagem em tons terrosos.</div>
+          <div class="content-text"><strong>Acessórios:</strong> Broche de prata em formato de folha de salgueiro (preso na capa, perto do ombro). Origem: promessa para uma moribunda de Cinzavale.</div>
+          <div class="content-text"><strong>Expressão:</strong> Golpe Planar — dano de energia imbuído nas lâminas</div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Idiomas & Ferramentas</h2>
+          <div class="tags-container">
+            <span class="tag">Comum</span>
+            <span class="tag">Élfico</span>
+            <span class="tag">Silvestre</span>
+            <span class="tag">Flauta (instrumento musical)</span>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Informações Básicas</h2>
+          <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 6px 15px;">
+            <div class="save-item"><span>Background</span> <span>Forasteira</span></div>
+            <div class="save-item"><span>Alinhamento</span> <span>Leal e Neutro</span></div>
+            <div class="save-item"><span>Hit Dice</span> <span>3d10</span></div>
+            <div class="save-item"><span>Inspiração</span> <span>Não</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Perícias & Treinamento</h2>
+          <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 4px 10px;">
+            <div class="skill-row"><span>Acrobacia</span><span>+3</span></div>
+            <div class="skill-row"><span>Adestrar Animais</span><span>+2</span></div>
+            <div class="skill-row"><span>Arcanismo</span><span>+0</span></div>
+            <div class="skill-row skill-proficient"><span>Atletismo</span><span>+1</span></div>
+            <div class="skill-row"><span>Atuação</span><span>+1</span></div>
+            <div class="skill-row"><span>Enganação</span><span>+1</span></div>
+            <div class="skill-row skill-proficient"><span>Furtividade</span><span>+5</span></div>
+            <div class="skill-row"><span>História</span><span>+0</span></div>
+            <div class="skill-row"><span>Intimidação</span><span>+1</span></div>
+            <div class="skill-row skill-proficient"><span>Intuição</span><span>+4</span></div>
+            <div class="skill-row"><span>Investigação</span><span>+0</span></div>
+            <div class="skill-row"><span>Medicina</span><span>+2</span></div>
+            <div class="skill-row"><span>Natureza</span><span>+0</span></div>
+            <div class="skill-row skill-proficient"><span>Percepção</span><span>+4</span></div>
+            <div class="skill-row"><span>Persuasão</span><span>+1</span></div>
+            <div class="skill-row"><span>Prestidigitação</span><span>+3</span></div>
+            <div class="skill-row"><span>Religião</span><span>+0</span></div>
+            <div class="skill-row skill-proficient"><span>Sobrevivência</span><span>+4</span></div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Resistências & Imunidades</h2>
+          <div class="resistances-box">
+            Vantagem em salvaguardas contra ser encantado; imune a sono mágico.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-landscape">
+      D&D 5E · 1.4.0 · PÁGINA 3
+    </div>
+  </div>
+
+  <!-- PÁGINA 4: CONJURAÇÃO -->
+  <div class="standard-page">
+    <header class="page-title">
+      <span>Conjuração</span>
+      <span style="font-size: 12px; opacity: 0.5">Thalia Windrunner // D&D 5E</span>
+    </header>
+
+    <div class="data-grid" style="grid-template-columns: 1.2fr 1fr; gap: 30px;">
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Magias Preparadas</h2>
+          <div class="tags-container">
+            <span class="tag tag-gold">Curar Ferimentos (1º círculo de Evocação)</span>
+            <span class="tag tag-gold">Passos Longos (1º círculo de Transmutação)</span>
+            <span class="tag tag-gold">Absorver Elementos (1º círculo de Abjuração)</span>
+            <span class="tag tag-gold">Proteção contra o Bem e o Mal (1º círculo de Abjuração — Magia de Arquétipo)</span>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Descrições das Magias</h2>
+          <div class="spell-list">
+            <div class="spell-item">
+              <div class="spell-item-header">
+                <span class="spell-name">Curar Ferimentos</span>
+                <span class="spell-level">1º Círculo - Evocação</span>
+              </div>
+              <div class="spell-meta">
+                1 ação | Toque | V, S | Instantânea
+              </div>
+              <div class="content-text" style="font-size: 10px;">
+                Uma criatura que você toca recupera 1d8 + seu modificador de habilidade de conjuração em pontos de vida.
+              </div>
+              <div class="spell-narrative">"Para Thalia, curar ferimentos é um ato de responsabilidade — a mensageira que não pode se dar ao luxo de perder aliados no campo."</div>
+            </div>
+            <div class="spell-item">
+              <div class="spell-item-header">
+                <span class="spell-name">Golpe Planar</span>
+                <span class="spell-level">1º Círculo - Transmutação</span>
+              </div>
+              <div class="spell-meta">
+                Ação Bônus | Pessoal | V | Concentração, até 1 minuto
+              </div>
+              <div class="content-text" style="font-size: 10px;">
+                Gasta um espaço de magia para imbuir armas com energia planar. Por 1 minuto, uma vez por turno, ao acertar: converte todo o dano em energia e causa 1d8 de dano de energia adicional.
+              </div>
+              <div class="spell-narrative">"O poder inesperado despertado em Cinzavale. Quando as lâminas de Thalia brilham com luz planar, até ela mesma sente que algo maior que ela mesma está em jogo."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Habilidades de Conjuração</h2>
+          <div class="vitals-grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="vital-card">
+              <div class="vital-label">Atributo</div>
+              <div class="vital-value" style="font-size: 20px;">Sabedoria</div>
+            </div>
+            <div class="vital-card">
+              <div class="vital-label">CD Salva.</div>
+              <div class="vital-value" style="font-size: 20px;">12</div>
+            </div>
+          </div>
+          <div class="vital-card" style="margin-top: 10px;">
+            <div class="vital-label">Bônus de Ataque</div>
+            <div class="vital-value" style="font-size: 20px;">+4</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Espaços de Magia</h2>
+          <div class="vital-card">
+            <div class="vital-value" style="font-size: 16px; letter-spacing: 2px;">2 (1º nível)</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Truques Conhecidos</h2>
+          <div class="content-text" style="opacity: 0.5; font-style: italic;">Nenhum truce conhecido</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-landscape">
+      D&D 5E · 1.4.0 · PÁGINA 4
+    </div>
+  </div>
+
+  <!-- PÁGINA FINAL: ARSENAL, EQUIPAMENTO & TESOURO -->
+  <div class="standard-page">
+    <header class="page-title">
+      <span>Arsenal, Equipamento & Tesouro</span>
+      <span style="font-size: 12px; opacity: 0.5">Thalia Windrunner // D&D 5E</span>
+    </header>
+
+    <div class="data-grid" style="grid-template-columns: 1fr 1.2fr; gap: 30px;">
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Tesouro & Moedas</h2>
+          <div class="money-grid">
+            <div class="money-item">
+              <div class="money-label">PC</div>
+              <div class="money-value">0</div>
+            </div>
+            <div class="money-item">
+              <div class="money-label">PP</div>
+              <div class="money-value">0</div>
+            </div>
+            <div class="money-item">
+              <div class="money-label">PE</div>
+              <div class="money-value">0</div>
+            </div>
+            <div class="money-item">
+              <div class="money-label">PO</div>
+              <div class="money-value">10</div>
+            </div>
+            <div class="money-item">
+              <div class="money-label">PL</div>
+              <div class="money-value">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Armas & Ataques</h2>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); padding: 10px; border-radius: 4px;">
+              <div style="font-weight: bold; color: var(--gold-bright);">Arco Longo</div>
+              <div style="font-size: 10px;">Bônus: +7 | Dano: 1d8+3 Perfurante</div>
+            </div>
+            <div style="background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); padding: 10px; border-radius: 4px;">
+              <div style="font-weight: bold; color: var(--gold-bright);">Espada Curta</div>
+              <div style="font-size: 10px;">Bônus: +5 | Dano: 1d6+3 Perfurante</div>
+            </div>
+            <div style="background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); padding: 10px; border-radius: 4px;">
+              <div style="font-weight: bold; color: var(--gold-bright);">Espada Curta 2</div>
+              <div style="font-size: 10px;">Bônus: +5 | Dano: 1d6+3 Perfurante</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Armaduras & Proteções</h2>
+          <ul style="margin-left: 20px; font-size: 11px; color: #ccc;">
+            <li>Armadura de Couro Batido</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="data-column">
+        <div class="content-block">
+          <h2 class="section-title" style="margin-top:0;">Itens Mágicos</h2>
+          <div class="content-text" style="opacity: 0.5; font-style: italic;">Nenhum item mágico registrado</div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Equipamento Geral</h2>
+          <div class="equipment-list">
+            <div class="equipment-item">Duas espadas curtas</div>
+            <div class="equipment-item">Arco longo</div>
+            <div class="equipment-item">Aljava com 20 flechas</div>
+            <div class="equipment-item">Pacote de explorador (mochila, saco de dormir, kit de refeição, caixa de fogo, 10 tochas, 10 dias de rações, cantil)</div>
+            <div class="equipment-item">Cajado</div>
+            <div class="equipment-item">Laço de caça</div>
+            <div class="equipment-item">Troféu de presa de lobo</div>
+            <div class="equipment-item">Broche de prata em formato de folha de salgueiro</div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Características Adicionais</h2>
+          <div class="content-text" style="margin-bottom: 10px;">
+            <strong>Background:</strong> Andarilha (rota de passagem segura em certos territórios)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-landscape">
+      D&D 5E · 1.4.0 · FIM
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+{
+  "character_name": "Chun-Li",
+  "race": "Humana",
+  "class": "Monge 2 / Guerreiro 1",
+  "level": 3,
+  "basic_info": {
+    "system": "Dungeons & Dragons",
+    "full_name": "Chun-Li",
+    "archetype": "Caminho da Mão Aberta / Mestre de Batalha",
+    "background": "Soldado (Oficial da Guarda da Cidadela)",
+    "alignment": "Leal e Bom",
+    "inspiration": false
+  },
+  "health_and_defense": {
+    "current_hp": 25,
+    "max_hp": 25,
+    "hit_dice": "2d8 + 1d10",
+    "armor_class": 15,
+    "movement": "12m",
+    "initiative": "+3",
+    "death_saves": { "successes": 0, "failures": 0 },
+    "resistances_immunities": "Nenhuma"
+  },
+  "attributes": {
+    "strength": { "value": 13, "modifier": "+1", "save": "+3" },
+    "dexterity": { "value": 16, "modifier": "+3", "save": "+5" },
+    "constitution": { "value": 14, "modifier": "+2", "save": "+2" },
+    "intelligence": { "value": 11, "modifier": "+0", "save": "+0" },
+    "wisdom": { "value": 15, "modifier": "+2", "save": "+2" },
+    "charisma": { "value": 9, "modifier": "-1", "save": "-1" }
+  },
+  "proficiencies": {
+    "saving_throws": ["Força", "Destreza"],
+    "skill_proficiencies": [
+      { "name": "Acrobacia", "attribute": "Destreza", "proficient": true, "expertise": false, "modifier": "+5" },
+      { "name": "Atletismo", "attribute": "Força", "proficient": true, "expertise": false, "modifier": "+3" },
+      { "name": "Intimidação", "attribute": "Carisma", "proficient": true, "expertise": false, "modifier": "+1" },
+      { "name": "Intuição", "attribute": "Sabedoria", "proficient": true, "expertise": false, "modifier": "+4" }
+    ],
+    "tools_and_languages": ["Jogo de Dados", "Veículos Terrestres", "Comum", "Outro Idioma"]
+  },
+  "abilities_and_features": {
+    "racial_traits": ["Nenhum detalhado"],
+    "class_features": [
+      "Defesa sem Armadura",
+      "Artes Marciais (d4)",
+      "Ki (2 pontos)",
+      "Movimento sem Armadura",
+      "Técnica da Mão Aberta",
+      "Estilo de Luta (Luta Desarmada)",
+      "Retomar o Fôlego"
+    ],
+    "background_features": ["Patente Militar"],
+    "feats": []
+  },
+  "attacks": [
+    { "name": "Golpe Desarmado", "attack_bonus": "+5", "damage_and_type": "1d6+3 Contundente" },
+    { "name": "Dardo", "attack_bonus": "+5", "damage_and_type": "1d4+3 Perfurante" }
+  ],
+  "spellcasting": {
+    "spellcasting_ability": null,
+    "spell_save_dc": null,
+    "spell_attack_bonus": null,
+    "cantrips": [],
+    "spell_slots": null,
+    "spells_prepared": []
+  },
+  "equipment": {
+    "armor": ["Nenhuma"],
+    "magic_items": [],
+    "general_equipment": ["Pacote de Aventureiro", "10 dardos", "Insígnia da Guarda da Cidadela", "Fragmento do uniforme de um agente da Shadaloo"],
+    "money": { "gold": 10 }
+  },
+  "personality": {
+    "trait": "Sou guiada por um senso de justiça inabalável e uma determinação de aço, buscando sempre proteger os inocentes.",
+    "ideal": "Justiça. Os criminosos, não importa quão poderosos, devem enfrentar as consequências de seus atos.",
+    "bond": "Não descansarei enquanto a organização Shadaloo e seu líder, M. Bison, não forem levados à justiça pela morte de meu pai.",
+    "flaw": "Minha busca por vingança às vezes me torna imprudente, subestimando os perigos para alcançar meu objetivo."
+  },
+  "backstory": "Chun-Li era uma das mais promissoras oficiais da Guarda da Cidadela de Dragão de Jade, conhecida por sua disciplina impecável e um estilo de luta único e poderoso. Sua vida foi virada de cabeça para baixo quando seu pai, um capitão da guarda, foi assassinado em uma emboscada orquestrada pela Shadaloo, uma guilda de ladrões e assassinos liderada pelo tirânico M. Bison. Agora, Chun-Li usa seu treinamento e sua sede de justiça para caçar a Shadaloo, operando nas sombras e disposta a tudo para vingar seu pai e desmantelar a organização criminosa.",
+  "appearance_and_style": {
+    "image_alt": "Chun-Li",
+    "image_prompt": "A full body portrait of Chun-Li, a human monk/fighter of Asian descent with an athletic build and visibly strong, muscular legs. Her hair is styled in 'ox horns' double buns held by golden silk ribbons. She wears a royal blue silk qipao, modified for combat with side slits for freedom of movement and detailed with gold embroidery. She is equipped with sturdy leather boots and spiked metal bracelets, a sign of her warrior status. Her expression is one of intense determination and focus. The style should be semi-realistic western fantasy digital painting, suitable for Dungeons & Dragons, set against a backdrop of a medieval fantasy city guard barracks.",
+    "physical_appearance": "Mulher humana de ascendência asiática, com uma constituição atlética e pernas visivelmente fortes e musculosas. Cabelo preso em coques duplos ('ox horns').",
+    "clothing_style": "Qipao de seda azul royal modificado para combate, com botas de couro e braceletes de metal com pontas.",
+    "unique_accessories": "Braceletes de metal com pontas",
+    "signature_expression": "Expressão de intensa determinação e foco."
+  },
+  "goals_and_motivations": {
+    "main_goal": "Desmantelar a guilda Shadaloo e levar M. Bison à justiça perante a lei ou os deuses.",
+    "motivations": "A memória de seu pai e seu inabalável senso de justiça.",
+    "fears": "Teme que sua vingança a cegue a ponto de colocar seus aliados em perigo mortal.",
+    "secrets": "Sabe a identidade de um antigo membro da guarda que traiu seu pai e passou informações para a Shadaloo, mas ainda não tem provas."
+  },
+  "game_notes": {
+    "combat_behavior": "Usa a mobilidade de Monge para atacar e recuar. Emprega a Técnica da Mão Aberta para controlar o campo, derrubando ou empurrando inimigos para proteger seus aliados, e guarda o Surto de Ação do Guerreiro para momentos decisivos.",
+    "social_interactions": "Age como uma profissional, buscando informações de forma metódica. É respeitosa, mas sua paciência é curta para mentiras e corrupção.",
+    "future_development": "Continuar a progressão em Monge e Guerreiro para maximizar o número de ataques e manobras, tornando-se uma força de controle e dano quase imparável."
+  },
+  "spell_description": [],
+  "metadata": {
+    "template_title": "D&D 5e Character Sheet",
+    "system": "D&D 5e",
+    "locale": "pt-BR",
+    "version": "1.4.0"
+  }
+}

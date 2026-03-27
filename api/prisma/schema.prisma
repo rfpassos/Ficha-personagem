@@ -37,6 +37,7 @@ model Generation {
   imageUrl       String?
   pdfSizeBytes   Int?
   pdfPath        String?
+  htmlPath       String?
   errorMessage   String?
   durationMs     Int?
   createdAt      DateTime         @default(now())

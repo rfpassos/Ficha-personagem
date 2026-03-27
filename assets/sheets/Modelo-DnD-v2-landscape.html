@@ -18,7 +18,6 @@
       --text-dim: rgba(255, 255, 255, 0.7);
       --border: rgba(255, 255, 255, 0.15);
 
-      /* TIPOGRAFIA PADRONIZADA */
       --font-h1: 35px;
       --font-h2: 14px;
       --font-h3: 11px;
@@ -40,29 +39,26 @@
       print-color-adjust: exact;
     }
 
-    /* WRAPPER PAISAGEM (Cinemascópio) */
     .landscape-container {
       width: 297mm;
-      height: 210mm;
+      min-height: 210mm;
       position: relative;
       display: flex;
       background: #000;
       overflow: visible;
-      /* Permite que conteúdo empurre para a próxima página no PDF */
       page-break-after: always;
     }
 
-    /* RESET PARA PÁGINAS PADRÃO (Sem imagem de fundo gigante) */
     .standard-page {
       width: 297mm;
-      min-height: 210mm; /* Permitir crescer se necessário */
+      min-height: 210mm;
       background: #0a0a0a;
       display: block;
       padding: 30px 50px;
       position: relative;
       border: 1px solid var(--border);
       page-break-after: always;
-      overflow: visible; /* Permitir transbordamento para o PDF */
+      overflow: visible;
     }
 
     .page-title {
@@ -71,9 +67,7 @@
       color: var(--gold);
       margin-bottom: 40px;
       border-top: 2px solid var(--gold);
-      /* Invertido para cima */
       padding-top: 15px;
-      /* Espaço após a borda superior */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -81,7 +75,6 @@
       letter-spacing: 2px;
     }
 
-    /* BACKGROUND IMAGE - A arte que preenche tudo */
     .hero-background {
       position: absolute;
       top: 0;
@@ -96,7 +89,6 @@
       height: 100%;
       object-fit: cover;
       filter: brightness(1.0) contrast(1.05);
-      /* Mantém brilho original e realça levemente o contraste */
     }
 
     .hero-background::after {
@@ -109,7 +101,6 @@
       background: linear-gradient(90deg, transparent 40%, rgba(0, 0, 0, 0.3) 60%, #000 98%);
     }
 
-    /* LEFT SIDE (ESPAÇO PARA A ARTE BRILHAR) */
     .art-zone {
       flex: 1.2;
       z-index: 1;
@@ -129,7 +120,6 @@
       margin-bottom: 5px;
     }
 
-    /* RIGHT SIDE (INTERFACE GLASSMORPHISM) */
     .info-panel {
       flex: 1;
       min-height: 100%;
@@ -145,7 +135,6 @@
       overflow: visible;
     }
 
-    /* HEADER INFO */
     .header-info {
       margin-bottom: 15px;
     }
@@ -168,7 +157,6 @@
       text-transform: uppercase;
     }
 
-    /* PRIMARY STATS GRID (HP, CA, INI) */
     .vitals-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -198,7 +186,6 @@
       color: var(--gold-bright);
     }
 
-    /* ATTRIBUTES LIST (Compact Horizontal) */
     .attr-list {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -230,7 +217,6 @@
       font-weight: 600;
     }
 
-    /* SECONDARY INFO (Skills/Powers Highlights) */
     .secondary-zone {
       flex: 1;
       display: grid;
@@ -259,7 +245,6 @@
       break-inside: auto;
     }
 
-    /* SAVING THROWS & PASSIVES (PAG 1) */
     .technical-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -301,7 +286,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 30px;
       height: calc(100% - 60px);
-      /* Ajuste para caber com o título da página */
     }
 
     .tags-container {
@@ -314,14 +298,16 @@
       background: rgba(255, 255, 255, 0.08);
       padding: 6px 12px;
       border-radius: 4px;
-      /* Mais retangular para parecer ficha de dossiê */
       font-size: 11px;
       font-weight: 500;
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* PERÍCIAS DETALHADAS */
+    .tag-gold {
+      border-color: var(--gold);
+    }
+
     .skills-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -356,7 +342,7 @@
     }
 
     .quote-box::before {
-      content: '“';
+      content: '"';
       font-size: 40px;
       color: var(--gold);
       position: absolute;
@@ -365,7 +351,6 @@
       opacity: 0.5;
     }
 
-    /* FOOTER */
     .footer-landscape {
       position: absolute;
       bottom: 20px;
@@ -377,342 +362,320 @@
       z-index: 5;
     }
 
-    /* --- SPELL CARDS REVOLUTION (STRICT 4:5 - TRADING CARD SIZE) --- */
-    .cards-page {
-      width: 297mm;
-      height: 210mm;
-      background: #000;
-      padding: 10mm;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 88mm 88mm;
-      /* Tamanho de Trading Card Real */
-      gap: 10mm 5mm;
-      page-break-after: always;
-      overflow: hidden;
-      align-content: center;
-      justify-items: center;
-    }
-
-    .spell-card {
-      position: relative;
-      width: 63mm;
-      /* MAGIC CARD WIDTH */
-      height: 88mm;
-      /* MAGIC CARD HEIGHT */
-      background: #080808;
-      border: 1.5px solid var(--gold);
+    .data-column {
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 10mm 20mm rgba(0, 0, 0, 0.8);
-      border-radius: 3mm;
-      /* Bordas arredondadas de carta real */
+      gap: 20px;
     }
 
-    /* FRENTE: 100% ARTE, ZERO TEXTO TÉCNICO */
-    .card-front {
-      border-color: var(--gold-bright);
-      box-shadow: 0 0 15px rgba(195, 163, 74, 0.4);
-      grid-row: 1;
-      /* Força na primeira linha */
+    .resistances-box {
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(195, 163, 74, 0.05);
+      border-left: 2px solid var(--gold);
+      font-size: var(--font-small);
     }
 
-    .card-front .card-art-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100% !important;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 1;
-    }
-
-    /* Gradiente mais suave para não esconder a arte */
-    .card-front::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 30%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-      z-index: 2;
-    }
-
-    /* VERSO: TUDO TEXTO, ESTÉTICA DARK ACADEMIA */
-    .card-back {
-      background: #050505;
-      background-image: radial-gradient(circle at 50% 10%, rgba(195, 163, 74, 0.15) 0%, transparent 80%);
-      border-style: solid;
-      border-color: rgba(195, 163, 74, 0.5);
-      grid-row: 2;
-      /* Força na segunda linha */
-    }
-
-    .card-back .card-content {
-      padding: 5mm;
-      height: 100%;
+    .spell-list {
       display: flex;
       flex-direction: column;
-      z-index: 2;
+      gap: 10px;
     }
 
-    .card-back .spell-header-back {
-      border-bottom: 1.5px solid var(--gold);
-      padding-bottom: 2mm;
-      margin-bottom: 3mm;
+    .spell-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 2px solid var(--gold);
+      padding: 10px;
+    }
+
+    .spell-item-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
+      margin-bottom: 5px;
     }
 
-    .card-back .spell-name-back {
-      font-family: 'Cinzel', serif;
-      font-size: 11pt;
+    .spell-name {
+      font-weight: bold;
       color: var(--gold-bright);
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    .card-back .spell-level-back {
-      font-size: 8pt;
+    .spell-level {
+      font-size: var(--font-small);
+      color: var(--gold);
+    }
+
+    .spell-meta {
+      font-size: var(--font-small);
       color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 600;
+      margin-bottom: 5px;
     }
 
-    .card-back .school-tag {
-      font-size: 7pt;
+    .spell-narrative {
+      font-style: italic;
+      opacity: 0.7;
+      font-size: var(--font-small);
+      margin-top: 5px;
+    }
+
+    .equipment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .equipment-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--font-body);
+    }
+
+    .equipment-item::before {
+      content: "•";
       color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 700;
-      margin-bottom: 3mm;
-      display: block;
     }
 
-    .card-back .spell-description {
-      font-size: 8.5pt;
-      line-height: 1.35;
-      color: #eee;
-      text-align: left;
-      overflow-y: hidden;
-      flex: 1;
-      margin-bottom: 3mm;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .card-back .spell-stats-grid {
+    .money-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2mm;
-      border-top: 1px solid rgba(195, 163, 74, 0.3);
-      padding-top: 3mm;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
     }
 
-    .card-back .stat-mini {
-      text-transform: uppercase;
-      color: var(--gold);
+    .money-item {
+      text-align: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    .money-label {
       font-size: var(--font-small);
+      color: var(--text-dim);
     }
 
-    .card-back .stat-mini span {
-      color: #fff;
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
+    .money-value {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--gold-bright);
     }
 
-    .card-back .school-tag {
-      font-size: var(--font-small);
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 2px;
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- PÁGINA 1: HERO (DADOS PRINCIPAIS) -->
   <div class="landscape-container">
-
-    <!-- HERO BACKGROUND -->
     <div class="hero-background">
       {{#if appearance_and_style.image_file}}
       <img src="{{appearance_and_style.image_file}}" alt="Character Art">
       {{else}}
-      <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&q=80&w=2069"
-        alt="Default Art">
+      <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&q=80&w=2069" alt="Default Art">
       {{/if}}
     </div>
 
-    <!-- ART ZONE (LEFT) -->
     <div class="art-zone">
       <div class="art-overlay-title">DUNGEONS & DRAGONS 5E</div>
     </div>
 
-    <!-- INFO PANEL (RIGHT) -->
     <div class="info-panel">
-
       <header class="header-info">
-        <div class="char-meta">{{race}} · {{class}} ({{subclass}}) · {{background}} · {{alignment}} · NÍVEL {{level}}</div>
+        <div class="char-meta">{{race}} · {{class}} · {{basic_info.archetype}} · NÍVEL {{level}}</div>
         <h1 class="char-name">{{character_name}}</h1>
       </header>
 
-      <!-- VITALS -->
+      <!-- VITAIS -->
       <div class="vitals-grid">
         <div class="vital-card">
           <div class="vital-label">PV</div>
-          <div class="vital-value" style="font-size: 28px;">{{health_and_defense.hp_current}}</div>
+          <div class="vital-value" style="font-size: 28px;">{{health_and_defense.current_hp}}</div>
         </div>
         <div class="vital-card">
           <div class="vital-label">CA</div>
-          <div class="vital-value" style="font-size: 28px;">{{armor_class}}</div>
+          <div class="vital-value" style="font-size: 28px;">{{health_and_defense.armor_class}}</div>
         </div>
         <div class="vital-card">
           <div class="vital-label">INI</div>
-          <div class="vital-value" style="font-size: 28px;">{{initiative}}</div>
+          <div class="vital-value" style="font-size: 28px;">{{health_and_defense.initiative}}</div>
         </div>
         <div class="vital-card">
           <div class="vital-label">VEL</div>
-          <div class="vital-value" style="font-size: 28px;">{{speed}}<span
-              style="font-size: 10px; margin-left: 2px;">m</span></div>
+          <div class="vital-value" style="font-size: 28px;">{{health_and_defense.movement}}<span style="font-size: 10px; margin-left: 2px;">m</span></div>
         </div>
       </div>
 
-      <!-- ATTRIBUTES -->
+      <!-- ATRIBUTOS -->
       <div class="attr-list" style="margin-bottom: 15px;">
-        {{#each attributes_formatted}}
         <div class="attr-item">
-          <div class="attr-name">{{key}}</div>
-          <div class="attr-val" style="font-size: 18px;">{{value}}</div>
-          <div class="attr-mod" style="font-size: 9px;">{{modifier}}</div>
+          <div class="attr-name">FOR</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.strength.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.strength.modifier}}</div>
         </div>
-        {{/each}}
+        <div class="attr-item">
+          <div class="attr-name">DES</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.dexterity.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.dexterity.modifier}}</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">CON</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.constitution.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.constitution.modifier}}</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">INT</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.intelligence.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.intelligence.modifier}}</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">SAB</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.wisdom.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.wisdom.modifier}}</div>
+        </div>
+        <div class="attr-item">
+          <div class="attr-name">CAR</div>
+          <div class="attr-val" style="font-size: 18px;">{{attributes.charisma.value}}</div>
+          <div class="attr-mod" style="font-size: 9px;">{{attributes.charisma.modifier}}</div>
+        </div>
       </div>
 
-      <!-- TECHNICAL SUB-GRID (SAVES & PASSIVES) -->
+      <!-- SALVAGUARDAS E PASSIVAS -->
       <div class="technical-grid">
         <div>
-          <h2 class="section-title" style="margin-top: 0;">Resistências (Saving Throws)</h2>
+          <h2 class="section-title" style="margin-top: 0;">Salvaguardas</h2>
           <div class="saving-throws-list">
-            {{#each saving_throws}}
-            <div class="save-item {{#if proficient}}save-proficient{{/if}}">
-              <span>{{name}}</span>
-              <span>{{modifier}}</span>
+            <div class="save-item {{#if (contains proficientSaves 'Força')}}save-proficient{{/if}}">
+              <span>Força</span>
+              <span>{{attributes.strength.save}}</span>
             </div>
-            {{/each}}
+            <div class="save-item {{#if (contains proficientSaves 'Destreza')}}save-proficient{{/if}}">
+              <span>Destreza</span>
+              <span>{{attributes.dexterity.save}}</span>
+            </div>
+            <div class="save-item {{#if (contains proficientSaves 'Constituição')}}save-proficient{{/if}}">
+              <span>Constituição</span>
+              <span>{{attributes.constitution.save}}</span>
+            </div>
+            <div class="save-item {{#if (contains proficientSaves 'Inteligência')}}save-proficient{{/if}}">
+              <span>Inteligência</span>
+              <span>{{attributes.intelligence.save}}</span>
+            </div>
+            <div class="save-item {{#if (contains proficientSaves 'Sabedoria')}}save-proficient{{/if}}">
+              <span>Sabedoria</span>
+              <span>{{attributes.wisdom.save}}</span>
+            </div>
+            <div class="save-item {{#if (contains proficientSaves 'Carisma')}}save-proficient{{/if}}">
+              <span>Carisma</span>
+              <span>{{attributes.charisma.save}}</span>
+            </div>
           </div>
         </div>
         <div>
           <h2 class="section-title" style="margin-top: 0;">Sentidos Passivos</h2>
           <div class="saving-throws-list" style="grid-template-columns: 1fr;">
-            <div class="save-item"><span>Percepção Passiva</span> <span>{{passive_perception}}</span></div>
-            <div class="save-item"><span>Investigação Passiva</span> <span>{{passive_investigation}}</span></div>
-            <div class="save-item"><span>Intuição Passiva</span> <span>{{passive_insight}}</span></div>
+            <div class="save-item"><span>Percepção</span> <span>{{passivePerception}}</span></div>
+            <div class="save-item"><span>Investigação</span> <span>{{passiveInvestigation}}</span></div>
+            <div class="save-item"><span>Intuição</span> <span>{{passiveInsight}}</span></div>
           </div>
         </div>
       </div>
 
-      <!-- HIGHLIGHTS -->
+      <!-- FEATURES -->
       <div class="secondary-zone">
         <div>
-          <h2 class="section-title">Talentos & Proficiências de Raça</h2>
+          <h2 class="section-title">Características de Raça</h2>
           <div class="tags-container">
-            {{#each abilities_and_features.feats}}<span class="tag">{{this}}</span>{{/each}}
-            {{#each abilities_and_features.racial_traits}}<span class="tag"
-              style="border-color: var(--gold);">{{this}}</span>{{/each}}
+            {{#each abilities_and_features.racial_traits}}<span class="tag tag-gold">{{this}}</span>{{/each}}
           </div>
         </div>
 
         <div>
-          <h2 class="section-title">Ações de Combate Rápido</h2>
+          <h2 class="section-title">Características de Classe</h2>
+          <div class="tags-container">
+            {{#each abilities_and_features.class_features}}<span class="tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Ataques</h2>
           <div class="tags-container" style="gap: 15px;">
             {{#each attacks}}
-            <div class="content-block"
-              style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
+            <div class="content-block" style="padding: 10px; flex: 1; background: rgba(195, 163, 74, 0.05); border: 1px solid var(--gold); margin-bottom: 0;">
               <div style="font-weight: bold; color: var(--gold-bright); font-size: 11px;">{{name}}</div>
-              <div style="font-size: 10px;">Bonus: {{attack_bonus}} | {{damage_and_type}}</div>
+              <div style="font-size: 10px;">Bônus: {{attack_bonus}} | {{damage_and_type}}</div>
             </div>
             {{/each}}
           </div>
         </div>
       </div>
 
-      <!-- PERSONALITY / QUOTE -->
       <div class="quote-box">
-        {{#if personality_traits}}
-        {{personality_traits}}
+        {{#if personality.trait}}
+        {{personality.trait}}
         {{else}}
         A aventura começa onde a prudência termina. Um destino forjado em fogo e aço.
         {{/if}}
       </div>
 
       <div class="footer-landscape">
-        D&D 5E · LANDSCAPE v1.0 · LOOPSTUDIO_IA
+        D&D 5E · {{basic_info.archetype}} · {{metadata.system}}
       </div>
-
     </div>
-
   </div>
 
-  <!-- PÁGINA 2+: BIOGRAFIA E ESSÊNCIA (DINÂMICA) -->
-  {{#each backstory_pages}}
+  <!-- PÁGINA 2: BIOGRAFIA E ESSÊNCIA -->
   <div class="standard-page">
     <header class="page-title">
-      <span>Biografia & Essência {{#unless isFirstPage}}(Continuação){{/unless}}</span>
-      <span style="font-size: 12px; opacity: 0.5">{{../character_name}} // D&D 5E</span>
+      <span>Biografia & Essência</span>
+      <span style="font-size: 12px; opacity: 0.5">{{character_name}} // D&D 5E</span>
     </header>
 
-    <div class="data-grid" style="grid-template-columns: {{#if isFirstPage}}1fr 1fr{{else}}1fr{{/if}}; gap: 40px;">
-      <div class="data-column" style="display: flex; flex-direction: column; gap: 20px;">
+    <div class="data-grid" style="grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">História do Personagem</h2>
-          <div class="content-text" style="text-align: justify; columns: {{#if isFirstPage}}1{{else}}2{{/if}}; column-gap: 40px;">{{nl2br text}}</div>
+          <div class="content-text" style="text-align: justify;">{{backstory}}</div>
         </div>
 
-        {{#if isFirstPage}}
         <div class="content-block">
           <h2 class="section-title">Personalidade & Psicologia</h2>
-          <div class="content-text"><strong>Traços:</strong> {{../personality.trait}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Ideais:</strong> {{../personality.ideal}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Vínculos:</strong> {{../personality.bond}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Defeitos:</strong> {{../personality.flaw}}</div>
+          <div class="content-text"><strong>Traços:</strong> {{personality.trait}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Ideais:</strong> {{personality.ideal}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Vínculos:</strong> {{personality.bond}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Defeitos:</strong> {{personality.flaw}}</div>
         </div>
-        {{/if}}
       </div>
 
-      {{#if isFirstPage}}
-      <div class="data-column" style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="data-column">
         <div class="content-block">
-          <h2 class="section-title" style="margin-top:0;">Medos, Segredos & Motivações</h2>
-          <div class="content-text"><strong>Objetivo Principal:</strong> {{../goals_and_motivations.main_goal}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Motivações:</strong> {{../goals_and_motivations.motivations}}</div>
+          <h2 class="section-title" style="margin-top:0;">Metas, Motivações & Segredos</h2>
+          <div class="content-text"><strong>Objetivo Principal:</strong> {{goals_and_motivations.main_goal}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Motivações:</strong> {{goals_and_motivations.motivations}}</div>
           <div class="content-text" style="margin-top: 15px; padding: 10px; background: rgba(195, 163, 74, 0.05); border-left: 2px solid var(--gold);">
-            <strong>Medos:</strong> {{../goals_and_motivations.fears}}<br>
-            <strong>Segredos:</strong> {{../goals_and_motivations.secrets}}
+            <strong>Medos:</strong> {{goals_and_motivations.fears}}<br>
+            <strong>Segredos:</strong> {{goals_and_motivations.secrets}}
           </div>
         </div>
 
         <div class="content-block">
           <h2 class="section-title">Notas de Jogo & Comportamento</h2>
-          <div class="content-text"><strong>Combate:</strong> {{../game_notes.combat_behavior}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Social:</strong> {{../game_notes.social_interactions}}</div>
-          <div class="content-text" style="margin-top: 10px;"><strong>Futuro:</strong> {{../game_notes.future_development}}</div>
+          <div class="content-text"><strong>Combate:</strong> {{game_notes.combat_behavior}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Social:</strong> {{game_notes.social_interactions}}</div>
+          <div class="content-text" style="margin-top: 10px;"><strong>Futuro:</strong> {{game_notes.future_development}}</div>
         </div>
       </div>
-      {{/if}}
     </div>
 
     <div class="footer-landscape">
-      D&D 5E · LANDSCAPE v1.0 · PÁGINA 2 · BLOCO {{pageIndex}}
+      D&D 5E · {{metadata.version}} · PÁGINA 2
     </div>
   </div>
-  {{/each}}
 
   <!-- PÁGINA 3: PERFIL TÉCNICO & ESTILO -->
   <div class="standard-page">
@@ -722,7 +685,7 @@
     </header>
 
     <div class="data-grid" style="grid-template-columns: 1fr 1fr; gap: 40px;">
-      <div class="data-column" style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">Aparência & Estilo Único</h2>
           <div class="content-text" style="margin-bottom: 10px;">{{appearance_and_style.physical_appearance}}</div>
@@ -732,19 +695,24 @@
         </div>
 
         <div class="content-block">
-          <h2 class="section-title">Características Físicas</h2>
+          <h2 class="section-title">Idiomas & Ferramentas</h2>
+          <div class="tags-container">
+            {{#each proficiencies.tools_and_languages}}<span class="tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2 class="section-title">Informações Básicas</h2>
           <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 6px 15px;">
-            <div class="save-item"><span>Idade</span> <span>{{appearance_and_style.age}}</span></div>
-            <div class="save-item"><span>Altura</span> <span>{{appearance_and_style.height}}</span></div>
-            <div class="save-item"><span>Peso</span> <span>{{appearance_and_style.weight}}</span></div>
-            <div class="save-item"><span>Olhos</span> <span>{{appearance_and_style.eyes}}</span></div>
-            <div class="save-item"><span>Cabelo</span> <span>{{appearance_and_style.hair}}</span></div>
-            <div class="save-item"><span>Pele</span> <span>{{appearance_and_style.skin}}</span></div>
+            <div class="save-item"><span>Background</span> <span>{{basic_info.background}}</span></div>
+            <div class="save-item"><span>Alinhamento</span> <span>{{basic_info.alignment}}</span></div>
+            <div class="save-item"><span>Hit Dice</span> <span>{{health_and_defense.hit_dice}}</span></div>
+            <div class="save-item"><span>Inspiração</span> <span>{{#if basic_info.inspiration}}Sim{{else}}Não{{/if}}</span></div>
           </div>
         </div>
       </div>
 
-      <div class="data-column" style="display: flex; flex-direction: column; gap: 20px;">
+      <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">Perícias & Treinamento</h2>
           <div class="skills-list" style="grid-template-columns: 1fr 1fr; gap: 4px 10px;">
@@ -758,90 +726,108 @@
         </div>
 
         <div class="content-block">
-          <h2 class="section-title">Idiomas & Ferramentas</h2>
-          <div class="tags-container">
-            {{#each proficiencies.tools_and_languages}}<span class="tag">{{this}}</span>{{/each}}
+          <h2 class="section-title">Resistências & Imunidades</h2>
+          {{#if health_and_defense.resistances_immunities}}
+          <div class="resistances-box">
+            {{health_and_defense.resistances_immunities}}
           </div>
+          {{else}}
+          <div class="content-text" style="opacity: 0.5;">Nenhuma resistência ou imunidade registrada.</div>
+          {{/if}}
         </div>
       </div>
     </div>
 
     <div class="footer-landscape">
-      D&D 5E · LANDSCAPE v1.0 · PÁGINA 3
+      D&D 5E · {{metadata.version}} · PÁGINA 3
     </div>
   </div>
 
-  <!-- PÁGINA 4+: GRIMÓRIO (MAGIAS DETALHADAS DINÂMICAS) -->
-  {{#each spell_description_pages}}
+  <!-- PÁGINA 4: CONJURAÇÃO (SE HOUVER) -->
+  {{#if spellcasting}}
   <div class="standard-page">
     <header class="page-title">
-      <span>Grimório & Conjuração {{#unless isFirstPage}}(Continuação){{/unless}}</span>
-      <span style="font-size: 12px; opacity: 0.5">{{../character_name}} // D&D 5E</span>
+      <span>Conjuração</span>
+      <span style="font-size: 12px; opacity: 0.5">{{character_name}} // D&D 5E</span>
     </header>
 
-    <div class="data-grid" style="grid-template-columns: {{#if isFirstPage}}1.2fr 1fr{{else}}1fr{{/if}}; gap: 30px;">
-      <div class="data-column" {{#unless isFirstPage}}style="columns: 2; column-gap: 40px;"{{/unless}}>
+    <div class="data-grid" style="grid-template-columns: 1.2fr 1fr; gap: 30px;">
+      <div class="data-column">
         <div class="content-block">
-          <h2 class="section-title" style="margin-top:0;">Descrições das Magias</h2>
-          <div style="display: flex; flex-direction: column; gap: 15px;">
-            {{#each spells}}
-            <div style="border-left: 2px solid var(--gold); padding-left: 12px; break-inside: avoid;">
-              <div style="font-weight: bold; color: var(--gold-bright);">{{name}} ({{level}})</div>
-              <div style="font-size: 10px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px;">
-                {{school}} | {{casting_time}} | {{range}} | {{duration}}
+          <h2 class="section-title" style="margin-top:0;">Magias Preparadas</h2>
+          <div class="tags-container">
+            {{#each spellcasting.spells_prepared}}<span class="tag tag-gold">{{this}}</span>{{/each}}
+          </div>
+        </div>
+
+        {{#if spell_description.length}}
+        <div class="content-block">
+          <h2 class="section-title">Descrições das Magias</h2>
+          <div class="spell-list">
+            {{#each spell_description}}
+            <div class="spell-item">
+              <div class="spell-item-header">
+                <span class="spell-name">{{name}}</span>
+                <span class="spell-level">{{level}}º Círculo - {{school}}</span>
               </div>
-              <div class="content-text" style="font-size: 10px;">{{description}}</div>
+              <div class="spell-meta">
+                {{casting_time}} | {{range}} | {{components}} | {{duration}}
+              </div>
+              <div class="content-text" style="font-size: 10px;">
+                {{description}}
+              </div>
               {{#if narrative}}
-              <div class="content-text" style="font-style: italic; opacity: 0.7; margin-top: 5px; font-size: 9px;">"{{narrative}}"</div>
+              <div class="spell-narrative">"{{narrative}}"</div>
               {{/if}}
             </div>
             {{/each}}
           </div>
         </div>
+        {{/if}}
       </div>
 
-      {{#if isFirstPage}}
       <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">Habilidades de Conjuração</h2>
           <div class="vitals-grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
             <div class="vital-card">
               <div class="vital-label">Atributo</div>
-              <div class="vital-value" style="font-size: 20px;">{{../spellcasting.spellcasting_ability}}</div>
+              <div class="vital-value" style="font-size: 20px;">{{spellcasting.spellcasting_ability}}</div>
             </div>
             <div class="vital-card">
               <div class="vital-label">CD Salva.</div>
-              <div class="vital-value" style="font-size: 20px;">{{../spellcasting.spell_save_dc}}</div>
+              <div class="vital-value" style="font-size: 20px;">{{spellcasting.spell_save_dc}}</div>
             </div>
           </div>
           <div class="vital-card" style="margin-top: 10px;">
             <div class="vital-label">Bônus de Ataque</div>
-            <div class="vital-value" style="font-size: 20px;">{{../spellcasting.spell_attack_bonus}}</div>
+            <div class="vital-value" style="font-size: 20px;">{{spellcasting.spell_attack_bonus}}</div>
           </div>
         </div>
 
         <div class="content-block">
-          <h2 class="section-title">Espaços de Magia (Slots)</h2>
+          <h2 class="section-title">Espaços de Magia</h2>
           <div class="vital-card">
-            <div class="vital-value" style="font-size: 16px; letter-spacing: 2px;">{{../spellcasting.spell_slots}}</div>
+            <div class="vital-value" style="font-size: 16px; letter-spacing: 2px;">{{spellcasting.spell_slots}}</div>
           </div>
         </div>
 
+        {{#if spellcasting.cantrips.length}}
         <div class="content-block">
-          <h2 class="section-title">Magias Preparadas</h2>
+          <h2 class="section-title">Truques Conhecidos</h2>
           <div class="tags-container">
-            {{#each ../spellcasting.spells_prepared}}<span class="tag">{{this}}</span>{{/each}}
+            {{#each spellcasting.cantrips}}<span class="tag tag-gold">{{this}}</span>{{/each}}
           </div>
         </div>
+        {{/if}}
       </div>
-      {{/if}}
     </div>
 
     <div class="footer-landscape">
-      D&D 5E · LANDSCAPE v1.0 · PÁGINA {{add pageIndex 3}}
+      D&D 5E · {{metadata.version}} · PÁGINA 4
     </div>
   </div>
-  {{/each}}
+  {{/if}}
 
   <!-- PÁGINA FINAL: ARSENAL, EQUIPAMENTO & TESOURO -->
   <div class="standard-page">
@@ -854,26 +840,26 @@
       <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">Tesouro & Moedas</h2>
-          <div class="skills-list" style="grid-template-columns: repeat(5, 1fr); gap: 10px;">
-            <div class="vital-card" style="padding: 10px;">
-              <div class="vital-label">PC</div>
-              <div class="vital-value" style="font-size: 18px;">{{equipment.money.copper}}</div>
+          <div class="money-grid">
+            <div class="money-item">
+              <div class="money-label">PC</div>
+              <div class="money-value">{{equipment.money.copper}}</div>
             </div>
-            <div class="vital-card" style="padding: 10px;">
-              <div class="vital-label">PP</div>
-              <div class="vital-value" style="font-size: 18px;">{{equipment.money.silver}}</div>
+            <div class="money-item">
+              <div class="money-label">PP</div>
+              <div class="money-value">{{equipment.money.silver}}</div>
             </div>
-            <div class="vital-card" style="padding: 10px;">
-              <div class="vital-label">PE</div>
-              <div class="vital-value" style="font-size: 18px;">{{equipment.money.electrum}}</div>
+            <div class="money-item">
+              <div class="money-label">PE</div>
+              <div class="money-value">{{equipment.money.electrum}}</div>
             </div>
-            <div class="vital-card" style="padding: 10px;">
-              <div class="vital-label">PO</div>
-              <div class="vital-value" style="font-size: 18px;">{{equipment.money.gold}}</div>
+            <div class="money-item">
+              <div class="money-label">PO</div>
+              <div class="money-value">{{equipment.money.gold}}</div>
             </div>
-            <div class="vital-card" style="padding: 10px;">
-              <div class="vital-label">PL</div>
-              <div class="vital-value" style="font-size: 18px;">{{equipment.money.platinum}}</div>
+            <div class="money-item">
+              <div class="money-label">PL</div>
+              <div class="money-value">{{equipment.money.platinum}}</div>
             </div>
           </div>
         </div>
@@ -901,70 +887,46 @@
       <div class="data-column">
         <div class="content-block">
           <h2 class="section-title" style="margin-top:0;">Itens Mágicos</h2>
+          {{#if equipment.magic_items.length}}
           <ul style="margin-left: 20px; font-size: 11px; color: var(--gold-bright);">
             {{#each equipment.magic_items}}<li>{{this}}</li>{{/each}}
           </ul>
+          {{else}}
+          <div class="content-text" style="opacity: 0.5; font-style: italic;">Nenhum item mágico registrado</div>
+          {{/if}}
         </div>
 
         <div class="content-block">
           <h2 class="section-title">Equipamento Geral</h2>
-          <div class="content-text" style="font-size: 10px; columns: 2; column-gap: 20px;">
-            <ul style="margin-left: 15px;">
-              {{#each equipment.general_equipment}}<li>{{this}}</li>{{/each}}
-            </ul>
+          <div class="equipment-list">
+            {{#each equipment.general_equipment}}
+            <div class="equipment-item">{{this}}</div>
+            {{/each}}
           </div>
         </div>
 
         <div class="content-block">
-          <h2 class="section-title">Proficiências Técnicas</h2>
-          <div class="content-text" style="font-size: 11px;">
-            <div style="margin-bottom: 5px;"><strong>Idiomas & Ferramentas:</strong> {{join proficiencies.tools_and_languages ", "}}</div>
-            <div style="margin-bottom: 5px;"><strong>Armas:</strong> {{proficiencies.weapon_proficiencies}}</div>
-            <div style="margin-bottom: 5px;"><strong>Armaduras:</strong> {{proficiencies.armor_proficiencies}}</div>
+          <h2 class="section-title">Características Adicionais</h2>
+          {{#if abilities_and_features.background_features.length}}
+          <div class="content-text" style="margin-bottom: 10px;">
+            <strong>Background:</strong>
+            {{#each abilities_and_features.background_features}}{{this}}{{/each}}
           </div>
+          {{/if}}
+          {{#if abilities_and_features.feats.length}}
+          <div class="content-text">
+            <strong>Feats:</strong>
+            {{#each abilities_and_features.feats}}{{this}}{{/each}}
+          </div>
+          {{/if}}
         </div>
       </div>
     </div>
 
     <div class="footer-landscape">
-      D&D 5E · LANDSCAPE v1.0 · PÁGINA {{add spell_description_pages.length 4}}
+      D&D 5E · {{metadata.version}} · FIM
     </div>
   </div>
-  <!-- PÁGINAS DE SPELL CARDS (Layout de Estudo: Frente e Verso na mesma folha) -->
-  {{#each spell_card_pages}}
-  <div class="cards-page">
-    <!-- LINHA 1 (TOPO): FRENTES (SÓ ARTE + NOME) -->
-    {{#each frontRow}}
-    <div class="spell-card card-front">
-      <div class="card-art-bg" style="background-image: url('{{art}}')"></div>
-    </div>
-    {{/each}}
-
-    <!-- LINHA 2 (BASE): VERSOS TÉCNICOS -->
-    {{#each backRow}}
-    <div class="spell-card card-back">
-      <div class="card-content">
-        <div class="spell-header-back">
-          <span class="spell-name-back">{{name}}</span>
-          <span class="spell-level-back">{{level}}</span>
-        </div>
-        <span class="school-tag">{{school}}</span>
-
-        <div class="spell-description">
-          {{{nl2br description}}}
-        </div>
-
-        <div class="spell-stats-grid">
-          <div class="stat-mini">Tempo <span>{{casting_time}}</span></div>
-          <div class="stat-mini">Alcance <span>{{range}}</span></div>
-          <div class="stat-mini">Comp. <span>{{components}}</span></div>
-          <div class="stat-mini">Duração <span>{{duration}}</span></div>
-        </div>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/each}}
 
 </body>
 
